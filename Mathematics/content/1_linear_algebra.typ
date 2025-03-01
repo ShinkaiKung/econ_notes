@@ -35,12 +35,12 @@ where $a_11, a_12, ..., a_(m n)$ are the coefficients of the variables $x_1, x_2
 
 A rectangular array of real numbers is called #concept[Matrix]. It is put into parentheses (or brackets). The size of a matrix is its number of rows and columns, in signs of $m times n$.
 $
-  A = mat(a_11, a_12, a_13, ..., a_(1 n);
+  bold(A) = mat(a_11, a_12, a_13, ..., a_(1 n);
             a_21, a_22, a_23, ..., a_(2 n);
             dots.v, dots.v, dots.down, dots.v;
             a_(m 1), a_(m 2), a_(m 3), ..., a_(m n))
   "or"
-  A = mat(delim: "[",
+  bold(A) = mat(delim: "[",
             a_11, a_12, a_13, ..., a_(1 n);
             a_21, a_22, a_23, ..., a_(2 n);
             dots.v, dots.v, dots.down, dots.v;
@@ -51,7 +51,7 @@ When the numbers represent coefficients of a system of linear equations, the mat
 We can use #concept[Augmented Matrix] to represent a system of linear equations.
 If we add the expressions on the right-hand side of the system of linear equations, we get the *augumented (coefficient) matrix*.
 $
-  hat(A) = mat(a_11, a_12, a_13, ..., a_(1 n), b_1;
+  hat(bold(A)) = mat(a_11, a_12, a_13, ..., a_(1 n), b_1;
             a_21, a_22, a_23, ..., a_(2 n), b_2;
             dots.v, dots.v, dots.down, dots.v;
             a_(m 1), a_(m 2), a_(m 3), ..., a_(m n), b_m;
@@ -70,15 +70,15 @@ Similarly, we can use #concept("Elementary Row Operations") to transform a(n aug
 Examples of Row Echelon Form:
 $
   // 4 x 4 matrix
-  A = mat(0, 1, 2, 3;
+  bold(A) = mat(0, 1, 2, 3;
           0, 0, 4, 5;
           0, 0, 0, 6),
   // 3 x 4 matrix
-  B = mat(0, 1, 2, 3;
+  bold(B) = mat(0, 1, 2, 3;
           0, 0, 4, 5;
           0, 0, 0, 6),
   // 4 x 3 matrix
-  C = mat(0, 1, 2;
+  bold(C) = mat(0, 1, 2;
           0, 0, 4;
           0, 0, 0;
           0, 0, 0)
@@ -87,9 +87,9 @@ $
 
 *Sepcial cases of Row Echelon Form:*
 
-1. A square matrix in which all the elements of the principal diagonal are ones and all other elements are zeros is called the #concept[Identity Matrix]. The identity matrix of order $n$ is denoted by $I_n$.
+1. A square matrix in which all the elements of the principal diagonal are ones and all other elements are zeros is called the #concept[Identity Matrix]. The identity matrix of order $n$ is denoted by $bold(I)_n$.
   $
-    I_n = mat(1, 0, 0, ..., 0;
+    bold(I)_n = mat(1, 0, 0, ..., 0;
                 0, 1, 0, ..., 0;
                 0, 0, 1, ..., 0;
                 dots.v, dots.v, dots.v, dots.down;
@@ -98,7 +98,7 @@ $
 
 2. A matrix in which all the elements are zeros is called the #concept[Zero Matrix]. The zero matrix of order $m times n$ is denoted by $O_(m n)$.
   $
-    O_(m n) = mat(0, 0, 0, ..., 0;
+    bold(O)_(m n) = mat(0, 0, 0, ..., 0;
               0, 0, 0, ..., 0;
               0, 0, 0, ..., 0;
               dots.v, dots.v, dots.v, dots.down, dots.v;
@@ -138,22 +138,22 @@ However, as we know, a linear equation system may have no solution, a unique sol
 #concept[Rank]: The *rank* of a matrix is the number of non-zero rows in its row echelon form.
 
 #theorem("Fact 1 of Rank")[
-  Let $A$ be a coefficient matrix with $m$ rows and $n$ columns, and $hat(A)$ be the augumented matrix. Then
-  1. rank $A$ $<=$ rank $hat(A)$.
-  2. rank $A$ $<=$ $min(m, n)$.
+  Let $bold(A)$ be a coefficient matrix with $m$ rows and $n$ columns, and $hat(bold(A))$ be the augumented matrix. Then
+  1. rank $bold(A)$ $<=$ rank $hat(bold(A))$.
+  2. rank $bold(A)$ $<=$ $min(m, n)$.
 ]
 
 #theorem("Fact 2 of Rank")[
-  Let $A$ be a coefficient matrix f a system of linear equations of form $m times n$ and $hat(A) = (A|b)$ the augumented matrix.
+  Let $bold(A)$ be a coefficient matrix f a system of linear equations of form $m times n$ and $hat(bold(A)) = (bold(A)|bold(b))$ the augumented matrix.
   n is the number of variables and m is the number of equations. Then the corresponding system of linear equations has
-  1. no sollution if, rank $A$ $<$ rank $hat(A)$.
-  2. a unique solution if, rank $A$ $=$ rank $hat(A)$ $=$ n.
-  3. infinitely many solutions if, rank $A$ $=$ rank $hat(A)$ $<$ n.
+  1. no sollution if, rank $bold(A)$ $<$ rank $hat(bold(A))$.
+  2. a unique solution if, rank $bold(A)$ $=$ rank $hat(bold(A))$ $=$ n.
+  3. infinitely many solutions if, rank $bold(A)$ $=$ rank $hat(bold(A))$ $<$ n.
 ]
 
 
 #example("Applications of Rank")[
-  1. $"rank"(A) = 1 = "rank"(A|b) < 2$, has infinitely many solutions.
+  1. $"rank"(bold(A)) = 1 = "rank"(bold(A)|bold(b)) < 2$, has infinitely many solutions.
     $
       mat(1, 2, 3;
         2,4, 6;
@@ -163,7 +163,7 @@ However, as we know, a linear equation system may have no solution, a unique sol
         0, 0, 0;
         augment: #(-1))
     $
-  2. $1 = "rank"(A) < "rank"(A|b) = 2$, has no solution.
+  2. $1 = "rank"(bold(A)) < "rank"(bold(A)|bold(b)) = 2$, has no solution.
     $
       mat(1, 2, 3;
         1,2, 4;
@@ -173,7 +173,7 @@ However, as we know, a linear equation system may have no solution, a unique sol
         0, 0, 1;
         augment: #(-1))
     $
-  3. $"rank"(A) = 2 = "rank"(A|b) = 2$, has a unique solution.
+  3. $"rank"(bold(A)) = 2 = "rank"(bold(A)|bold(b)) = 2$, has a unique solution.
     $
       mat(1, 2, 3;
         2, 5, 7;
@@ -183,7 +183,7 @@ However, as we know, a linear equation system may have no solution, a unique sol
         0, 1, 1;
         augment: #(-1))
     $
-  If $"rank"(A|b)="rank"(A)=n$ then the reduced echelon looks like
+  If $"rank"(bold(A)|bold(b))="rank"(bold(A))=n$ then the reduced echelon looks like
   $
     mat(1, 0, ..., 0, b_1;
         0, 1, ..., 0, b_2;
@@ -215,7 +215,7 @@ However, as we know, a linear equation system may have no solution, a unique sol
 
 1. #concept("Addition")
   $
-    A + B =
+    bold(A) + bold(B) =
     mat(a_11, ... , a_(1 n);
       a_21, ..., a_(2 n);
       dots.v, a_(i j), dots.v;
@@ -233,7 +233,7 @@ However, as we know, a linear equation system may have no solution, a unique sol
 
 2. #concept("Subtraction")
   $
-    A - B =
+    bold(A) - bold(B) =
     mat(a_11, ... , a_(1 n);
       a_21, ..., a_(2 n);
       dots.v, a_(i j), dots.v;
@@ -251,7 +251,7 @@ However, as we know, a linear equation system may have no solution, a unique sol
 
 3. #concept("Scalar Multiplication")
   $
-    c A =
+    c bold(A) =
     c mat(a_11, ... , a_(1 n);
       a_21, ..., a_(2 n);
       dots.v, a_(i j), dots.v;
@@ -264,66 +264,66 @@ However, as we know, a linear equation system may have no solution, a unique sol
 
 4. #concept("Multiplication")
 
-  Define the matrix product $A B$ if and only if
-  $ "number of columns of" A = "number of rows of" B. $
-  For the matrix product to exist, $A$ must be $k times m$ and $B$ must be $m times n$. The product $A B$ is a $k times n$ matrix. To obtain the $(i, j)$th entry of $A B$, we multiply the $i$th row of $A$ by the $j$th column of $B$ as follows:
+  Define the matrix product $bold(A)bold(B)$ if and only if
+  $ "number of columns of" bold(A) = "number of rows of" bold(B). $
+  For the matrix product to exist, $bold(A)$ must be $k times m$ and $bold(B)$ must be $m times n$. The product $bold(A)bold(B)$ is a $k times n$ matrix. To obtain the $(i, j)$th entry of $bold(A)bold(B)$, we multiply the $i$th row of $bold(A)$ by the $j$th column of $bold(B)$ as follows:
   $
     mat(a_(i 1), a_(i 2), ..., a_(i m)) dot mat(b_(1 j); b_(2 j); ...; b_(m j)) = a_(i 1)b_(1 j) + a_(i 2)b_(2 j) + ... + a_(i m)b_(m j) = sum_(k=1)^m a_(i h)b_(h j).
   $
   Example:
   $
-    mat(a, b; c, d; e, f) mat(A, B; C, D) = mat(a A + b C, a B + b D; c A + d C, c B + d D; e A + f C, e B + f D)
+    mat(a, b; c, d; e, f) mat(bold(A), bold(B); bold(C), bold(D)) = mat(a bold(A) + b bold(C), a bold(B) + b bold(D); c bold(A) + d bold(C), c bold(B) + d bold(D); e bold(A) + f bold(C), e bold(B) + f bold(D))
   $
 
-  Sepcially, we have $A = A I = I A$.
+  Sepcially, we have $bold(A) = bold(A)bold(I)= bold(I)bold(A)$.
 
 - #concept("Laws of Matrix Algebra")
   1. Associative Laws:
   $
-    (A + B) + C = A + (B + C)
+    (bold(A) + bold(B)) + bold(C) = bold(A) + (bold(B) + bold(C))
   $
   $
-    (A B)C = A (B C)
+    (bold(A) bold(B))bold(C) = bold(A) (bold(B) bold(C))
   $
   2. Commutative Law for Addition:
   $
-    A + B = B + A
+    bold(A) + bold(B) = bold(B) + bold(A)
   $
   #attention("Attention")[The Commutative Law for Multiplication does not hold in general.]
   3. Distributive Laws:
   $
-    A (B + C) = A B + A C
+    bold(A) (bold(B) + bold(C)) = bold(A)bold(B) + bold(A)bold(C)
   $
 
 5. #concept("Transpose")
 
-  The transpose of a matrix $A$ is denoted by $A^T$. The transpose of a matrix is obtained by interchanging its rows and columns. If $A$ is an $m times n$ matrix, then $A^T$ is an $n times m$ matrix. The $(i, j)$th entry of $A^T$ is the $(j, i)$th entry of $A$. For example,
+  The transpose of a matrix $bold(A)$ is denoted by $bold(A)^T$. The transpose of a matrix is obtained by interchanging its rows and columns. If $bold(A)$ is an $m times n$ matrix, then $bold(A)^T$ is an $n times m$ matrix. The $(i, j)$th entry of $bold(A)^T$ is the $(j, i)$th entry of $bold(A)$. For example,
   $
     // 2 x 3
-    A = mat(a_11, a_12, a_13;
+    bold(A) = mat(a_11, a_12, a_13;
             a_21, a_22, a_23)
     arrow
     // 3 x 2
-    A^T = mat(a_11, a_21;
+    bold(A)^T = mat(a_11, a_21;
               a_12, a_22;
               a_13, a_23)
   $
 
   We have rules of transpose:
-  1. $(A^T)^T = A$
-  2. $(A + B)^T = A^T + B^T$
-  3. $(c A)^T = c A^T$
-  4. $(A B)^T = B^T A^T$
+  1. $(bold(A)^T)^T = bold(A)$
+  2. $(bold(A) + bold(B))^T = bold(A)^T + bold(B)^T$
+  3. $(c bold(A))^T = c bold(A)^T$
+  4. $(bold(A)bold(B))^T = bold(B)^T bold(A)^T$
   #proof("Proof of rule 4")[
-    Matrix $A$ is $k times m$ and matrix $B$ is $m times n$. Then the $(i, j)$th entry of $A B$ is
+    Matrix $bold(A)$ is $k times m$ and matrix $bold(B)$ is $m times n$. Then the $(i, j)$th entry of $bold(A)bold(B)$ is
     $
-      (A B)^T_(i j) = (A B)_(j i) = sum_(h=1)^m A_(j h) B_(h i) = sum_(h=1)^m B^T_(i h) A^T_(h j) = (B^T A^T)_(i j)
+      (bold(A)bold(B))^T_(i j) = (bold(A)bold(B))_(j i) = sum_(h=1)^m bold(A)_(j h) bold(B)_(h i) = sum_(h=1)^m bold(B)^T_(i h) bold(A)^T_(h j) = (bold(B)^T bold(A)^T)_(i j)
     $
   ]
 
-Formally, we can represent systems of linear equations in matrix form. Let $A$ be a coefficient matrix of a system of linear equations, $x$ be a vector of variables, and $b$ be a vector of constants. Then the system of linear equations can be written as:
+Formally, we can represent systems of linear equations in matrix form. Let $bold(A)$ be a coefficient matrix of a system of linear equations, $bold(x)$ be a vector of variables, and $bold(b)$ be a vector of constants. Then the system of linear equations can be written as:
 $
-  bold(A x) = bold(b)
+  bold(A)bold(x) = bold(b)
 $
 
 #upper[*Sepcial Kinds of Matrices*]
@@ -405,7 +405,7 @@ For $k times n$ Matrices:
   $,
 
   concept("Idempotent Matrix"),
-  $A^2 = A$,
+  $bold(A)^2 = bold(A)$,
   $
     mat(1, 0, 0;
         0, 1, 0;
@@ -435,10 +435,10 @@ For $k times n$ Matrices:
 
 There are three types of #concept("Elementary Matrices") which express the transformation of the Gaussian-Jordan elimination.
 
-- *Type 1*: We get $E_(i j)$ from $I_n$ by exchanging row $i$ and $j$.
+- *Type 1*: We get $bold(E)_(i j)$ from $bold(I)_n$ by exchanging row $i$ and $j$.
   $
   // 3 x 3 example
-  E_12 A = mat(0, 1, 0;
+  bold(E)_12 bold(A) = mat(0, 1, 0;
               1, 0, 0;
               0, 0, 1)
           mat(a_11, a_12, a_13;
@@ -448,10 +448,10 @@ There are three types of #concept("Elementary Matrices") which express the trans
             a_11, a_12, a_13;
             a_31, a_32, a_33)
   $
-- *Type 2*: We get $E_i (c)$ from $I_n$ by multiplying row $i$ by a non-zero number $c$.
+- *Type 2*: We get $bold(E)_i (c)$ from $bold(I)_n$ by multiplying row $i$ by a non-zero number $c$.
   $
   // 3 x 3 example
-  E_1 (c) A = mat(c, 0, 0;
+  bold(E)_1 (c) bold(A)= mat(c, 0, 0;
                   0, 1, 0;
                   0, 0, 1)
               mat(a_11, a_12, a_13;
@@ -461,10 +461,10 @@ There are three types of #concept("Elementary Matrices") which express the trans
                 a_21, a_22, a_23;
                 a_31, a_32, a_33)
   $
-- *Type 3*: We get $E_(i j)(c)$ from $I_n$ by adding $c$ times row $i$ to row $j$.
+- *Type 3*: We get $bold(E)_(i j)(c)$ from $bold(I)_n$ by adding $c$ times row $i$ to row $j$.
   $
   // 3 x 3 example
-  E_12 (c) A = mat(1, 0, 0;
+  bold(E)_12 (c) bold(A) = mat(1, 0, 0;
                     c, 1, 0;
                     0, 0, 1)
               mat(a_11, a_12, a_13;
@@ -476,102 +476,102 @@ There are three types of #concept("Elementary Matrices") which express the trans
   $
 
 #theorem("Gaussian-Jordan Elimination Theorem")[
-  For any $m times n$ matrix $A$, there exist elementory matrices $E_1, E_2, ..., E_k$ such that
+  For any $m times n$ matrix $bold(A)$, there exist elementory matrices $bold(E)_1, bold(E)_2, ..., bold(E)_k$ such that
   $
-    E_k E_(k-1) ... E_2 E_1 A = U
+    bold(E)_k bold(E)_(k-1) ... bold(E)_2 bold(E)_1 bold(A) = bold(U)
   $,
-  where $U$ is a matrix in row echelon form (or even in reduced echelon form).
+  where $bold(U)$ is a matrix in row echelon form (or even in reduced echelon form).
 ]
 
 #section("2.3. Inverse Matrix")
 
-#concept("Inverse Matrix"): Let $A$ be a $n times n$ square matrix. If there exists a matrix $B$ such that
+#concept("Inverse Matrix"): Let $bold(A)$ be a $n times n$ square matrix. If there exists a matrix $bold(B)$ such that
 $
-  A B = B A = I_n
+  bold(A) bold(B) = bold(B) bold(A) = bold(I)_n
 $
-, then $B$ is called the *Inverse Matrix* of $A$, denoted by $A^(-1)$.
+, then $bold(B)$ is called the *Inverse Matrix* of $bold(A)$, denoted by $bold(A)^(-1)$.
 
 
 #theorem("Fact 1 of Inverse Matrix")[
   There is at most one inverse matrix for a given square matrix.
   #proof("Proof of Fact 1")[
-    Suppose $A B = I_n$ and $A C = I_n$. Then
+    Suppose $bold(A)bold(B) = bold(I)_n$ and $bold(A)bold(C) = bold(I)_n$. Then
     $
-      B = B I_n = B (A C) = (B A) C = I_n C = C
+      bold(B) = bold(B) bold(I)_n = bold(B) (bold(A)bold(C)) = (bold(B) bold(A)) bold(C) = bold(I)_n bold(C) = bold(C)
     $
   ]
 ]
 
-let A be a $m times n$ matrx. $B$ ($n times m$ matrix) is called #concept("Right Inverse") of $A$ if $A B = I_m$. $C$ ($m times n$ matrix) is called #concept("Left Inverse") of $A$ if $C A = I_n$.
+let $bold(A)$ be a $m times n$ matrx. $bold(B)$ ($n times m$ matrix) is called #concept("Right Inverse") of $bold(A)$ if $bold(A) bold(B) = bold(I)_m$. $bold(C)$ ($m times n$ matrix) is called #concept("Left Inverse") of $bold(A)$ if $bold(C)bold(A) = bold(I)_n$.
 
 #theorem("Fact 2 of Inverse Matrix")[
-  + If $A$ has a left and a right inverse, then they are equal.
-  + A square matrix $A$ has an inverse if it has a left inverse and a right inverse.
+  + If $bold(A)$ has a left and a right inverse, then they are equal.
+  + A square matrix $bold(A)$ has an inverse if it has a left inverse and a right inverse.
 
   #proof("Proof of Fact 2")[
-    + Suppose $A B = I_m$ and $C A = I_n$. Then
+    + Suppose $bold(A)bold(B) = bold(I)_m$ and $bold(C)bold(A) = bold(I)_n$. Then
       $
-        C = C I_n = C (A B) = (C A) B = I_n B = B
+        bold(C) = bold(C) bold(I)_n = bold(C) (bold(A)bold(B)) = (bold(C)bold(A)) bold(B) = bold(I)_n bold(B) = bold(B)
       $
-    + Suppose $A$ has a left inverse $C$ and a right inverse $B$. Then
+    + Suppose $bold(A)$ has a left inverse $bold(C)$ and a right inverse $bold(B)$. Then
       $
-        A B = I_n & = C A \
-        & = B A space (<- "By Fact 2.1")
+        bold(A)bold(B) = bold(I)_n & = bold(C)bold(A) \
+        & = bold(B)bold(A) space (<- "By Fact 2.1")
       $
-      Hence, $A^(-1) = B = C$
+      Hence, $bold(A)^(-1) = bold(B) = bold(C)$
   ]
 
 ]
 
 
 #theorem("Fact 3")[
-  For any $n times n$ matrix $A$, the following statements are equivalent:
-  + $A$ is invertible.
-  + $A$ is nonsingular, i.e. $A bold(x) = bold(b)$ has a unique solution.
-  + $A$ has rank $n$.
+  For any $n times n$ matrix $bold(A)$, the following statements are equivalent:
+  + $bold(A)$ is invertible.
+  + $bold(A)$ is nonsingular, i.e. $A bold(x) = bold(b)$ has a unique solution.
+  + $bold(A)$ has rank $n$.
 ]
 
-*Algebra of Inverse Matrices*: Let $A$ and $B$ be invertible $n times n$ matrices. Then
-1. $(A^(-1))^(-1) = A$
-2. $(A^T)^(-1) = (A^-1)^T$
-3. $(A B)^(-1) = B^(-1) A^(-1)$
+*Algebra of Inverse Matrices*: Let $bold(A)$ and $bold(B)$ be invertible $n times n$ matrices. Then
+1. $(bold(A)^(-1))^(-1) = bold(A)$
+2. $(bold(A)^T)^(-1) = (bold(A)^(-1))^T$
+3. $(bold(A)bold(B))^(-1) = bold(B)^(-1) bold(A)^(-1)$
 
 
 #theorem("Fact 4")[
   Any matrix can be written as a product of elementary matrices and a reduced row echelon matrix.
   $
-    A =& E_1^(-1) E_2^(-1) ... E_k^(-1) U
-    =& F_1 F_2 ... F_k U
+    bold(A) =& bold(E)_1^(-1) bold(E)_2^(-1) ... bold(E)_k^(-1) U
+    =& bold(F)_1 bold(F)_2 ... bold(F)_k U
   $
-  where $F_i = E_i^(-1)$ is an elementary matrix and $U$ is a reduced row echelon matrix.
-  Sepcially, when $A$ is nonsingular, $U$ is an identity matrix.
+  where $bold(F)_i = bold(E)_i^(-1)$ is an elementary matrix and $bold(U)$ is a reduced row echelon matrix.
+  Sepcially, when $bold(A)$ is nonsingular, $bold(U)$ is an identity matrix.
 
   For different types of elementary matrices, we have
-  1. Type 1 $E_(i j)$: $E_(i j)^(-1) = E_(j i)$.
-  2. Tpye 2 $E_i(c)$: $E_i^(-1) = E_i (1/c)$ .
-  3. Type 3 $E_(i j)(c)$: $E_(i j)^(-1)(c) = E_(i j) (-c)$.
+  1. Type 1 $bold(E)_(i j)$: $bold(E)_(i j)^(-1) = bold(E)_(j i)$.
+  2. Tpye 2 $bold(E)_i(c)$: $bold(E)_i^(-1) = bold(E)_i (1/c)$ .
+  3. Type 3 $bold(E)_(i j)(c)$: $bold(E)_(i j)^(-1)(c) = bold(E)_(i j) (-c)$.
 ]
 
 *How to calculate the inverse of a matrix?*
 
-Equation $A A^(-1) = I_n$ can be decomposed into $A bold(x)_i = bold(e)_i$, where $bold(e)_i$ is the $i$th column of $I_n$. Then we can get $A^(-1) = mat(bold(x)_1, bold(x)_2, ..., bold(x)_n)$.
+Equation $bold(A) bold(A)^(-1) = bold(I)_n$ can be decomposed into $bold(A) bold(x)_i = bold(e)_i$, where $bold(e)_i$ is the $i$th column of $bold(I)_n$. Then we can get $bold(A)^(-1) = mat(bold(x)_1, bold(x)_2, ..., bold(x)_n)$.
 
-We have mastered the method of solving a system of linear equations like $A bold(x)_i = bold(e)_i$: construct the augmented matrix $hat(A) = (A|bold(e)_i)$, and use the Gaussian-Jordan elimination to get the reduced echelon form. If $A$ is nonsingular, then we can get $bold(x)_i = A^(-1) bold(e)_i$.
+We have mastered the method of solving a system of linear equations like $bold(A) bold(x)_i = bold(e)_i$: construct the augmented matrix $hat(bold(A)) = (bold(A)|bold(e)_i)$, and use the Gaussian-Jordan elimination to get the reduced echelon form. If $bold(A)$ is nonsingular, then we can get $bold(x)_i = bold(A)^(-1) bold(e)_i$.
 
-#note($bold(x) = A^(-1) bold(b)$)[
-  $bold(x) = A^(-1) bold(b)$ is an important equation. It directly tells us how to get the solution of a system of linear equations. If $A$ is nonsingular, then we can get the unique solution $bold(x) = A^(-1) bold(b)$.
+#note($bold(x) = bold(A)^(-1) bold(b)$)[
+  $bold(x) = bold(A)^(-1) bold(b)$ is an important equation. It directly tells us how to get the solution of a system of linear equations. If $bold(A)$ is nonsingular, then we can get the unique solution $bold(x) = bold(A)^(-1) bold(b)$.
 
-  If $bold(b)$ changes and $A$ does not, we can simply get the new solution $bold(x) = A^(-1) bold(b)'$.
+  If $bold(b)$ changes and $bold(A)$ does not, we can simply get the new solution $bold(x) = bold(A)^(-1) bold(b)'$.
 ]
 
-So we can calculate the inverse matrix $A^(-1)$ in a similar way. We construct the augmented matrix $hat(A) = (A|I_n)$, and use the Gaussian-Jordan elimination to get the reduced echelon form. If $A$ is nonsingular, then we can get $A^(-1) = mat(bold(x)_1, bold(x)_2, ..., bold(x)_n)$.
+So we can calculate the inverse matrix $bold(A)^(-1)$ in a similar way. We construct the augmented matrix $hat(bold(A)) = (bold(A)|bold(I)_n)$, and use the Gaussian-Jordan elimination to get the reduced echelon form. If $bold(A)$ is nonsingular, then we can get $bold(A)^(-1) = mat(bold(x)_1, bold(x)_2, ..., bold(x)_n)$.
 
 #example("Calculate Inverse Matrix")[
   $
-    A =& mat(1, 1, 1;
+    bold(A) =& mat(1, 1, 1;
             12, 2, -3;
             3, 4, 1) \
-    (A | I) =& mat(1, 1, 1, 1, 0, 0;
+    (bold(A) | bold(I)) =& mat(1, 1, 1, 1, 0, 0;
                   12, 2, -3, 0, 1, 0;
                   3, 4, 1, 0, 0, 1;
                   augment: #(-3) )
@@ -583,7 +583,7 @@ So we can calculate the inverse matrix $A^(-1)$ in a similar way. We construct t
            0, 1, 0, -0.6, -2/35, 3/7;
            0, 0, 1, 1.2, -1/35, -2/7;
            augment: #(-3) ) \
-    A^(-1) =& mat(0.4, 3/35, -1/7;
+    bold(A)^(-1) =& mat(0.4, 3/35, -1/7;
                  -0.6, -2/35, 3/7;
                  1.2, -1/35, -2/7)
   $
@@ -591,50 +591,50 @@ So we can calculate the inverse matrix $A^(-1)$ in a similar way. We construct t
 
 #section("2.4. Partitioned Matrices")
 
-#concept("Partitioned Matrix"): A matrix is said to be partitioned if it is divided into blocks. For example, a $m times n$ matrix $A$ can be partitioned into four blocks as follows:
+#concept("Partitioned Matrix"): A matrix is said to be partitioned if it is divided into blocks. For example, a $m times n$ matrix $bold(A)$ can be partitioned into four blocks as follows:
 $
-  A = mat(A_(11), A_(12);
-          A_(21), A_(22))
+  bold(A) = mat(bold(A)_(11), bold(A)_(12);
+          bold(A)_(21), bold(A)_(22))
 $
-where $A_(11)$ is a $k times l$ matrix, $A_(12)$ is a $k times (n-l)$ matrix, $A_(21)$ is a $(m-k) times l$ matrix, and $A_(22)$ is a $(m-k) times (n-l)$ matrix.
+where $bold(A)_(11)$ is a $k times l$ matrix, $bold(A)_(12)$ is a $k times (n-l)$ matrix, $bold(A)_(21)$ is a $(m-k) times l$ matrix, and $bold(A)_(22)$ is a $(m-k) times (n-l)$ matrix.
 
-If $A$ is a square matrix which has been partitioned as
+If $bold(A)$ is a square matrix which has been partitioned as
 $
-  A = mat(A_11, 0, dots, 0;
-          0, A_22, dots, 0;
+  bold(A) = mat(bold(A)_11, 0, dots, 0;
+          0, bold(A)_22, dots, 0;
           dots.v, dots.v, dots.down, dots.v;
-          0, 0, dots, A_(k k))
+          0, 0, dots, bold(A)_(k k))
 $
-where each $A_(i j)$ is a square matrix, then $A$ is called a #concept("Block Diagonal Matrix").
+where each $bold(A)_(i j)$ is a square matrix, then $bold(A)$ is called a #concept("Block Diagonal Matrix").
 
-Suppose that $A$ and $B$ are $m times n$ matrices, which are partitioned the same way; that is
+Suppose that $bold(A)$ and $bold(B)$ are $m times n$ matrices, which are partitioned the same way; that is
 $
-  A = mat(A_11, A_12, A_13;
-          A_21, A_22, A_23)
+  bold(A) = mat(bold(A)_11, bold(A)_12, bold(A)_13;
+          bold(A)_21, bold(A)_22, bold(A)_23)
   "and"
-  B = mat(B_11, B_12, B_13;
-          B_21, B_22, B_23)
+  bold(B) = mat(bold(B)_11, bold(B)_12, bold(B)_13;
+          bold(B)_21, bold(B)_22, bold(B)_23)
 $
-. Then $A$ and $B$ can be added or subtracted as follows:
+. Then $bold(A)$ and $bold(B)$ can be added or subtracted as follows:
 $
-  A + B = mat(A_11 + B_11, A_12 + B_12, A_13 + B_13;
-              A_21 + B_21, A_22 + B_22, A_23 + B_23)
+  bold(A) + bold(B) = mat(bold(A)_11 + bold(B)_11, bold(A)_12 + bold(B)_12, bold(A)_13 + bold(B)_13;
+              bold(A)_21 + bold(B)_21, bold(A)_22 + bold(B)_22, bold(A)_23 + bold(B)_23)
   \ "and" \
-  A - B = mat(A_11 - B_11, A_12 - B_12, A_13 - B_13;
-              A_21 - B_21, A_22 - B_22, A_23 - B_23)
+  bold(A) - bold(B) = mat(bold(A)_11 - bold(B)_11, bold(A)_12 - bold(B)_12, bold(A)_13 - bold(B)_13;
+              bold(A)_21 - bold(B)_21, bold(A)_22 - bold(B)_22, bold(A)_23 - bold(B)_23)
 $
-Similarly, two partitioned matrices $A$ and $C$ can be multiplied. For example, if
+Similarly, two partitioned matrices $bold(A)$ and $bold(C)$ can be multiplied. For example, if
 $
-  A = mat(A_11, A_12;
-          A_21, A_22)
+  bold(A) = mat(bold(A)_11, bold(A)_12;
+          bold(A)_21, bold(A)_22)
   "and"
-  C = mat(C_11, C_12, C_13;
-          C_21, C_22, C_23)
+  bold(C) = mat(bold(C)_11, bold(C)_12, bold(C)_13;
+          bold(C)_21, bold(C)_22, bold(C)_23)
 $,
 then
 $
-  A C = mat(A_11 C_11 + A_12 C_21, A_11 C_12 + A_12 C_22, A_11 C_13 + A_12 C_23;
-          A_21 C_11 + A_22 C_21, A_21 C_12 + A_22 C_22, A_21 C_13 + A_22 C_23)
+  bold(A)bold(C) = mat(bold(A)_11 bold(C)_11 + bold(A)_12 bold(C)_21, bold(A)_11 bold(C)_12 + bold(A)_12 bold(C)_22, bold(A)_11 bold(C)_13 + bold(A)_12 bold(C)_23;
+          bold(A)_21 bold(C)_11 + bold(A)_22 bold(C)_21, bold(A)_21 bold(C)_12 + bold(A)_22 bold(C)_22, bold(A)_21 bold(C)_13 + bold(A)_22 bold(C)_23)
 $
 
 #section("2.5. Decomposing Matrices")
