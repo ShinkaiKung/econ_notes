@@ -1,1 +1,1 @@
-# EconNoes
+# EconNotes
