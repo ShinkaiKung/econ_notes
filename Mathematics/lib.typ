@@ -503,6 +503,26 @@
   },
 ).with(numbering: boxnumbering)
 
+#let lemma = thmenv(
+  "lemma",
+  boxcounting,
+  none,
+  (name, number, body, ..args) => {
+    showybox(
+      title: [*#name* #h(1fr) Lemma #number],
+      frame: (
+        border-color: navy,
+        title-color: navy.lighten(30%),
+        body-color: navy.lighten(95%),
+        footer-color: navy.lighten(80%),
+      ),
+      ..args.named(),
+      body,
+    )
+  },
+).with(numbering: boxnumbering)
+
+
 #let proposition = thmenv(
   "Proposition",
   boxcounting,

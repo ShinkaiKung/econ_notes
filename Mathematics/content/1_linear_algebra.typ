@@ -656,3 +656,199 @@ To be continued...
 )
 
 == Chapter 3. Determinants
+
+#note("GOAL")[The goal of this chapter is to master how to calculate the Determinants, and how to use it get the inverse matrix and the solution of a linear equation system.]
+
+#concept("Determinant"): The *determinant* of a square matrix $bold(A)$ is a number that can be calculated from the elements of $bold(A)$. The determinant of $bold(A)$ is denoted by $|bold(A)|$ or $det(bold(A))$.
+
+#definition("Definition of Determinant")[
+  Let $bold(A)$ a $n times n$ matrix.
+  Let $bold(A)_(i j)$ be the submatrix of $bold(A)$ obtained by deleting the $i$th row and the $j$th column of $bold(A)$. The #concept("Minor") of the element $a_(i j)$ is denoted by $M_(i j)$, which is defined as
+  $
+    M_(i j) = |bold(A)_(i j)| "or" det(bold(A)_(i j))
+  $
+  and the #concept("Cofactor") of $a_(i j)$ is denoted by $C_(i j)$, which is defined as
+  $
+    C_(i j) = (-1)^(i + j) M_(i j) = (-1)^(i + j) det(bold(A)_(i j)).
+  $
+  The *determinant* of $bold(A)$ is defined as
+  $
+    |bold(A)| = det(bold(A)) = sum_(i,j=1)^n a_(i j) C_(i j) = sum_(i,j=1)^n a_(i j) (-1)^(i + j) M_(i j)
+  $
+  #note("Note about \"bold\"")[
+    $M_(i j)$ and $C_(i j)$ are scalars, while $bold(A)_(i j)$ is a matrix.
+  ]
+]
+
+#concept("Rule of Sarrus"):
+For a $3 times 3$ matrix, the determinant can be calculated by the Rule of Sarrus. For example,
+$
+  mat(a, b, c;
+        d, e, f;
+        g, h, i;
+        delim: "|") = a e f + b f g + c d h - c e g - a d i - b h i
+$
+
+#theorem("Determinants of Some Special Matrices")[
+  The determinant of a Lower-Triangular, Upper-Triangular, or Diagonal matrix is the product of its diagonal elements.
+
+  #example("Examples")[
+    $
+    // Lower-Triangular
+    bold(A) &= mat(1, 0, 0;
+            2, 3, 0;
+            4, 5, 6),
+    |bold(A)| &= 1 times 3 times 6 &= 18
+    \
+    // Upper-Triangular
+    bold(B) &= mat(1, 2, 3;
+            0, 4, 5;
+            0, 0, 6),
+    |bold(B)| &= 1 times 4 times 6 &= 24
+    \
+    // Diagonal
+    bold(C) &= mat(1, 0, 0;
+            0, 2, 0;
+            0, 0, 3),
+    |bold(C)| &= 1 times 2 times 3 &= 6
+    $
+  ]
+]
+
+#concept("Properties of the Determinant"):
+Let $bold(A)$, $bold(B)$ be $n times n$ matrices.
++ If $bold(B) = bold(E)_(i)(lambda) bold(A)$, then $det(bold(B)) = lambda^n det(bold(A))$
++ If $bold(B) = bold(E)_(i j)bold(A)$, then $det(bold(B)) = -det(bold(A))$.
++ If $bold(B) = bold(E)_(i j) (lambda) bold(A)$, then $det(bold(B)) = det(bold(A))$.
++ If any row of $bold(A)$ is zero, then $det(bold(A)) = 0$.
++ $det(A B) = det(A)det(B)$
++ $det(bold(A)^T) = det(bold(A))$
+
+#theorem("Determinant of echelon form")[
+  Let $bold(A)$ be an $n times n$ matrix and $bold(R)$ be its echelon form. Then
+  $
+    det(bold(A)) = (-1)^r det(bold(R))
+  $,
+  where $r$ is the number of row exchanges required to transform $bold(A)$ into $bold(R)$.
+]
+
+#concept("Adjoint Matrix"): For any $n times n$ matrix $bold(A)$, let $C_(i j)$ be the cofactor of $a_(i j)$. The $n times n$ matrix whose $(i, j)$th entry is $C_(bold(j i))$, the $bold((j, i))$th cofactor of $bold(A)$, is called the *Adjoint* of $bold(A)$ and is written $"adj"bold(A)$.
+
+#theorem("Determinant of inverse matrix")[
+  Let $bold(A)$ be an invertible $n times n$ matrix. Then
+  $
+    det(bold(A)^(-1)) = 1 / det(bold(A))
+  $
+]
+
+#theorem("Application of Determinants")[
+  Let $A$ be a nonsingular matrix, Then
+  + $bold(A)^(-1) = 1 / det(bold(A)) dot "adj"bold(A)$,
+  + Cramer's Rule \
+    The unique solution $bold(x) = mat(x_1, ..., x_n)$ of the $n times n$ system $bold(A)bold(x)=bold(b)$ is
+    $
+      x_i = det(bold(B)_i) / det(bold(A)), "for" i = 1, ..., n,
+    $
+    where $bold(B)_i$ is the matrix $A$ with the right-hand side $bold(b)$ replacing the $i$th column of A.
+]
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#set page(
+  paper: "us-letter",
+  header: align(
+    right + horizon,
+    title,
+  ),
+  numbering: "1",
+  columns: 1,
+)
+
+== Chapter 4. Linear Independence in Vector Space
+
+#definition("Vector Space")[
+  Let $V eq.not emptyset$ be a set. By $plus.circle$ we denote a binary operation $V plus.circle V -> V$ and by $dot.circle$ the operation $RR times V -> V$. Let the operations fulfill the following properties:
+  + $(V, plus.circle)$ is a #concept("Commutative Group") with identity element, $bold(0)$.
+    #note("Commutative Group / Abelian Group")[
+      + Closure: $forall v, w in V, v plus.circle w in V$.
+      + Associativity: $forall u, v, w in V, (u plus.circle v) plus.circle w = u plus.circle (v plus.circle w)$.
+      + Identity Elementary: There exists a special element, denoted as $bold(0)$. $forall v in V, v plus.circle bold(0) = bold(0) plus.circle v = v$.
+      + Inverse: $forall v in V, exists -v in V, v plus.circle (-v) = (-v) plus.circle v = bold(0)$
+      + Commutative: $forall v, w in V, v plus.circle w = w plus.circle v$.
+    ]
+  + $forall alpha in RR, forall x, y in V: alpha dot.circle (x plus.circle y) = (alpha dot.circle x) plus.circle (alpha dot.circle y)$.
+  + $forall alpha, beta in RR, forall x in V: (alpha plus.circle beta) dot.circle x = (alpha dot.circle x) plus.circle (beta dot.circle x)$.
+  + $forall alpha, beta in RR, forall x in V: alpha dot.circle(beta dot.circle x) = (alpha dot.circle beta) dot.circle x$.
+  + $forall x in V: 1 dot.circle x = x$.
+  Then $(V, plus.circle, dot.circle)$ is called #concept("Vector Space").
+
+  Shotcut notation: $V$ instead of $(V, plus.circle, dot.circle)$.
+]
+
+*$RR^m$ as vector space*
+
+Consider $RR^m = {(x_1, dots, x_m) | x_i in RR, i = 1, dots, m}$ with $plus.circle$ the matrix addition
+$
+  (x_1, ..., x_m) plus.circle (y_1, ..., y_m) colon.eq (x_1 + x_2, ..., x_m, y_m)
+$
+and $dot.circle$ the multiplication with a scalar
+$
+  alpha dot.circle (x_1, ..., x_m) colon.eq (alpha x_1, alpha x_m)
+$
+. Then $(RR^m, plus.circle, dot.circle)$ is a vector space.
+
+The elements of $RR^m$ can be written as column vectors or row vectors:
+$
+  vec(x_1, ..., x_m), (x_1, ..., x_m).
+$
+
+#lemma("Linear Subspace")[
+  Let $V_* subset V$ and for any $alpha in RR$ and $x, y in V_*$ hold
+  $
+    alpha dot.circle x in V_* "and" x plus.circle y in V_*
+  $.
+  Then $(V_*, plus.circle, dot.circle)$ is a vector space.
+
+  $(V, plus.circle, dot.circle)$ is called a #concept("Linear Subspace") of $(V, plus.circle, dot.circle)$
+
+  #example("Subspace")[
+    + A line through the origin: Let $W = {(x, 2x)| x in RR}$, $W$ is a subspace of $RR^2$, because:
+      - $forall (x_1, 2x_1): (x_2, 2x_2), (x_1, 2x_1) + (x_2, 2x_2) = (x_1 + x_2, 2(x_1 + x_2)) in W$
+      - $forall lambda in R: lambda(x, 2x) = (lambda x, 2lambda x) in W$
+    + A plane through the origin: Let $W = {(x, y, 0) | x, y in RR }$, $W$ is a subspace of $RR^3$.
+    + $W = {(x, x+1) | x in RR}$ is *NOT* a subspace of $RR^2$.
+      - $exists lambda = 0, lambda(x, x+1) = (lambda x, lambda(x + 1)) = (0, 0) in.not W$.
+  ]
+]
+
+#concept("Linear Independence"): Let $V$ be a vector space. A set of vectors $S = {bold(v)_1, bold(v)_2, dots, bold(v)_n}$ is called *Linearly Independent* if the only solution of the equation
+$
+  c_1 bold(v)_1 + c_2 bold(v)_2 + dots + c_n bold(v)_n = bold(0)
+$
+is $c_1 = c_2 = dots = c_n = 0$.
+
+Consequently, if $bold(v)_1, bold(v)_2, dots, bold(v)_n$ are _not linearly independent_ (#concept("Linearly Dependent")), i.e. $c_1 bold(v)_1 + c_2 bold(v)_2 + dots + c_n bold(v)_n = bold(0)$ holds for some $c_i eq.not 0$, say $c_k eq.not 0$, Then $
+bold(v)_k = sum_(i=1)^(n) ((-c_i) / c_k) bold(v)_i.
+$
+
+#definition("Spanning Set")[
+  Let $bold(v)_1, ..., bold(v)_n in RR^n$. The set of linear combinations
+  $
+    {c_1 bold(v)_1 + c_2 bold(v)_2 + dots + c_n bold(v)_n | c_i in RR, i = 1, dots, n}
+  $
+  is called the #concept("Span") of $bold(v)_1, ..., bold(v)_n$.
+
+  Let $V subset RR^n$, if $V = {c_1 bold(v)_1 + c_2 bold(v)_2 + dots + c_n bold(v)_n | c_i in RR, i = 1, dots, n}$, it is said that $V$ is spanned by $bold(v)_1, ..., bold(v)_n$.
+]
+
+
+
+
+
+
+
+
+
+
+
+
