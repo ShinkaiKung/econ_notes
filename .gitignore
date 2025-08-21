@@ -1,0 +1,73 @@
+# ------------------------
+# LaTeX intermediate files
+# ------------------------
+*.aux
+*.bbl
+*.blg
+*.brf
+*.idx
+*.ilg
+*.ind
+*.lof
+*.log
+*.lot
+*.out
+*.toc
+*.synctex.gz
+*.synctex(busy)
+*.fdb_latexmk
+*.fls
+*.nav
+*.snm
+*.vrb
+*.xdv
+*.run.xml
+
+# ------------------------
+# Editors and IDEs
+# ------------------------
+*~
+*.swp
+*.bak
+*.tmp
+*.backup
+*.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
+
+# TeXShop
+*.pdfsync
+
+# ------------------------
+# Build artifacts
+# ------------------------
+*.pdf
+*.dvi
+*.ps
+
+# ------------------------
+# Generated glossaries / nomenclature
+# ------------------------
+*.acn
+*.acr
+*.alg
+*.glg
+*.glo
+*.gls
+*.ist
+
+# ------------------------
+# Misc
+# ------------------------
+*.lot
+*.maf
+*.mtc*
+*.mlf
+*.msf
+*.nlo
+*.nls
+*.slg
+*.slo
+*.sls
