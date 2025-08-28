@@ -1,0 +1,759 @@
+% --- LaTeX Homework Template - S. Venkatraman ---
+
+% --- Set document class and font size ---
+
+\documentclass[letterpaper, 11pt]{article}
+
+% --- Package imports ---
+
+\usepackage{
+  amsmath, amsthm, amssymb, mathtools, dsfont,	  % Math typesetting
+  graphicx, wrapfig, subfig, float,                  % Figures and graphics formatting
+  listings, color, inconsolata, pythonhighlight,     % Code formatting
+  fancyhdr, sectsty, hyperref, enumerate, enumitem } % Headers/footers, section fonts, links, lists
+
+% --- Page layout settings ---
+
+% Set page margins
+\usepackage[left=1.35in, right=1.35in, bottom=1in, top=1.1in, headsep=0.2in]{geometry}
+
+% Anchor footnotes to the bottom of the page
+\usepackage[bottom]{footmisc}
+
+% Set line spacing
+\renewcommand{\baselinestretch}{1}
+
+% Set spacing between paragraphs
+\setlength{\parskip}{1.5mm}
+
+% Allow multi-line equations to break onto the next page
+\allowdisplaybreaks
+
+% Enumerated lists: make numbers flush left, with parentheses around them
+\setlist[enumerate]{wide=0pt, leftmargin=21pt, labelwidth=0pt, align=left}
+\setenumerate[1]{label={(\arabic*)}}
+
+% --- Page formatting settings ---
+
+% Set link colors for labeled items (blue) and citations (red)
+\hypersetup{colorlinks=true, linkcolor=blue, citecolor=red}
+
+% Make reference section title font smaller
+\renewcommand{\refname}{\large\bf{References}}
+
+% --- Settings for printing computer code ---
+
+% Define colors for green text (comments), grey text (line numbers),
+% and green frame around code
+\definecolor{greenText}{rgb}{0.5, 0.7, 0.5}
+\definecolor{greyText}{rgb}{0.5, 0.5, 0.5}
+\definecolor{codeFrame}{rgb}{0.5, 0.7, 0.5}
+
+% Define code settings
+\lstdefinestyle{code} {
+  frame=single, rulecolor=\color{codeFrame},            % Include a green frame around the code
+  numbers=left,                                         % Include line numbers
+  numbersep=8pt,                                        % Add space between line numbers and frame
+  numberstyle=\tiny\color{greyText},                    % Line number font size (tiny) and color (grey)
+  commentstyle=\color{greenText},                       % Put comments in green text
+  basicstyle=\linespread{1.1}\ttfamily\footnotesize,    % Set code line spacing
+  keywordstyle=\ttfamily\footnotesize,                  % No special formatting for keywords
+  showstringspaces=false,                               % No marks for spaces
+  xleftmargin=1.95em,                                   % Align code frame with main text
+  framexleftmargin=1.6em,                               % Extend frame left margin to include line numbers
+  breaklines=true,                                      % Wrap long lines of code
+  postbreak=\mbox{\textcolor{greenText}{$\hookto$}\space} % Mark wrapped lines with an arrow
+}
+
+% Set all code listings to be styled with the above settings
+\lstset{style=code}
+
+% --- Math/Statistics commands ---
+
+% Add a reference number to a single line of a multi-line equation
+% Usage: "\numberthis\label{labelNameHere}" in an align or gather environment
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+% Shortcut for bold text in math mode, e.g. $\b{X}$
+\let\b\mathbf
+
+% Shortcut for bold Greek letters, e.g. $\bg{\beta}$
+\let\bg\boldsymbol
+
+% Shortcut for calligraphic script, e.g. %\mc{M}$
+\let\mc\mathcal
+
+% \mathscr{(letter here)} is sometimes used to denote vector spaces
+\usepackage[mathscr]{euscript}
+
+% Convergence: right arrow with optional text on top
+% E.g. $\converge[w]$ for weak convergence
+\newcommand{\converge}[1][]{\xto{#1}}
+
+% Normal distribution: arguments are the mean and variance
+% E.g. $\normal{\mu}{\sigma}$
+\newcommand{\normal}[2]{\mathcal{N}\left(#1,#2\right)}
+
+% Uniform distribution: arguments are the left and right endpoints
+% E.g. $\unif{0}{1}$
+\newcommand{\unif}[2]{\text{Uniform}(#1,#2)}
+
+% Independent and identically distributed random variables
+% E.g. $ X_1,...,X_n \iid \normal{0}{1}$
+\newcommand{\iid}{\stackrel{\smash{\text{iid}}}{\sim}}
+
+% Equality: equals sign with optional text on top
+% E.g. $X \equals[d] Y$ for equality in distribution
+\newcommand{\equals}[1][]{\stackrel{\smash{#1}}{=}}
+
+% Math mode symbols for common sets and spaces. Example usage: $\R$
+\newcommand{\R}{\mathbb{R}}   % Real numbers
+\newcommand{\C}{\mathbb{C}}   % Complex numbers
+\newcommand{\Q}{\mathbb{Q}}   % Rational numbers
+\newcommand{\Z}{\mathbb{Z}}   % Integers
+\newcommand{\N}{\mathbb{N}}   % Natural numbers
+\newcommand{\F}{\mathcal{F}}  % Calligraphic F for a sigma algebra
+\newcommand{\El}{\mathcal{L}} % Calligraphic L, e.g. for L^p spaces
+
+% Math mode symbols for probability
+\newcommand{\pr}{\mathbb{P}}    % Probability measure
+\newcommand{\E}{\mathbb{E}}     % Expectation, e.g. $\E(X)$
+\newcommand{\var}{\text{Var}}   % Variance, e.g. $\var(X)$
+\newcommand{\cov}{\text{Cov}}   % Covariance, e.g. $\cov(X,Y)$
+\newcommand{\corr}{\text{Corr}} % Correlation, e.g. $\corr(X,Y)$
+\newcommand{\B}{\mathcal{B}}    % Borel sigma-algebra
+
+% Other miscellaneous symbols
+\newcommand{\tth}{\text{th}}	% Non-italicized 'th', e.g. $n^\tth$
+\newcommand{\Oh}{\mathcal{O}}	% Big-O notation, e.g. $\O(n)$
+\newcommand{\1}{\mathds{1}}	% Indicator function, e.g. $\1_A$
+
+% Additional commands for math mode
+\DeclareMathOperator*{\argmax}{argmax}    % Argmax, e.g. $\argmax_{x\in[0,1]} f(x)$
+\DeclareMathOperator*{\argmin}{argmin}    % Argmin, e.g. $\argmin_{x\in[0,1]} f(x)$
+\DeclareMathOperator*{\spann}{Span}       % Span, e.g. $\spann\{X_1,...,X_n\}$
+\DeclareMathOperator*{\bias}{Bias}        % Bias, e.g. $\bias(\hat\theta)$
+\DeclareMathOperator*{\ran}{ran}          % Range of an operator, e.g. $\ran(T) 
+\DeclareMathOperator*{\dv}{d\!}           % Non-italicized 'with respect to', e.g. $\int f(x) \dv x$
+\DeclareMathOperator*{\diag}{diag}        % Diagonal of a matrix, e.g. $\diag(M)$
+\DeclareMathOperator*{\trace}{trace}      % Trace of a matrix, e.g. $\trace(M)$
+
+% Numbered theorem, lemma, etc. settings - e.g., a definition, lemma, and theorem appearing in that 
+% order in Section 2 will be numbered Definition 2.1, Lemma 2.2, Theorem 2.3. 
+% Example usage: \begin{theorem}[Name of theorem] Theorem statement \end{theorem}
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+
+% Un-numbered theorem, lemma, etc. settings
+% Example usage: \begin{lemma*}[Name of lemma] Lemma statement \end{lemma*}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{corollary*}{Corollary}
+\newtheorem*{definition*}{Definition}
+\newtheorem*{example*}{Example}
+\newtheorem*{remark*}{Remark}
+\newtheorem*{claim}{Claim}
+
+% --- Left/right header text (to appear on every page) ---
+
+% Include a line underneath the header, no footer line
+\pagestyle{fancy}
+\renewcommand{\footrulewidth}{0pt}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% Left header text: course name/assignment number
+\lhead{MATHEMATICS - Problem Set 1}
+
+% Right header text: your name
+\rhead{Zian Gong}
+
+% --- Document starts here ---
+
+\begin{document}
+\subsection*{Problem 1}
+
+\subsubsection*{a)} 
+Solution:
+
+i)
+\begin{align*}
+  1 - \ln|x| \geq 0 \\
+  \ln|x| \leq 1 \\
+\end{align*}
+
+Therefore, $D = \{x \in \mathbb{R}: |x| \leq e, x \neq 0  \}$
+
+ii)
+\begin{align*}
+  x(x^{2} - 4)^{-1} \geq 0 \\
+  \frac{x}{x^2 - 4} \geq 0
+\end{align*}
+
+We need:
+\begin{itemize}
+  \item $x \geq 0, x^2 - 4 > 0,  \Rightarrow x > 2$,
+  \item $x \leq 0, x^2 -4 < 0, \Rightarrow -2 < x \leq 0$
+\end{itemize}
+
+Therefore, $D = \{ x \in \mathbb{R}, x \in (-2, 0] \cup x \in (2, +\infty) \}$
+
+\subsubsection*{b)}
+
+Solution:
+
+i)
+
+While $x \to 2$, $x^2 - 3x + 2 \to 0$ and $x -2 \to 0 $, using L'Hopital rule, \begin{equation*}
+  \lim_{x \to 2}\frac{x^2 - 3x + 2}{x - 2} = \lim_{x \to 2}\frac{2x-3}{1} = 1  
+\end{equation*}
+
+ii)
+
+While $x \to -1$, $4 - \sqrt{x+17} \to 0$ and $2x+2 \to 0$, using L'Hopital rule, \begin{equation*}
+  \lim_{x \to -2}\frac{4 - \sqrt{x+17}}{2x+2} =  \lim_{x \to -1}\frac{-\frac{1}{2}(x+17)^{-1/2}}{2} = \lim_{x \to -1}-\frac{1}{4 \sqrt{x+17}} = -1/16 
+\end{equation*}
+
+\subsubsection*{c)}
+
+Solution:
+
+i)
+Trying to prove $ \forall \epsilon > 0, \exists \eta > 0$, assure \begin{equation*}
+  |2x+1-11| < \epsilon,\quad \text{when}\, |x - 5| < \eta.
+\end{equation*} 
+
+We have $|2x+1-11| = |2x-10|=2|x-5| < 2 \eta $,
+we can assign $\eta = \frac{1}{2} \epsilon$.
+
+Then $|2x+1-11| = |2x-10|=2|x-5| < 2 \eta = \epsilon$.
+
+Q.E.D
+
+ii)
+
+Trying to prove $ \forall \epsilon > 0, \exists \eta > 0$, assure \begin{equation*}
+  |x^{2} - 10x + 21| < \epsilon,\quad \text{when}\, |x - 3| < \eta.
+\end{equation*} 
+
+We have $|x^{2} - 10x + 21| = |(x-3)(x-7)|=|(x-3)(x-3-4)| = |(x-3)^{2} - 4(x-3)| < |(x-3)^{2}| + 4 |x-3| < \eta ^{2} + 4 \eta $.
+
+We can assume $0 < eta < 1$, then $\eta ^{2} + 4 \eta < \eta + 4\eta = 5\eta$, then we assign $\eta = \frac{1}{5}\epsilon$.
+Then $|x^{2} - 10x + 21| < 5\eta = \epsilon$
+
+Q.E.D
+
+\subsection*{Problem 2}
+% TODO:
+Trying to prove $ \forall \epsilon > 0, \exists \eta_{1}, \eta_{2} > 0$, assure \begin{equation*}
+  |f(x)g(x) - AB| < \epsilon,\quad \text{when}\, |f(x) - A| < \eta_{1} , |g(x) - B| < \eta_{2}.
+\end{equation*}
+
+$|f(x)g(x) - AB| = | (f(x) - A)(g(x) - B) + A g(x) + B f(x) - 2AB |$
+
+
+
+\subsection*{Problem 3}
+
+\subsubsection*{a)}
+
+Solution:
+
+i)
+\begin{align*}
+  \frac{d f(x)}{dx} &= \lim_{h \to 0} \frac{f(x+h) - f(x)}{h} \\
+  &= \lim_{h \to 0} \frac{(x+h)^{2} - (x+h) + 2 - x ^{2} + x -2}{h} \\
+  &= \lim_{h \to 0} \frac{x ^{2} + 2hx + h ^{2} - x -h - x ^{2} +x}{h} \\
+  &= \lim_{h \to 0} \frac{(2x-1)h}{h} = 2x-1
+\end{align*} 
+
+ii)
+\begin{align*}
+   \frac{d f(x)}{dx} &= \lim_{h \to 0} \frac{f(x+h) - f(x)}{h} \\
+  &= \lim_{h \to 0} \frac{-2(x+h)^3 + (x+h) ^{2} + 2x ^{3}  - x ^{2}}{h} \\
+  &= \lim_{h \to 0} \frac{-2 x ^{3} - 6hx ^{2} -6xh ^{2} - 2h ^{3} + x ^{2} + 2xh + h ^{2} + 2 x ^{3} - x ^{2}}{h} \\
+  &= \lim_{h \to 0} \frac{-6x ^{2} h + 2xh -6 xh ^{2} -2h ^{3}}{h} = -6 x ^{2} + 2x
+\end{align*}
+
+
+
+\subsubsection*{b)}
+
+Solution:
+
+i)
+\begin{align*}
+  f'(x) &= e ^{-3x ^{2}} (-6 x) = -6x e ^{-3 x^{2}} \\
+  f''(x) &= -6e ^{-3 x^{2}} -6x (-6x e ^{-3 x^{2}}) \\
+        &= 6(6x ^{2} - 1) e ^{-3 x ^{2}} 
+\end{align*}
+
+ii)
+\begin{align*}
+  f'(x) &= \frac{2xe^{x} - x ^{2} e ^{x}}{e ^{2x}} = \frac{2x-x ^{2}}{e ^{x}} \\
+  f''(x) &= \frac{(2 - 2x)e ^{x}-(2x - x ^{2})e ^{x}}{e ^{2x}} = \frac{2-4x+x ^{2}}{e ^{x}}
+\end{align*}
+
+iii)
+\begin{align*}
+  f'(x) &= e ^{x}(\ln(x ^{2} + 2) + \frac{2x}{x ^{2} + 2}) \\
+  f''(x) &= f'(x) + e ^{x} (\frac{2x}{x ^{2} + 2} + \frac{-2x ^{2} + 4}{(x ^{2} + 2)^{2}}) \\
+  &= f'(x) + e ^{x}\frac{2x ^{3} -2 x ^{2} + 4x + 4}{(x ^{2} + 2) ^{2}}
+\end{align*}
+
+iv)
+\begin{align*}
+  f'(x) &= -4x ^{3} e ^{-x} + x ^{4} e ^{-x} = (x ^{4} - 4x ^{3})e ^{-x} \\
+  f''(x) &=(-x ^{4} +4x ^{3} +4x ^{3} =12 x ^{2})e ^{-x} \\
+      &= (-x ^{4} + 8 x ^{3}- 12 x ^{2}) e ^{-x}
+\end{align*}
+
+v)
+\begin{align*}
+  f'(x) &= n(e ^{x} + x ^{2}) ^{n - 1} (e ^{x} + 2x) \\
+  f''(x) &= n(n-1)(e ^{x} + x ^{2}) ^{n - 2} (e ^{x} + 2x)^{2} +n(e ^{x} + x ^{2}) ^{n - 1} (e ^{x} + 2)
+\end{align*}
+
+vi)
+\begin{align*}
+  f'(x) &= \frac{1}{2(x + x ^{\frac{1}{2}})} \\
+  f''(x) &= -\frac{2 + x ^{-1/2}}{4(x + \sqrt{x})^2}
+\end{align*}
+
+\subsection*{Problem 4}
+
+\subsubsection*{a)}
+
+Solution:
+
+\subsubsection*{b)}
+
+Solution:
+
+For $0.98 ^{20}$, $ x = -0.02, m = 20$, then $0.98 ^{20} \approx 1 + 20 \times (-0.02) = 0.6 $.
+
+For $\sqrt{37}$, we can calculate $a = \frac{\sqrt{37}}{6} = \sqrt{\frac{37}{36}}$ first.
+
+For $a$, $x = \frac{1}{36}, m = 0.5$, then $a \approx 1 + \frac{1}{72} = \frac{73}{72}$. Therefore, $\sqrt{37} \approx \frac{73}{12}$
+
+\subsubsection*{c)}
+
+Solution: % TODO:
+
+i)
+
+\begin{align*}
+  f' = F'2x + 2FF'
+\end{align*}
+
+ii)
+
+\begin{align*}
+  g' = \frac{1}{2} (F + \sqrt{x})^{-1/2} (F' + \frac{1}{2}x ^{-1/2})
+\end{align*}
+
+iii)
+
+\begin{align*}
+  h' = F'(x-2h) + 2F'(2x+t)
+\end{align*}
+
+
+\subsection*{Problem 5}
+
+\subsubsection*{a)}
+
+Solution:
+
+i) 
+
+\begin{align*}
+  &\lim_{x \to a} \frac{x ^{2} - a ^{2}}{ x - a} \qquad\text{($\frac{0}{0}$)} \\
+  = &\lim_{x \to a} \frac{2x}{1} = 2a
+\end{align*}
+
+ii)
+
+\begin{align*}
+  &\lim_{x \to 1} \frac{x ^{x} -x}{1-x + \ln x} \qquad\text{($\frac{0}{0}$)} \\
+  =& \lim_{x \to 1} \frac{x ^{x}(\ln x + 1) - 1}{-1+\frac{1}{x}}\qquad\text{($\frac{0}{0}$)} \\ 
+  =& \lim_{x \to 1} \frac{x ^{x}(\ln x + 1)^{2} + \frac{1}{x}x ^{x}}{- \frac{1}{x ^{2}}} = -2 
+\end{align*}
+
+iii)
+
+\begin{align*}
+  &\lim_{x \to 1} \frac{\ln x - x + 1}{(x - 1)^{2}} \qquad\text{($\frac{0}{0}$)}\\ 
+  &= \lim_{x \to 1} \frac{1/x - 1}{2(x - 1)} = \lim_{x \to 1} \frac{1 - x}{2x(x-1)} \qquad\text{($\frac{0}{0}$)} \\
+  &= \lim_{x \to 1} \frac{-1}{4x - 2} = -1/2  
+\end{align*}
+
+\subsubsection*{b)}
+
+Solution:
+
+i)
+
+If $\beta > 1$ and $ x \to +\infty$, 
+\begin{align*}
+  &\lim_{x \to +\infty} \frac{x ^{\alpha}}{\beta ^{x}} \qquad\text{($\frac{+\infty}{+\infty}$)}\\
+  = &\lim_{x \to +\infty}\frac{\alpha(\alpha-1)(\alpha-2)\dots(\alpha-n)}{(\ln \beta)^{n}} \frac{x ^{\alpha - n}}{\beta ^{x}}
+\end{align*}
+
+While $n > a$, $\frac{x ^{\alpha - n}}{\beta ^{x}} \to 0$, then $\lim_{x \to +\infty} \frac{x ^{\alpha}}{\beta ^{x}} = 0$.
+
+If $\beta > 1$ and $ x \to -\infty$, it's hard to discuss.
+
+If $0 < \beta < 1$ and $ x \to +\infty$, $\lim_{x \to +\infty} \frac{x ^{\alpha}}{\beta ^{x}} = +\infty$.
+
+If $0 < \beta < 1$ and $ x \to -\infty$, still hard to discuss.
+
+If $\beta = 1$ and $x \to +\infty $, $\lim_{x \to +\infty} \frac{x ^{\alpha}}{\beta ^{x}} = +\infty$.
+
+If $\beta = 1$ and $x \to -\infty $, still hard to discuss.
+
+ii)
+
+\begin{align*}
+  \lim_{x \to 0 ^{+}} \frac{e ^{-1/x}}{x ^{\alpha}} = \lim_{x \to 0 ^{+}} \frac{1}{x ^{\alpha}e ^{1/x}} = 0
+\end{align*}
+
+
+\subsection*{Problem 6}
+
+\subsubsection*{a)}
+
+Solution:
+
+Let $A(x) = \big( \frac{\sin x}{x}\big)^{\frac{1}{x ^{2}}}$. Then $\ln A(x)  = \frac{1}{x ^{2}}\ln(\frac{\sin x}{x})$
+
+\begin{align*}
+  \lim_{x \to 0 ^{+}} \ln A(x) &= \lim_{x \to 0 ^{+}}  \frac{\ln \frac{\sin x}{x}}{x ^{2}} \\ 
+           &= \lim_{x \to 0 ^{+}} \frac{\sin x - x}{x ^{3}} \\
+           &=\lim_{x \to 0 ^{+}}  \frac{\cos x - 1}{3 x ^{2}} \\
+           &= \lim_{x \to 0 ^{+}} \frac{-\sin x}{6x} \\
+           &= \lim_{x \to 0 ^{+}} -\frac{1}{6}
+\end{align*}
+
+Therefore, $\lim_{x \to 0 ^{+}} A(x) = e ^{-1/6}$
+
+\subsection*{Problem 7}
+
+\subsubsection*{a)}
+
+Solution:
+
+i)
+
+\begin{align*}
+  f'(x) &= 2(e ^{2x} + 4e ^{-x})(2e ^{2x} -4e ^{-x}) \\
+  &= 4(e ^{2x} + 4e ^{-x})(e ^{2x} - 2e ^{-x}) \\
+  &= 4 (e ^{4x} + 2e ^{x} - 8e ^{-2x}) \\
+  f''(x) &= 4(4e ^{4x} + 2e ^{x} + 16e ^{-2x}) \\
+        &= 8(2e ^{4x} + e ^{x} + 8e ^{-2x})
+\end{align*}
+
+ii)
+
+\begin{align*}
+  f'(x) & = 0 \\
+  e ^{4x} + 2e ^{x} - 8e ^{-2x} &= 0 \\
+  e ^{6x} + 2e ^{3x} - 8 &=0 \\
+  (e ^{3x} - 2)(e ^{3x} + 4) &= 0 \\
+  x &= \frac{1}{3}\ln2
+\end{align*}
+
+Since $\forall x \in \mathbb{R}, f'' > 0$, then $f'$ is increasing on domain $\mathbb{R}$ and $f(x)$ in convex;
+
+Thus, $f' < 0$, while $x < \frac{1}{3}\ln2$ and $f' > 0$ while $ x > \frac{1}{3}\ln2$.
+
+Therefore $f(x)$ in decreasing when $x \in (-\infty, \frac{1}{3}\ln2)$ and increasing when $x \in (\frac{1}{3}\ln2, +\infty)$.
+
+iii)
+
+From ii) we can know $f(x)$ has one only extreme point (minimum) while $x = \frac{1}{3}\ln2$.
+
+
+\subsubsection*{b)}
+
+Solution:
+
+Let $L(x)$ be the distance from a point on $y=x ^{2}$ to point $(2,1)$. Then 
+\begin{align*}
+  L(x) &= \sqrt{(y - 1) ^{2} + (x-2) ^{2}} \\
+       &= \sqrt{(x ^{2} - 1) ^{2} + (x-2) ^{2}} \\
+       &= \sqrt{x ^{4} - x ^{2} -4x + 5} \\
+  L' &= \frac{1}{2}\frac{4x ^{3} -2x -4}{\sqrt{x ^{4} - x ^{2} -4x + 5}}
+\end{align*}
+% TODO:
+
+\subsubsection*{c)}
+
+Solution:
+
+i)
+
+\begin{align*}
+  5x + y &= 10 \\
+  5dx + dy &= 0 \\
+  \frac{dy}{dx} &= -5 \\ 
+  \frac{d ^{2}y}{dx ^{2}} &= 0
+\end{align*}
+
+ii)
+
+\begin{align*}
+  xy ^{3} &= 125 \\
+  y ^{3} dx + 3xy ^{2}dy &= 0 \\ 
+  \frac{dy}{dx} &= -\frac{y}{3x} \\
+  \frac{d ^{2}y}{dx ^{2}} &= - \frac{3xy' - 3y}{9x ^{2}} \\
+  &= \frac{4y}{9x ^{2}}
+\end{align*}
+
+
+iii)
+
+\begin{align*}
+  e ^{2y} &= x ^{3} \\
+  2e ^{2y} dy &= 3x ^{2} dx \\
+  \frac{dy}{dx} &= \frac{3x ^{2}}{2e ^{2y}} \\ 
+  \frac{d ^{2}y}{dx ^{2}} &= \frac{3x - 3x ^{2}y'}{e ^{2y}} \\
+  &= \frac{6xe ^{2y} - 9x ^{4}}{2e ^{4y}} \\
+\end{align*}
+
+\subsection*{Problem 8}
+
+Solution:
+
+a)
+
+\begin{align*}
+  \int_{1}^{\infty } \frac{5}{x ^{5}} \, dx &= \Big[- \frac{5}{4}x ^{-4}\Big]_{1}^{\infty} \\
+  &= 0-(-\frac{5}{4}) = \frac{5}{4}
+\end{align*}
+
+b)
+\begin{align*}
+  \int_{0}^{1} x ^{3}(1 +x ^{4})^{4} dx &= \frac{1}{4}\int_{0}^{1}(1+x ^{4})^{4} d(x ^{4}+1) \\
+  &= \frac{1}{4} \frac{1}{5} \Big[(1+x ^{4} )^{5} \Big]_{0}^{1} \\
+  &= \frac{1}{20}[2 ^{5} - 1] \\
+  &= \frac{31}{20}
+\end{align*}
+
+c)
+\begin{align*}
+  \int_{}^{}\frac{2}{x + 5} dx = 2\ln (x+5) + C
+\end{align*}
+
+d)
+
+\begin{align*}
+  \int_{}^{}xe ^{-2x}dx &= -\frac{1}{2}\int_{}^{}x de ^{-2x} \\
+  &= -\frac{1}{2}\Big[xe ^{-2x} - \int_{}^{}e ^{-2x}dx\Big] \\
+  &=-\frac{1}{2}\Big[xe ^{-2x} + \frac{1}{2}e ^{-2x}\Big] \\
+  &= \frac{1-x}{2e ^{2x}}
+\end{align*}
+
+e)
+\begin{align*}
+  \int_{}^{}x \ln(1+x ^{2}) dx &=\frac{1}{2} \int_{}^{}\ln(1+x ^{2}) d(x ^{2}+1) \\
+  &= \frac{1}{2}\Big[(1+x ^{2})\ln(1+x ^{2}) - \int_{}^{}(x ^{2} + 1)\dv \ln(1+x ^{2})\Big] \\
+  &=\frac{1}{2}\Big[(1+x ^{2})\ln(1+x ^{2}) - \int_{}^{} 2x
+  dx)\Big] \\
+  &=\frac{1}{2}\Big[(1+x ^{2})\ln(1+x ^{2}) - x ^{2})\Big] + C\\
+\end{align*}
+
+
+f)
+
+\begin{align*}
+  \int_{}^{}(\ln x)^{2}dx &= \int_{}^{}t ^{2}de ^{t} \qquad (\text{Using $t$ replace $\ln x$}) \\
+  &=t ^{2}e ^{t} - \int_{}^{}2te ^{t}dt \\
+  &=t ^{2}e ^{t} - (2te ^{t} - 2e ^{t}) \\
+  &=(t ^{2}-2t+2)e ^{t} \\
+  &= [(\ln x)^{2}-2 \ln x + 2]x + C \qquad \text{(Replace back)}
+\end{align*}
+
+g)
+
+\begin{align*}
+  \int_{}^{}\frac{\sin ^{3}x}{1+ \cos x}dx &= \int_{}^{}\frac{\sin x (1- \cos ^{2}x)}{1+\cos x}dx \\
+  &= -\int_{}^{}\frac{1-\cos ^{2} x}{1+ \cos x} d \cos x \\
+  &= \int_{}^{}\cos x - 1 d \cos x \\
+  &= \frac{1}{2}\cos ^{2} x - \cos x + C
+\end{align*}
+
+
+h)
+\begin{align*}
+  \int_{}^{}\frac{1}{x \ln x}dx &= \int_{}^{}\frac{1}{\ln x}d \ln x \\
+  &=\ln(\ln x) +C
+\end{align*}
+
+i)
+\begin{align*}
+  \int_{}^{}(1+\frac{1}{x})^{3}\frac{1}{x ^{2}} dx &= -\int_{}^{}(1 + \frac{1}{x})^{3}d(\frac{1}{x} + 1) \\
+  &= -\frac{1}{4} (1+\frac{1}{x})^{4} + C
+\end{align*}
+
+\subsection*{Problem 9}
+
+\subsubsection*{a)}
+
+Solution:
+
+i)
+
+\begin{align*}
+  F(x) &= \int_{x}^{0} t \cos t dt  \\
+  F'(x) &= 0 - x \cos x + \int_{0}^{x} 0 dt \\
+  &= -x\cos x
+\end{align*}
+
+ii)
+
+\begin{align*}
+  F(x) &= x\int_{x}^{0} t \cos t dt  \\
+  F'(x) &= 0 - x ^{2}\cos x + \int_{x}^{0}t \cos t dt \\
+      &= -x ^{2} \cos x + \int_{x}^{0}t d \sin t \\
+      &= -x ^{2} \cos x + \Big[ t \sin t \Big]_{x}^{0} - \int_{x}^{0}\sin t dt \\
+      &= -x ^{2} \cos x - x \sin x + (1 - \cos x) \\
+      &= 1 - (1+x ^{2})\cos x - x \sin x
+\end{align*}
+
+iii)
+
+\begin{align*}
+  F(x) &= \int_{1}^{x}(t ^{2} - 2t + 5) dt \\
+F'(x) &= x ^{2} - 2x + 5 - 0+ 0 \\
+&= x ^{2} - 2x + 5
+\end{align*}
+
+iv)
+
+\begin{align*}
+  F(x) &= \int_{4}^{x}(\sqrt{u} + \frac{x}{\sqrt{u}}) du \\
+  F'(x) &=\int_{4}^{x}(\sqrt{u}) du +\int_{4}^{x}( \frac{x}{\sqrt{u}}) du \\
+  &= \sqrt{x} + \sqrt{x} - 0 + \int_{4}^{x}\frac{1}{\sqrt{u}} du \\
+  &= 2 \sqrt{x} + \Big[ 2 u ^{1/2} \Big]_{4}^{x} \\
+  &= 4 \sqrt{x} - 4
+\end{align*}
+
+\subsubsection*{b)}
+
+Solution:
+
+Let $f(x) = (e ^{x} + 1) e ^{-x}$, then
+\begin{align*}
+  \int_{}^{} f(x) dx &= \int_{}^{} 1 + e ^{-x} dx \\
+  &= x - e ^{-x} + C
+\end{align*}
+
+When $x = 0$, we have \begin{align*}
+  0 - 1 + C &= 1 \\
+  C &= 2
+\end{align*}
+
+Therefore, the antiderivative is $F(x) = x - e ^{ -x } + 2$
+
+\subsection*{Problem 10}
+
+\subsubsection*{a)}
+
+Solution:
+
+\begin{align*}
+  \lim_{x \to 0}\frac{\int_{0}^{x}\sin ^{2} t dt}{x ^{2}} &=\lim_{x \to 0} \frac{\sin ^{2} x}{2x} = \lim_{x \to 0} \frac{x}{2} = 0
+\end{align*}
+
+\subsubsection*{b)}
+
+\begin{align*}
+  f' &= \frac{1}{2 \sqrt{x}} - 1 \\
+  f'' &< 0 
+\end{align*}
+
+Let $f' = 0$, $x = \frac{1}{4}$. Therefore, $f(x)$ has a maximum when $x = \frac{1}{4}$.
+
+
+\subsection*{Problem 11}
+
+Solution:
+
+a)
+
+\begin{align*}
+  f' &= 4 \frac{2 \ln t - t (\ln t) ^{2}}{t ^{3}} = \frac{8 \ln t}{t ^{2}} - \frac{4 \ln ^{2} t}{t ^{2}} \\
+  f'' &= \frac{8 - 24 \ln t + 8 \ln ^{2} t}{t ^{3}} 
+\end{align*}
+
+b)
+
+Let $f' = 0$, $\ln t = 0$ or $\ln t = 2$, then $t = 1, e ^{2}$.
+
+When $ t = 1$, $f'' > 0$, $f$ has a local minimum.
+
+When $ t = e ^{2}$, $f '' < 0$, $f$ has a local maximum.
+
+And $f' < 0$ when $t \in (0, 1) \cup (e ^{2}, +\infty)$, $f' > 0$ when $t \in (1, e ^{2})$.
+
+$f(1) = 0$ and $f(e ^{2}) = \frac{16}{e ^{2}}$
+
+% TODO:
+
+c)
+
+Let $S = \int_{1}^{e ^{2}} f(t)dt$, then 
+\begin{align*}
+  S &= 4\int_{1}^{e ^{2}} \frac{ln ^{2} t}{t} dt \\
+  &= 4 \int_{1}^{e ^{2}} \ln ^{2} t d(\ln t) \\
+  &= 4 \Big[ \frac{1}{3} \ln ^{3} t \Big]_{1}^{e ^{2}} \\
+  &= \frac{4}{3}(8 - 0) = \frac{32}{3}
+\end{align*}
+
+
+\subsection*{Problem 12}
+
+Solution:
+
+a)
+
+It's easy to prove $F' = f$.
+
+\begin{align*}
+  \lim_{x \to -\infty} F(x) &= \lim_{x \to -\infty} \frac{\alpha}{e ^{- \lambda x} + \alpha} = 0 \\
+  \lim_{x \to +\infty} F(x) &=\lim_{x \to +\infty} \frac{\alpha}{e ^{- \lambda x} + \alpha} = 1
+\end{align*}
+
+b)
+
+\begin{align*}
+  \int_{-\infty }^{x} f(t) dt = \Big[ F(t) \Big]_{- \infty }^{x} = F(x) -0 = F(x) \\
+\end{align*}
+
+Since $  F'(x) = f(x) >0$, $F(x)$ is strictly increasing.
+
+c)
+
+$F''(x) = f'(x)$, Then
+
+\begin{align*}
+  F''(x) = f'(x) &= \frac{df(u)}{du} \frac{du}{dx} \qquad \text{(using $u(x) = e ^{-\lambda x}$)} \\
+  &= \alpha \lambda u' \frac{\alpha - u}{(\alpha + u)^{3}} \\
+  &= \alpha \lambda ^{2} e ^{- \lambda x} \frac{e ^{- \lambda x} - \alpha}{(\alpha + e ^{- \lambda x})^{3}}
+\end{align*}
+
+Let $F'' = 0$, then $x_{0} = -\frac{\ln \alpha}{\lambda}, F(x_{0}) = 1/2$.
+
+% TODO: Graph
+
+% --- Document ends here ---
+
+\end{document}
+
