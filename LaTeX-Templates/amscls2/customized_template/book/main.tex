@@ -1,0 +1,50 @@
+\documentclass[11pt]{amsbook}
+
+% --- Packages ---
+\usepackage[a4paper,margin=1in]{geometry} % Adjust margins for screen
+\usepackage{amsmath, amssymb, amsthm}    % AMS math environments
+\usepackage{hyperref}                    % Clickable references
+\usepackage{lipsum}                      % For dummy text (remove later)
+
+% --- Theorem Environments ---
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+% Unnumbered versions
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{corollary*}{Corollary}
+\newtheorem*{definition*}{Definition}
+\newtheorem*{example*}{Example}
+\newtheorem*{remark*}{Remark}
+\newtheorem*{claim}{Claim}
+
+% --- Metadata ---
+\title{Lecture Notes in Mathematics}
+\author{Zian Gong}
+\date{\today}
+
+\begin{document}
+
+\frontmatter
+\maketitle
+\tableofcontents
+
+\mainmatter
+\chapter{Introduction to Lecture Notes}
+\input{lectures/1.tex}
+
+\backmatter
+% References or index could go here
+
+\end{document}

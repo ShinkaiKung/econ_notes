@@ -1,0 +1,164 @@
+% TeX root = ../Main.tex
+% First argument to \section is the title that will go in the table of contents. Second argument is the title that will be printed on the page.
+\section[Pre-requirements]{Lecture 1}
+
+\subsection{Matrices}
+
+\subsubsection{Transpose}
+
+\begin{definition}[Transpose]
+	Let $A$ be an $n \times m$ (i.e. a matrix with $n$ rows and $m$ columns). The \textit{\textbf{transpose}} $A'$ of $A$ is the $m \times n$ matrix in which, for $i = 1, ..., m$, the $i$th row is the $i$th column of $A$.
+\end{definition}
+
+
+In particular, if $x$ is a column vector ($n \times 1$ matrix) then $x'$ is a row vector.
+
+\begin{example}
+	\begin{equation*}
+		\text{If}\, A = \begin{pmatrix}
+			a & b \\
+			c & d
+		\end{pmatrix},\quad \text{then}\, A' = \begin{pmatrix}
+			a & c \\
+			b & d
+		\end{pmatrix}
+	\end{equation*}
+\end{example}
+
+\subsubsection{Determinant}
+
+
+\textit{\textbf{Determinant}} is an important characteristic of \textit{\textbf{Square Matrix}}, which has the same number of rows as columns.
+
+\begin{definition}[Determinant]
+	The \textit{\textbf{determinant}} of a $1 \times 1$ matrix is the single number in the matrix. For any $n \geq 2$, the \textit{\textbf{determinant}} of the $n \times n$ matrix A is
+	\begin{equation*}
+		|A| = \sum_{j=1}^{n} (-1)^{1+j}a_{1j}|A_{1j}|
+	\end{equation*}
+\end{definition}
+
+\begin{proposition}[Calculate determinant]
+	\begin{equation*}
+		|A| = \sum_{j=1}^{n} (-1)^{i+j}a_{ij}|A_{ij}| = \sum_{i=1}^{n} (-1)^{i+j}a_{ij}|A_{ij}|
+	\end{equation*}
+\end{proposition}
+
+\begin{example}
+	\begin{equation*}
+		\begin{vmatrix}
+			a & b \\
+			c & d
+		\end{vmatrix} = ad - bc
+	\end{equation*}
+
+	\begin{equation*}
+		\begin{vmatrix}
+			a & b & c \\
+			c & d & e \\
+			f & g & h
+		\end{vmatrix} = a(dh-eg) - b(ch-ef) + c(cg-df)
+	\end{equation*}
+\end{example}
+
+If the square matrix $A$ like $\begin{pmatrix}
+		a_{00} & 0      & \dots  & 0      \\
+		0      & a_{11} & \dots  & 0      \\
+		\vdots & \vdots & \ddots & \vdots \\
+		0      & 0      & \dots  & a_{nn}
+	\end{pmatrix}$, then $|A|$ equals $\prod_{i=0}^{n}a_{ii}$.
+
+\subsubsection{Inverse}
+
+\begin{definition}[Nonsingular]
+	The square matrix is \textit{\textbf{nonsingular}} if its determinant is not zero.
+\end{definition}
+
+\begin{definition}
+	Let $A$ be an $n \times n$ matrix. If there exists an $n \times n$ matrix $B$ such that
+	\begin{equation*}
+		AB = BA = I
+	\end{equation*},
+	where $I$ is the $n \times n$ identity matrix, then $A$ is said to be \textit{\textbf{invertible}} (or \textit{\textbf{nonsingular}}), and $B$ is called the \textit{\textbf{inverse}} of $A$, denoted by $A^{-1}$.
+\end{definition}
+
+\begin{proposition}
+	A square matrix has at most one inverse.
+\end{proposition}
+
+\begin{proposition}
+	A matrix has an inverse if and only if it is nonsingular.
+\end{proposition}
+
+\begin{proposition}
+	The inverse of the nonsingular matrix $A$ is the $n \times n$ matrix for the $(i,j)$th component is \begin{equation*}
+		(-1)^{i+j}\frac{|A_{ji}|}{|A|}.
+	\end{equation*}
+\end{proposition}
+
+\begin{example}
+	\begin{equation*}
+		A = \begin{pmatrix}
+			a & b \\
+			c & d
+		\end{pmatrix},\quad A^{-1} = \frac{1}{ad-bc}\begin{pmatrix}
+			d  & -b \\
+			-c & a
+		\end{pmatrix}
+	\end{equation*}
+\end{example}
+\begin{example}
+	\begin{equation*}
+		% 3 x 3 matrix
+		A = \begin{pmatrix}
+			a & b & c \\
+			d & e & f \\
+			g & h & i
+		\end{pmatrix},\quad A^{-1}=\frac{1}{|A|}\begin{pmatrix}
+			|A_{11}   & -|A_{21}| & |A_{31}|  \\
+			-|A_{12}| & |A_{22}|  & -|A_{32}| \\
+			|A_{13}|  & -|A_{23}| & |A_{33}|
+		\end{pmatrix}
+	\end{equation*}
+\end{example}
+
+\subsubsection{Rank}
+
+\begin{definition}
+	The rank of a matrix $A$ is the number of rows and columns in the \textbf{largest} square matrix obtained by deleting rows and columns of $A$ that has a determinant different from 0.
+\end{definition}
+
+\subsection{Linear Equations}
+
+\subsubsection{Solutions of Linear Equations}
+
+Linear Equations can be written in matrix form, as $Ax=b$.
+
+If $A$ is nonsingular, then the solution $x = A^{-1}b$.
+
+\begin{definition}[Augmented Matrix]
+	The \textit{\textbf{augmented matrix}} of the system of linear equations $Ax = b$ is the $n \times (m+1)$ matrix obtained by appending the column vector $b$ to the matrix $A$.
+\end{definition}
+
+\begin{proposition}
+	Let $A$ be an $n \times n$ matrix.
+	\begin{itemize}
+		\item If $rank(A) = n$ (nonsingular), then the system $Ax = b$ has a unique solution.
+		\item If $rank(A) < n$ and $rank(A|b) = rank(A)$, then the system $Ax = b$ has infinitely many solutions.
+		\item If $rank(A) < n$ and $rank(A|b) > rank(A)$, then the system $Ax = b$ has no solution.
+	\end{itemize}
+\end{proposition}
+
+
+\subsubsection{Cramer's Rule}
+
+
+\begin{proposition}
+	Let $A$ be an $n \times n$ matrix, let $b$ be an $n \times 1$ column vector, and consider the system of linear equations $Ax=b$ where $x$ is an $n \times 1$ column vector. if $A$ is nonsingular then the (unique) value of $x$ that satisfies the system is given by \begin{equation*}
+		x_{i} = \frac{|A^{*(b,i)}|}{|A|} \quad\text{for}\quad i = 1, \dots, n,
+	\end{equation*}
+	where $A^{*(b,i)}$ is the matrix obtained from $A$ by replacing the $i$th column with $b$.
+\end{proposition}
+
+Cramer's Rule is partially useful if you want to calculate the value of only some og the variables in a solution of a system of linear equations.
+
+

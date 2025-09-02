@@ -1,0 +1,196 @@
+% TeX root = ../Main.tex
+% First argument to \section is the title that will go in the table of contents. Second argument is the title that will be printed on the page.
+\section[Univariate Analysis]{Univariate Analysis}
+
+\subsection{Limits and Continuity}
+
+\subsubsection{Limits}
+
+\begin{definition}
+    $\forall \epsilon > 0, \exists \eta >0$ such that if $|x - a| < \eta$, then $|f(x) - A| < \epsilon$.
+    \begin{equation*}
+        \lim_{x \to a} f(x) = A
+    \end{equation*}
+\end{definition}
+
+\begin{remark*}
+    Need to prove with definition.
+\end{remark*}
+
+
+\subsubsection{LHS\&RHS}
+
+\begin{proposition}[$LHS=RHS$]
+    One-sided limits:
+    \begin{itemize}
+        \item LHS limit: $\lim_{x \to a^-} f(x)=B_1$ if $f(x) \to B_1$ as $x \to a^-$.
+        \item RHS limit: $\lim_{x \to a^+} f(x)=B_2$ if $f(x) \to B_2$ as $x \to a^+$.
+    \end{itemize}
+    A limit at $a$ exists $\iff \text{LHS limit} = \text{RHS limit} \iff B_1=B_2$.
+\end{proposition}
+
+Limits Rules: if $\lim_{x \to a}f(x)=A $ and $\lim_{x \to a}g(x)=B $, then:
+\begin{itemize}
+    \item $\lim_{x \to a}[f(x) \pm g(x)] = A \pm B $,
+    \item $\lim_{x \to a} f(x)g(x) = AB $,
+    \item $\lim_{x \to a}\frac{f(x)}{g(x)} = \frac{A}{B} (\text{if } B \neq 0) $,
+    \item $\lim_{x \to a} [f(x)]^r = A^r(\text{if $A^r$ is defined and $r$ is a real number})$.
+\end{itemize}
+
+\subsubsection{Limits at Infinity}
+
+\begin{definition}[$\lim_{x \to \pm\infty} f(x)$]Limits at Infinity:
+
+    $\forall \epsilon > 0, \exists N > 0$ such that if $x > N$, then $|f(x) - L|< \epsilon$.
+    \begin{equation*}
+        \lim_{x \to \infty} f(x) = L
+    \end{equation*}
+
+    $\forall \epsilon > 0, \exists N > 0$ such that if $x < -N$, then $|f(x) - L|< \epsilon$.
+    \begin{equation*}
+        \lim_{x \to -\infty} f(x) = L
+    \end{equation*}
+\end{definition}
+
+\subsubsection{Continuity}
+
+\begin{definition}
+    A function $f$ is continuous at a given point $x=a$ if $\lim_{x \to a} f(x) = f(a)$. $\iff \forall \epsilon > 0, \exists \delta > 0$ such that if $|x-a|<\delta$ then $|f(x) - f(a)| < \epsilon$.
+\end{definition}
+
+Properties: if $f$ and $g$ are continuous on $a$, then
+\begin{itemize}
+    \item $f \pm g$ is continuous on $a$,
+    \item $fg$ is continuous on $a$,
+    \item $f / g$ is continuous on $a$, if $g(a) \neq 0$,
+    \item $f(x)^{r}$ is continuous on $a$ if $f(x)^{r}$ is defined and $r$ is a real number.
+\end{itemize}
+
+
+\begin{theorem}[Intermediate Value Theorem]
+    If $f(x)$ is continuous on $[a,b]$, $\forall y \in [f(a), f(b)]$(assume $f(a) < f(b)$), then $\exists c \in [a,b]$ such that $y=f(c)$.
+\end{theorem}
+
+\begin{theorem}[Bolzano's Theorem]
+    If $f(x)$ is continuous on $[a,b]$ and assume $f(a)f(b)<0$, then $\exists c \in [a,b]$ such that $f(c) = 0$.
+    \begin{remark*}
+        It's a special case of "Intermediate Value Theorem".
+    \end{remark*}
+\end{theorem}
+
+\subsection{Differentiation}
+
+\subsubsection{Differentiation}
+
+\begin{definition}
+    We say a function $f$ is \textit{\textbf{differentiable}} at $x$ if
+    \begin{equation*}
+        \frac{d f(x)}{dx} = \lim_{h \to 0}\frac{f(x+h)-f(x)}{h}
+    \end{equation*}
+    exists.
+\end{definition}
+
+\begin{definition}
+    If function $f$ is differentiable for all $x$ in its domain, then we say $f$ is a \textbf{\textit{differentiable function}}.
+\end{definition}
+
+\begin{remark*}
+    Function $f$ is differentiable at point A $\iff $
+    \begin{itemize}
+        \item It's continuous at point A.
+        \item Its $LHS = RHS$.
+    \end{itemize}
+\end{remark*}
+
+\subsubsection{Higher-order Derivatives}
+
+Notation: The $k$th order differentiation is denoted $\frac{d ^{k}f(x)}{dx ^{k}}$ or $f ^{(k)}(x)$. The class of all $k-$times continuously differentiable functions is called $C^k$.
+
+\subsubsection{Implicit Differentiation}
+
+\begin{proposition}
+    For $f(x, y(x)) = 0$, we have \begin{equation*}
+        \frac{df}{dx} + \frac{df}{dy}\frac{dy}{dx} = 0
+    \end{equation*}
+\end{proposition}
+
+\begin{example*}
+    %TODO:
+\end{example*}
+
+
+\subsubsection{Inverse Function Theorem}
+
+\begin{theorem}[Inverse Function Theorem]
+    If $f$ is differentiable and strictly increasing or decreasing in an interval $I$, then $f$ has an inverse function $g$. If $x_0$ is an intetior point of $I$ and $f'(x_0) \neq 0$, then $g$ is differentiable at $y_0 = f(x_0)$ and: \begin{equation*}
+        g'(x_0) = \frac{1}{f'(x_0)} = \frac{1}{f'[g(y_0)]}.
+    \end{equation*}
+\end{theorem}
+
+\begin{example*}
+    %TODO:
+\end{example*}
+
+\subsubsection{Taylor Expansions}
+
+\textbf{Taylor expansions}:
+\begin{align*}
+    f(x) & \approx f(c) + f'(c)(x-c) + \frac{1}{2!}f''(c)(x-c)^{2} + \dots + \frac{1}{k!}f ^{(k)}(c)(x-c)^{k} \\
+         & \approx f(c) + \sum_{i=1}^{k}\frac{f ^{(i)}(c)}{i!}(x-c)^{i}
+\end{align*}
+
+\begin{theorem}[Rolle's Theorem]
+    Let $f: [a, b] \to \mathbb{R}$. If $f$ is continuous on $[a, b]$ and differentiable on (a, b). If $f(a)=f(b)$, then $\exists c \in (a,b)$ such that $f'(c) = 0$.
+\end{theorem}
+
+\begin{theorem}[Mean Value Theorem]
+    Let $f: [a, b] \to \mathbb{R}$. If $f$ is continuous on $[a, b]$ and differentiable on (a, b), then $\exists z \in (a,b)$ such that:
+    \begin{equation*}
+        f'(z) = \frac{f(b)- f(a)}{b-a}.
+    \end{equation*}
+\end{theorem}
+
+\begin{proposition}
+    \begin{equation*}
+        f(x) = f(c) + \sum_{i=1}^{k}\frac{f ^{(i)}(c)}{i!}(x-c)^{i} + \frac{f ^{(k+1)}(z)}{(k+1)!}(x-x_0)^{k+1}
+    \end{equation*}
+\end{proposition}
+
+
+\begin{proof}[\textbf{Proof of Taylor expansions}]:
+
+    The first-order: \begin{equation*}
+        f(x) \approx f(x_0) + f'(x_0)(x-x_0)
+    \end{equation*}
+
+    The higher order approximation:
+    \begin{align*}
+        P(x) & = a_0 + a_{1}(x-x_0) + a_{2}(x-x_0)^{2} + a_{3}(x-x_0)^{3} + a_{n}(x-x_0)^{n} + U(x) = f(x) \\
+        P(x) & = Q(x) + U(x) = f(x)
+    \end{align*}
+
+    We have:
+    \begin{align*}
+        a_0     & = f(x_0)       \\
+        a_{1}   & = f'(x_0)      \\
+        2!a_{2} & = f''(x_0)     \\
+        n!a_{n} & = f^{(n)}(x_0)
+    \end{align*}
+    then $a_{0} = f(x_0), a_{1} = f'(x_0), a_{2}=\frac{f''(x_0)}{2!}, \dots, a_{n} = \frac{f^{(n)}(x_0)}{n!} \Rightarrow Q(x) = \sum_{i=1}^{n} \frac{f ^{(k)}(x_0)}{k!}(x-x_0)^{n}$
+
+    For functions $U(x), R(x) = (x-x_0)^{n+1}$, they are high-order continuous and differentiable on interval $I$. And $U(x_0) = R(x_0) = 0, U'(x_1) = R'(x_1) = 0, U''(x_0) = R''(x_0) = 0, \dots, U^{(n)}(x_0) = R^{(n)}(x_0) = 0$, then using "\textit{\textbf{Cauchy Mean Value Theorem}}": \begin{align*}
+         & \text{On domain $[x_0, x]$, there $\exists c_1 \in (x_0, x)$ such that}                                                                                                                                       \\
+         & \frac{U(x) - U(x_0)}{R(x)- R(x_0)} = \frac{U'(c_1)}{R'(c_1)} \Rightarrow  \frac{U(x)}{R(x)} = \frac{U'(c_1)}{R'(c_1)}                                                                                         \\
+         & \text{On domain $[x_0, c_1]$, there $\exists c_2 \in (x_0, c_1)$ such that}                                                                                                                                   \\
+         & \frac{U'(c_1) - U'(x_0)}{R'(c_1)- R'(x_0)} = \frac{U''(c_2)}{R''(c_2)} \Rightarrow  \frac{U'(c_1)}{R'(c_1)} = \frac{U''(c_2)}{R''(c_2)}                                                                       \\
+         & \dots                                                                                                                                                                                                         \\
+         & \text{On domain $[x_0, c_n]$, there $\exists c_{n+1} \in (x_0, c_n)$ such that}                                                                                                                               \\
+         & \frac{U^{(n)}(c_n) - U^{(n)}(x_0)}{R^{(n)}(c_n)- R^{(n)}(x_0)} = \frac{U^{(n+1)}(c_{n+1})}{R^{(n+1)}(c_{n+1})} \Rightarrow  \frac{U^{(n)}(c_n)}{R^{(n)}(c_n)} = \frac{U^{(n+1)}(c_{n+1})}{R^{(n+1)}(c_{n+1})} \\
+         & \text{Then}                                                                                                                                                                                                   \\
+         & \frac{U(x)}{R(x)} = \frac{U'(c_1)}{R'(c_1)} = \frac{U''(c_2)}{R''(c_2)} = \dots = \frac{U^{(n+1)}(c_{n+1})}{R^{(n+1)}(c_{n+1})}                                                                               \\
+         & U(x) = \frac{U^{(n+1)}(c_{n+1})}{(n+1)!}(x-x_0)^{n+1}                                                                                                                                                         \\
+         & \text{Since $f^{(n+1)}(x) = Q^{(n+1)}(x) + U^{(n+1)}(x) = U^{(n+1)}(x)$, then}                                                                                                                                \\
+         & U(x) = \frac{f^{(n+1)}(c_{n+1})}{(n+1)!}(x-x_0)^{n+1}
+    \end{align*}
+\end{proof}
+
