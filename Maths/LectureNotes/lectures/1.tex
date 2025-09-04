@@ -1,10 +1,9 @@
 % TeX root = ../Main.tex
 % First argument to \section is the title that will go in the table of contents. Second argument is the title that will be printed on the page.
-\section[Univariate Analysis]{Univariate Analysis}
 
-\subsection{Limits and Continuity}
+\section{Limits and Continuity}
 
-\subsubsection{Limits}
+\subsection{Limits}
 
 \begin{definition}
     $\forall \epsilon > 0, \exists \eta >0$ such that if $|x - a| < \eta$, then $|f(x) - A| < \epsilon$.
@@ -18,7 +17,7 @@
 \end{remark*}
 
 
-\subsubsection{LHS\&RHS}
+\subsection{LHS\&RHS}
 
 \begin{proposition}[$LHS=RHS$]
     One-sided limits:
@@ -26,6 +25,7 @@
         \item LHS limit: $\lim_{x \to a^-} f(x)=B_1$ if $f(x) \to B_1$ as $x \to a^-$.
         \item RHS limit: $\lim_{x \to a^+} f(x)=B_2$ if $f(x) \to B_2$ as $x \to a^+$.
     \end{itemize}
+
     A limit at $a$ exists $\iff \text{LHS limit} = \text{RHS limit} \iff B_1=B_2$.
 \end{proposition}
 
@@ -37,7 +37,7 @@ Limits Rules: if $\lim_{x \to a}f(x)=A $ and $\lim_{x \to a}g(x)=B $, then:
     \item $\lim_{x \to a} [f(x)]^r = A^r(\text{if $A^r$ is defined and $r$ is a real number})$.
 \end{itemize}
 
-\subsubsection{Limits at Infinity}
+\subsection{Limits at Infinity}
 
 \begin{definition}[$\lim_{x \to \pm\infty} f(x)$]Limits at Infinity:
 
@@ -52,7 +52,7 @@ Limits Rules: if $\lim_{x \to a}f(x)=A $ and $\lim_{x \to a}g(x)=B $, then:
     \end{equation*}
 \end{definition}
 
-\subsubsection{Continuity}
+\subsection{Continuity}
 
 \begin{definition}
     A function $f$ is continuous at a given point $x=a$ if $\lim_{x \to a} f(x) = f(a)$. $\iff \forall \epsilon > 0, \exists \delta > 0$ such that if $|x-a|<\delta$ then $|f(x) - f(a)| < \epsilon$.
@@ -78,9 +78,10 @@ Properties: if $f$ and $g$ are continuous on $a$, then
     \end{remark*}
 \end{theorem}
 
-\subsection{Differentiation}
 
-\subsubsection{Differentiation}
+\section{Differentiation}
+
+\subsection{Differentiation}
 
 \begin{definition}
     We say a function $f$ is \textit{\textbf{differentiable}} at $x$ if
@@ -102,11 +103,11 @@ Properties: if $f$ and $g$ are continuous on $a$, then
     \end{itemize}
 \end{remark*}
 
-\subsubsection{Higher-order Derivatives}
+\subsection{Higher-order Derivatives}
 
 Notation: The $k$th order differentiation is denoted $\frac{d ^{k}f(x)}{dx ^{k}}$ or $f ^{(k)}(x)$. The class of all $k-$times continuously differentiable functions is called $C^k$.
 
-\subsubsection{Implicit Differentiation}
+\subsection{Implicit Differentiation}
 
 \begin{proposition}
     For $f(x, y(x)) = 0$, we have \begin{equation*}
@@ -119,7 +120,7 @@ Notation: The $k$th order differentiation is denoted $\frac{d ^{k}f(x)}{dx ^{k}}
 \end{example*}
 
 
-\subsubsection{Inverse Function Theorem}
+\subsection{Inverse Function Theorem}
 
 \begin{theorem}[Inverse Function Theorem]
     If $f$ is differentiable and strictly increasing or decreasing in an interval $I$, then $f$ has an inverse function $g$. If $x_0$ is an intetior point of $I$ and $f'(x_0) \neq 0$, then $g$ is differentiable at $y_0 = f(x_0)$ and: \begin{equation*}
@@ -131,9 +132,8 @@ Notation: The $k$th order differentiation is denoted $\frac{d ^{k}f(x)}{dx ^{k}}
     %TODO:
 \end{example*}
 
-\subsubsection{Taylor Expansions}
+\subsection{Taylor Expansions}
 
-\textbf{Taylor expansions}:
 \begin{align*}
     f(x) & \approx f(c) + f'(c)(x-c) + \frac{1}{2!}f''(c)(x-c)^{2} + \dots + \frac{1}{k!}f ^{(k)}(c)(x-c)^{k} \\
          & \approx f(c) + \sum_{i=1}^{k}\frac{f ^{(i)}(c)}{i!}(x-c)^{i}
@@ -193,4 +193,121 @@ Notation: The $k$th order differentiation is denoted $\frac{d ^{k}f(x)}{dx ^{k}}
          & U(x) = \frac{f^{(n+1)}(c_{n+1})}{(n+1)!}(x-x_0)^{n+1}
     \end{align*}
 \end{proof}
+
+
+
+\section{Univariate Optimization}
+
+\subsection{Some Special Points}
+
+\begin{itemize}
+    \item \textbf{Maximum}: If $f(x)$ has domain $D$, then $c \in D$ is a \textit{\textbf{maximum point}} for $f \iff f(x) \leq f(c) \forall x \in D$.
+    \item \textbf{Minimum}: If $f(x)$ has domain $D$, then $c \in D$ is a \textit{\textbf{maximum point}} for $f \iff f(x) \geq f(c) \forall x \in D$.
+    \item \textbf{Stationary Point}: Such that $f'(c) = 0$.
+    \item \textbf{Local maximum}: If $f(x)$ has domain $D$, then $c \in (\alpha, \beta) \subset D$ is a \textit{\textbf{local maximum}} for $f \iff f(x) \leq f(c) \forall x \in (\alpha, \beta)$.
+    \item \textbf{Local minimum}: If $f(x)$ has domain $D$, then $c \in (\alpha, \beta) \subset D$ is a \textit{\textbf{local minimum}} for $f \iff f(x) \geq f(c) \forall x \in (\alpha, \beta)$.
+\end{itemize}
+
+\begin{remark*}
+    Using $f'(x)$ and $f''(x)$ to find the above.
+\end{remark*}
+
+\section{Integral}
+
+\subsection{Definitions and Properties}
+
+\begin{definition}[Indefinite Integral]
+    \textbf{Integral} is an inverse operation of differentiation, also called \textbf{indefinite integral} or \textbf{antiderivative}. Notation: $F(x) = \int_{}^{} f(x) \, dx $
+\end{definition}
+
+\begin{definition}[Definite Integral]
+    The area inside $f(x), x-axis, x=a, x=b$ is denoted by $\int_{a}^{b} f(x) \, dx$, is called the \textit{\textbf{definite integral}} of $f(x)$ between $a$ and $b$.
+\end{definition}
+
+Properties:
+\begin{itemize}
+    \item $\int_{a}^{b} [f(x) + g(x)] \, dx = \int_{a}^{b} f(x) \, dx + \int_{a}^{b} g(x) \, dx$
+    \item $\int_{a}^{b} \lambda f(x) \, dx = \lambda \int_{a}^{b} f(x) \, dx$
+    \item $\int_{a}^{c} f(x) \, dx = \int_{a}^{b} f(x) \, dx + \int_{b}^{c} f(x) \, dx$
+    \item $\int_{a}^{b} f(x) \, dx = -\int_{b}^{a} f(x) \, dx$
+    \item $\int_{a}^{a} f(x) \, dx = 0$
+\end{itemize}
+
+\subsection{Some Integration Techniques}
+
+\subsubsection{First Substitution Method}
+Also called \emph{direct substitution}. If we let
+\begin{equation*}
+    u = g(x), \quad du = g'(x)\, dx,
+\end{equation*}
+
+then the integral
+\begin{equation*}
+    \int f(g(x)) g'(x)\, dx
+\end{equation*}
+becomes
+\begin{equation*}
+    \int f(u)\, du.
+\end{equation*}
+
+\begin{example*}
+    \begin{equation*}
+        \int 2x \cos(x^2)\, dx
+    \end{equation*}
+    Let $u = x^2$, so $du = 2x\,dx$. Then
+    \begin{equation*}
+        \int 2x \cos(x^2)\, dx = \int \cos(u)\, du = \sin(u) + C = \sin(x^2) + C.
+    \end{equation*}
+\end{example*}
+
+\subsubsection{Second Substitution Method}
+Often used for trigonometric or rational functions. If we set
+\begin{equation*}
+    x = \varphi(t), \quad dx = \varphi'(t)\, dt,
+\end{equation*}
+then the integral
+\begin{equation*}
+    \int f(x)\, dx
+\end{equation*}
+can be rewritten as
+\begin{equation*}
+    \int f(\varphi(t)) \varphi'(t)\, dt.
+\end{equation*}
+
+\begin{example*}
+    \begin{equation*}
+        \int \frac{dx}{1+x^2}
+    \end{equation*}
+    Let $x = \tan t$, so $dx = \sec^2 t\, dt$. Then
+    \begin{equation*}
+        \int \frac{dx}{1+x^2} = \int \frac{\sec^2 t\, dt}{1+\tan^2 t}
+        = \int dt = t + C = \arctan(x) + C.
+    \end{equation*}
+\end{example*}
+
+\subsubsection{Integration by Parts}
+Based on the product rule of differentiation. If $ u = u(x) $ and $ v = v(x) $, then
+\begin{equation*}
+    \int u \, dv = uv - \int v \, du,
+\end{equation*}
+where $ du = u'(x)\, dx $ and $ dv = v'(x)\, dx $.
+
+\begin{example*}
+    \begin{equation*}
+        \int x e^x\, dx
+    \end{equation*}
+    Let $u = x \Rightarrow du = dx$, and $dv = e^x dx \Rightarrow v = e^x$. Then
+    \begin{equation*}
+        \int x e^x\, dx = x e^x - \int e^x\, dx = x e^x - e^x + C.
+    \end{equation*}
+\end{example*}
+
+\subsection{Leibniz's Rule}
+
+\begin{theorem}
+    Suppose that $f(\theta, x)$ and $f_{\theta}'(\theta,x)$ are continuous over the rectangle $a \leq \theta \leq b, c \leq x \leq d$. Moreover, suppose that $u(\theta)$ and $v(\theta)$ are $C^1$ functions over $[a,b]$ and that the ranges of $u$ and $v$ are contained in $[c,d]$. If $F(\theta) = \int_{u(\theta)}^{v(\theta)} f(\theta, x) \, dx$ then:
+    \begin{equation*}
+        F'(\theta) = f[\theta, v(\theta)]v'(\theta) - f[\theta, u(\theta)]u'(\theta) + \int_{u(\theta)}^{v(\theta)} \frac{\partial f(\theta, x)}{\partial \theta} \, dx
+    \end{equation*}
+\end{theorem}
 

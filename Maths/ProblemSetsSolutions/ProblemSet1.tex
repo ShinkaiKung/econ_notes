@@ -234,7 +234,7 @@ Therefore, $D = \{ x \in \mathbb{R}, x \in (-2, 0] \cup x \in (2, +\infty) \}$
 
   Then $|2x+1-11| = |2x-10|=2|x-5| < 2 \eta = \epsilon$.
 
-  Q.E.D
+  Q.E.D.
 
   ii)
 
@@ -244,18 +244,25 @@ Therefore, $D = \{ x \in \mathbb{R}, x \in (-2, 0] \cup x \in (2, +\infty) \}$
 
   We have $|x^{2} - 10x + 21| = |(x-3)(x-7)|=|(x-3)(x-3-4)| = |(x-3)^{2} - 4(x-3)| < |(x-3)^{2}| + 4 |x-3| < \eta ^{2} + 4 \eta $.
 
-  We can assume $0 < eta < 1$, then $\eta ^{2} + 4 \eta < \eta + 4\eta = 5\eta$, then we assign $\eta = \frac{1}{5}\epsilon$.
+  We can assume $0 < \eta < 1$, then $\eta ^{2} + 4 \eta < \eta + 4\eta = 5\eta$, then we assign $\eta = \frac{1}{5}\epsilon$.
   Then $|x^{2} - 10x + 21| < 5\eta = \epsilon$
 
-  Q.E.D
+  Q.E.D.
 
   \subsection*{Problem 2}
-  % TODO:
-  Trying to prove $ \forall \epsilon > 0, \exists \eta_{1}, \eta_{2} > 0$, assure \begin{equation*}
-    |f(x)g(x) - AB| < \epsilon,\quad \text{when}\, |f(x) - A| < \eta_{1} , |g(x) - B| < \eta_{2}.
+  % TODO: Check the Proof
+  Trying to prove $ \forall \epsilon > 0, \exists \eta > 0$, assure \begin{equation*}
+    |f(x)g(x) - AB| < \epsilon,\quad \text{when}\, |x-a| < \eta.
   \end{equation*}
 
-$|f(x)g(x) - AB| = | (f(x) - A)(g(x) - B) + A g(x) + B f(x) - 2AB |$
+  \begin{align*}
+    |f(x)g(x) - AB| & = |f(x)g(x) - B f(x) + B f(x) - AB|    \\
+                    & =|f(x)(g(x)-B) + B(f(x)-A)|            \\
+                    & \leq |f(x)(g(x)- B)| + |B(f(x)-A)|     \\
+                    & = |f(x)||g(x)- B| + |B||f(x)-A|        \\
+                    & = |f(x)-A + A||g(x)-B| + |B||f(x) - A| \\
+    %TODO: continue 
+  \end{align*}
 
 
 
@@ -344,7 +351,7 @@ $|f(x)g(x) - AB| = | (f(x) - A)(g(x) - B) + A g(x) + B f(x) - 2AB |$
 
   \subsubsection*{c)}
 
-  Solution: % TODO:
+  Solution:
 
   i)
 
@@ -400,23 +407,20 @@ $|f(x)g(x) - AB| = | (f(x) - A)(g(x) - B) + A g(x) + B f(x) - 2AB |$
 
   i)
 
-  If $\beta > 1$ and $ x \to +\infty$,
+  If $\beta > 1$ and $ x \to \infty$,
   \begin{align*}
-      & \lim_{x \to +\infty} \frac{x ^{\alpha}}{\beta ^{x}} \qquad\text{($\frac{+\infty}{+\infty}$)}                             \\
-    = & \lim_{x \to +\infty}\frac{\alpha(\alpha-1)(\alpha-2)\dots(\alpha-n)}{(\ln \beta)^{n}} \frac{x ^{\alpha - n}}{\beta ^{x}}
+      & \lim_{x \to \infty} \frac{x ^{\alpha}}{\beta ^{x}} \qquad\text{($\frac{\infty}{\infty}$)}                               \\
+    = & \lim_{x \to \infty}\frac{\alpha(\alpha-1)(\alpha-2)\dots(\alpha-n)}{(\ln \beta)^{n}} \frac{x ^{\alpha - n}}{\beta ^{x}}
   \end{align*}
 
-  While $n > a$, $\frac{x ^{\alpha - n}}{\beta ^{x}} \to 0$, then $\lim_{x \to +\infty} \frac{x ^{\alpha}}{\beta ^{x}} = 0$.
+  While $n > a$, $\frac{x ^{\alpha - n}}{\beta ^{x}} \to 0$, then $\lim_{x \to \infty} \frac{x ^{\alpha}}{\beta ^{x}} = 0$.
 
-  If $\beta > 1$ and $ x \to -\infty$, it's hard to discuss.
 
-  If $0 < \beta < 1$ and $ x \to +\infty$, $\lim_{x \to +\infty} \frac{x ^{\alpha}}{\beta ^{x}} = +\infty$.
+  If $0 < \beta < 1$ and $ x \to \infty$, $\lim_{x \to \infty} \frac{x ^{\alpha}}{\beta ^{x}} = \infty$.
 
-  If $0 < \beta < 1$ and $ x \to -\infty$, still hard to discuss.
 
-  If $\beta = 1$ and $x \to +\infty $, $\lim_{x \to +\infty} \frac{x ^{\alpha}}{\beta ^{x}} = +\infty$.
+  If $\beta = 1$ and $x \to \infty $, $\lim_{x \to \infty} \frac{x ^{\alpha}}{\beta ^{x}} = \infty$.
 
-  If $\beta = 1$ and $x \to -\infty $, still hard to discuss.
 
   ii)
 
@@ -491,7 +495,13 @@ $|f(x)g(x) - AB| = | (f(x) - A)(g(x) - B) + A g(x) + B f(x) - 2AB |$
          & = \sqrt{x ^{4} - x ^{2} -4x + 5}                                   \\
     L'   & = \frac{1}{2}\frac{4x ^{3} -2x -4}{\sqrt{x ^{4} - x ^{2} -4x + 5}}
   \end{align*}
-  % TODO:
+
+  We need to calculate $L'=0$, then $2x ^{3}-x -2=0$. Let $f(x) = 2x ^{3}-x-2$.
+  We have $f(1)=-1, f(2) = 12$.
+  Using Taylor expansion at $x=1$:\begin{equation*}
+    f(x) \approx f(1) + f'(1)(x-1) = 5x-6
+  \end{equation*}
+  Then $x = \frac{6}{5}$.
 
   \subsubsection*{c)}
 
@@ -705,7 +715,7 @@ $|f(x)g(x) - AB| = | (f(x) - A)(g(x) - B) + A g(x) + B f(x) - 2AB |$
 
 $f(1) = 0$ and $f(e ^{2}) = \frac{16}{e ^{2}}$
 
-  % TODO:
+  % TODO: Graph
 
   c)
 

@@ -5,13 +5,22 @@
 \usepackage{amsmath, amssymb, amsthm}    % AMS math packages
 \usepackage{hyperref}                    % Clickable references
 \usepackage{lipsum}                      % For dummy text (remove later)
+\usepackage{tikz}
+\usepackage{caption}
+\usetikzlibrary{calc,patterns}
+\usepackage{setspace}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{tcolorbox}
+\tcbuselibrary{theorems, breakable, skins, listings}
+
 
 % --- Theorem Environments ---
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
-
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{example}[theorem]{Example}
@@ -29,6 +38,22 @@
 \newtheorem*{remark*}{Remark}
 \newtheorem*{claim}{Claim}
 
+
+% --- Lecture counter ---
+\newcounter{lecture}
+\renewcommand{\thelecture}{\arabic{lecture}}
+
+% Make sections depend on lecture
+\renewcommand{\thesection}{\thelecture.\arabic{section}}
+
+\newcommand{\lecture}[1]{%
+  \refstepcounter{lecture}%
+  \bigskip\hrule\bigskip
+  {\Large\bfseries Lecture \thelecture: #1 \par}\medskip
+  \addcontentsline{toc}{section}{Lecture \thelecture: #1}%
+  \setcounter{section}{0} % reset sections for each lecture
+}
+
 % --- Metadata ---
 \title{Lecture Notes in Mathematics}
 \author{Zian Gong}
@@ -39,8 +64,31 @@
 \maketitle
 \tableofcontents
 
+\setlength{\parskip}{0.8em}   % 段落之间距离
+\setlength{\parindent}{2em}   % 段首缩进
+% % 1.5 倍行距
+\onehalfspacing
+
+% % 双倍行距
+% \doublespacing
+
+% 或者手动指定，比如 1.2 倍
+% \setstretch{1.2}
+
+
+
 \newpage
+\lecture{Univariate Analysis}
 \input{lectures/1.tex}
+\newpage
+\lecture{Linear Algebra}
+\input{lectures/2.tex}
+\newpage
+\lecture{Analysis in $\mathbb{R}^{n}$}
+\input{lectures/3.tex}
+\newpage
+\lecture{D}
+\input{lectures/4.tex}
 
 % You can add more sections here
 % \section{Advanced Topic}

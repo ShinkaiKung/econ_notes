@@ -1,0 +1,402 @@
+% TeX root = ../Main.tex
+% First argument to \section is the title that will go in the table of contents. Second argument is the title that will be printed on the page.
+
+\section{Basics of Linear Algebra}
+
+\begin{definition}[Matrix]
+    $A$ is an $m \times n$ \textbf{\textit{matrix}}
+    \begin{equation*}
+        A = (a_{ij}) = \begin{pmatrix}
+            a_{11} & a_{12} & \dots  & a_{1n} \\
+            a_{11} & a_{12} & \dots  & a_{1n} \\
+            \vdots & \vdots & \ddots & \vdots \\
+            a_{m1} & a_{m2} & \dots  & a_{mn} \\
+        \end{pmatrix}
+    \end{equation*}
+    where the number $a_{ij}$ is called the $ij ^{th}$ \textbf{\textit{component}} or \textbf{\textit{entry}}.
+\end{definition}
+
+\subsection{Operations of Matrix}
+
+Let $A = (a_{ij}), B=(b_{ij})$,
+
+\textbf{Sum}: $A + B = (a_{ij} + b_{ij})$.
+
+\textbf{Scalar Multiplication}: $\alpha A = (\alpha a_{ij})$.
+
+\textbf{Dot Product/Inner Product} of two \textbf{vectors}: $a = (a_{1}, a_{2}, \dots, a_{n}), b = (b_{1}, b_{2}, \dots, b_{n})$ is defined as: \begin{equation*}
+    a \cdot b = \sum_{i=1}^{n} a_{i}b_{i}
+\end{equation*}
+
+\textbf{Matrix Multiplication}: $(AB)_{ij} = \sum_{k=1}^{n} a_{ik}b_{kj}$.
+
+Properties of Matrix Multiplication:
+\begin{itemize}
+    \item (AB)C = A(BC)
+    \item A(B+C) = AB + AC
+    \item (A+B)C = AC+BC
+\end{itemize}
+
+\subsection{Some Special Matrix}
+\begin{itemize}
+    \item \textbf{Square Matrix}
+    \item \textbf{Zero Matrix}
+    \item \textbf{Diagonal Matrix}
+    \item \textbf{Upper Triangle Matrix}
+    \item \textbf{Lower Triangle Matrix}
+    \item \textbf{Identity Matrix}
+\end{itemize}
+
+\subsection{Transpose}
+
+\begin{definition}[Transpose]
+    The \textbf{transpose} of a matrix $A$ is denoted by $A^T$ or $A'$, is obtained by reversing its rows and columns.
+\end{definition}
+Properties of Transpose: $(A')' = A, (A+B)' = A' + B', (\alpha A)'=\alpha A', (AB)'=B'A'$
+
+\subsubsection{Some Special Matrix Related to Transpose}
+\begin{itemize}
+    \item \textbf{Symmetric Matrix}: $A=A'$
+    \item \textbf{Orthogonal Matrix}: $A'A=I=AA'$
+    \item \textbf{Idempotent Matrix}: $AA=A$
+\end{itemize}
+
+\subsection{Determinants}
+\begin{remark*}
+    Only for \textbf{\textit{Square Matrix}}.
+\end{remark*}
+\begin{definition}
+    Determinant is given by
+    \begin{equation*}
+        |A|=\det(A)=\sum_{j=1}^{n} a_{ij}A_{ij}
+    \end{equation*}
+    where $A_{ij}$ is the $ij ^{th}$ \textit{\textbf{cofactor}} of $A$, and $A_{ij} = (-1)^{i+j}M_{ij}$, $M_{ij}$ is the $ij ^{th}$ minor.
+\end{definition}
+
+
+\begin{remark*}
+    The determinants represent the area/volume/... change after the Matrix Transform.
+\end{remark*}
+
+Properties of Determinants:
+\begin{itemize}
+    \item $|A'| = |A|$,
+    \item $|AB| = |A||B|$,
+    \item $|\alpha A| = \alpha ^{n}|A|$,
+    \item $|A| = \prod_{i=1}^{n} a_{ii}$ if $A$ is triangular.
+\end{itemize}
+
+\subsection{Inverse}
+\begin{remark*}
+    Only for \textbf{\textit{Square Matrix}}.
+\end{remark*}
+
+\begin{definition}
+    The \textbf{Inverse} $A ^{-1}$ of an $n \times n$ Square Matrix $A$ is the matrix $B$ that satisfies:
+    \begin{equation*}
+        AB=I_{n}, BA=I_{n}
+    \end{equation*}
+\end{definition}
+
+How to calculate?
+\begin{equation*}
+    A^{-1} = \frac{1}{\det(A)}adj(A) \quad \text{where} \quad adj(A) = \begin{pmatrix}
+        A_{11} & \dots  & A_{n1} \\
+        \vdots & \vdots & \vdots \\
+        A_{1n} & \dots  & A_{nn}
+    \end{pmatrix}
+\end{equation*}
+where $A_{ij}$ is the $ij ^{th}$ \textit{\textbf{cofactor}} of $A$.
+
+Properties of Inverse:
+\begin{itemize}
+    \item $AA^{-1} = A^{-1} A = I$
+    \item $(A^{-1})^{-1} = A$
+    \item $(AB)^{-1} = B^{-1}A^{-1}$
+    \item $(A')^{-1} = (A^{-1})'$
+    \item $|A^{-1}| = |A|^{-1}$
+\end{itemize}
+
+\subsection{Solve Linear Equations}
+
+For the system of linear equations, we can denote as $Ax=b$, where $A$ is a matrix (not necessary to be Square Matrix) and $b$ is a column vector.
+
+\subsubsection{Using Inverse Matrix of A}
+If $A$ is invertible, then \begin{equation*}
+    x = A^{-1}b \to x = \frac{1}{\det(A)}adj(A)b
+\end{equation*}
+
+\subsubsection{Cramer's Rule}
+
+\begin{equation*}
+    x_j = \frac{|A_{j}|}{|A|}, j=1,2,\dots,n
+\end{equation*}
+where $A_{j}$ is the matrix formed by replacing the $j^{th}$ column of $A$ with the vector $b$.
+
+\begin{remark*}
+    This method is important to solve a certain unknown variable of the system.
+\end{remark*}
+
+\subsubsection{Gaussian Elimination}
+
+Using \textbf{\textit{Elementary Row Operations}} on $(A|b)$ to reduce the system to \textbf{\textit{row echelon form}}.
+
+\subsection{Linear Independence}
+
+\begin{definition}[Linearly Dependent]
+    For vectors $a_{1}, a_{2}, \dots, a_{n}$, there exists a non-zero vector $c=(c_{1}, c_{2}, \dots, c_{n})$ such that $a_{1}c_{1} + a_{2}c_{2} + \dots + a_{n}c_{n} = 0$.
+\end{definition}
+
+\begin{definition}[Linearly Independent]
+    For vectors $a_{1}, a_{2}, \dots, a_{n}$, only when vector $c=(c_{1}, c_{2}, \dots, c_{n}) = 0$ such that $a_{1}c_{1} + a_{2}c_{2} + \dots + a_{n}c_{n} = 0$.
+\end{definition}
+
+\subsection{Rank}
+
+\begin{definition}
+    The \textbf{\textit{column rank}} of $A$ is the number of the number of Linearly Independent column vectors of $A$.    The \textbf{\textit{row rank}} of $A$ is the number of the number of Linearly Independent row vectors of $A$.
+
+    Always: $\text{column rank} = \text{row rank}$
+
+    Denoted as $r(A)$.
+\end{definition}
+
+Properties of Rank:
+\begin{itemize}
+    \item $r(A) = r(A') = r(AA') = r(A'A)$,
+    \item $r(AB) \leq min[r(A),r(B)]$,
+    \item $r(AB)= r(A)$ if $B$ is a Square Matrix of full rank and $r(A+B) \leq r(A) + r(B)$.
+\end{itemize}
+
+\subsubsection{Rank and Solutions}
+
+\begin{itemize}
+    \item If $r(A|b)=r(A) = n$, there is one solution.
+    \item If $r(A|b)=r(A) < n$, there are infinite solutions.
+    \item If $r(A|b) \neq  r(A)$, there is no solution.
+\end{itemize}
+
+\section{Eigenvalue and Eigenvectors}
+
+\begin{definition}
+    Let $x$ be a non-zero vector and $\lambda$ is a scalar, \begin{equation*}
+        Ax=\lambda x
+    \end{equation*}
+    , we call $\lambda$ is an \textbf{eigenvalue}(\textbf{characteristic value}) of $A$, and $x$ is an \textbf{eigenvector} of $A$.
+\end{definition}
+
+How to calculate?
+\begin{enumerate}
+    \item Calculate $\det (A-\lambda I) = 0$, then we have eigenvalues.
+    \item Then solve the system of linear equations $(A-\lambda_i I)x_i = 0$.
+\end{enumerate}
+
+\section{Trace}
+
+\begin{definition}
+    The trace of a Square Matrix $A$ is given by,
+    \begin{equation*}
+        tr(A) = \sum_{i=1}^{n} a_{ii}
+    \end{equation*}, the sum of diagonal numbers.
+\end{definition}
+
+Properties of trace:
+\begin{itemize}
+    \item $tr(cA) = c[tr(A)]$
+    \item $tr(A') = tr(A)$
+    \item $tr(A+B) = tr(A) + tr(B)$
+    \item $tr(I_{n}) = n$
+    \item \textbf{$x'x=tr(x'x)=tr(xx')$, if $x$ is a column vector}
+    \item $tr(AB) = tr(BA)$, moreover, $tr(ABC) = tr(CAB) = tr(BCA)$
+\end{itemize}
+
+If the Square Matrix A has eigenvalues $\lambda_1, \lambda_2, \dots, \lambda_n$, then
+\begin{itemize}
+    \item $\det(A) = \prod_{i=1}^{n} \lambda_i$
+    \item $tr(A) = \sum_{i=1}^{n} \lambda_i$
+\end{itemize}
+
+\section{Diagonalization}
+
+\begin{definition}
+    A matrix is \textbf{\textit{diagonalizable}} if it can be written as \begin{equation*}
+        A = PDP ^{-1}
+    \end{equation*}, where $D$ is a diagonal matrix, $P$ is, of course, a invertible matrix.
+\end{definition}
+
+\begin{remark*}
+    If we rewrite the definition like this: \begin{equation*}
+        AP = PD
+    \end{equation*}, comparing to the eigen equation $Ax = \lambda x$, it's easy to know the columns of matrix $P$ represent eigenvectors of matrix $A$ and the diagonal numbers in matrix $D$ represent eigenvalues of matrix $A$.
+    \begin{equation*}
+        P ^{-1} A P = D = diag(\lambda_{1}, \lambda_{2}, \dots, \lambda_{n})
+    \end{equation*}
+\end{remark*}
+
+\begin{remark*}
+    A matrix is diagonalizable $\iff$ it has a set of linearly independent eigenvectors.
+\end{remark*}
+
+\section{Orthonormal}
+
+\begin{definition}
+    A matrix is \textbf{\textit{Orthonormal}} if \begin{equation*}
+        P ^{-1} = P'
+    \end{equation*}, and the column vectors are unit vectors, orthogonal to each others.
+\end{definition}
+
+\begin{remark*}
+    For \textbf{vectors} $x, y$, $x$ and $y$ are orthogonal $\iff x'y = 0$
+\end{remark*}
+
+\begin{remark*}
+    If matrix $A$ is \textbf{\textit{symmetric}}, then:
+    \begin{itemize}
+        \item All of its eigenvectors are real.
+        \item Eigenvectors corresponding to distinct eigenvalues are orthogonal.
+        \item If $A$ is diagonalizable, the eigenvectors' matrix can be written in an orthogonal form.
+    \end{itemize}
+\end{remark*}
+
+\section{Quadratic Forms}
+
+\begin{definition}
+    A general quadratic form in $n$ variables is \begin{equation*}
+        Q(x_{1},\dots,x_{n}) = \sum_{i=1}^{n}\sum_{j=1}^{n} a_{ij}x_ix_j = x'Ax
+    \end{equation*}
+    , the matrix $A$ can be written in a symmetric form.
+\end{definition}
+
+\subsection{Definiteness}
+
+\begin{definition}[Positive Definite]
+    $\forall x \neq 0, \,x'Ax > 0$
+\end{definition}
+
+\begin{definition}[Negative Definite]
+    $\forall x \neq 0, \,x'Ax < 0$
+\end{definition}
+
+\begin{definition}[Positive Semi-definite]
+    $\forall x \neq 0, \,x'Ax \geq 0$
+\end{definition}
+
+\begin{definition}[Positive Semi-definite]
+    $\forall x \neq 0, \,x'Ax \leq 0$
+\end{definition}
+
+\subsubsection{Methods to Determine Definiteness}
+\begin{itemize}
+    \item Minors - \emph{See the Lecture 04}
+    \item Eigenvalues: Let $A$ be symmetric, and $\lambda_{1}, \lambda_{2}, \dots, \lambda_{n}$ are eigenvalues,
+          \begin{itemize}
+              \item positive definite $\iff \lambda_{1} > 0, \lambda_{2}>0, \dots, \lambda_{n}>0$
+              \item negative definite $\iff \lambda_{1} < 0, \lambda_{2}<0, \dots, \lambda_{n}<0$
+              \item positive semi-definite $\iff \lambda_{1} \geq 0, \lambda_{2} \geq 0, \dots, \lambda_{n}\geq 0$
+              \item negative semi-definite $\iff \lambda_{1} \leq 0, \lambda_{2}\leq 0, \dots, \lambda_{n}\leq 0$
+          \end{itemize}
+\end{itemize}
+
+\begin{proposition}[Cholesky Decomposition]
+    If $A$ is positive definite, then it can be decomposed as \begin{equation*}
+        A = LL'
+    \end{equation*}, where $L$ is a lower triangular matrix with strictly positive diagonal entries. $L$ is unique.
+\end{proposition}
+
+\section{Vector Space and Subspace}
+
+\begin{definition}[Vector Space]
+    $V$ is a \textbf{\textit{vector space}} if for all $u,v,w$ in $V$ and all scalars $r, s$ in $\mathbb{R}$ we have:
+    \begin{enumerate}
+        \item $(u+v) \in V$, (closure under addition)
+        \item $u+v = v+u$, (commutative law for addition)
+        \item $u+(v+w) = (u+v) + w$, (associative law for addition)
+        \item $\exists \textbf{0} \in V: \forall v \in V, v + \textbf{0} = v$, (additive identity)
+        \item $\forall v \in V, \exists w \in V: v+w=\textbf{0}$, (additive inverse)
+        \item $rv \in V$, (closure under scalar multiplication)
+        \item $r(u+v) = ru+rv$, (distributive under scalar multiplication)
+        \item $(r+s)u = ru+su$
+        \item $(rs)u = r(su)$
+        \item $\textbf{1}u = u$
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}[Subspace in $\mathbb{R}^{n}$]
+    Any \textbf{\textit{subset}} $V$ of $\mathbb{R}^{n}$ which satisfies Properties (1)-(10) is called a \textbf{\textit{subspace in $\mathbb{R}^{n}$}}.
+\end{definition}
+
+\begin{theorem}[How to check if a subset is a subspace of $\mathbb{R}^{n}$? - Two Conditions]
+    Let $V$ be a \textbf{\textit{subset}} of $\mathbb{R}^{n}$. Assume that $\forall u,v \in V$ we have $(u+v) \in V$ and $\forall v \in V, \forall r \in \mathbb{R}$ we have $rv \in V$. Then $V$ is a subspace.
+\end{theorem}
+
+\begin{remark*}
+    The definition of a vector space and a subspace in a vector space is not limited to $\mathbb{R}^{n}$; it also works for other sets. To determine a subset is a subspace of a known vector space (not necessarily to be $\mathbb{R}^{n}$), we just need closure under addition and closure under scalar multiplication.
+\end{remark*}
+
+\section{Span and Basis}
+
+\begin{definition}
+    Let $\{a_{1}, a_{2}, \dots, a_{k}\}$ be a collection of vectors in $\mathbb{R}^{n}$.
+
+    The set $V = \{c_{1}a_{1}+c_{2}a_{2}+\dots+c_{k}a_{k}: x_{1}, \dots,x_{k} \in \mathbb{R}\}$ is called the "\textbf{span of $a_{1}, a_{2}, \dots, a_{k}$}".
+
+    Denoted as: \begin{equation*}
+        V=sp[a_{1}, a_{2}, \dots, a_{k}] \quad \text{or} \quad V = \mathcal{L}[a_{1}, a_{2}, \dots, a_{k}]
+    \end{equation*}
+\end{definition}
+
+\begin{definition}
+    Let $V$ be a subspace of $\mathbb{R}^{n}$. The set of vectors ${b_{1}, b_{2}, \dots, b_{k}}$ form a \textbf{basis} of $V$ if
+    \begin{enumerate}
+        \item $b_{1}, b_{2}, b_{k}$ are linearly independent, and
+        \item $\forall v \in V, v = \sum_{i=1}^{k}c_{i}b_{i}$
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    The number of vectors in any basis of $V$ is called the \textbf{dimension} of $V$. Denoted as $\dim(A)$.
+\end{definition}
+
+\section{Row Space, Column Space and Rank} % TODO: Review it!
+
+\begin{definition}
+    Let $A$ be an $m \times n$ matrix. The \textbf{column space} and the \textbf{row space} are the span of the columns and the rows of $A$, respectively:
+    \begin{equation*}
+        Row(A)=\mathcal{L}[a'_{1\cdot},a'_{2\cdot},\dots,a'_{n\cdot}] \quad \text{and} \quad Col(A) = \mathcal{L}[a_{\cdot 1},a_{\cdot 2},\dots,a_{\cdot n}]
+    \end{equation*}
+\end{definition}
+
+\begin{theorem}
+    \begin{equation*}
+        \dim[Col(A)] = \dim[Row(A)] = r(A)
+    \end{equation*}
+\end{theorem}
+
+
+\section{Null-Space} % TODO: Review it!
+
+\begin{theorem}
+    Let $A$ be an $m \times n$ matrix. Then, set $V$ of \textbf{solutions} to the homogenous system $Ax=0$ is a subspace of $\mathbb{R}^{n}$.
+\end{theorem}
+
+\begin{remark*}
+    It is called the \textbf{null-space} of $A$ or the \textbf{kernel} of $A$, and written as $Null(A)$ or $\ker(A)$. (\textbf{Explanation}: It is the set of all vectors that are mapped to \textbf{0} by the matrix $A$.)
+\end{remark*}
+
+\section{Solutions of a Linear System (Vector Space Perspective)}
+
+\begin{theorem}
+    Let $A$ be an $m \times n$ matrix of coefficients:
+    \begin{itemize}
+        \item $Ax=b$ has a solution for a given $b \in \mathbb{R}^{m} \iff b \in Col(A)$,
+        \item  $Ax=b$ has a solution for every $b \in \mathbb{R}^{m} \iff r(A) = m$,
+        \item If $Ax=b$ has a solution $\forall b \Rightarrow r(A) \leq \# cols(A)=n$.
+    \end{itemize}
+\end{theorem}
+
+
+\begin{theorem}[Fundamental Theorem of Linear Algebra] Let $A$ be an $m \times n$ matrix of coefficients, then
+    \begin{equation*}
+        \dim[Null(A)] + r(A) = n
+    \end{equation*}.
+\end{theorem}

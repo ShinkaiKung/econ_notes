@@ -1,0 +1,410 @@
+% TeX root = ../Main.tex
+% First argument to \section is the title that will go in the table of contents. Second argument is the title that will be printed on the page.
+
+\section{Metric Space}
+
+\begin{definition}
+    A set $X$ is said to be a \textbf{\textit{metric space}} if $\forall p,q \in X$, there is an associated real number $d(p,q)$ called the distance from $p$ to $q$ such that:
+    \begin{itemize}
+        \item $d(p,q)>0$ if $p \neq q$ and $d(p,q) = 0$ if $p=1$,
+        \item $d(p,q) = d(q,p)$, and
+        \item $d(p,q) \leq d(p,r) + d(r,q), \forall r \in X$ (Triangle Inequality).
+    \end{itemize}
+\end{definition}
+
+\begin{remark*}
+    Any function with these properties is called a \textbf{\textit{distance function}} or a \textbf{\textit{metric}}.
+\end{remark*}
+
+\section{Euclidean Space}
+
+We can define the following operations in $\mathbb{R}^{n}$:
+
+\begin{definition}[\textbf{Sum}]
+    Given $\mathbf{x, y} \in \mathbb{R}^{n}, x+y = (x_{1}+y_{1}, \dots,x_{n}+y_{n})' \in \mathbb{R}^{n}$
+\end{definition}
+
+\begin{definition}[\textbf{Scalar Multiplication}]
+    Given $a \in \mathbb{R}$ and $\mathbf{x} \in \mathbb{R}^{n}, a \mathbf{x} = (ax_1,\dots,ax_n)' \in \mathbb{R}^{n}$
+\end{definition}
+
+\begin{definition}[\textbf{Inner Product}]
+    Given $\mathbf{x, y} \in \mathbb{R}^{n}, x\cdot y = \sum_{i=1}^{n} x_{i}y_{i} \in \mathbb{R}^{n}$
+\end{definition}
+
+\begin{remark*}[Vector Space]
+    With operations "Sum" and "Scalar Multiplication", we can say that $\mathbb{R}^{n}$ is a \textbf{Vector Space}. \textit{(See the Definition in Section "Vector Space and Subspace")}
+\end{remark*}
+
+\begin{remark*}[Euclidean Space]
+    With operations "Sum", "Scalar Multiplication" and "Inner Product" make $\mathbb{R}^{n}$ a \textbf{Euclidean Space}.
+\end{remark*}
+
+\begin{definition}[Euclidean Norm]
+    The \textbf{Euclidean Norm} of a vector $\mathbf{x} \in \mathbb{R}^{n}$ is given by \begin{equation*}
+        ||\mathbf{x}||=\sqrt{\mathbf{x}\cdot \mathbf{x}} = \sqrt{\sum_{i=1}^{n} x^2_{i}}.
+    \end{equation*}
+\end{definition}
+
+\begin{definition}[$p$-Norm*]
+    \begin{equation*}
+        ||\mathbf{x}||_p = \Big(\sum_{i=1}^{n} |x_i|^p\Big)^{1/p}, \quad p \geq 1
+    \end{equation*}
+    \begin{remark*}
+        Euclidean norm is a spacial case of the $p$-norm with $p=2$.
+    \end{remark*}
+
+\end{definition}
+
+
+\begin{definition}[Manhattan Norm*]
+    \begin{equation*}
+        ||\mathbf{x}||_1 = \sum_{i=1}^{n} |x_i|
+    \end{equation*}
+    \begin{remark*}
+        Measures "grid-like" distance.
+    \end{remark*}
+\end{definition}
+
+\begin{definition}[Maximum Norm*]
+    \begin{equation*}
+        ||\mathbf{x}||_{\infty } = \max_{1 \leq i \leq n} |x_i|
+    \end{equation*}
+\end{definition}
+
+\begin{definition}[Euclidean Distance]
+    \begin{equation*}
+        d(\mathbf{x},\mathbf{y}) = ||\mathbf{x}-\mathbf{y}|| = \sqrt{\sum_{i=1}^{n} (x_i-y_i)^{2}}
+    \end{equation*}
+\end{definition}
+
+
+
+\begin{definition}[Angle of Two Vectors]
+    For two vectors $\mathbf{x}, \mathbf{y} \in \mathbb{R}^{n}$, the \textbf{angle} $\theta$ can be defined via the following expression: \begin{equation*}
+        \cos\theta=\frac{\mathbf{x}\cdot\mathbf{y}}{||\mathbf{x}||||\mathbf{y}||}, \qquad \theta \in [0,\pi]
+    \end{equation*}
+\end{definition}
+
+\begin{proof}
+    \begin{align*}
+        ||\mathbf{x}-\mathbf{y}||^{2} & = \sum_{i=1}^{n} (x_i-y_i)^{2}                                            \\
+                                      & = \sum_{i=1}^{n} (x_{i}^{2} + y_{i}^{2} - 2x_{i}y_{i})                    \\
+                                      & = ||\mathbf{x}||+||\mathbf{y}||-2 \mathbf{x}\cdot\mathbf{y}               \\
+        ||\mathbf{x}-\mathbf{y}||^{2} & = ||\mathbf{x}|| + ||\mathbf{y}||-2||\mathbf{x}||||\mathbf{y}||\cos\theta \\
+        2 \mathbf{x}\mathbf{y}        & = 2||\mathbf{x}||||\mathbf{y}||\cos\theta                                 \\
+        \cos\theta                    & =\frac{\mathbf{x}\cdot\mathbf{y}}{||\mathbf{x}||||\mathbf{y}||}
+    \end{align*}
+\end{proof}
+
+\section{Open Set and Closed Set}
+
+\begin{definition}[Open Ball]
+    If $\mathbf{x}_0\in \mathbb{R}^{n}$ and $r > 0$, then the set of all points $\mathbf{x} \in \mathbb{R}^{n}$ whose distance from $\mathbf{x}$ is \textbf{less} than $r$ is called the \textbf{open all} around $\mathbf{x}_0$ with radius $r$, \begin{equation*}
+        B(\mathbf{x}_0,r) = \{\mathbf{x} \in \mathbb{R}^{n}: d(\mathbf{x},\mathbf{x}_0) < r\}
+    \end{equation*}
+\end{definition}
+
+\begin{remark*}
+    \begin{equation*}
+        \mathring{B}(\mathbf{x}_0,r) = \{\mathbf{x} \in \mathbb{R}^{n}: 0 < d(\mathbf{x},\mathbf{x}_0) < r\}
+    \end{equation*}
+\end{remark*}
+
+\begin{definition}[Interior Point]
+    $\mathbf{x}$ is an Interior Point of $A$, if $\exists B(\mathbf{x},r) \subset A$.
+
+    The \textbf{set} of all interior points of $A$ is the \textbf{interior} of $A$ and is denoted by $int(A)$.
+\end{definition}
+
+\begin{definition}[Exterior Point]
+    $\mathbf{x}$ is an Exterior Point of $A$, if $\exists B(\mathbf{x},r) \subset A^{c}$.
+
+    The \textbf{set} of all exterior points of $A$ is the \textbf{exterior} of $A$ and is denoted by $ext(A)$.
+\end{definition}
+
+\begin{definition}[Boundary Point]
+    $\mathbf{x}$ is a Boundary Point of $A$, if $\forall B(\mathbf{x},r), B(\mathbf{x},r)\cap A \neq \emptyset,  B(\mathbf{x},r)\cap A^c \neq \emptyset$.
+
+    The \textbf{set} of all boundary points of $A$ is the \textbf{boundary} of $A$ and is denoted by $bd(A)$.
+\end{definition}
+
+\begin{remark*}
+    Let $A \subset \mathbb{R}^{n}$. Then $\mathbb{R}^{n}=int(A)\cup ext(A)\cup bd(A)$.
+\end{remark*}
+
+\begin{definition}[Open Set]
+    A set $A$ is an open set $\iff \forall \mathbf{x} \in A, \mathbf{x} \in int(A)$.
+\end{definition}
+Properties of open sets:
+\begin{itemize}
+    \item $\mathbb{R}^{n}$ and $\emptyset $ are open.
+    \item Arbitrary unions of open sets are open.
+    \item The intersection of finitely many open sets is open.
+\end{itemize}
+
+\begin{definition}[Closed Set]
+    A set $A$ is a closed set $\iff A^c$ is an open set.
+\end{definition}
+Properties of closed sets:
+\begin{itemize}
+    \item $\mathbb{R}^{n}$ and $\emptyset $ are closed.
+    \item Arbitrary intersection of closed sets are closed.
+    \item The union of finitely many closed sets is closed.
+\end{itemize}
+
+\section{Closure, Accumulation and Isolated Points}
+
+\begin{definition}[Closure Point]
+    $\mathbf{x}$ is a closure point of $A$, if $\forall B(\mathbf{x},r), B(\mathbf{x},r) \cap A \neq \emptyset$.
+
+    The \textbf{set} of all closure points of $A$ is the \textbf{closure} of $A$ and is denoted by $cl(A)$.
+\end{definition}
+
+\begin{proposition}
+    $A$ is closed $\iff cl(A)=A$.
+\end{proposition}
+
+\begin{definition}[Accumulation Point]
+    $\mathbf{x}$ is an accumulation point of $A$, if $\forall \mathring{B}(\mathbf{x},r), \mathring{B}(\mathbf{x},r) \cap A \neq \emptyset$.
+
+    The \textbf{set} of all accumulation points of $A$ is the \textbf{accumulation} of $A$ and is denoted by $acc(A)$.
+\end{definition}
+
+\begin{definition}[Isolated Point]
+    $\mathbf{x}$ is an isolated point of $A$, if $\mathbf{x} \in cl(A), \mathbf{x} \notin acc(A)$.
+
+    The \textbf{set} of all isolated points of $A$ is denoted by $ais(A)$.
+\end{definition}
+
+\begin{remark*}
+    \begin{align*}
+        1. & cl(A) = int(A) \cup bd(A).                                         \\
+        2. & cl(A) - acc(A) = ais(A).                                           \\
+        3. & cl(A) \text{ is the intersection of all closed sets containing } A
+    \end{align*}
+\end{remark*}
+
+
+\begin{figure}[h!]
+    \centering
+    \begin{tikzpicture}[scale=1.5, every node/.style={scale=1}]
+
+        % Define the set S
+        \draw[thick, fill=blue!20] (0,0) -- (4,0.5) -- (5,3) -- (2,4) -- (0,2) -- cycle;
+        \node at (2.5, 2) {\huge $S$};
+
+        % Interior Point A
+        \node[circle, fill=red, inner sep=2pt, label={[label distance=-0.2cm]90:$A$}] (A) at (2,1.5) {};
+        \draw[red, dashed] (A) circle (0.5cm);
+        \node[red, align=center] at (2, 0.5) {Interior Point \\ $\exists B(\mathbf{x},r) \subset S$};
+
+        % Boundary Point B
+        \node[circle, fill=green!60!black, inner sep=2pt, label={[label distance=-0.2cm]180:$B$}] (B) at (5, 3) {};
+        \draw[green!60!black, dashed] (B) circle (0.6cm);
+        \node[green!60!black, align=center] at (6, 2.5) {Boundary Point \\ $\exists B(\mathbf{x},r) \cap S \neq \emptyset$ \\ $\exists B(\mathbf{x},r) \cap S^c \neq \emptyset$};
+
+        % Exterior Point C
+        \node[circle, fill=orange, inner sep=2pt, label={[label distance=-0.2cm]90:$C$}] (C) at (6,1) {};
+        \draw[orange, dashed] (C) circle (0.5cm);
+        \node[orange, align=center] at (6, 0) {Exterior Point \\ $\exists B(\mathbf{x},r) \subset S^c$};
+
+        % Accumulation Point D
+        \node[circle, fill=purple, inner sep=2pt, label={[label distance=-0.2cm]270:$D$}] (D) at (0.2, 1) {};
+        \draw[purple, dashed] (D) circle (0.7cm);
+        \foreach \i in {1,...,5}{
+                \node[circle, fill=purple!50, inner sep=1pt] at ($(D)+(15+5*\i:0.1*\i cm)$) {};
+            }
+        \node[purple, align=center] at (-1.2, 0.5) {Accumulation Point \\ $\forall \mathring{B}(\mathbf{x},r) \cap S \neq \emptyset$};
+
+        % Isolated Point E
+        % This point E belongs to the set S, which is the union of the main shape and the point E itself.
+        \node[circle, fill=magenta, inner sep=2pt, label={[label distance=-0.2cm]90:$E$}] (E) at (4,4) {};
+        \draw[magenta, dashed] (E) circle (0.5cm);
+        \node[magenta, align=center] at (4, 5) {Isolated Point \\ $\exists B(\mathbf{x}, r) \cap S = \{\mathbf{x}\}$};
+        \node at (0.5, 4) {$S = S_{main} \cup \{E\}$}; % Clarify that E is part of S
+
+        % Annotations for Sets
+        \node[blue!80!black] at (1.5,-1) {The blue shaded area is the \textbf{Interior} of $S$, an \textbf{Open Set}.};
+        \node[blue!80!black] at (1.5,-1.5) {The Interior plus the solid boundary form a \textbf{Closed Set}.};
+        \node at (1.5,-2) {Points A, B, D, E are \textbf{Closure Points} ($\forall B(\mathbf{x},r) \cap S \neq \emptyset$) of the set $S$.};
+
+    \end{tikzpicture}
+    \caption{Visual representation of topological points and sets. Here, the set $S$ is composed of the large shaded region (including its boundary) and the separate point E.}
+    \label{fig:topology}
+\end{figure}
+
+\begin{remark*}[Accumulation \& Interior Points]
+    An \textbf{interior point} must \textit{\textbf{belong to a set}} and be surrounded by a neighborhood entirely within that set,
+
+    whereas an \textbf{accumulation point} is a point whose every neighborhood contains \textit{\textbf{at least one point from the set}}, regardless of whether it belongs to the set itself.
+\end{remark*}
+
+\begin{remark*}[Isolated \& Boundary Points]
+    An \textbf{isolated point} must \textbf{belong to a set} that has a neighborhood containing no other points from that set,
+
+    whereas a \textbf{boundary point} is a point whose every neighborhood must contain \textit{\textbf{at least one point from the set}} and \textit{\textbf{one point not from the set}}, regardless of whether it belongs to the set itself.
+\end{remark*}
+
+\section{Sequence}
+
+\begin{definition}[Sequence]
+    A \textbf{Sequence} is a \textit{function} $\{{\mathbf{x}_n}\}_{n=1}^{\infty}$ that maps natural numbers $n = 1,2,\dots$ to points in a set $S$.
+\end{definition}
+
+\begin{definition}[Converge]
+    Given a metric space $(S,d)$, a sequence $\{{\mathbf{x}_n}\}_{n=1}^{\infty}$ in $S$ converges to $\mathbf{x} \in  S$ if \begin{equation*}
+        \forall \epsilon >0, \exists N, \forall n > N \Rightarrow d(\mathbf{x}_n,\mathbf{x}) < \epsilon
+    \end{equation*}
+\end{definition}
+
+\begin{definition}[Limit of Sequence] If a sequence converges,
+    \begin{equation*}
+        \lim_{n \to \infty} \mathbf{x}_n = \mathbf{x}
+    \end{equation*}
+\end{definition}
+
+\begin{definition}[Set Bounded]
+    A set $X \subset S$ is \textbf{bounded} if \begin{equation*}
+        \exists M \in R, \mathbf{y} \in S, \forall \mathbf{x} \in X, \Rightarrow d(\mathbf{x},\mathbf{y}) < M.
+    \end{equation*}
+\end{definition}
+
+\begin{definition}[Sequence Bounded]
+    A sequence $\{{\mathbf{x}_n}\}_{n=1}^{\infty}$ is \textbf{bounded} if \begin{equation*}
+        \exists M \in R, \mathbf{y} \in \mathbb{R}^{n}, \forall \mathbf{x}_j \in \{{\mathbf{x}_n}\}_{n=1}^{\infty}, \Rightarrow d(\mathbf{x}_j,\mathbf{y}) < M.
+    \end{equation*}
+\end{definition}
+
+\begin{proposition}
+    A sequence of vectors $\{{\mathbf{x}_n}\}_{n=1}^{\infty}$ in $\mathbb{R}^{m}$ converges $\iff$ all $m$ sequences of its components ($\{x_{in}\}_{n=0}^{\infty }$, for $i=1,\dots,m$) converge.
+\end{proposition}
+
+
+\begin{proposition} Let $\{\mathbf{x}_n\}$ be a sequence in $(S,d)$ then,
+    \begin{enumerate}
+        \item $\{\mathbf{x}_{n}\}$ converges to $\mathbf{x} \in S \iff \forall B(\mathbf{x},r)$ contains \textit{\textbf{nearly}} all elements of  $\{\mathbf{x}_{n}\}$, except the finite subset $\mathbf{x}_1,\dots,\mathbf{x}_M$.
+        \item A sequence has at most one limit.
+        \item If $\{\mathbf{x}_{n}\}$ converges, it is bounded.
+    \end{enumerate}
+\end{proposition}
+
+\begin{definition}[Subsequence]
+    Let $\mathcal{N} = \{n_1, n_2, \dots\}$ be an infinite subset of $\mathbb{N}$ such that $n_1 < n_2 < \dots$. A \textbf{subsequence} $\{\mathbf{y}_n\}$ of a sequence $\{\mathbf{x}_n\}$ is defined as $\mathbf{y}_j = \mathbf{x}_{nj}$, for $j=1,2,\dots$
+\end{definition}
+
+\section{Compactness}
+
+
+\begin{definition}[Open Cover]
+    An \textbf{open cover} is a collection of open sets whose union contains all the elements of a given set in same space.
+
+    For $E \subset S$, \underline{\textbf{open cover} of $E$ is $\{G_i\} \subset S$} such that $E \subset \cup_i G_i$.
+\end{definition}
+
+
+
+\begin{definition}[Subcover]
+    A \textbf{subcover} is a subset of open cover which still covers $E$.
+\end{definition}
+
+
+\begin{definition}[Finite Subcover]
+    A \textbf{finite subcover} is a subset with finite elements.
+
+    For $E \subset S$, \underline{\textbf{finite subcover} of $E$ is indices of $\{G_{i}\} \subset S$} such that $E \subset G_{i1}  \cup \dots \cup G_{in}$.
+\end{definition}
+
+
+\begin{definition}
+    $E \subset S$ is \textbf{compact} if \textbf{EVERY} open cover of $E$ has a \textbf{finite subcover}.
+\end{definition}
+
+\begin{example*}
+    1. Any finite set is compact, such as singleton $\{\mathbf{x}\}$. 2. The interval $(0,1)$ is not compact.
+\end{example*}
+
+\begin{definition}[Sequentially Compact]
+    Let $(S,d)$ be a metric space. $X \subseteq S$ is \textbf{sequentially compact} if every sequence in $X$ has a subsequence that converges to a point in $X$.
+
+    Note: The limit point must stay inside the set (this is crucial).
+    \begin{example*}
+        $(0,1)$ is not sequentially compact.
+    \end{example*}
+\end{definition}
+
+\begin{proposition}
+    In \textbf{metric space}: \begin{equation*}
+        \text{Compact} \iff \text{Sequentially compact}
+    \end{equation*}
+    It is not necessarily right for non-metric space.
+\end{proposition}
+
+\begin{theorem}[Heine-Borel]
+    In $\mathbb{R}^{n}$ (Euclidean Space): \begin{equation*}
+        E \text{ is compact} \iff E \text{ is closed and bounded}.
+    \end{equation*}
+\end{theorem}
+
+\begin{theorem}[Bolzano-Weiesrstrass]
+    Every bounded sequence in $\mathbb{R}^{n}$ (Euclidean Space) contains a convergent subsequence (in $\mathbb{R}^{n}$).
+\end{theorem}
+
+% TODO: Proof of Bolzano-Weiesrstrass
+
+\begin{proposition}[Bolzano-Weiesrstrass’ Generalization on Set]
+    $S \subset \mathbb{R}^{n}$ is bounded $\iff$ Every sequence in $S$ contains a convergent subsequence.
+
+    Note: It is actually checking if every sequence in a set fulfill the Bolzano-Weiesrstrass Theorem.
+\end{proposition}
+
+\begin{theorem}
+    Every bounded monotone sequence converges.
+\end{theorem}
+
+\section{Cauchy Sequences}
+
+\begin{definition}[Cauchy Sequence]
+    A sequence $\{\mathbf{x}_n\}_{n=0}^{\infty}$ in $S$ is a \textbf{Cauchy Sequence} if
+    \begin{equation*}
+        \forall \epsilon > 0, \exists N_{\epsilon} \Rightarrow \forall n,m>N_{\epsilon}, d(\mathbf{x}_n, \mathbf{x}_m) < \epsilon
+    \end{equation*}
+\end{definition}
+
+\begin{proposition}
+    Every convergent sequence is Cauchy.
+\end{proposition}
+
+\begin{remark*}
+    Not all Cauchy sequences are convergent. \textbf{Remember}, the limit of convergent sequences should be in the same space. See the definition of Completeness.
+\end{remark*}
+
+\begin{lemma}
+    Any Cauchy sequence is bounded. 
+\end{lemma}
+
+\begin{definition}[Complete]
+    A metric space $(S,d)$ is \textbf{complete} if every Cauchy sequence converges to an element in $S$.
+\end{definition}
+
+\begin{proposition}
+    All compact metric spaces are complete.
+\end{proposition}
+
+\begin{remark*}
+    Not every metric space is complete. e.g. the set of rational numbers $\mathbb{Q}$.\begin{align*}
+        &x_1 = 1 \\
+        &x_2 = 1.4 \\
+        &x_3 = 1.41 \\
+        &x_4 = 1.414 \\
+        & \dots \\
+        &\lim_{n \to \infty} x_n = \sqrt{2} \notin \mathbb{Q}
+    \end{align*}
+\end{remark*}
+
+\begin{proposition}
+    $\mathbb{R}^{n}$ is complete.
+\end{proposition}
+% TODO: Proof
+
+
