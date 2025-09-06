@@ -327,7 +327,9 @@ Properties of closed sets:
 \begin{definition}[Sequentially Compact]
     Let $(S,d)$ be a metric space. $X \subseteq S$ is \textbf{sequentially compact} if every sequence in $X$ has a subsequence that converges to a point in $X$.
 
-    Note: The limit point must stay inside the set (this is crucial).
+    \begin{remark*}
+        The limit point must stay inside the set (this is crucial).
+    \end{remark*}
     \begin{example*}
         $(0,1)$ is not sequentially compact.
     \end{example*}
@@ -341,21 +343,27 @@ Properties of closed sets:
 \end{proposition}
 
 \begin{theorem}[Heine-Borel]
-    In $\mathbb{R}^{n}$ (Euclidean Space): \begin{equation*}
+    In $\mathbb{R}^{n}$ (\textbf{Euclidean Space}): \begin{equation*}
         E \text{ is compact} \iff E \text{ is closed and bounded}.
     \end{equation*}
 \end{theorem}
 
-\begin{theorem}[Bolzano-Weiesrstrass]
-    Every bounded sequence in $\mathbb{R}^{n}$ (Euclidean Space) contains a convergent subsequence (in $\mathbb{R}^{n}$).
+%TODO: Proof of Heine-Borel
+
+
+
+\begin{theorem}[Bolzano-Weierstrass]
+    Every bounded sequence in $\mathbb{R}^{n}$ (\textbf{Euclidean Space}) contains a convergent subsequence (in $\mathbb{R}^{n}$).
 \end{theorem}
 
-% TODO: Proof of Bolzano-Weiesrstrass
+% TODO: Proof of Bolzano-Weierstrass
 
-\begin{proposition}[Bolzano-Weiesrstrass’ Generalization on Set]
+\begin{proposition}[Bolzano-Weierstrass Generalization on Set]
     $S \subset \mathbb{R}^{n}$ is bounded $\iff$ Every sequence in $S$ contains a convergent subsequence.
 
-    Note: It is actually checking if every sequence in a set fulfill the Bolzano-Weiesrstrass Theorem.
+    \begin{remark*}
+        It is actually checking if every sequence in a set fulfill the Bolzano-Weierstrass Theorem.
+    \end{remark*}
 \end{proposition}
 
 \begin{theorem}
@@ -380,7 +388,7 @@ Properties of closed sets:
 \end{remark*}
 
 \begin{lemma}
-    Any Cauchy sequence is bounded. 
+    Any Cauchy sequence is bounded.
 \end{lemma}
 
 \begin{definition}[Complete]
@@ -393,12 +401,12 @@ Properties of closed sets:
 
 \begin{remark*}
     Not every metric space is complete. e.g. the set of rational numbers $\mathbb{Q}$.\begin{align*}
-        &x_1 = 1 \\
-        &x_2 = 1.4 \\
-        &x_3 = 1.41 \\
-        &x_4 = 1.414 \\
-        & \dots \\
-        &\lim_{n \to \infty} x_n = \sqrt{2} \notin \mathbb{Q}
+         & x_1 = 1                                              \\
+         & x_2 = 1.4                                            \\
+         & x_3 = 1.41                                           \\
+         & x_4 = 1.414                                          \\
+         & \dots                                                \\
+         & \lim_{n \to \infty} x_n = \sqrt{2} \notin \mathbb{Q}
     \end{align*}
 \end{remark*}
 
@@ -407,4 +415,161 @@ Properties of closed sets:
 \end{proposition}
 % TODO: Proof
 
+\section{Functions (from $\mathbb{R}^{n}$ to $\mathbb{R}^{m}$)}
 
+\begin{definition}[Function and Domain]
+    Let  $D \subset \mathbb{R}^{n}, n \geq 1$, and let  $\mathbb{R}^{m}$, for  $m \geq 1$.
+
+    A \textbf{function} $f:D \subset \mathbb{R}^{n} \to \mathbb{R}^{m}$ assigns to each $\mathbf{x} \in D$ one and only one $\mathbf{y} \in \mathbb{R}^{m}$.
+
+    $D$ is the $domain$ of the function $f$.
+\end{definition}
+
+\begin{remark*} (Categories)
+    \begin{itemize}
+        \item
+              If \(n = 1, m = 1, f\) is a function of a real variable on a real
+              variable.
+        \item
+              If \(n = 1, m > 1, f\) is a vector function of real values.
+        \item
+              If \(n > 1, m = 1, f\) is a real function of vector values.
+        \item
+              If \(n > 1, m > 1, f\) is a vector function of vector values.
+    \end{itemize}
+\end{remark*}
+
+\section{Limit of a function}
+
+\begin{definition}[Limits]
+    Let $f: D \subset \mathbb{R}^{n} \to \mathbb{R}^{m}$. Consider
+    \(\mathbf{x}_{0}\in a c c(D)\) and \(\textbf{L}\in\) \(\mathbb{R}^{m}\), $\mathbf{L}$ is the limit of if \begin{equation*}
+        \forall \epsilon > 0, \exists \delta > 0, 0<||\mathbf{x} - \mathbf{x}_{0}|| < \delta \Rightarrow \left|\left|f(\mathbf{x}) - \mathbf{L}\right|\right|< \epsilon
+    \end{equation*}
+\end{definition}
+
+\begin{remark*}
+    The definition above is equivalent to the following:
+    $\forall \epsilon > 0, \exists \delta > 0$
+    \begin{itemize}
+        \item $\mathbf{x} \in \mathring{B}(\mathbf{x}_0, \delta) \Rightarrow f(\mathbf{x}) \in B(\mathbf{L}, \epsilon)$,
+        \item $\lim_{||\mathbf{x} - \mathbf{x}_0||\rightarrow 0}||f(\mathbf{x}) - \mathbf{L}|| = 0$.
+        \item $\lim_{d(\mathbf{x},\mathbf{x}_0)\rightarrow 0}d(f(\mathbf{x}),\mathbf{L}) = 0$.
+    \end{itemize}
+\end{remark*}
+
+\begin{remark*}
+    How to proof the limit at \(\mathbf{x}_0\) not exists?
+
+    Find \textbf{one} direction of the Ball that the limit not exists, e.g. \(x_1=kx_2\)
+\end{remark*}
+
+\begin{proposition}
+    The limit of \(f\) at \(\mathbf{x}_0\), if it exists, is unique.
+\end{proposition}
+
+Limit Rules: Let \(f:\mathbb{R}^{n}\longrightarrow \mathbb{R}\) and\(g:\mathbb{R}^{n}\longrightarrow \mathbb{R}\) . Moreover, assume \(\lim_{\mathbf{x}\to \mathbf{x}_0}f(\mathbf{x}) = L_1\) and \(\lim_{\mathbf{x}\to \mathbf{x}_0}g(\mathbf{x}) = L_2\) ; then:
+\begin{enumerate}
+    \item \(\lim_{\mathbf{x}\to \mathbf{x}_0}f(\mathbf{x}) + g(\mathbf{x}) = L_1 + L_2.\)
+    \item \(\lim_{\mathbf{x}\to \mathbf{x}_0}a f(\mathbf{x}) = a L_1\), for all \(a\in \mathbb{R}\).
+    \item \(\lim_{\mathbf{x}\to \mathbf{x}_0}f(\mathbf{x})g(\mathbf{x}) = L_1L_2\).
+    \item \(\lim_{\mathbf{x}\to \mathbf{x}_0}\frac{f(\mathbf{x})}{g(\mathbf{x})} = \frac{L_1}{L_2}\), if \(L_2\neq 0\).
+    \item \(\lim_{\mathbf{x}\to \mathbf{x}_0}f(\mathbf{x})g(\mathbf{x}) = L_1^{L_2}\), (if \(L_1^{L_2}\) is well defined).
+\end{enumerate}
+
+
+\begin{proposition}
+    \(f: \mathbb{R}^{n} \rightarrow \mathbb{R}^{m}, \mathbf{x_{0}} \in \mathbb{R}^{n}\), and \(f = (f_{1}, f_{2}, \ldots , f_{m})'\). Then, \(\forall i = 1,2, \ldots , m\)
+    \[
+        f(\mathbf{x}) = \mathbf{L} = \left( \begin{array}{c}L_{1} \\ L_{2} \\ \vdots \\ L_{m} \end{array} \right) \iff \lim_{\mathbf{x} \rightarrow \mathbf{x}_{0}} f_{i}(\mathbf{x}) = L_{i}
+    \]
+\end{proposition}
+
+
+\section{Continuity}
+
+\begin{definition}[Continuity]
+    \(f: D \subset \mathbb{R}^{n} \rightarrow \mathbb{R}^{m}\) and consider \(\mathbf{x}_{0} \in D\). \(f(\mathbf{x})\) is \textbf{continuous} at \(\mathbf{x} = \mathbf{x}_0\) if \[
+        \forall \epsilon > 0, \exists \delta > 0, ||\mathbf{x}-\mathbf{x_0}|| < \delta \Longrightarrow ||f(\mathbf{x}) - f(\mathbf{x}_0)|| < \epsilon
+    \]
+\end{definition}
+
+\begin{remark*}
+    The definition above is equivalent to the following statement:
+    \[
+        \forall \epsilon > 0, \exists \delta > 0, \forall\mathbf{x} \in B(\mathbf{x}_0, \delta) \Longrightarrow f(\mathbf{x}) \in B(f(\mathbf{x}_0),\epsilon).
+    \]
+\end{remark*}
+
+Continuity rules: Let \(f: \mathbb{R}^{n} \rightarrow \mathbb{R}^{m}\) and
+\(g: \mathbb{R}^{n} \rightarrow \mathbb{R}^{m}\). Let
+\(\mathbf{x}_{0} \in \mathbb{R}^{n}\). If \(f\) and \(g\) are
+continuous at \(\mathbf{x}_{0}\), then:
+\begin{enumerate}
+    \item
+          \(f + g\) is continuous at \(\mathbf{x}_{0}\).
+    \item
+          \(a f\) is continuous at \(\mathbf{x}_{0}\) if \(a \in \mathbb{R}\).
+    \item
+          \(f \cdot g\) is continuous at \(\mathbf{x}_{0}\).
+    \item
+          If \(g(\mathbf{x}_{0}) \neq 0\) , then \(\frac{f}{g}\) is continuous at \(\mathbf{x}_{0}\) (when \(m = 1\)).
+\end{enumerate}
+
+
+\begin{proposition}
+    Let \(f:\mathbb{R}^{n}\rightarrow \mathbb{R}^{m}\) \(\mathbf{x_{0}}\in \mathbb{R}^{n}\), and \(f = (f_{1},f_{2},\ldots ,f_{m})^{\prime}\). Then,
+
+    \(f\) is continuous at \(\mathbf{x}_{0}\iff f_{i}\) is continuous at \(\mathbf{x}_{0},\forall i = 1,2,\ldots ,m.\)
+\end{proposition}
+
+
+\begin{proposition}
+    \(f:\mathbb{R}^{n}\rightarrow \mathbb{R}^{p}\) and \(g:\mathbb{R}^{p}\rightarrow \mathbb{R}^{m}\). Let \(\mathbf{x}_0\in \mathbb{R}^n\). If \(f\) is continuous at \(\mathbf{x}_0\) and \(g\) is continuous at \(f(\mathbf{x}_0)\). Then, \(g\circ f\) is continuous at \(\mathbf{x}_0\).
+\end{proposition}
+
+\begin{remark*}
+    The above propositions and rules allow us to study the continuity of numerous functions without having to resort to the definition.
+\end{remark*}
+
+
+\begin{definition}[Continuity on (Sub)Domain]
+    Let \(A\subset \mathbb{R}^{n}\). \(f\) is continuous at \(A\) if \(\forall \mathbf{x}_0\in A\), \(f\) is continuous at \(\mathbf{x}_0\).
+\end{definition}
+
+\section{Weierstrass' Theorem}
+
+\begin{proposition} Bounded Above and Supremum:
+    \begin{itemize}
+        \item If \(E \subset \mathbb{R}\) is \textbf{bounded above}, \(y = \sup E\), then \(y \in \text{cl} (E)\).
+        \item If \(E \subset \mathbb{R}\) is \textbf{bounded above and closed}, then \(\sup E \in E\).
+    \end{itemize}
+\end{proposition}
+
+\begin{remark*}
+    Similar to infimum.
+\end{remark*}
+
+\begin{theorem}[Weierstrass Theorem]
+    Suppose \textbf{\(f:X\to \mathbb{R}\) is continuous, \(X\) is compact}, and \(M = \sup_{t\in X}f(t)\), \(m = \inf_{t\in X}f(t)\). Then, there exist \(p,q\in X\) such that \(f(p) = M\) \(f(q) = m\), such that \(f(q)\leq f(x)\leq f(p)\) for all \(x\in X\).
+\end{theorem}
+
+\begin{remark*}
+      The Weierstrass theorem is useful in optimization problems because it guarantees the \textbf{existence of a solution}, as long as the function being maximized/minimized is \textbf{continuous}, and the set over which it is being maximized/minimized is \textbf{closed and bounded}.
+\end{remark*}
+
+
+\begin{proof}[Proof of Weierstrass Theorem]
+    Let \(\{\mathbf{y}_m\}\) be an arbitrary sequence in \(f(\mathbf{x})\).
+
+    Consider a sequence \(\mathbf{y}_m=f(\mathbf{x}_m)\).
+
+    Because \( X \) is compact, then \( \{\mathbf{x}_m\} \subset X \) has a convergent subsequence \( \{\mathbf{x}_{mk}\} \), and \( \lim_{k \to \infty} \mathbf{x}_{mk} \to \mathbf{x} \in X \). (\textbf{Bolzano Weierstrass Theorem})
+
+    By continuity of \( f \) let \( \mathbf{y}_{mk} = f(\mathbf{x}_{mk}) \)
+    \[
+        \lim_{k \to \infty} \mathbf{y}_{mk} = \lim_{k \to \infty} f(\mathbf{x}_{mk}) = f(\lim_{k \to \infty} \mathbf{x}_{mk}) = f(\mathbf{x}) = \mathbf{y}
+    \]
+
+    So \(\{\mathbf{y}_m\}\) has a convergent subsequence. Because every sequence of \(\{\mathbf{y}\}\) has a convergent subsequence, so it is \textbf{Sequentially Compact} (\textbf{Definition of Sequentially Compact}). And Since in metric space sequentially compact is equivalent to compact (\textbf{Heine-Borel Theorem}) \( \Longrightarrow \) \textbf{closed and bounded}.
+\end{proof}
