@@ -42,15 +42,18 @@
 % --- Lecture counter ---
 \newcounter{lecture}
 \renewcommand{\thelecture}{\arabic{lecture}}
-
+\makeatletter
+\renewcommand{\theHsection}{\thelecture.\arabic{section}}
+\renewcommand{\theHsubsection}{\thelecture.\arabic{section}.\arabic{subsection}}
+\renewcommand{\theHsubsubsection}{\thelecture.\arabic{section}.\arabic{subsection}.\arabic{subsubsection}}
+\makeatother
 % Make sections depend on lecture
 \renewcommand{\thesection}{\thelecture.\arabic{section}}
-
 \newcommand{\lecture}[1]{%
   \refstepcounter{lecture}%
   \bigskip\hrule\bigskip
   {\Large\bfseries Lecture \thelecture: #1 \par}\medskip
-  \addcontentsline{toc}{section}{Lecture \thelecture: #1}%
+  \addcontentsline{toc}{chapter}{Lecture \thelecture: #1}%
   \setcounter{section}{0} % reset sections for each lecture
 }
 

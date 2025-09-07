@@ -277,7 +277,7 @@ Properties of closed sets:
 \end{definition}
 
 \begin{proposition}
-    A sequence of vectors $\{{\mathbf{x}_n}\}_{n=1}^{\infty}$ in $\mathbb{R}^{m}$ converges $\iff$ all $m$ sequences of its components ($\{x_{in}\}_{n=0}^{\infty }$, for $i=1,\dots,m$) converge.
+    A sequence of vectors $\{{\mathbf{x}_n}\}_{n=1}^{\infty}$ in $\mathbb{R}^{m}$ converges $\iff$ all $m$ sequences of its components ($\{x_{in}\}_{n=1}^{\infty }$, for $i=1,\dots,m$) converge.
 \end{proposition}
 
 
@@ -290,7 +290,7 @@ Properties of closed sets:
 \end{proposition}
 
 \begin{definition}[Subsequence]
-    Let $\mathcal{N} = \{n_1, n_2, \dots\}$ be an infinite subset of $\mathbb{N}$ such that $n_1 < n_2 < \dots$. A \textbf{subsequence} $\{\mathbf{y}_n\}$ of a sequence $\{\mathbf{x}_n\}$ is defined as $\mathbf{y}_j = \mathbf{x}_{nj}$, for $j=1,2,\dots$
+    Let $\mathcal{N} = \{n_1, n_2, \dots\}$ be an infinite subset of $\mathbb{N}$ such that $n_1 < n_2 < \dots$. A \textbf{subsequence} $\{\mathbf{y}_n\}$ of a sequence $\{\mathbf{x}_n\}$ is defined as $\mathbf{y}_j = \mathbf{x}_{n_j}$, for $j=1,2,\dots$
 \end{definition}
 
 \section{Compactness}
@@ -343,23 +343,28 @@ Properties of closed sets:
 \end{proposition}
 
 \begin{theorem}[Heine-Borel]
-    In $\mathbb{R}^{n}$ (\textbf{Euclidean Space}): \begin{equation*}
+    In $\mathbb{R}^{n}$ (\textbf{with the usual metric}): \begin{equation*}
         E \text{ is compact} \iff E \text{ is closed and bounded}.
     \end{equation*}
 \end{theorem}
 
-%TODO: Proof of Heine-Borel
-
-
+\begin{remark*}
+    \textbf{With usual metric (Euclidean Space), we have:}
+    \[
+       \text{Closed and Bounded} \iff \text{Compact} \iff \text{Sequentially Compact}
+    \]
+\end{remark*}
 
 \begin{theorem}[Bolzano-Weierstrass]
-    Every bounded sequence in $\mathbb{R}^{n}$ (\textbf{Euclidean Space}) contains a convergent subsequence (in $\mathbb{R}^{n}$).
+    Every \textbf{bounded} sequence in $\mathbb{R}^{n}$ (\textbf{with the usual metric}) contains a \textbf{convergent} subsequence (in $\mathbb{R}^{n}$).
 \end{theorem}
 
-% TODO: Proof of Bolzano-Weierstrass
+\begin{proof} Proof of Bolzano-Weierstrass:
+    Recursively using Bisection method.
+\end{proof}
 
 \begin{proposition}[Bolzano-Weierstrass Generalization on Set]
-    $S \subset \mathbb{R}^{n}$ is bounded $\iff$ Every sequence in $S$ contains a convergent subsequence.
+    $S \subset \mathbb{R}^{n}$ is \textbf{bounded} $\iff$ Every sequence in $S$ contains a \textbf{convergent} subsequence.
 
     \begin{remark*}
         It is actually checking if every sequence in a set fulfill the Bolzano-Weierstrass Theorem.
@@ -413,7 +418,15 @@ Properties of closed sets:
 \begin{proposition}
     $\mathbb{R}^{n}$ is complete.
 \end{proposition}
-% TODO: Proof
+
+\begin{remark*}
+    Cauchy Sequence has two implications:
+    \begin{itemize}
+        \item to check if a sequence is convergent in a complete space,
+        \item to define Completeness of a space.
+    \end{itemize}
+\end{remark*}
+
 
 \section{Functions (from $\mathbb{R}^{n}$ to $\mathbb{R}^{m}$)}
 
@@ -559,16 +572,16 @@ continuous at \(\mathbf{x}_{0}\), then:
 \end{remark*}
 
 
-\begin{proof}[Proof of Weierstrass Theorem]
+\begin{proof}[\textbf{Proof of Weierstrass Theorem}]
     Let \(\{\mathbf{y}_m\}\) be an arbitrary sequence in \(f(\mathbf{x})\).
 
     Consider a sequence \(\mathbf{y}_m=f(\mathbf{x}_m)\).
 
-    Because \( X \) is compact, then \( \{\mathbf{x}_m\} \subset X \) has a convergent subsequence \( \{\mathbf{x}_{mk}\} \), and \( \lim_{k \to \infty} \mathbf{x}_{mk} \to \mathbf{x} \in X \). (\textbf{Bolzano Weierstrass Theorem})
+    Because \( X \) is compact, then \( \{\mathbf{x}_m\} \subset X \) has a convergent subsequence \( \{\mathbf{x}_{m_k}\} \), and \( \lim_{k \to \infty} \mathbf{x}_{m_k} \to \mathbf{x} \in X \). (\textbf{Bolzano Weierstrass Theorem})
 
-    By continuity of \( f \) let \( \mathbf{y}_{mk} = f(\mathbf{x}_{mk}) \)
+    By continuity of \( f \) let \( \mathbf{y}_{m_k} = f(\mathbf{x}_{m_k}) \)
     \[
-        \lim_{k \to \infty} \mathbf{y}_{mk} = \lim_{k \to \infty} f(\mathbf{x}_{mk}) = f(\lim_{k \to \infty} \mathbf{x}_{mk}) = f(\mathbf{x}) = \mathbf{y}
+        \lim_{k \to \infty} \mathbf{y}_{m_k} = \lim_{k \to \infty} f(\mathbf{x}_{m_k}) = f(\lim_{k \to \infty} \mathbf{x}_{m_k}) = f(\mathbf{x}) = \mathbf{y}
     \]
 
     So \(\{\mathbf{y}_m\}\) has a convergent subsequence. Because every sequence of \(\{\mathbf{y}\}\) has a convergent subsequence, so it is \textbf{Sequentially Compact} (\textbf{Definition of Sequentially Compact}). And Since in metric space sequentially compact is equivalent to compact (\textbf{Heine-Borel Theorem}) \( \Longrightarrow \) \textbf{closed and bounded}.
