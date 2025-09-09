@@ -1,0 +1,149 @@
+% TeX root = ../Main.tex
+% First argument to \section is the title that will go in the table of contents. Second argument is the title that will be printed on the page.
+
+\section{Derivate with Direction}
+
+\begin{definition}[Derivate with Direction]
+    Let $f: D \subset  \mathbb{R}^{n} \to \mathbb{R}^{m}$. Let $\mathbf{x_0} \in int(D)$ and $\mathbf{v} \in \mathbb{R}^{n}$. The \textbf{derivative} of $f$ at point $\mathbf{x_0}$ (\textbf{with direction $\mathbf{v}$}) is:
+    \[
+        f'(\mathbf{x_0},\mathbf{v}) = \lim_{h \to 0} \frac{f(\mathbf{x_0}+h \mathbf{v}) - f(\mathbf{x_0})}{h}
+    \]
+    if the limit exists.
+\end{definition}
+
+
+\begin{example*}
+    For $\mathbb{R}^{n} \to \mathbb{R}$ linear function $f$. We have $f'(\mathbf{x_0},\mathbf{v}) = f(\mathbf{v}).$
+\end{example*}
+
+\begin{theorem}[Mean Value Theorem]
+    Let $f: \mathbb{R}^{n} \to \mathbb{R}$. Suppose $f'(\mathbf{x_0}+t \mathbf{v},\mathbf{v}) \exists \forall t \in [0,1]$. Then, $\exists \theta \in (0,1)$ such that \[
+        f(\mathbf{x_0}+\mathbf{v}) - f(\mathbf{x_0}) = f'(\mathbf{x_0}+\theta \mathbf{v}, \mathbf{v}).
+    \]
+\end{theorem}
+
+\section{Partial Derivative}
+
+\begin{definition}[Partial Derivative]
+    Let $f: \mathbb{R}^{n} \to \mathbb{R}$. The \textbf{partial derivative} of $f$ with $x_i$ at point $\mathbf{x_0}$ is:
+    \[
+        D_if(\mathbf{x_0}) = \frac{\partial f}{\partial x_i}(\mathbf{x_0}) = \lim_{h \to 0} \frac{f(\mathbf{x_0} + h \mathbf{e_i}) - f(\mathbf{x_0})}{h}
+    \]
+    if the limit exists.
+
+    More generally, if $f: \mathbb{R}^{n} \to \mathbb{R}^{m} (f = (f_1, f_2, \dots,f_j,\dots,f_m)')$, the partial derivative of $f_j$ with respect to $x_i$ at $\mathbf{x_0}$ is:
+    \[
+        D_if_j(\mathbf{x_0}) = \frac{\partial f_j}{\partial x_i}(\mathbf{x_0}) = \lim_{h \to 0} \frac{f_j(\mathbf{x_0}_1, \dots, \mathbf{x_0}_i+h,\dots,\mathbf{x_0}_n)-f_j(\mathbf{x_0})}{h}
+    \]
+\end{definition}
+
+\begin{remark*}
+    Actually, the partial derivative is a derivative with direction $e_i$.
+\end{remark*}
+\section{Gradient}
+
+\begin{definition}[Gradient]
+    Let $f: \mathbb{R}^{n} \to \mathbb{R}$ and $\mathbf{x_0} \in \mathbb{R}^{n}$. Then the \textbf{gradient} is defined as: \[
+        \nabla f(\mathbf{x_0}) = \Big(\frac{\partial f(\mathbf{x_0})}{\partial x_1}, \frac{\partial f(\mathbf{x_0})}{\partial x_2},\dots,\frac{\partial f(\mathbf{x_0})}{\partial x_n}\Big)
+    \]
+\end{definition}
+\begin{remark*}
+    The gradient is a collection of partial derivatives and described all the change rate at all axis' directions.
+\end{remark*}
+
+\section{Directional Derivative}
+
+\begin{definition}[Directional Derivative]
+    Let $f: \mathbb{R}^{n}\to \mathbb{R}^{m}, \mathbf{x_0}\in \mathbb{R}^{n}$ and $\mathbf{v}\in \mathbb{R}^{n}$ \underline{with $||\mathbf{v}||$}. Then the \textbf{directional derivative} of $f$ at $\mathbf{x_0}$ with direction $\mathbf{v}$ is given by: \[
+        D_\mathbf{v}f(\mathbf{x_0}) =f'(\mathbf{x_0},\mathbf{v}) = \lim_{h \to 0} \frac{f(\mathbf{x_0+h \mathbf{v}})-f(\mathbf{x_0})}{h}
+    \]
+    where $h \in \mathbb{R}$ is a scalar, assuming the limit exists.
+\end{definition}
+
+\begin{remark*}
+    Directional Derivative is actually a specific situation of derivative with direction when $||\mathbf{v}||=1$.
+
+    Partial Derivate can be also seen as a special case of Directional Derivative when $\mathbf{v} = \mathbf{e_i}$.
+\end{remark*}
+
+\begin{remark*}
+    Partial derivatives give the slope of the function when you move in directions parallel to the coordinate axis, i.e., when you keep all other coordinates constant with the exception of one variable.
+
+    The notion of a directional derivative, however, allows us to compute the instantaneous rate of change of a function, i.e., when all of the variables move.
+\end{remark*}
+
+\begin{proposition}
+    Let $f: \mathbb{R}^{n} \to \mathbb{R}^{m}, f_i: \mathbb{R}^{n} \to \mathbb{R}$ for $i=1,\dots,m, \mathbf{x_0} \in \mathbb{R}^{n}, \mathbf{v} \in \mathbb{R}^{n}$, then \[
+        \exists f'(\mathbf{x_0}, \mathbf{v}) \iff \forall i = 1,\dots,m \quad f'_i(\mathbf{x_0},\mathbf{v})
+    \]
+\end{proposition}
+
+\begin{remark*}
+    Suppose $f: D \subseteq \mathbb{R}^{n} \to \mathbb{R}, \mathbf{x_0} \in \mathbb{R}^{n}$, and $\exists f'(\mathbf{x_0},\mathbf{v})$ for all $\mathbf{v} \in \mathbb{R}^{n}$. It could be the case that $f$ is not continuous at $\mathbf{x_0}$.
+
+    Explain: all the derivative with directions are getting close to $\mathbf{x_0}$ linearly. But it could be found a non-linear direction which crosses many $\mathbf{v_i}$ make the limit varies.
+
+    Example:
+    $f(x,y) = \left\{\begin{array}{l}
+            \frac{xy ^{2}}{x ^{2} + y ^{4}} \\
+            0                               \\
+        \end{array}\right.$
+\end{remark*}
+
+
+\section{Differentiability}
+
+\begin{definition}
+    Let $f: D \subseteq \mathbb{R}^{n} \to \mathbb{R}^{m}$. $f$ is \textbf{differentiable} at $\mathbf{x_0} \iff \forall \mathbf{h} \in \mathbb{R}^{n}, \exists Df(\mathbf{x_0})$ such that the following limit exists \[
+        \lim_{h \to 0} \frac{||f(\mathbf{x_0}+\mathbf{h})-f(\mathbf{x_0})-Df(\mathbf{x_0})\mathbf{h}||}{||\mathbf{h}||} = 0
+    \]
+    where $Df(\mathbf{x_0})$ is called Jacobian Matrix.
+    \begin{remark*}
+        $f(\mathbf{x_0}+\mathbf{h})-f(\mathbf{x_0}) = Df(\mathbf{x_0})\mathbf{h}+g(\mathbf{h})$ with $\lim_{h \to 0} \frac{g(\mathbf{h})}{\mathbf{h}} = 0$. It's a linear approximation of $f.$
+    \end{remark*}
+\end{definition}
+
+\begin{proposition}
+    Let $f: D \subseteq \mathbb{R}^{n} \to \mathbb{R}^{m}$, and $\mathbf{x_0} \in \mathbb{R}^{n}$.
+    $f$ is differentiable at $\mathbf{x_0} \iff f_i$ is differentiable at $\mathbf{x_0}\, \forall i = 1,\dots,m$.
+\end{proposition}
+
+\begin{proposition}
+    If $f: \mathbb{R}^{n} \to \mathbb{R}$ is differentiable at $\mathbf{x_0}\in \mathbb{R}^{n}$, with differential $L_\mathbf{x_0}$, then $\forall \mathbf{v} \in \mathbb{R}^{n}, \exists f'(\mathbf{x_0}, \mathbf{v})$, in addition \[
+        L_\mathbf{x_0}(\mathbf{v}) = f'(\mathbf{x_0},\mathbf{v})= \nabla f(\mathbf{x_0}) \cdot \mathbf{v}.
+    \]
+    , where $L_\mathbf{x_0}$ represents the linear part of the approximation $f(\mathbf{x_0}+\mathbf{h})-f(\mathbf{x_0}) = Df(\mathbf{x_0})\mathbf{h}+g(\mathbf{h})$.
+\end{proposition}
+
+\begin{proof}
+    If $\mathbf{v} = 0$, it is trivial that $L_{\mathbf{x_0}}(\mathbf{v}) = 0$ and $f'(\mathbf{x_0},\mathbf{v}) = 0$.
+
+    If $\mathbf{v} \neq 0$, $f(\mathbf{x_0} + \mathbf{w}) - f(\mathbf{x_0})= L_\mathbf{x_0}(\mathbf{w}) + g(\mathbf{w}), \lim_{\mathbf{w} \to \mathbf{0}} \frac{g(\mathbf{w})}{||\mathbf{w}||} = 0$. Take $\mathbf{w} = h \mathbf{v} (h \neq 0)$, \begin{align*}
+        f'(\mathbf{x_0},\mathbf{v}) = \lim_{h \to 0} \frac{f(\mathbf{x_0}+h \mathbf{v}) - f(\mathbf{x_0})}{h} & = \lim_{h \to 0} \frac{L_{x_0}(h \mathbf{v}) + g(h \mathbf{v})}{h}                                                                           \\
+                                                                                                              & =\lim_{h \to 0} \frac{h L_\mathbf{x_0}(\mathbf{v})}{h} + \lim_{h \to 0} \frac{g(h \mathbf{v})}{||h \mathbf{v}||} \frac{|h|||\mathbf{v}||}{h} \\
+                                                                                                              & = L_\mathbf{x_0}(\mathbf{v}) + ||\mathbf{v}|| \lim_{h \to 0} \frac{|h|}{h}\frac{g(h \mathbf{v})}{||h \mathbf{v}||}                           \\
+                                                                                                              & = L_\mathbf{x_0}(\mathbf{v})
+    \end{align*}
+    Using $\mathbf{v} = \sum_{i=1}^{n} v_i \mathbf{e}_i$, \begin{align*}
+        L_\mathbf{x_0}(\mathbf{v}) & = L_\mathbf{x_0}\Big(\sum_{i=1}^{n} v_i \mathbf{e}_i \Big) = \sum_{i=1}^{n} v_i L_\mathbf{x_0}(\mathbf{e}_i) = \sum_{i=1}^{n} v_i f'(\mathbf{x_0}, \mathbf{e}_i) = \sum_{i=1}^{n} v_i \frac{\partial f(\mathbf{x_0})}{\partial x_i} = \nabla f(\mathbf{x_0}) \cdot  \mathbf{v}
+    \end{align*}
+\end{proof}
+
+\begin{remark*}
+    \(D_{\mathbf{v}}f(\mathbf{x}_0) = \nabla f(\mathbf{x}_0) \cdot \mathbf{v}\). This means that, for a real-valued function, we can write the directional derivative as the inner product of the gradient and the direction.
+\end{remark*}
+
+
+\begin{proposition}
+    Let \(f:\mathbb{R}^{n}\longrightarrow \mathbb{R}^{m}\), and \(\mathbf{x}_{0}\in \mathbb{R}^{n}\). If \(f\) is differentiable at \(\mathbf{x}_{0}\) , then it is continuous at \(\mathbf{x}_{0}\)
+\end{proposition}
+
+\begin{remark*} Summary:
+
+    Differentiable $\Longrightarrow$ Continuous.
+
+    Differentiable $\Longrightarrow$ Partial Derivates exist.
+
+    Continuous $\nLeftrightarrow$ Partial Derivates exist.
+\end{remark*}
+
