@@ -112,7 +112,7 @@
     If $f: \mathbb{R}^{n} \to \mathbb{R}$ is differentiable at $\mathbf{x_0}\in \mathbb{R}^{n}$, with differential $L_\mathbf{x_0}$, then $\forall \mathbf{v} \in \mathbb{R}^{n}, \exists f'(\mathbf{x_0}, \mathbf{v})$, in addition \[
         L_\mathbf{x_0}(\mathbf{v}) = f'(\mathbf{x_0},\mathbf{v})= \nabla f(\mathbf{x_0}) \cdot \mathbf{v}.
     \]
-    , where $L_\mathbf{x_0}$ represents the linear part of the approximation $f(\mathbf{x_0}+\mathbf{h})-f(\mathbf{x_0}) = Df(\mathbf{x_0})\mathbf{h}+g(\mathbf{h})$.
+    , where $L_\mathbf{x_0}$ represents the linear part of the approximation $f(\mathbf{x_0}+\mathbf{h})-f(\mathbf{x_0}) = Df(\mathbf{x_0})\mathbf{h}+g(\mathbf{h})$. So we have $L_\mathbf{x_0}(\mathbf{v} + \mathbf{h})= L_\mathbf{x_0}(\mathbf{v})+L_\mathbf{x_0}(\mathbf{h})$ and $L_\mathbf{x_0}(\lambda \mathbf{v})=\lambda L_\mathbf{x_0}(\mathbf{v})$.
 \end{proposition}
 
 \begin{proof}
@@ -146,4 +146,314 @@
 
     Continuous $\nLeftrightarrow$ Partial Derivates exist.
 \end{remark*}
+
+
+
+\section{Jacobian Matrix and Chain Rule}
+
+\begin{definition}
+    The matrix of partial derivatives of all the $f_i$ with respect to all the $x_i$ evaluated at $\mathbf{x_0}$ is called the \textbf{Jacobian} of $\mathbf{f}$ at $\mathbf{x_0}$: \[
+        \mathbf{Jf(x_0)} = \begin{pmatrix}
+            \nabla f_1(\mathbf{x_0})' \\ \dots \\ \nabla f_m(\mathbf{x_0})'
+        \end{pmatrix} = \begin{pmatrix}
+            \frac{\partial f_1(\mathbf{x_0})}{\partial x_1} & \dots  & \frac{\partial f_1(\mathbf{x_0})}{\partial x_n} \\
+            \vdots                                          & \ddots & \vdots                                          \\
+            \frac{\partial f_m(\mathbf{x_0})}{\partial x_1} & \dots  & \frac{\partial f_m(\mathbf{x_0})}{\partial x_n}
+        \end{pmatrix}
+    \]
+\end{definition}
+
+\begin{remark*}
+    If $m=n$, then the Jacobian matrix is a square matrix. We can calculate the determinant and inverse of it.
+\end{remark*}
+
+\begin{proposition}
+    Let \(f: \mathbb{R}^{n} \rightarrow \mathbb{R}^{m}\) and \(g: \mathbb{R}^{m} \rightarrow \mathbb{R}^{p}\) be differentiable. Let \(f\) be continuously differentiable at some set \(U\), and \(g\) be continuously differentiable on \(f(U)\). Then, \(h: \mathbb{R}^{n} \rightarrow \mathbb{R}^{p}\), \(h(\mathbf{x}) = g[f(\mathbf{x})]\) is continuously differentiable on \(U\), with:
+    \[
+        D h(\mathbf{x}) = D g[f(\mathbf{x})]D f(\mathbf{x}).
+    \]
+\end{proposition}
+
+\begin{remark*}
+    About notation:
+
+    If \(f: \mathbb{R}^{n} \rightarrow \mathbb{R}^{m}\) , we will denote
+    \(D f(x)\mathbf{v}\) as \(\mathbf{J}f(\mathbf{x})\mathbf{v}\) while,
+
+    if \(f: \mathbb{R}^{n} \rightarrow \mathbb{R}\) , we will denote
+    \(D f(x)\mathbf{v}\) as \(\nabla f(\mathbf{x}) \cdot \mathbf{v}\) and,
+    finally,
+
+    if \(f: \mathbb{R} \rightarrow \mathbb{R}^{m}\) , we will denote
+    \(D f(x)v\) as \(f'(x)v\).
+\end{remark*}
+
+
+\section{Additional Results}
+
+\begin{proposition} Let \(f: \mathbb{R}^{n} \rightarrow \mathbb{R}, \mathbf{v} \in \mathbb{R}^{n}\), and \(||\mathbf{v}|| = 1\). Then
+
+    \[
+        \max_{\mathbf{v}}f^{\prime}(\mathbf{x}_{0},\mathbf{v}) = ||\nabla f(\mathbf{x}_{0})|| \quad \text{when } \mathbf{v} = \frac{\nabla f(\mathbf{x}_{0})}{||\nabla f(\mathbf{x}_{0})||},
+    \]
+    \[
+        \min_{\mathbf{v}}f^{\prime}(\mathbf{x}_{0},\mathbf{v}) = -||\nabla f(\mathbf{x}_{0})|| \quad \text{when } \mathbf{v} = -\frac{\nabla f(\mathbf{x}_{0})}{||\nabla f(\mathbf{x}_{0})||},
+    \]
+
+    and \(\mathbf{v} \perp \nabla f(\mathbf{x}_{0}) \Rightarrow f^{\prime}(\mathbf{x}_{0}, \mathbf{v}) = 0\).
+\end{proposition}
+
+\begin{proposition}[Sufficient Condition of Differentiability]
+    For function $f$, if all partial derivatives exist in $B(\mathbf{x_0},r)$, and they are continuous at $\mathbf{x_0}$, $\Longrightarrow f$ is differentiable at $\mathbf{x_0}$
+\end{proposition}
+
+\section{Level Sets (and the gradient)}
+
+
+\begin{definition}
+    $C_\alpha = \{\mathbf{x} \in \mathbb{R}^{n}: f(\mathbf{x}) = \alpha\}$ is a \textbf{level set} of function $f: \mathbb{R}^{n} \to \mathbb{R}$ at a given level $\alpha$.
+\end{definition}
+
+If $\mathbf{x_0}$ lies on the level set, the \textit{tangent hyperplane} to the level set is the set of all $\mathbf{x}$ that satisfy: \[
+    \frac{\partial f(\mathbf{x_0})}{\partial x_1}(x_1-x_1 ^{0}) + \dots+ \frac{\partial f(\mathbf{x_0})}{\partial x_n}(x_n-x_n ^{0}) = \mathbf{0}.
+\]
+, which can be written as \[
+    \nabla f(\mathbf{x_0}) \cdot (\mathbf{x - x_0}) = \mathbf{0}.
+\]
+
+\begin{proposition}
+    $\nabla f(\mathbf{x_0})$ is orthogonal to the level set of $f$ that contains $\mathbf{x_0}$.
+\end{proposition}
+
+\begin{proof}
+    To prove $\nabla f(x_0)$ is orthogonal to an arbitrary curve which passes $\mathbf{x_0}$ in level set.
+
+    Let $f(\mathbf{x_0}) = \alpha$ and $C_\alpha = \{\mathbf{x} \in \mathbb{R}^{n}: f(\mathbf{x}) = \alpha\}$. Let $\Gamma$ be a curve within the level set of $f$ at $\alpha$, that is $\Gamma \subseteq C_\alpha$ and passed through $\mathbf{x_0}$. \[
+        \mathbf{x} \in \Gamma \, \text{if } \begin{pmatrix}
+            x_1 \\ \dots \\ x_n
+        \end{pmatrix} = \begin{pmatrix}
+            \phi_1(t) \\ \dots \\ \phi_n(t)
+        \end{pmatrix} := \boldsymbol{\phi}(\mathbf{x}), \, \text{with } t \in \mathbb{R} \text{ so that } \mathbf{x_0} = \boldsymbol{\phi}(t)
+    \]
+
+    Let $g(t) = (f \circ \phi )(t) = f[\phi (t)]$, since $g(t) = a$, then \[
+        g'(t) = 0 = \nabla f[\phi (t)] \cdot \phi' (t).
+    \]
+    In particular, when $t=t_0$, \[
+        \nabla f(\mathbf{x_0}) \cdot \phi'(t_0) = 0.
+    \]
+\end{proof}
+
+\section{Higher-order Derivatives}
+
+Suppose \(f: \mathbb{R}^{n} \rightarrow \mathbb{R}^{m}\). Then \(f' : \mathbb{R}^{n} \rightarrow \mathcal{M}_{mn}\). That is, there are \(nm\) first- order partial derivatives.
+
+Each of these has \(n\) partial derivatives, so \(f\) has \(n^{2}m\) second order partial derivatives, written \(\partial^{2}f_{k} / \partial x_{i}\partial x_{j}\), for \(k = 1, \ldots , m\) and \(i, j = 1, \ldots , n\).
+
+We just need to stack all columns of \(f'\) and just treat it as a function from \(\mathbb{R}^{n}\) to \(\mathbb{R}^{mn}\).
+
+If we keep on going, we will find that the vector that corresponds to \(f^{(k)}(\cdot)\) will have size \(n^{k}m\) , which grows quickly with \(k\) .
+
+
+\subsection{Second-order Partial Derivatives}
+
+\begin{definition}
+    Let $f: \mathbb{R}^{n} \to \mathbb{R}$. The \textbf{second partial derivative} with respect to $x_i$ and $x_j$ at point $\mathbf{x_0}$ is \[
+        D_{ij}f(\mathbf{x_0}) = \frac{\partial ^{2}f(\mathbf{x_0})}{\partial x_i \partial x_j} = \lim_{h \to 0} \frac{f'(\mathbf{x_0}+h \mathbf{e_j}, \mathbf{e_i}) - f_i(\mathbf{x_0})}{h},
+    \] assuming such a limit exists.
+\end{definition}
+
+
+\begin{definition}
+    Let \(f: D \subset \mathbb{R}^{n} \rightarrow \mathbb{R}\). We say that \(f\) is twice differentiable at \(\mathbf{x}_{0}\) if it is differentiable in an open set around \(\mathbf{x}_{0}\) (so that \(f'\) is defined in an open set around \(\mathbf{x}_{0}\)) and \(\nabla f\) is differentiable at \(\mathbf{x}_{0}\).
+\end{definition}
+
+\begin{definition}
+    The \textbf{Hessian} matrix is:
+    \[
+        \mathbf{H}f(\mathbf{x}) = \begin{pmatrix}
+            \frac{\partial ^{2}f(\mathbf{x})}{\partial x_1 \partial x_1} & \frac{\partial ^{2}f(\mathbf{x})}{\partial x_1 \partial x_2} & \dots & \frac{\partial ^{2}f(\mathbf{x})}{\partial x_1 \partial x_n} \\
+            \frac{\partial ^{2}f(\mathbf{x})}{\partial x_2 \partial x_1} & \ddots                                                       &       & \frac{\partial ^{2}f(\mathbf{x})}{\partial x_2 \partial x_n} \\
+            \vdots                                                       &                                                              &       & \vdots                                                       \\
+            \frac{\partial ^{2}f(\mathbf{x})}{\partial x_n \partial x_1} & \dots                                                        &       & \frac{\partial ^{2}f(\mathbf{x})}{\partial x_n \partial x_n}
+        \end{pmatrix}
+    \]
+\end{definition}
+
+\begin{theorem}[Schwarz's - or Clairaut's- Theorem]
+    If \(f\) is \(C^{2}\), then:
+    \[
+        \frac{\partial^{2}f(x)}{\partial x_{j}\partial x_{i}} = \frac{\partial^{2}f(x)}{\partial x_{i}\partial x_{j}}.
+    \]
+    It means Hessian matrix is symmetric.
+\end{theorem}
+
+\section{Taylor Formula}
+
+\begin{theorem}
+    Let \(f:D\subseteq \mathbb{R}^{n}\to \mathbb{R}\) : \(f\in C^{q}\) in \(D\) (i.e.~it has continuous derivatives up to order \(q\)). Let \(\mathbf{x},\mathbf{x_0}:[\mathbf{x_0},\mathbf{x}]\subseteq D\) and define \(\mathbf{v} = \mathbf{x} - \mathbf{x_0}\) Then, \(\exists \theta \in (0,1)\) :
+
+    \[
+        \begin{array}{rcl}{f(\mathbf{x})}&{=}&{f(\mathbf{x_0})+\sum_iD_if(\mathbf{x_0})(x_i-x_{0i})}\\{}&{}&{+\frac{1}{2}\sum_{i,j}D_{ij}f(\mathbf{x_0})(x_i-x_{0i})(x_j-x_{0j})+\cdots}\\{}&{}&{+\frac{1}{(q-1)!}\sum_{i_1\dots i_{q-1}}D_{i_1}\dots_{i_{q-1}}f(\mathbf{x_0})(x_{i_1}-x_{0i_1})\cdots(x_{i_{q-1}}-x_{0i_{q-1}})}\\{}&{}&{+\frac{1}{q!}\sum_{i_1\dots i_q}D_{i_1}\dots_{i_q}f(\mathbf{x_0}+\theta\mathbf{v})(x_{i_1}-x_{0i_1})\cdots(x_{i_q}-x_{0i_q}).}\end{array}
+    \]
+\end{theorem}
+
+\begin{corollary}
+    If $q = 2$, the first-order Taylor approximation is \[
+        f(\mathbf{x}) = f(\mathbf{x_0}) + \nabla f(\mathbf{x_0}) \cdot (\mathbf{x - x_0}) + R_2(\mathbf{x})
+    \]
+\end{corollary}
+
+\begin{corollary}
+    If $q = 3$, the first-order Taylor approximation is \[
+        f(\mathbf{x}) = f(\mathbf{x_0}) + \nabla f(\mathbf{x_0}) \cdot (\mathbf{x - x_0}) + \frac{1}{2}(\mathbf{x - x_0})'\mathbf{H}f(\mathbf{x_0})(\mathbf{x-x_0}) + R_3(\mathbf{x})
+    \]
+\end{corollary}
+
+
+\section{Multiple Integrals}
+
+\begin{theorem}[Fubini's Theorem]
+    Suppose \[
+        \int\int_{X \times Y} |f(x,y)|d(x,y) < \infty.
+    \]
+    Then,
+    \[
+        \int\int_{X \times Y} f(x,y)d(x,y) = \int_{Y}\left(\int_{X}f(x,y)dx\right)dy = \int_{X}\left(\int_{Y}f(x,y)dy\right)dx.
+    \]
+\end{theorem}
+
+\section{Injectivity, Surjectivity, and Bijectivity}
+
+Consider a mapping $f: A \to B$, an element of the codomain $\mathbf{y} \in B$, and the inverse image of $\mathbf{y}, f ^{-1}(\mathbf{y})$.
+
+\begin{definition}
+    A mapping $f: A \to B$ is \textbf{injective} or \textbf{one-to-one} $\iff$ \[
+        \forall \mathbf{x},\mathbf{x'} \in A, f(\mathbf{x}) = f(\mathbf{x'}) \Longrightarrow \mathbf{x} = \mathbf{x'}.
+    \]
+\end{definition}
+
+
+\begin{definition}
+    A mapping $f: A \to B$ is \textbf{surjective} or \textbf{onto} $\iff$ \[
+        \forall \mathbf{y} \in B, \exists \mathbf{x} \in A \Longrightarrow \mathbf{y} = f(\mathbf{x}).
+    \]
+\end{definition}
+
+\begin{definition}
+    A mapping $f: A \to B$ is \textbf{bijective} $iff$ it is both \textbf{injective} and \textbf{surjective}.
+\end{definition}
+
+\section{Inverse Function}
+
+\begin{definition}
+    The \textbf{identity mapping} from $A$ to $A$ is the mapping $Id_X: A \to A, Id_X(\mathbf{x}) = \mathbf{x}$.
+\end{definition}
+
+\begin{definition}
+    $f$ has an \textbf{inverse} if there exists a mapping $g: B \to A$ such that $f \circ g = Id_Y$ and $g \circ f = Id_X$.
+\end{definition}
+
+\begin{proposition}
+    $f$ is bijective $\iff$ $f$ has an inverse.
+\end{proposition}
+
+\begin{theorem}[Inverse Function Theorem]
+    Let $f: A \subset \mathbb{R}^{n} \to B \subset \mathbb{R}^{n}$, with $A$ open. Let $\mathbf{a} \in A$ and $\mathbf{b} = f(\mathbf{a})$. Assume:
+    \begin{enumerate}
+        \item $f$ has all its first partial derivatives, and they are continuous in $A$; and
+        \item $det[\mathbf{J}f(\mathbf{a})] \neq 0$.
+    \end{enumerate}
+    Then, \begin{enumerate}
+        \item \textbf{the inverse function $\varphi: W \to V$ exists} (where $V, W$ are open, $\mathbf{a} \in V, \mathbf{b} \in W, \varphi (\mathbf{y}) = \mathbf{x}$),
+        \item $\varphi$ is differentiable, and its differential is the inverse of $\mathbf{J}f(a)^{-1}$.
+    \end{enumerate}
+    In addition, if $f$ is $C ^{k}$, then $\varphi$ is also $C ^{k}$ in $W$.
+\end{theorem}
+
+\begin{remark*}
+    $\forall \mathbf{x} \in A, \det (\mathbf{J}f(\mathbf{x})) \neq 0 \nRightarrow$ $f$ injective. But it could have inverse function at some local neighbor.
+
+    \begin{example*}
+        $f: A \subset \mathbb{R}^{2} \to \mathbb{R}$ with $A = \{(x_1,x_2)\in \mathbb{R}^{2}: x_1 ^{2} + x_2 ^{2} \geq 1\}$ and $f(x_1,x_2) = (x_1 ^{2} - x_2 ^{2}, x_1x_2)$.
+
+        $\forall \mathbf{x} \in A, \det (\mathbf{J}f(\mathbf{x})) \neq 0$, but $f(1,1) = f(-1,-1)$.
+    \end{example*}
+\end{remark*}
+
+
+
+\subsection{"Heuristic" argument}
+\begin{align*}
+     & f(\mathbf{x}) = f(\mathbf{a}) + \mathbf{J}f(\mathbf{a})(\mathbf{x} - \mathbf{a}) + R_1                                                                                                            \\
+     & \mathbf{y} = f(\mathbf{a}) + \mathbf{J}f(\mathbf{a})(\mathbf{x} - \mathbf{a}) \Longrightarrow \mathbf{J}f(\mathbf{a})\mathbf{x} = \mathbf{y} - f(\mathbf{a}) + \mathbf{J}f(\mathbf{a})\mathbf{a}. \\
+     & \mathbf{x} = [\mathbf{J}f(\mathbf{a})]^{-1}[\mathbf{y} - f(\mathbf{a})+\mathbf{J}f(\mathbf{a})\mathbf{a}] = \mathbf{a} + [\mathbf{J}f(\mathbf{a})]^{-1}[\mathbf{y}-f(\mathbf{a})]
+\end{align*}
+That's why we need $det[\mathbf{J}f(\mathbf{a})] \neq 0$.
+
+
+
+\section{Implicit Function Theorem}
+
+\begin{theorem}[Implicit Function Theorem]
+    Let $f: \mathbb{R}^{n} \times \mathbb{R}^{m} \to \mathbb{R}^{m}, (\mathbf{x}, \mathbf{y}) \to f(\mathbf{x}, \mathbf{y})$, and let $(\mathbf{a}, \mathbf{b}) \in \mathbb{R}^{n} \times \mathbb{R}^{m}$. Assume:
+    \begin{enumerate}
+        \item $f(\mathbf{a}, \mathbf{b}) = \mathbf{0}$,
+        \item $f$ has all its partial derivatives continuous in an open set the contains $(\mathbf{a}, \mathbf{b})$, and
+        \item $\left|\frac{\partial (f_1,\dots,f_m)'}{\partial (y_1,\dots,y_m)}\right|_{(\mathbf{x,y}) = (\mathbf{a,b})} \neq 0$.
+    \end{enumerate}
+    Then, \begin{enumerate}
+        \item \textbf{the implicit function $g: A \to B$ exists} (where $A,B$ are open, $A \subset \mathbb{R}^{n}, \mathbf{a} \in A, B \subset \mathbb{R}^{m}, \mathbf{b} \in B$, and $\forall \mathbf{x} \in A, f(\mathbf{x}, g(\mathbf{x})) = \mathbf{0}$).
+        \item $g$ is continuously differentiable for all $\mathbf{x} \in A$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}[Proof of Implicit Function Theorem]
+    Define a mapping $F: \mathbb{R}^{n} \times \mathbb{R}^{m} \to \mathbb{R}^{n} \times \mathbb{R}^{m}$ such that \[
+        (\mathbf{x}, \mathbf{y}) \mapsto F(\mathbf{x}, \mathbf{y}) := (\mathbf{x}, f(\mathbf{x,y}))
+    \]
+    That's check the two requirements of \textbf{Inverse Function Theorem} for $F$:
+
+    1) F has all its first order partial derivatives, and they are continuous on an open set contains $(\mathbf{a, b})$. It is trivial.
+
+    2)$\det (\mathbf{J}F) = \big|\frac{\partial (F_1,\dots,F_n,F_{n+1},\dots,F_{n+m})}{\partial (x_1,\dots,x_n,y_1,\dots,y_m)}\big|_{\mathbf{x=a,y=b}} = \begin{vmatrix}
+            \boldsymbol{I_n}                                           & \boldsymbol{0}                                             \\
+            \frac{\partial (f_1,\dots,f_m)'}{\partial (x_1,\dots,x_n)} & \frac{\partial (f_1,\dots,f_m)'}{\partial (y_1,\dots,y_m)}
+        \end{vmatrix} = \left|\frac{\partial (f_1,\dots,f_m)'}{\partial (y_1,\dots,y_m)}\right| \neq 0$
+
+    Specifically, there exists open $W \subseteq \mathbb{R}^{n} \times \mathbb{R}^{n}$ with $\mathbf{b} \in W$, such that $F(\mathbf{a,b}) \in W$,
+    \[
+        F(\mathbf{a}, \mathbf{b}) = (\mathbf{a}, f(\mathbf{a,b})) = (\mathbf{a, 0})
+    \]
+    Then there exists an open set in $\mathbb{R}^{n} \times \mathbb{R}^{n}$, say $A \times B \subseteq \mathbb{R}^{n} \times \mathbb{R}^{m}$ with $\mathbf{a} \in A, \mathbf{b} \in B$, such that:
+    i) there exists $h: W \to A \times B$, with $h$ being the inverse function of $F$, and
+    ii) $h$ is differentiable.
+
+    Specifically, $h(\mathbf{x',y'}) = (\mathbf{x,y})$ with $F(\mathbf{x,y}) = (\mathbf{x',y'}) = (\mathbf{x, f(\mathbf{x,y})})$, which implies \[
+        \left\{\begin{array}{l}
+            \mathbf{x} = \mathbf{x'}      \\
+            f(\mathbf{x,y}) = \mathbf{y'} \\
+        \end{array}\right.
+    \]
+    Therefore, $h$ has to have the following form: ($f(\mathbf{x',y}) = \mathbf{y'} \Rightarrow  \mathbf{y} = k(\mathbf{x',y'})$, the existence of $k$ is given by $\left|\frac{\partial (f_1,\dots,f_m)'}{\partial (y_1,\dots,y_m)}\right|_{(\mathbf{x,y}) = (\mathbf{a,b})} \neq 0$) \[
+        h(\mathbf{x',y'}) = (\mathbf{x'},k(\mathbf{x',y'})), \, \text{with $k$ differentiable}.
+    \]
+
+    Consider now the function $\pi : \mathbb{R}^{n} \times \mathbb{R}^{m} \to \mathbb{R}^{m}$ such that $(\mathbf{x,y}) \mapsto \pi (\mathbf{x,y}) := \mathbf{y}$. Then \[
+        (\pi \circ F)(\mathbf{x,y}) = \pi [F(\mathbf{x,y})] = \pi [\mathbf{x, f(\mathbf{x,y})}] = f(\mathbf{x,y}).
+    \]
+    Then, for function $f[\mathbf{x}, k(\mathbf{x,y})] $ we have \[
+        f[\mathbf{x}, k(\mathbf{x,y})] = f[h(\mathbf{x,y})] = (\pi \circ F)[h(\mathbf{x,y})] = \pi [(F \circ h)(\mathbf{x,y})] = \pi (\mathbf{x,y}) = \mathbf{y}
+    \]
+
+    Take $g(\mathbf{x}) = k(\mathbf{x, 0})$, then $\forall \mathbf{x} \in A$:
+
+    1) $f(\mathbf{x},g(\mathbf{x})) = \mathbf{0}$, and
+
+    2) $g$ is differentiable.
+\end{proof}
+
+
+
+
 
