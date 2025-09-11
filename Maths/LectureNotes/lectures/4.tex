@@ -435,7 +435,7 @@ That's why we need $det[\mathbf{J}f(\mathbf{a})] \neq 0$.
             f(\mathbf{x,y}) = \mathbf{y'} \\
         \end{array}\right.
     \]
-    Therefore, $h$ has to have the following form: ($f(\mathbf{x',y}) = \mathbf{y'} \Rightarrow  \mathbf{y} = k(\mathbf{x',y'})$, the existence of $k$ is given by $\left|\frac{\partial (f_1,\dots,f_m)'}{\partial (y_1,\dots,y_m)}\right|_{(\mathbf{x,y}) = (\mathbf{a,b})} \neq 0$) \[
+    Therefore, $h$ has to have the following form: ($f(\mathbf{x',y}) = \mathbf{y'} \Rightarrow  \mathbf{y} = k(\mathbf{x',y'})$ - inverse function) \[
         h(\mathbf{x',y'}) = (\mathbf{x'},k(\mathbf{x',y'})), \, \text{with $k$ differentiable}.
     \]
 
@@ -454,6 +454,217 @@ That's why we need $det[\mathbf{J}f(\mathbf{a})] \neq 0$.
 \end{proof}
 
 
+\section{Convex Set}
+
+\begin{definition}[Convex Set]
+    Let $C \subseteq \mathbb{R}^{n}$. Then, $C$ is a \textbf{convex set} $\iff \forall \mathbf{x,y} \in C, \forall \lambda \in [0,1], \lambda \mathbf{x} + (1-\lambda)\mathbf{y} \in C$.
+\end{definition}
+
+\begin{remark*}
+    $\emptyset $ and $\mathbb{R}^{n}$ are convex.
+\end{remark*}
+
+\begin{proposition}
+    Let $C_i \subset \mathbb{R}^{n}$ be convex $\forall i \in \boldsymbol{I} \Longrightarrow \bigcap_{i \in I}^{}C_i$ is convex.
+\end{proposition}
+
+\begin{remark*}
+    The union of convex sets is usually not convex.
+\end{remark*}
 
 
+\begin{definition}[Convex Linear Combination]
+    Let $\mathbf{x_1, x_2, \dots, x_m} \in \mathbb{R}^{n}$ and $\lambda_1,\lambda_2,\dots,\lambda_m \in [0,1]$. Then, a \textbf{convex linear combination} of $\mathbf{x_1, x_2, \dots, x_m}$ is a vector \[
+        \lambda_1 \mathbf{x_1} + \lambda_2 \mathbf{x_2} + \dots + \lambda_m \mathbf{x_m} \text{ with } \sum_{i=1}^{m} \lambda_i = 1.
+    \]
+\end{definition}
+
+\begin{proposition}
+    Let $C \subset \mathbb{R}^{n}$ be convex. Then any convex linear combination of the element in $C$ is in $C$.
+\end{proposition}
+
+\begin{definition}[Convex Envelope]
+    Let $A = \{\mathbf{x_1, x_2, \dots,x_m}\} \subset \mathbb{R}^{n} $. The set of convex linear combination of $\mathbf{x_1, x_2, \dots,x_m}, i.e., Ec(A) = \{\sum_{i=1}^{m} \lambda_i \mathbf{x_i} : \lambda_i \in [0,1], \sum_{i=1}^{m} \lambda_i = 1, \mathbf{x_1, x_2, \dots, x_m} \in A \}$, is called \textbf{convex envelope} of $A$.
+\end{definition}
+
+\begin{remark*}
+    Convex envelope is the smallest convex set which contains set $A$.
+\end{remark*}
+
+\section{Separating Hyperplane}
+
+\begin{definition}[Hyperplane]
+    A subset \(H\) of \(\mathbb{R}^{n}\) is a \textbf{hyperplane} if
+    there exists \(\mathbf{a} \neq \mathbf{0} \in \mathbb{R}^{n}\) and
+    \(c \in \mathbb{R}\) such that we can define the following set:
+    \[
+        \begin{array}{rl} & H_{a} = \{\mathbf{x} \in \mathbb{R}^{n}: a_{1} x_{1} + a_{2} x_{2} + \ldots + a_{n} x_{n} = c \} \\ & \quad = \{\mathbf{x} \in \mathbb{R}^{n}: \mathbf{a}^{\prime} \mathbf{x} = c \} . \end{array}
+    \]
+\end{definition}
+
+\begin{definition}
+    We can also define closed and open half- spaces:
+
+    Closed: \(\overline{H_{a}^{+}} \equiv \left\{\mathbf{x} \in \mathbb{R}^{n}: \mathbf{a}^{\prime} \mathbf{x} \geq c \right\}\) and \(\overline{H_{a}^{- }} \equiv \left\{\mathbf{x} \in \mathbb{R}^{n}: \mathbf{a}^{\prime} \mathbf{x} \leq c \right\}\).
+
+    Open: \(H_{a}^{+} \equiv \left\{\mathbf{x} \in \mathbb{R}^{n}: \mathbf{a}^{\prime} \mathbf{x} > c \right\}\) and \(H_{a}^{- } \equiv \left\{\mathbf{x} \in \mathbb{R}^{n}: \mathbf{a}^{\prime} \mathbf{x}< c \right\}\)
+    .
+\end{definition}
+
+\begin{remark*}
+    Hyperplanes and half-spaces are convex.
+\end{remark*}
+
+\begin{theorem}[Strict Separation Theorem]
+    Let \(A \subset \mathbb{R}^{n}, B \subset \mathbb{R}^{n}\). If \(A, B\) are convex, \textbf{closed}, disjoint, non-empty, with \textbf{at least one of them bounded}, then \(\exists H_{a}^{+}\) and \(H_{a}^{- }\) such that \(A \subset H_{a}^{+}\) and \(B \subset H_{a}^{- }\).
+\end{theorem}
+
+
+\begin{theorem}[Weak Separation Theorem]
+    Let \(A \subset \mathbb{R}^{n}, B \subset \mathbb{R}^{n}\). If \(A, B\) are convex, disjoint, and non-empty, then \(\exists \overline{H_{a}^{+}}\) and \(H_{a}^{- }\) such that \(A \subset \overline{H_{a}^{+}}\) and \(B \subset \overline{H_{a}^{- }}\).
+\end{theorem}
+
+\section{Convex and Concave Functions}
+
+\begin{definition}[Convex Function]
+    A convex function is defined as a function whose \textbf{area above the curve}: \(\{(\mathbf{x}, \mathbf{y}): \mathbf{y} \geq f(\mathbf{x})\}\) (called the epigraph or the hypergraph) is a \textbf{convex set}.
+\end{definition}
+
+\begin{definition}[Concave Function]
+    A concave function is defined as a function whose \textbf{area below the curve}: \(\{(\mathbf{x}, \mathbf{y}): \mathbf{y} \leq f(\mathbf{x})\}\) (called the subgraph or the hypergraph) is a \textbf{convex set}.
+\end{definition}
+
+\textbf{Equivalent definitions:}
+
+\begin{definition}[Convex Function]
+    \(f\) is a convex function if \(C\) is a convex subset of \(\mathbb{R}^{n}\) and:
+    \[
+        \mathbf{y} \in C, \forall \lambda \in [0,1], f(\lambda \mathbf{x} + (1 - \lambda)\mathbf{y}) \leq \lambda f(\mathbf{x}) + (1 - \lambda)f(\mathbf{y})
+    \]
+\end{definition}
+
+\begin{definition}[Concave Function]
+    \(f\) is a concave function if \(C\) is a convex subset of \(\mathbb{R}^{n}\) and:
+    \[
+        \mathbf{y} \in C, \forall \lambda \in [0,1], f(\lambda \mathbf{x} + (1 - \lambda)\mathbf{y}) \geq \lambda f(\mathbf{x}) + (1 - \lambda)f(\mathbf{y})
+    \]
+\end{definition}
+
+We also define strictly convex and strictly concave functions by requiring the additional condition that the inequality in the definition is strict whenever \(\mathbf{x} \neq \mathbf{y}\) and \(\lambda \in (0,1)\).
+
+\subsection{Properties of convex and concave functions}
+\begin{enumerate}
+    \item
+          (Sum) If \(f\) and \(g\) are convex (concave), then so is \(f + g\) .
+    \item
+          (Multiplication by a scalar) If \(f\) is convex (concave) and
+          \(\lambda \geq 0\) , then \(\lambda f\) is convex (concave).
+    \item
+          Composition of functions:
+          \begin{itemize}
+              \item
+                    If \(f\) and \(g\) are convex and \(g\) is (weakly) increasing, then
+                    \(g \circ f\) is convex.
+              \item
+                    If \(f\) and \(g\) are concave and \(g\) is (weakly) increasing, then
+                    \(g \circ f\) is concave.
+          \end{itemize}
+    \item
+          Maximum and minimum:
+          \begin{itemize}
+              \item
+                    If \(f\) and \(g\) are convex, then \(\max (f, g)\) is convex.
+              \item
+                    If \(f\) and \(g\) are concave, then \(\min (f, g)\) is concave.
+          \end{itemize}
+\end{enumerate}
+
+\subsection{Characterization for differentiable functions}
+
+\begin{proposition}
+    Let \(f: C \subset \mathbb{R}^{n} \rightarrow \mathbb{R}\), with \(C\) convex. Assume that \(f\) is differentiable at \(\mathbf{x}_{0} \in \mathbb{R}^{n}\). Then:
+    \begin{align*}
+        f \text{(strictly) convex} \iff \forall \mathbf{x} \in \mathbb{R}^{n}, f(\mathbf{x}) & \geq f(\mathbf{x_0}) + \nabla f(\mathbf{x_0}) \cdot (\mathbf{x} - \mathbf{x_0}) \\
+                                                                                             & (>)
+    \end{align*}
+    or
+    \begin{align*}
+        f \text{(strictly) concave} \iff \forall \mathbf{x} \in \mathbb{R}^{n}, f(\mathbf{x}) & \leq f(\mathbf{x_0}) + \nabla f(\mathbf{x_0}) \cdot (\mathbf{x} - \mathbf{x_0}) \\
+                                                                                              & (<)
+    \end{align*}
+\end{proposition}
+
+\subsection{Characterization for \(C^2\) functions}
+
+\begin{proposition}
+    Let \(f:C\subset \mathbb{R}^{n}\longrightarrow \mathbb{R}\) , with \(C\) convex and \(f\in C^{2}\) . Then:
+
+    i) \(f\) is \textbf{convex} \(\iff \mathbf{H}f(\mathbf{x})\) is \textbf{positive} semi-definite \(\forall \mathbf{x}\in \mathbb{R}^{n}\)
+
+    ii) \(f\) is \textbf{concave} \(\iff \mathbf{H}f(\mathbf{x})\) is \textbf{negative} semi-definite \(\forall \mathbf{x}\in \mathbb{R}^{n}\)
+\end{proposition}
+
+\begin{proposition}
+    Let \(f:C\subset \mathbb{R}^{n}\longrightarrow \mathbb{R}\) , with \(C\) convex and \(f\in C^{2}\). Then:
+
+    i) If \(\mathbf{H}f(\mathbf{x})\) is \textbf{positive} definite \(\forall \mathbf{x}\in \mathbb{R}^{n} \Longrightarrow f\) is \textbf{strictly convex}.
+
+    ii) If \(\mathbf{H}f(\mathbf{x})\) is \textbf{negative} definite \(\forall \mathbf{x}\in \mathbb{R}^{n} \Longrightarrow f\) is \textbf{strictly concave}.
+\end{proposition}
+
+\section{Quasi-concave and Quasi-convex Functions}
+
+\begin{definition}[Upper-level Set]
+    Given a point \(a \in \mathbb{R}\), the \textbf{upper-level set} of \(f\) at level \(a\) is the set: \(\left\{\mathbf{x}: f(\mathbf{x}) \geq a\right\}\).
+\end{definition}
+
+
+\begin{definition}[Lower-level Set]
+    Given a point \(a \in \mathbb{R}\), the \textbf{lower-level set} of \(f\) at level \(a\) is the set: \(\left\{\mathbf{x}: f(\mathbf{x}) \leq a\right\}\).
+\end{definition}
+
+
+\begin{definition}[Quasi-concave]
+    A function is \textbf{quasi-concave} if all its upper-level sets are convex.
+\end{definition}
+
+\begin{definition}[Quasi-convex]
+    A function is \textbf{quasi-convex} if all its lower-level sets are convex.
+\end{definition}
+
+\textbf{Equivalent definitions:}
+
+\begin{definition}[Quasi-concave]
+    \(f:S\subseteq \mathbb{R}^{n}\longrightarrow \mathbb{R}\) (S convex set) is quasi-concave if
+    \[
+        \forall \mathbf{x},\mathbf{y}\in S,\forall \lambda \in [0,1],f(\lambda \mathbf{x} + (1 - \lambda)\mathbf{y})\geq \min \{f(\mathbf{x}),f(\mathbf{y})\}
+    \]
+\end{definition}
+
+\begin{definition}[Quasi-convex]
+    \(f:S\subseteq \mathbb{R}^{n}\longrightarrow \mathbb{R}\) (S convex set) is quasi-convex if
+    \[
+        \forall \mathbf{x},\mathbf{y}\in S,\forall \lambda \in [0,1],f(\lambda \mathbf{x} + (1 - \lambda)\mathbf{y})\leq \max \{f(\mathbf{x}),f(\mathbf{y})\}
+    \]
+\end{definition}
+
+We also define \textbf{strictly quasi-concave (quasi-convex) functions} by requiring the additional condition that the inequality in the definition is strict whenever \(\mathbf{x}\neq \mathbf{y}\) and \(\lambda \in (0,1)\).
+
+\begin{remark*}Examples of Quasi-convex and Quasi-concave:
+
+    Quasi-convex: $f(x_1,x_2) = \max(x_1, x_2)$.
+
+    Quasi-concave: $f(x_1,x_2) = \min(x_1, x_2)$.
+\end{remark*}
+
+\subsection{Properties of quasi-concave (quasi-convex) functions}
+
+\begin{enumerate}
+    \item
+          If \(f\) is quasi-concave and \(g\) increasing, then \(g \circ f\) is
+          quasi-concave.
+    \item
+          If \(f\) is quasi-convex and \(g\) increasing, then \(g \circ f\) is
+          quasi-convex.
+\end{enumerate}
 
