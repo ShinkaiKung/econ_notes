@@ -1,0 +1,409 @@
+\section{Static Unconstrained Optimization}
+
+\begin{definition}
+    \[
+        \min / \max_{\mathbf{x} \in B} f(\mathbf{x}).
+    \]
+    $f(\mathbf{x})$ is called the \textbf{objective function}. $B$ is the \textbf{constraint set} or the \textbf{feasible set}.
+
+    $\arg \max_{\mathbf{x} \in B} f(\mathbf{x})$ represents the set of maximizers.
+
+    $\arg \min_{\mathbf{x} \in B} f(\mathbf{x})$ represents the set of minimizers.
+\end{definition}
+
+\begin{definition}
+    $f ^{*} = \max_{\mathbf{x} \in B} f(\mathbf{x})$, is the \textbf{maximum} of $f$ if $\forall \mathbf{x} \in B, f(\mathbf{x}) \leq f^{*}$, and $\exists x^{*} \in B, f(\mathbf{x^{*}}) = f ^{*}$.
+
+    $\mathbf{x ^{*}}$ is a \textbf{maximizer} of $f$ on $B$ if $f(\mathbf{x ^{*}}) = \max_{\mathbf{x} \in B}f(\mathbf{x})$. The set of all $\mathbf{x ^{*}}$ such that $f(\mathbf{x ^{*}}) = f ^{*}$ is $\arg \max_{\mathbf{x} \in B} f(\mathbf{x})$.
+
+    $\mathbf{x ^{*}}$ is a \textbf{strict maximizer} of $f$ on $B$ if $\forall \mathbf{x} \in B \text{ and } \mathbf{x \neq x ^{*}}, f(\mathbf{x ^{*}}) > f(\mathbf{x})$.
+\end{definition}
+
+\begin{definition}
+    \(\mathbf{x}^{*}\) is a \textbf{local maximizer} if \(\exists B(\mathbf{x}^{*}, r)\) such that \(\forall \mathbf{x} \in B(\mathbf{x}^{*}, r) \cap B f(\mathbf{x}) \leq f(\mathbf{x}^{*})\).
+
+    \(\mathbf{x}^{*}\) is a \textbf{strict local maximizer} if \(\exists B(\mathbf{x}^{*}, r)\) such that \(\forall \mathbf{x} \in B(\mathbf{x}^{*}, r) \cap B\) with \(\mathbf{x} \neq \mathbf{x}^{*}, f(\mathbf{x}) < f(\mathbf{x}^{*})\).
+
+    \(\mathbf{x}^{*}\) is a \textbf{global maximizer} if \(\forall \mathbf{x} \in B f(\mathbf{x}) \leq f(\mathbf{x}^{*})\).
+
+    \(\mathbf{x}^{*}\) is a \textbf{strict global maximizer} if \(\forall \mathbf{x} \in B\) with \(\mathbf{x} \neq \mathbf{x}^{*}, f(\mathbf{x}) < f(\mathbf{x}^{*})\).
+\end{definition}
+
+\subsection{First-order Conditions}
+
+\begin{proposition}
+    Let \(B\) be an open set of \(\mathbb{R}^{n}\) , and \(f: B \to \mathbb{R}\) be a differentiable function. If \(f\) has a local maximum or local minimum at \(\mathbf{x}\), then \(\nabla f(\mathbf{x}) = \mathbf{0}\), i.e., \(D_{i}f(\mathbf{x}) = \mathbf{0} \, \forall i\).
+\end{proposition}
+
+\begin{definition}
+    Any point such that \(\nabla f(\mathbf{x}) = 0\) is called a \textbf{critical point} or \textbf{stationary point} of \(f\).
+\end{definition}
+
+\begin{remark*}
+    If \(f\) is differentiable, then \(f\) cannot have local maxima or minima at non-critical points. Also, \(f\) might have local minima/maxima at its critical points, but it does not have to.
+\end{remark*}
+
+\begin{definition}[Saddle Point] We call $\mathbf{x_0}$ is a saddle point if
+    $\forall r > 0, \exists \mathbf{x_1, x_2} \in B(\mathbf{x_0}, r) \Longrightarrow f(\mathbf{x_1}) < f(\mathbf{x_0}) < f(\mathbf{x_2})$.
+\end{definition}
+
+\subsection{Second-order Conditions}
+
+We know that if \(\mathbf{x}^{*}\) is a critical point of the function \(f\) , then \(\nabla f(\mathbf{x}^{*}) = 0\) . To see whether \(\mathbf{x}^{*}\) is a local maximizer or minimizer, we look at \(f(\mathbf{x}^{*} + \mathbf{h})\) for some small \(\mathbf{h}\) . Now, if \(f\) is twice continuously differentiable, we can take a second-order Taylor expansion of \(f\) around \(\mathbf{x}^{*}\) to find:
+
+\begin{proposition}
+    Let \(f: B \to \mathbb{R}\) be twice continuously differentiable function on \(B\) and \(\mathbf{x}^{*}\) be a critical point in the interior of \(B\). If:
+
+    i) \(\mathbf{H}f(\mathbf{x}^{*})\) is \textbf{negative} definite, then \(\mathbf{x}^{*}\) is a \textbf{strict local maximizer},
+
+    ii) \(\mathbf{H}f(\mathbf{x}^{*})\) is \textbf{positive} definite, then \(\mathbf{x}^{*}\) is a \textbf{strict local minimizer},
+
+    iii) \(\mathbf{H}f(\mathbf{x}^{*})\) is \textbf{indefinite}, then \(\mathbf{x}^{*}\) is neither a \textbf{local minimizer} nor it is a \textbf{local maximizer}, and
+
+    iv) \(\mathbf{H}f(\mathbf{x}^{*})\) is positive semi-definite or negative semi-definite, then \(\mathbf{x}^{*}\) could be a local maximizer, local minimizer, or neither.
+\end{proposition}
+
+\begin{proposition}[not very useful]
+    Let $f: B \to \mathbb{R}$ be $C ^{2}$ and $\mathbf{x ^{*}} \in int(B)$ be a local maximizer (minimizer) of $f$. Then, $\nabla f(\mathbf{x ^{*}}) = \mathbf{0}$ and $\mathbf{H}f(\mathbf{x ^{*}})$ is negative (positive) semi-definite.
+\end{proposition}
+
+\subsection{Global Maximum and minimum}
+
+\subsubsection{Convex Optimization Problems}
+
+\begin{definition}
+    A program $\min_{\mathbf{x} \in B}f(\mathbf{x})$ is said to be a \textbf{convex program} if 1) $f$ is a convex function. 2) $B$ is a convex set.
+\end{definition}
+
+\begin{theorem}[Fundamental Theorem of Convex Programming]
+    Let $\mathbf{x ^{*}}$ be a local minimizer of a convex program. Then, $\mathbf{x ^{*}}$ is a global minimizer.
+\end{theorem}
+
+\begin{proposition}
+    Let $f: \mathbb{R}^{n} \to \mathbb{R}$ be a differentiable function. Then: \begin{itemize}
+        \item If $f$ is convex, then $f$ has a global minimum at $\mathbf{x ^{*}} \iff \nabla f(\mathbf{x ^{*}}) = 0$, i.e., $\mathbf{x ^{*}}$ is a critical point.
+        \item If $f$ is concave, then $f$ has a global maximum at $\mathbf{x ^{*}} \iff \nabla f(\mathbf{x ^{*}}) = 0$, i.e., $\mathbf{x ^{*}}$ is a critical point.
+    \end{itemize}
+\end{proposition}
+
+\begin{remark*}
+    If $f$ is strictly convex/concave, then $\nabla f(\mathbf{x ^{*}}) = 0$ is necessary and sufficient for $f$ to have a strict global minimum/maximum at $\mathbf{x ^{*}}$.
+\end{remark*}
+
+\begin{proposition}
+    Consider a convex program, $\min_{\mathbf{x} \in B} f(\mathbf{x})$, let $C = \{\mathbf{x} \in B: \mathbf{x} \text{ are minimizers}\}$. Then $C$ is convex.
+\end{proposition}
+
+\subsection{Proof of OLS}
+
+\begin{proof}
+    The objective function is:
+    \[
+        \hat{\boldsymbol{\beta}} = \arg \min_{\mathbf{b}} \sum_{i=1}^{n} (y_i - \mathbf{x}'_i \mathbf{b})^{2}
+    \]
+    , rewrite it to matrix form, where $\mathbf{X}$ is an $n \times k$ matrix and $\mathbf{y}$ an $n \times 1$ vector:
+    \[
+        \hat{\boldsymbol{\beta}} = \arg \min_{\mathbf{b}} (\mathbf{y-Xb})'(\mathbf{y-Xb})
+    \]
+    using the fact from matrix calculus, \[
+        \frac{\partial \mathbf{x'a}}{\partial \mathbf{x}} = \mathbf{a} \text{ and } \frac{\partial \mathbf{x'Ax}}{\partial \mathbf{x}} = (\mathbf{A + A'})\mathbf{x},
+    \]
+    and after expanding the objective function \[
+        f(\mathbf{b}) = \mathbf{(y-Xb)'(y-Xb)} = \mathbf{yy'} - 2 \mathbf{b'X'y} + \mathbf{b'X'Xb},
+    \]
+    the corresponding first order conditions are \[
+        \frac{\partial f(\mathbf{b})}{\partial \mathbf{b}} = -2 \mathbf{X'y} + 2 \mathbf{X'Xb}
+    \] where $\hat{\boldsymbol{\beta}} = (\mathbf{X'X})^{-1}\mathbf{X'y}$.
+
+    The second order conditions are \[
+        \frac{\partial ^{2}f(\mathbf{b})}{\partial \mathbf{b} \partial \mathbf{b'}} = 2 \mathbf{X'X}.
+    \]
+    Finally, noticing that for any $\mathbf{y} \in \mathbb{R}^{k}$, $\mathbf{y'X'Xy} = \mathbf{z'z} >0 $, (with $\mathbf{z} = \mathbf{Xy}$) provided $\mathbf{z \neq 0}$, it is clear that $\mathbf{X'X}$ is positive definite (Unless there is \textbf{multicollinearity} among the regressors, i.e., $\mathbf{z = 0}$).
+\end{proof}
+
+
+\section{Optimization with Equality Constraints}
+
+\subsection{The Problem}
+
+\[
+    \left\{\begin{array}{l}
+        \min f(\mathbf{x})                 \\
+        s.t. \, g(\mathbf{x}) = \mathbf{0} \\
+    \end{array}\right.
+\] where $f: D \subset \mathbb{R}^{n} \to \mathbb{R}, g: D \subset \mathbb{R}^{n} \to \mathbb{R}^{m}$, with $m < n, D$ open, and $f$ and $g$ are twice continuously differentiable.
+
+\textbf{Assume} we can solve for $m$ elements of $\mathbf{x}$ in terms of the remaining $n-m$ i.e. \[
+    g(\mathbf{x}) = \mathbf{0} \Longrightarrow \mathbf{x_B} = \boldsymbol{\varphi(x_{NB})}
+\]
+where $\mathbf{x = (x_B, x_{NB})}$ with $\mathbf{x_B}$ $m$-dimensional and $\mathbf{x_{NB}}$ $n-m$-dimensional.
+
+In this case, \[
+    \left\{\begin{array}{l}
+        \min f(\mathbf{x})                 \\
+        s.t. \, g(\mathbf{x}) = \mathbf{0} \\
+    \end{array}\right. \sim \left\{\begin{array}{l}
+        \min f(\mathbf{x_B}, \mathbf{x_{NB}})               \\
+        s.t. \, \mathbf{x_B = \boldsymbol{\varphi}(x_{NB})} \\
+    \end{array}\right.
+\]
+, the original problem is converted to an unconstrained optimization problem \[
+    \min f(\boldsymbol{\varphi (\mathbf{x_{NB}}), \mathbf{x_{NB}}}) = F(\mathbf{x_{NB}})
+\]
+
+
+\subsection{Lagrange Method}
+Consider
+\[
+    \left\{\begin{array}{l}
+        \min f(x_1, x_2, x_3) \\
+        s.t. \left\{\begin{array}{l}
+                        g_1(x_1, x_2, x_3) = b_1 \\
+                        g_2(x_1, x_2, x_3) = b_2 \\
+                    \end{array}\right.
+    \end{array}\right.
+\]
+, where $f, g_1, g_2$ are twice continuously differentiable. Moreover assume $\nabla g_1(\mathbf{x ^{*}})$ and $\nabla g_2(\mathbf{x ^{*}})$ are linearly independent(regularity condition).
+
+Get \begin{align*}
+    \frac{\partial f(\mathbf{x ^{*}})}{\partial x_1} + \frac{\partial g_1(\mathbf{x ^{*}})}{\partial x_1}\lambda_1^* + \frac{\partial g_2(\mathbf{x ^{*}})}{\partial x_1}\lambda_2 ^*=\mathbf{0} \\
+    \frac{\partial f(\mathbf{x ^{*}})}{\partial x_2} + \frac{\partial g_1(\mathbf{x ^{*}})}{\partial x_2}\lambda_1^* + \frac{\partial g_2(\mathbf{x ^{*}})}{\partial x_2}\lambda_2 ^*=\mathbf{0} \\
+    \frac{\partial f(\mathbf{x ^{*}})}{\partial x_3} + \frac{\partial g_1(\mathbf{x ^{*}})}{\partial x_3}\lambda_1^* + \frac{\partial g_2(\mathbf{x ^{*}})}{\partial x_3}\lambda_2 ^*=\mathbf{0}
+\end{align*}
+
+
+\begin{definition}
+    The \textbf{Lagrangian} associated to problem $\mathcal{L}: \mathbb{R}^{n+m} \to \mathbb{R}$ is defined as \[
+        \mathcal{L}(\mathbf{x,\boldsymbol{\lambda}}) = f(\mathbf{x}) + \sum_{i=1}^{m} \lambda_i g_i(\mathbf{x}) = f(\mathbf{x}) + \boldsymbol{\lambda'}g(\mathbf{x}),
+    \] where $\mathbf{\lambda} = (\lambda_1, \dots, \lambda_m)'$.
+\end{definition}
+
+
+\subsubsection{Necessary Conditions: \textbf{Lagrange Conditions}}
+
+\[
+    \nabla f(\mathbf{x ^{*}}) + \mathbf{J}g(\mathbf{x ^{*}})'\boldsymbol{\lambda ^{*}} = \mathbf{0} \text{ and } g(\mathbf{x ^{*}}) = \mathbf{0}.
+\]
+
+\begin{definition}
+    $\boldsymbol{\lambda ^{*}} = (\lambda_1, \dots, \lambda_m^*)$ is the vector of \textbf{Lagrange multiplier} associated to the respective Constraints at $\mathbf{x ^{*}}$.
+\end{definition}
+
+
+\subsubsection{Sufficient Conditions}
+
+\begin{proposition}[Sufficient conditions for a strict local minimum]
+    Let $\mathbf{x ^{*}}$ be a feasible point satisfying the Lagrange condition for some $\boldsymbol{\lambda ^{*}}$. Assume that the Hessian matrix of the Lagrangian function with respect to the choice variables $\mathbf{x}$, evaluated at $(\mathbf{x ^{*}, \lambda ^{*}})$,
+    \[
+        H_\mathbf{x}\mathcal{L}(\mathbf{x ^{*}}, \boldsymbol{\lambda ^{*}}) = \mathbf{H}f(\mathbf{x ^{*}}) + \sum_{i=1}^{m} \lambda_i ^{*}\mathbf{H}g_i(\mathbf{x ^{*}})
+    \]
+    is positive definite subject to the constraint $\mathbf{J}g(\mathbf{x ^{*}})\mathbf{h} = \mathbf{0}$ (specially, it is varified that $\mathbf{h'H_x\mathcal{L}(\mathbf{x ^{*}, \boldsymbol{\lambda ^{*}}})} > 0$ for all $\mathbf{h} \in  \mathbb{R}^{n}, \mathbf{h \neq 0}: \mathbf{J}g(\mathbf{x ^{*}})\mathbf{h} = \mathbf{0}$). Then $\mathbf{x}^{*}$ is a strict minimizer of $f$ subject to $g(\mathbf{x}) = \mathbf{0}$.
+\end{proposition}
+
+\begin{remark*}
+    i.e., the sufficient condition is $\mathbf{h'}\mathbf{H_x}\mathcal{L}(\mathbf{x ^{*}}, \boldsymbol{\lambda})\mathbf{h} > 0, \forall \mathbf{h \neq 0}, \mathbf{J}g(\mathbf{x ^{*}})\mathbf{h} = \mathbf{0}$.
+\end{remark*}
+
+\subsection{The Convex Case}
+
+\begin{proposition}
+    If $f$ is \textbf{convex} in the feasible set of solutions $B$, and the functions $g_i, \, i=1,\dots,m$, are \textbf{linear} then the Lagrange conditions are \textbf{necessary and sufficient} for a global minimum.
+\end{proposition}
+
+\begin{proof}
+    Since the Lagrange conditions are necessary for \(\mathbf{x}^{*} \in B\)
+    to be a local minimizer (and, hence, global minimizer), let's show that
+    they are also sufficient. To do so, let \(\mathbf{x}^{*}\), with
+    associated \(\lambda^{*}\), verify the Lagrange conditions. Next,
+    taking a Taylor expansion of \(f\) around \(\mathbf{x}^{*}\),
+    \[
+        f(\mathbf{x}) = f(\mathbf{x}^{*}) + \nabla f(\mathbf{x}^{*})\cdot (\mathbf{x} - \mathbf{x}^{*}) + \frac{1}{2} (\mathbf{x} - \mathbf{x}^{*})^{\prime}\mathbf{H}f(\pmb {\xi})(\mathbf{x} - \mathbf{x}^{*})
+    \]
+    with \(\xi = \mathbf{x}^{*} + \lambda \mathbf{h}\) and
+    \(\lambda \in (0,1)\) . Then, since \(f\) is convex, we have
+    \[
+        f(\mathbf{x})\geq f(\mathbf{x}^{*}) + \nabla f(\mathbf{x}^{*})\cdot (\mathbf{x} - \mathbf{x}^{*}),
+    \]
+    and,
+    \[
+        \frac{1}{2} (\mathbf{x} - \mathbf{x}^{*})^{\prime}\mathbf{H}f(\pmb {\xi})(\mathbf{x} - \mathbf{x}^{*})\geq 0.
+    \]
+
+    Additionally, because \(\mathbf{x}^{*}\) satisfies the Lagrange
+    conditions,
+    \[
+        \nabla f(\mathbf{x}^{*}) = -\sum_{i = 1}^{m}\lambda_{i}^{*}\nabla g_{i}(\mathbf{x}^{*}).
+    \]
+
+    Then:
+    \[
+        f(\mathbf{x})\geq f(\mathbf{x}^{*}) - \sum_{i = 1}^{m}\lambda_{i}^{*}\nabla g_{i}(\mathbf{x}^{*})\cdot (\mathbf{x} - \mathbf{x}^{*}).
+    \]
+
+    Finally, noticing that because the constraints are \textbf{linear},
+    \[
+        \nabla g_{i}(\mathbf{x}^{*})\cdot (\mathbf{x} - \mathbf{x}^{*}) = 0,\forall i = 1,\dots,m,
+    \]
+    we end up with \(f(\mathbf{x})\geq f(\mathbf{x}^{*})\) , as desired.
+\end{proof}
+
+\subsection{Interpretation of $\boldsymbol{\lambda ^{*}}$}
+% TODO: Review this
+\[
+    \left\{\begin{array}{l}
+        \min f(x_1, \dots, x_n) \\
+        s.t. \left\{\begin{array}{l}
+                        g_1(x_1, \dots, x_n) = b_1 \\
+                        \qquad \quad \vdots        \\
+                        g_m(x_1, \dots, x_n) = b_m \\
+                    \end{array}\right.
+    \end{array}\right.
+\]
+, with $m < n$, and $f, g$ are $C ^{2}$ in an open $D$ that contains the feasible set of solutions.
+
+The Lagrangian $\mathcal{L}: \mathbb{R}^{n + 2m} \to \mathbb{R}$: \[
+    \mathcal{L}(\mathbf{x, \boldsymbol{\lambda}, \mathbf{b}}) = f(\mathbf{x}) + \sum_{i=1}^{m} \lambda_i[g_i(\mathbf{x}) - b_i]
+\]
+
+Assume $\mathbf{(x ^{*}, \boldsymbol{\lambda ^{*}})}$ verifies both the Lagrange conditions and the sufficient conditions. In what follows, we are going to show that \[
+    \lambda_j ^{*} = - \frac{\partial f(\mathbf{x ^{*}})}{\partial b_j}, \text{ for } j = 1,\dots,m.
+\]
+
+The FOCs: \begin{align*}
+    \frac{\partial \mathcal{L}(\mathbf{x, \boldsymbol{\lambda}, b})}{\partial \mathbf{x}}           & = h_1(\mathbf{x, \mathcal{\lambda}, \mathbf{b}}) : \mathbb{R}^{n+2m} \to \mathbb{R}^{n} \\
+    \frac{\partial \mathcal{L}(\mathbf{x, \boldsymbol{\lambda}, b})}{\partial \boldsymbol{\lambda}} & = h_2(\mathbf{x, \mathbf{b}}): \mathbb{R}^{n+m} \to \mathbb{R}^{m}                      \\
+\end{align*}
+
+For each $\mathbf{b} \in  \mathbb{R}^{n}, \mathbf{b} \in B(\mathbf{0}, r)$, from the \textbf{Implicit Function Theorem} there exist $\mathbf{x(b), \boldsymbol{\lambda}(\mathbf{b})}$ continuous and differentiable with respect to $\mathbf{b}$ at $\mathbf{b = 0}$ such that $\mathbf{x(0) = x ^{*}}$ and $\boldsymbol{\lambda(0)=\lambda ^{*}}$.
+
+Alternatively, consider the associated Lagrangian at $\mathbf{x(b)}, \boldsymbol{\lambda(b)}$ \begin{align*}
+    \mathcal{L}(\mathbf{x\boldsymbol{(\mathbf{b})}, \boldsymbol{\lambda(\mathbf{b})}, \mathbf{b}})
+     & = f(\mathbf{x\boldsymbol{(\mathbf{b})}}) +
+    \boldsymbol{\lambda(\mathbf{b})}\{g[\mathbf{x\boldsymbol{(\mathbf{b})}}]-\mathbf{b}\} \\
+     & = f[\mathbf{x\boldsymbol{(\mathbf{b})}}]
+\end{align*}
+
+Differentiating with respect to $\mathbf{b}$,
+\begin{align*}
+    \frac{\partial \mathcal{L}(\mathbf{x\boldsymbol{(\mathbf{b})}, \boldsymbol{\lambda(\mathbf{b})}, \mathbf{b}})}{\partial \mathbf{b}}
+     & = \nabla f[\mathbf{x\boldsymbol{(\mathbf{b})}}]\frac{\partial \mathbf{x\boldsymbol{(\mathbf{b})}}}{\partial \mathbf{b}} + \frac{\partial \boldsymbol{\lambda(\mathbf{b})}}{\partial \mathbf{b}}\{g[\mathbf{x\boldsymbol{(\mathbf{b})}}]-\mathbf{b}\} \\
+     & + \boldsymbol{\lambda(\mathbf{b})}\Biggl\{\mathbf{J}g[\mathbf{x\boldsymbol{(\mathbf{b})}}]\frac{\partial \mathbf{x \boldsymbol{(\mathbf{b})}}}{\partial \mathbf{b}}- \boldsymbol{I_m}\Biggr\}                                                        \\
+     & =\frac{\partial f[\mathbf{x(b)}]}{\partial \mathbf{b}}
+\end{align*}
+
+Because $\mathbf{x(b)}$ is feasible, $g[\mathbf{x\boldsymbol{(\mathbf{b})}}]-\mathbf{b = 0}$, and $\mathbf{x(b)}$ and $\boldsymbol{\lambda(\mathbf{b})}$ are solutions to the Lagrange conditions, $\nabla f[\mathbf{x \boldsymbol{(\mathbf{b})}}] + \boldsymbol{\lambda(\mathbf{b})}\mathbf{J}g[\mathbf{x\boldsymbol{(\mathbf{b})}}] = \mathbf{0}$. Therefore, substituting we obtain \[
+    -\boldsymbol{\lambda(\mathbf{b})} = \frac{\partial f[\mathbf{x\boldsymbol({\mathbf{b}})}]}{\partial \mathbf{b}},
+\]
+which at $\mathbf{b = 0}$ implies that $\boldsymbol{\lambda ^{*}}$ is a shadow price, i.e., \[
+    \boldsymbol{\lambda ^{*}} = - \frac{\partial f(\mathbf{x ^{*}})}{\partial \mathbf{b}}.
+\]
+
+
+\section{Static Optimization with Inequality Constraints}
+
+\subsection{The Problem}
+\[
+    \left\{\begin{array}{l}
+        \min f(\mathbf{x})                 \\
+        s.t. g(\mathbf{x}) \leq \mathbf{0} \\
+    \end{array}\right.
+\]
+
+, or \[
+    \left\{\begin{array}{l}
+        \min f(x_1,\dots,x_n)) \\
+        s.t. \left\{\begin{array}{l}
+                        g_1(x_1, \dots, x_n) \leq \mathbf{0} \\
+                        \qquad \quad \vdots                  \\
+                        g_m(x_1, \dots, x_n) \leq \mathbf{0} \\
+                    \end{array}\right.
+    \end{array}\right.
+\]
+
+
+\begin{definition}
+    Let $\mathbf{x ^{*}}$ denote the optimizer of the problem. If $g_i(\mathbf{x ^{*}}) = \mathbf{0}$ we say that $g_i$ is \textbf{active}; in contrast, if $g_i(\mathbf{x ^{*}}) < 0$ we say that $g_i$ is \textbf{inactive}.
+\end{definition}
+
+\subsection{Kuhn-Tucker (1951)'s Conditions (Necessary Conditions)}
+
+\begin{theorem}
+    Let $\mathbf{x ^{*}}$ be a local minimizer of the problem. Moreover assume that the vectors $\nabla g_i(\mathbf{x ^{*}})$, for $j \in J = \{j: g_j(\mathbf{x ^{*}}) = \mathbf{0}\} $ are linearly independent(regularity condition). Then, there exists $\boldmath{\lambda_j ^{*}} \geq \mathbf{0}$ for $j \in J$ such that
+    \[
+        \nabla f(\mathbf{x ^{*}}) + \sum_{j \in J}\lambda_j^* \nabla g_j(\mathbf{x ^{*}}) = \mathbf{0}.
+    \]
+\end{theorem}
+
+\begin{remark*}
+    It's important to take into account that KKT works ONLY IF the regularity condition above is met.
+
+    We should involve all the constraints in the optimality conditions:
+
+    - for $j \notin J$, where $J = \{j: g_j(\mathbf{x ^{*}}) = \mathbf{0}\}$ we set $\lambda_j ^{*} = 0$(i.e. when $g_j(\mathbf{x ^{*}}) < 0$, we simply multiply it by zero).
+\end{remark*}
+
+\subsubsection{Alternative Formulation} \[
+    \left\{\begin{array}{l}
+        (1): \nabla f(\mathbf{x ^{*}}) + \sum_{j=1}^{m} \lambda_j^*\nabla g_j(\mathbf{x ^{*}}) = \mathbf{0} \\
+        (2): \lambda_j^* \geq \mathbf{0} \geq \mathbf{0} \, \forall j = 1,\dots,m,                          \\
+        (3): g_j(\mathbf{x ^{*}}) \leq \mathbf{0} \, \forall j = 1,\dots,m, \text{ and}                     \\
+        (4): \lambda_j^*g_j(\mathbf{x ^{*}}) = \mathbf{0} \, \forall j = 1,\dots,m,
+    \end{array}\right.
+\]
+, or (in matrix notation):
+\[
+    \left\{\begin{array}{l}
+        (1): \nabla f(\mathbf{x ^{*}}) + \mathbf{J}g(\mathbf{x ^{*}})'\boldsymbol{\lambda ^{*}} = \mathbf{0} \\
+        (2): \boldsymbol{\lambda ^{*}} \geq \mathbf{0}                                                       \\
+        (3): g(\mathbf{x ^{*}}) \leq \mathbf{0}, \text{ and}                                                 \\
+        (4): \boldsymbol{\lambda ^{*}} \odot g(\mathbf{x ^{*}}) = \mathbf{0}.
+    \end{array}\right.
+\]
+
+\subsection{Formulation in Terms of the Lagrangian}
+\[
+    \left\{\begin{array}{l}
+        \min f(\mathbf{x})                 \\
+        s.t. g(\mathbf{x}) \leq \mathbf{0} \\
+    \end{array}\right.
+\]
+\begin{definition}
+    For the problem above, the Lagrangian is given by \[
+        \boldsymbol{\mathcal{L}(\mathbf{x}, \lambda) = f(\mathbf{x}) + \lambda' g(\mathbf{x})}.
+    \]
+
+    Derivating the Lagrangian WRT $\mathbf{x}$ and $\boldsymbol{\lambda}$ we obtain \begin{align*}
+         & \boldsymbol{\nabla_{\mathbf{x}}\mathcal{L}(\mathbf{x}, \lambda) = \nabla_{\mathbf{x}}f(\mathbf{x})+\mathbf{J}g(\mathbf{x})'\lambda} \\
+         & \boldsymbol{\nabla_{\mathbf{\lambda}}\mathcal{L}(\mathbf{x}, \lambda) = g(\mathbf{x})}
+    \end{align*}
+    , so the KKT conditions can be written as \[
+        \left\{\begin{array}{l}
+            (1): \boldsymbol{\nabla_{\mathbf{x}}\mathcal{L}(\mathbf{x ^{*}, \lambda ^{*}})} = \mathbf{0} \\
+            (2): \boldsymbol{\lambda^* \geq \mathbf{0}}                                                  \\
+            (3): \boldsymbol{\nabla_{\lambda}\mathcal{L}(\mathbf{x ^{*}, \lambda ^{*}})\leq 0}           \\
+            (4): \boldsymbol{\lambda ^{*} \odot \nabla_{\mathbf{\lambda}}\mathcal{L}(\mathbf{x ^{*}, \lambda*}) = 0.}
+        \end{array}\right.
+    \]
+\end{definition}
+
+
+\subsection{The Convex Case}
+
+\begin{theorem}
+    If, in addition, $f, g_{1}, \dots, g_{m}$ are convex functions, if $\mathbf{x}^{*}$ verifies the KKT conditions, then $\mathbf{x ^{*}}$ is a global minimizer.
+\end{theorem}
+
+\subsection{Sufficient Conditions}
+
+\begin{proposition}[Sufficient conditions for a strict local minimum]
+    Let $\mathbf{x ^{*}}$ be a feasible point satisfying the Lagrange condition for some $\mathbf{\lambda ^{*}}$. Assume that the Hessian matrix of the Lagrangian function WRT the choice variables $\mathbf{x}$, evaluated at $\boldsymbol{\mathbf{x}^{*},\lambda ^{*}}$,
+    \[
+        \boldsymbol{\mathbf{H_x}\mathcal{L}(\mathbf{x ^{*}}, \lambda ^{*}) = \mathbf{H}f(\mathbf{x ^{*}}) + \sum_{i=1}^{m} \lambda_i ^{*}\mathbf{H}g_i(\mathbf{x ^{*}})}
+    \]
+    is \textbf{positive definite} subject to the constraint $\boldsymbol{\mathbf{J}g_A(\mathbf{x ^{*}})\mathbf{h} = \mathbf{0}}$ for $\mathbf{h \neq 0}$, where $g_A$ denotes the active constraints at $(\mathbf{x ^{*}, \boldsymbol{\lambda ^{*}}})$ (that is, $\boldsymbol{\mathbf{h'H_x}\mathcal{L}(\mathbf{x ^{*}}, \lambda ^{*})\mathbf{h}} > 0, \forall \mathbf{h} \in \mathbb{R}^{n}, \mathbf{h \neq 0}: \boldsymbol{\mathbf{J}g_A(\mathbf{x ^{*}})\mathbf{h} = \mathbf{0}}$). Then, $\mathbf{x ^{*}}$ is a strict minimizer of $f$ subject to $g_A(\mathbf{x}) = \mathbf{0}$.
+\end{proposition}
+
+\begin{remark*}[Local Minimum]
+    Change the above proposition's "\textbf{positive definite}" to "\textbf{positive semi-definite}".
+\end{remark*}
+

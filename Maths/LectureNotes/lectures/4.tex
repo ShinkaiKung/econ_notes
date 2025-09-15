@@ -119,10 +119,11 @@
     If $\mathbf{v} = 0$, it is trivial that $L_{\mathbf{x_0}}(\mathbf{v}) = 0$ and $f'(\mathbf{x_0},\mathbf{v}) = 0$.
 
     If $\mathbf{v} \neq 0$, $f(\mathbf{x_0} + \mathbf{w}) - f(\mathbf{x_0})= L_\mathbf{x_0}(\mathbf{w}) + g(\mathbf{w}), \lim_{\mathbf{w} \to \mathbf{0}} \frac{g(\mathbf{w})}{||\mathbf{w}||} = 0$. Take $\mathbf{w} = h \mathbf{v} (h \neq 0)$, \begin{align*}
-        f'(\mathbf{x_0},\mathbf{v}) = \lim_{h \to 0} \frac{f(\mathbf{x_0}+h \mathbf{v}) - f(\mathbf{x_0})}{h} & = \lim_{h \to 0} \frac{L_{x_0}(h \mathbf{v}) + g(h \mathbf{v})}{h}                                                                           \\
-                                                                                                              & =\lim_{h \to 0} \frac{h L_\mathbf{x_0}(\mathbf{v})}{h} + \lim_{h \to 0} \frac{g(h \mathbf{v})}{||h \mathbf{v}||} \frac{|h|||\mathbf{v}||}{h} \\
-                                                                                                              & = L_\mathbf{x_0}(\mathbf{v}) + ||\mathbf{v}|| \lim_{h \to 0} \frac{|h|}{h}\frac{g(h \mathbf{v})}{||h \mathbf{v}||}                           \\
-                                                                                                              & = L_\mathbf{x_0}(\mathbf{v})
+        f'(\mathbf{x_0},\mathbf{v}) = \lim_{h \to 0} \frac{f(\mathbf{x_0}+h \mathbf{v}) - f(\mathbf{x_0})}{h}
+         & = \lim_{h \to 0} \frac{L_{x_0}(h \mathbf{v}) + g(h \mathbf{v})}{h}                                                                           \\
+         & =\lim_{h \to 0} \frac{h L_\mathbf{x_0}(\mathbf{v})}{h} + \lim_{h \to 0} \frac{g(h \mathbf{v})}{||h \mathbf{v}||} \frac{|h|||\mathbf{v}||}{h} \\
+         & = L_\mathbf{x_0}(\mathbf{v}) + ||\mathbf{v}|| \lim_{h \to 0} \frac{|h|}{h}\frac{g(h \mathbf{v})}{||h \mathbf{v}||}                           \\
+         & = L_\mathbf{x_0}(\mathbf{v})
     \end{align*}
     Using $\mathbf{v} = \sum_{i=1}^{n} v_i \mathbf{e}_i$, \begin{align*}
         L_\mathbf{x_0}(\mathbf{v}) & = L_\mathbf{x_0}\Big(\sum_{i=1}^{n} v_i \mathbf{e}_i \Big) = \sum_{i=1}^{n} v_i L_\mathbf{x_0}(\mathbf{e}_i) = \sum_{i=1}^{n} v_i f'(\mathbf{x_0}, \mathbf{e}_i) = \sum_{i=1}^{n} v_i \frac{\partial f(\mathbf{x_0})}{\partial x_i} = \nabla f(\mathbf{x_0}) \cdot  \mathbf{v}
@@ -192,7 +193,6 @@
 \section{Additional Results}
 
 \begin{proposition} Let \(f: \mathbb{R}^{n} \rightarrow \mathbb{R}, \mathbf{v} \in \mathbb{R}^{n}\), and \(||\mathbf{v}|| = 1\). Then
-
     \[
         \max_{\mathbf{v}}f^{\prime}(\mathbf{x}_{0},\mathbf{v}) = ||\nabla f(\mathbf{x}_{0})|| \quad \text{when } \mathbf{v} = \frac{\nabla f(\mathbf{x}_{0})}{||\nabla f(\mathbf{x}_{0})||},
     \]
