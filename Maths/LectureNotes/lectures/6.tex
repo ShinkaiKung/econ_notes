@@ -1,0 +1,595 @@
+
+\section{Difference Equation}
+
+\subsection{Difference Equation and Econometrics}
+\begin{align*}
+    \text{AR}(1):  & \, y_{t} = \rho y_{t-1} + \epsilon_{t}                                                 \\
+    \text{VAR}(1): & \, \mathbf{Y_{t}} = \boldsymbol{\Phi_{t}} \mathbf{Y_{t-1}} + \boldsymbol{\epsilon_{t}}
+\end{align*}
+
+\subsection{1st-order Difference Equation}
+
+\begin{definition}
+    A \textbf{first-order difference equation} is an expression of the form \[
+        F[y(k), y(k+1),k] = 0 \, \text{for} \, k=k_0,k_0+1,k_0+2,...
+    \]
+    for \(k_{0} \in \mathbb{Z}\).
+
+    We denoted the solution by $\bar{y}$ i.e. when the equality is satified for each $k = k_{0}, k_{0} + 1$.
+\end{definition}
+
+
+\begin{theorem}[Existence and Uniqueness of Solutions]
+    Consider \[
+        y(k+1) + f[f(k),k] = 0,
+    \]
+    where $f$ is a real function. Then, the equation has one and only one solution for each arbitrary initial value $y(0)$.
+\end{theorem}
+
+
+\begin{definition}
+    A solution that verifies the initial condition is called \textbf{particular solution}.
+\end{definition}
+
+\begin{definition}
+    If the initial condition is not imposed, it is called \textbf{general solution}.
+\end{definition}
+
+\begin{definition}
+    We say that \(\overline{y}\) is the \textbf{equilibrium} of the equation if once it is reached, the solution remains unchanged.
+\end{definition}
+
+\begin{definition}
+    \(\overline{y}\) is \textbf{asymptotically stable} if \(\forall y(0), \lim_{k \to \infty} y(k) = \overline{y}\).
+\end{definition}
+
+\begin{definition}
+    \(\overline{y}\) is \textbf{unstable} if \(\exists y(0), \lim_{k \to \infty} y(k) = \infty\).
+\end{definition}
+
+\begin{definition}
+    \(\overline{y}\) is \textbf{marginally stable} if it is not stable nor unstable.
+\end{definition}
+
+\subsection{N-order Difference Equations}
+
+\begin{definition}
+    An \(n\) - order difference equation is an expression of the form \[F[y(k),y(k + 1),\ldots ,y(k + n),k] = 0\,\text{for}\, k = k_{0},k_{0} + 1,k_{0} + 2,\ldots\] for \(k_{0} \in \mathbb{Z}\).
+\end{definition}
+
+
+\begin{theorem}[Existence and Uniqueness of Solutions]
+    Consider \[
+        y(k + n) + f[y(k + n - 1),\ldots ,y(k),k] = 0
+    \] where \(f\) is a real function. Then, the equation has one and only one solution for each arbitrary specification of \(n\) initial values \(y(0), \ldots , y(n - 1)\).
+\end{theorem}
+
+\subsubsection{Particular and General Solutions}
+
+\begin{definition}
+    A solution that verifies the \(n\) initial conditions is called particular solution.
+\end{definition}
+\begin{definition}
+    If the initial condition is not imposed, it is called general solution. It will depend on \(n\) arbitrary constants.
+\end{definition}
+
+
+\subsection{The Solutions of N-order Linear Difference Equations with Constant Coefficients}
+
+Consider the difference equation like this:
+\[
+    y(k+n) + a_{n-1}y(k+n-1) + \cdots + a_{0}y(k) = g(k).
+\]
+
+Using \textbf{characteristic equation} to solve homogenous equations: \[
+    \lambda ^{n} + a_{n-1}\lambda ^{n-1} + \cdots +a_{0} = 0
+\]
+
+
+\begin{enumerate}
+    \item Distinct real roots: ($\lambda_1, \lambda_2,\dots,\lambda_n$) \[
+              z(k) = c_1\lambda_{1}^{k} + c_2\lambda_{2}^{k}+\cdots+c_n\lambda_{n}^{k}
+          \]
+    \item Repeated real roots: (Assume $\lambda_1$ repeated $r$ times) \[
+              z_1(k) = (c_1 + c_2k + c_3k ^{2} + \cdots +c_rk^{r-1})\lambda_{1}^{k}
+          \]
+    \item Complex roots: ($\lambda_1 = re ^{\pm i\theta}$) \[
+              z_1(k) = 2sr ^{k}\cos(\phi + \theta k) \qquad \text{(where $s$ and $\phi$ are constants)}
+          \] or \[
+              z_1(k) = r ^{k}(A \cos(\theta t) + B \sin(\theta t)) \quad  \text{(where $A$ and $B$ are constants)}
+          \]
+    \item Repeated complex roots: (Assume $\lambda = re ^{\pm i\theta}$ repeated $r$ times)  \[
+              z_1(k) = 2r ^{k}\left[s_1 \cos(\phi_1 + \theta k) + s_2 k \cos(\phi_2 + \theta k) + \dots +s_r k ^{r} \cos(\phi_r + \theta k ) \right]
+          \] or \[
+              z_1(k) = r ^{k}\left[(A_1 + A_2k+\cdots +A_rk ^{r-1}) \cos(\theta k) + (B_1 + B_2k+\cdots +B_rk ^{r-1}) \sin(\theta k)\right]
+          \]
+\end{enumerate}
+
+
+\begin{table}[h!]
+    \centering
+    \caption{Particular Solution Forms for g(k)}
+    \label{tab:particular_solutions}
+    \begin{tabular}{ll}
+        \toprule
+        \textbf{g(k)}                           & \textbf{Solution}                     \\
+        \midrule
+        $a$                                     & $A$                                   \\
+        $a^k$                                   & $Aa^k$                                \\
+        $\sin(bk) \text{ or } \cos(bk)$         & $A \sin(bk) + B \cos(bk)$             \\
+        $k^n$                                   & $A_0 + A_1 k + \dots + A_n k^n$       \\
+        $k^n a^k$                               & $a^k [A_0 + A_1 k + \dots + A_n k^n]$ \\
+        $a^k \sin(bk) \text{ or } a^k \cos(bk)$ & $a^k [A \sin(bk) + B \cos(bk)]$       \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+
+And then trying particular solutions for $g(k)$, according to table \ref{tab:particular_solutions}.
+
+\begin{remark*} Tips:
+    \begin{enumerate}
+        \item If the solution (in the proposed table) doesn't work, try with $k$ or $k^2$ times the proposed solution.
+
+        \item If $g(k)$ is the sum of some of the above, try with the sum of the solutions.
+    \end{enumerate}
+\end{remark*}
+
+
+\begin{remark*}[Complex Situation]
+    For complex number $\lambda_1 = \alpha + i\beta$ and $\lambda_2 = \alpha - i\beta$.
+
+    We can represent this in polar coordinate system:
+    \begin{enumerate}
+        \item Modulus: $r = |\lambda_1| = |\lambda_2| = \sqrt{\alpha ^{2} + \beta ^{2}}$.
+        \item Argument: $\theta = \arg(\lambda_1)$ such that $\cos\theta = \frac{\alpha}{r}$ and $\sin\theta = \frac{\beta}{r}$.
+    \end{enumerate}
+    So, $\lambda_1,\lambda_2$ can be written as \[
+        \lambda_1 = r(\cos\theta+i\sin\theta),\qquad\lambda_2=r(\cos\theta-i\sin\theta).
+    \]
+    According to \textbf{Euler's Formula} $e ^{i\theta} = \cos\theta+i\sin\theta$, they can also be represented as: \[
+        \lambda_1 = re ^{i\theta}, \qquad \lambda_2 = re ^{-i\theta}
+    \]
+    then the solutions \begin{align*}
+        y(k) & = c_1 \lambda_1 ^{k} + c_2 \lambda_2 ^{k}                                                                                      \\
+             & = c_1 r ^{k}e ^{ik\theta} + c_2 r ^{k} e ^{-ik\theta}                                                                          \\
+             & = r ^{k}[c_1 e ^{ik\theta} + c_2 e ^{-ik\theta}]                                                                               \\
+             & = r ^{k}\left\{c_1\left[\cos(\theta k) + i \sin(\theta k)\right] + c_2 \left[\cos(\theta k) - i \sin(\theta k)\right] \right\} \\
+             & = r ^{k}\left[(c_1+c_2)\cos(\theta k) + (c_1 -c_2)i \sin(\theta k)\right]                                                      \\
+             & = r ^{k}\left[A\cos(\theta k) + B \sin(\theta k)\right]                                                                        \\
+             & \quad \text{(where $A = c_1+c_2$ and $B=i(c_1-c_2)$, $A,B \in \mathbb{R}$ or)}                                                 \\
+             & = sr ^{k} cos(\theta t + \phi)                                                                                                 \\
+             & \quad \text{(where $s, \phi \in \mathbb{R}$.)}                                                                                 \\
+    \end{align*}
+\end{remark*}
+
+\section{First-order System of Difference Equations}
+
+\begin{definition}
+    A \(n\)-dimensional first-order dynamic equation system in discrete time is characterized by
+
+    \[
+        \left\{ \begin{array}{l l}{x_{1}(k + 1) = f_{1}\left[x_{1}(k),x_{2}(k),\dots,x_{n}(k),k\right]}\\ {x_{2}(k + 1) = f_{2}\left[x_{1}(k),x_{2}(k),\dots,x_{n}(k),k\right]}\\ {\qquad \vdots}\\ {x_{n}(k + 1) = f_{n}\left[x_{1}(k),x_{2}(k),\dots,x_{n}(k),k\right]} \end{array} \right.\text{for } k = 0,1,2,\dots
+    \]
+
+    where: \(x_{i}(k)\) 's - for \(i = 1, \ldots , n\) - are called state variables, and \(x_{1}(0), \ldots , x_{n}(0)\) are called initial conditions.
+\end{definition}
+
+\subsection{The Linear Case}
+
+A $n$-dimensional first-order dynamic equation system is \textbf{linear} if it can be written as \[
+    \left\{ \begin{array}{l l}{x_{1}(k + 1) = a_{11}(k)x_{1}(k) + \dots +a_{1n}(k)x_{n}(k) + b_{11}(k)u_{1}(k) + \dots}\\ {\qquad \vdots}\\ {x_{n}(k + 1) = a_{n1}(k)x_{1}(k) + \dots +a_{n n}(k)x_{n}(k) + \dots +b_{n n}(k)u_{n}(k) + \dots} \end{array} \right.
+\]
+where: \begin{itemize}
+    \item \(x_{i}(k)\)'s - for \(i = 1, \ldots , n-\) are called state variables,
+    \item \(u_{i}(k)\)'s - for \(i = 1, \ldots , m-\) are called control - or input- variables, and
+    \item \(a_{ij}(k)\)'s and \(b_{hl}(k)\)'s are called parameters or coefficients.
+\end{itemize}
+
+In matrix notation,
+
+\[
+    \mathbf{x}(k + 1) = \mathbf{A}(k)\mathbf{x}(k) + \mathbf{B}(k)\mathbf{u}(k)
+\]
+
+where: \begin{itemize}
+    \item \(\mathbf{x}(k)\) is an \(n \times 1\) vector of state variables,
+    \item \(\mathbf{u}(k)\) is an \(m \times 1\) vector of control- or input-variables, and
+    \item \(\mathbf{A}(k)\) and \(\mathbf{B}(k)\) are \(n \times n\) and \(n \times m\) matrices of coefficients, respectively.
+\end{itemize}
+
+
+\subsection{From a linear difference equation of order \(n\) to a \(1^{st}\)-order system}
+
+\[
+    y(k + n) + a_{n - 1}(k)y(k + n - 1) + \dots + a_{0}(k)y(k) = u(k),
+\]
+Define
+\(x_{1}(k) = y(k), x_{2}(k) = y(k + 1), \ldots , x_{n}(k) = y(k + n - 1)\)
+, then clearly
+\[
+    \left\{ \begin{array}{c} x_{1}(k + 1) = x_{2}(k) \\ \vdots \\ x_{n - 1}(k + 1) = x_{n}(k) \\ x_{n}(k + 1) = -a_{0}(k)x_{1}(k) - \dots - a_{n - 1}(k)x_{n}(k) + u(k) \end{array} \right.
+\]
+with \(x_{1}(k) = y(k)\).
+
+In matrix form:
+\[
+    \mathbf{A}(k) = \left( \begin{array}{cccc}0 & 1 & \dots & 0 \\ \vdots & & \ddots & \\ 0 & \dots & 0 & 1 \\ -a_{0}(k) & -a_{1}(k) & \dots & -a_{n - 1}(k) \end{array} \right), \mathbf{B}(k) = \left( \begin{array}{c}0 \\ \vdots \\ 0 \\ 1 \end{array} \right).
+\]
+
+\subsection{Homogenous Systems}
+
+\[
+    \mathbf{x}(k + 1) = \mathbf{A}(k)\mathbf{x}(k) \quad \text{for } k = 0,1,2, \ldots
+\]
+
+\begin{proposition} The solution is
+    \[
+        \mathbf{x}(k) = \mathbf{A}(k - 1)\mathbf{A}(k - 2)\dots \mathbf{A}(0)\mathbf{x}(0) \quad\text{for } k = 0,1,2, \ldots
+    \]
+\end{proposition}
+
+\begin{definition}
+    We call \textbf{state-transition matrix} of the homogenous system to the matrix \(\phi (k,k^{\prime})\) that satisfies
+    \[
+        \left\{ \begin{array}{ll}\phi (k,l) = \mathbf{A}(k - 1)\mathbf{A}(k - 2)\dots \mathbf{A}(l) & \text{ for } k > l,\\ \phi (k,k) = I. \end{array} \right.
+    \]
+\end{definition}
+
+\begin{definition}
+    We call \textbf{state-transition matrix} of the homogenous system to the matrix \(\phi (k,k^{\prime})\) that satisfies
+    \[
+        \left\{ \begin{array}{ll}\phi (k + 1,l) = \mathbf{A}(k)\phi (k,l) & \text{ for } k > l,\\ \phi (k,k) = I. \end{array} \right.
+    \]
+\end{definition}
+
+\begin{remark*}
+    $ \mathbf{x}(k) = \phi (k,0)\mathbf{x}(0) $
+\end{remark*}
+
+\subsubsection{Time-invariant systems} $\mathbf{A}(k) = \mathbf{A} \Longrightarrow  \mathbf{x}(k) = \mathbf{A} ^{k}\mathbf{x}(0) = \mathbf{M}\mathbf{\Lambda}^{k}\mathbf{M}^{-1}\mathbf{x}(0)$
+
+\subsection{Full System}
+\[
+    \mathbf{x}(k + 1) = \mathbf{A}(k)\mathbf{x}(k) + \mathbf{B}(k)\mathbf{u}(k)
+\]
+\begin{proposition}
+    The solution to (1) for given \(\mathbf{x}(0)\) and inputs \(\mathbf{u}\) is
+    \[
+        \mathbf{x}(k) = \phi (k,0)\mathbf{x}(0) + \sum_{h = 0}^{k - 1}\phi (k,h + 1)\mathbf{B}(h)\mathbf{u}(h).
+    \]
+\end{proposition}
+
+\subsubsection{Time-invariant systems} $\mathbf{A}(k) = \mathbf{A} \Longrightarrow \mathbf{x}(k) = \mathbf{A}^{k}\mathbf{x}(0) + \sum_{h = 0}^{k - 1}\mathbf{A}^{k - h - 1}\mathbf{B}(h)\mathbf{u}(h).
+$
+
+\section{Differential Equation}
+
+\subsection{1st-order Differential Equation}
+
+\begin{definition}
+    A \textbf{first-order differential equation} is an expression of the form \[
+        F\Big[y(t), \frac{d(t))}{dx}, t\Big] = 0 \, \text{for } t \geq t_0, \, t_0 \in \mathbb{R}
+    \]
+    We denoted the solution by $\bar{y}(t)$, when the equality is satisfied for all $t \geq t_0$.
+\end{definition}
+
+\begin{theorem}[Existence and Uniqueness of Solutions] Consider \[
+        \frac{dy(t)}{dx} = f[y(t),t]
+    \] where $f$ is a real function such that both $f$ and $df/dy$ are continuous in a given domain $D \subset \mathbb{R}^{2}$. If $(t_0,y_0) \in D$, then the equation has one and only one solution for each arbitrary value $y(t_0) = y_0$.
+\end{theorem}
+
+\begin{definition}
+    A \textbf{general solution} is a function $y=\varphi(t,C)$ - where $C$ is an arbitrary constant - such that (i) satisfies the differential equation for any $C$ and (ii) for any inital condition $y(t_0) = y_0, \exists c_0: \varphi (t_0,c_0) = y_0$.
+\end{definition}
+
+\begin{definition}
+    $\varphi(t,c_0)$ is called a \textbf{particular solution}.
+\end{definition}
+
+\subsection{Some useful methods}
+
+\subsubsection{Separable variables}
+\[
+    \frac{dy}{dt} = f_1(t)f_2(y).
+\]
+Assuming $f_2(y) \neq 0$, we can write \[
+    \frac{1}{f_2(y)}dy = f_1(t)dt \Longrightarrow \int_{}^{} \frac{dy}{f_2(y)} \, dy = \int_{}^{} f_1(t) \, dt
+\]
+
+\subsubsection{Change of variable: Case 1}
+\[
+    \frac{dy}{dt} = f(y/t).
+\]
+Define $z = y/t$ so that $y=tz$ and hence \[
+    \frac{dy}{dt} = z + t \frac{dz}{dt} = f(z).
+\]
+Then \[
+    \frac{dt}{t} = \frac{dz}{f(z) - z} \Longrightarrow \ln t = \int_{}^{} \frac{dz}{f(z) - z} + \ln C
+\]
+
+\subsubsection{Change of variable: Case 2}
+\[
+    \frac{dy}{dt} = f(at+by+c).
+\]
+Define $z=at+by+c$ so that \[
+    \frac{dz}{dt} = a+b \frac{dy}{dt} \Longrightarrow \frac{dy}{dt} = \frac{dz/dt -a}{b}
+\] which substituted into the original expression delivers \[
+    \frac{dz/dt-a}{b} = f(z) \Longrightarrow \frac{dz}{a+bf(z)} = dt.
+\]
+Finally, integrating we get \[
+    t = \int_{}^{} \frac{dz}{a+bf(z)}
+\]
+
+\subsection{Linear first-order equations}
+\[
+    \frac{dy}{dt} + a_0(t)y = g(t),
+\]
+
+Starting from the associated homogenous equation $dy/dt + a_0(t)y = 0$, \[
+    \frac{dy}{y} = -a_0(t)dt
+\] so that \[
+    \ln y = -\int_{}^{} a_0(t) \, dt + \ln C \Longrightarrow y(t) = Ce ^{-\int_{}^{} a_0(t) \, dt}.
+\]
+To obtain the solution of the original equation, let $C$ be a function of $t$ i.e. $y(t) = C(t)e ^{-\int_{}^{} a_0(t) \, dt}$.
+
+Substituting into the original equation, we get \[
+    y(t) = e ^{-\int_{}^{} a_0(t) \, dt}[C_1 + \int_{}^{} g(t)e ^{\int_{}^{} a_0(t) \, dt} \, dt].
+\]
+
+\subsubsection{Linear case with constant coefficients}
+\[
+    \frac{dy}{dt} = ay+b
+\]
+We get \[
+    y(t) = Ae ^{at} - \frac{b}{a}
+\]
+
+\subsection{Linear Differential Equations of Order $n$}
+
+\subsubsection{Linear Differential Equations of Order $n$}
+
+\begin{definition}
+    A \textbf{$n$-order linear differential equation} is an expression of the form \[
+        \frac{d^ny}{dt^n} + a_{n-1}(t)\frac{d ^{n-1}y}{dt ^{n-1}} + \cdots + a_1(t)\frac{dy}{dt} + a_0(t)y = g(t), \, \text{for } t_0 \leq t \leq t_1.
+    \]
+
+    When $g(t) = 0$, we say that the equation is homogenous.
+\end{definition}
+
+\begin{definition}
+    A general solution is a function \(y = \phi (t, C_{1}, C_{2}, \ldots , C_{n})\) - where \(C_{1}, \ldots , C_{n}\) are \(n\) arbitrary constants- such that (i) satisfies the differential equation for any \(C_{1}, \ldots , C_{n}\) and (ii) for any initial condition \(y(t_{0}) = b_{0}\), \(y'(t_{0}) = b_{1}, \ldots , y^{(n - 1)}(t_{0}) = b_{n - 1}, \exists C_{1}^{0}, \ldots , C_{n}^{0}: \phi (t_{0}, C_{1}^{0}, \ldots , C_{n}^{0})\) satisfies the aforementioned conditions.
+\end{definition}
+
+\begin{definition}
+    \(\phi (t, C_{1}^{0}, \ldots , C_{n}^{0})\) is called a particular solution.
+\end{definition}
+Definition 19.3
+Theorem 19.1 (Existence and Uniqueness of Solutions)
+\begin{theorem}
+    If \(a_{0}(t), \ldots , a_{n - 1}(t), g(t)\) are continuous on \([t_{0}, t_{1}]\), then for each set of values \(b_{0}, b_{1}, \ldots , b_{n - 1}\) the equation has one unique solution satisfying
+    \[
+        y(t_{0}) = b_{0}, y^{\prime}(t_{0}) = b_{1},\ldots , y^{(n - 1)}(t_{0}) = b_{n - 1}.
+    \]
+\end{theorem}
+
+\begin{theorem}
+    Let \(y_{1}(t)\) be a particular solution of the n-order linear differential equation. Then, \(y(t)\) is a solution iff \(y(t) = y_{1}(t) + z(t)\), where \(z(t)\) is solution of the homogenous equation associated to it.
+\end{theorem}
+
+
+\begin{theorem}
+    Let \(z_{1}(t), z_{2}(t), \ldots , z_{m}(t)\) be solutions of the homogenous equation associated to the n-order linear differential equations. Then, for all constants \(c_{1}, \ldots , c_{m}\),
+    \[
+        z(t) = c_{1}z_{1}(t) + c_{2}z_{2}(t) + \dots + c_{m}z_{m}(t)
+    \]
+    is also a solution of the homogenous equation.
+\end{theorem}
+
+\begin{definition}
+    The \textbf{fundamental set of solutions} of the homogenous equation associated to the n-order linear differential equation is the set \(\{\bar{z}_{1}(t), \ldots , \bar{z}_{n}(t)\}\) where \(\bar{z}_{i}(t)\) is the particular solutions that verifies \(\bar{z}_{i}^{(i - 1)}(t_{0}) = 1\) and \(\bar{z}_{i}^{(j)}(t_{0}) = 0\) for \(j \neq i - 1\).
+\end{definition}
+
+\begin{definition}
+    Let \(\{\bar{z}_{1}(t),\dots,\bar{z}_{n}(t)\}\) be
+    fundamental set of solutions of the homogenous equation associated to the n-order linear differential equation. Then, for any solution \(z(t)\) of the homogenous equation there exist constants \(c_{1},\ldots ,c_{n}\) such that
+    \[
+        z(t) = c_{1}\bar{z}_{1}(t) + c_{2}\bar{z}_{2}(t) + \dots +c_{n}\bar{z}_{n}(t).
+    \]
+\end{definition}
+
+\begin{definition}
+    Consider the functions \(x_{1}(t),x_{2}(t),\ldots x_{m}(t)\), defined for \(t\in [t_{0},t_{1}]\). We say they are \textbf{linearly independent} if
+    \[
+        c_{1}x_{1}(t) + c_{2}x_{2}(t) + \dots +c_{m}x_{m}(t) = 0, \forall t\in [t_{0},t_{1}]
+    \]
+    implies \(c_{1} = c_{2} = \dots = c_{m} = 0\).
+\end{definition}
+
+
+\begin{theorem}
+    Let \(z_{1}(t), z_{2}(t), \ldots , z_{n}(t)\) be a l.i. set of solutions of the homogenous equation associated to the n-order linear differential equation. Then, any solution can be expressed as a linear combination of \(z_{1}(t), z_{2}(t), \ldots , z_{n}(t)\).
+\end{theorem}
+
+\subsection{The Solution of N-order Linear Differential Equations with Constant Coefficients}
+
+Consider the differential equation like this:
+\[
+    \frac{d^ny}{dt^n} + a_{n-1}\frac{d ^{n-1}y}{dt ^{n-1}} + \cdots + a_1\frac{dy}{dt} + a_0y = g(t), \, \text{for } t_0 \leq t \leq t_1.
+\]
+Using \textbf{characteristic equation} to solve homogenous equations:
+\[
+    \lambda^{n} + a_{n - 1}\lambda^{n - 1} + \dots +a_{1}\lambda +a_{0} = 0
+\]
+
+\begin{enumerate}
+    \item Distinct real roots: ($\lambda_1, \lambda_2,\dots,\lambda_n$)\[
+              z(t) = c_1e ^{\lambda_1t} + c_2e ^{\lambda_2t} + \cdots + c_ne ^{\lambda_nt}.
+          \]
+    \item Repeated real roots: (Assume $\lambda_1$ repeated $r$ times)\[
+              z_1(k) = (c_1 + c_2t+c_3t ^{2} + \cdots + c_r t ^{r-1})e ^{\lambda_1t}.
+          \]
+    \item Complex roots: ($\lambda_1 = a\pm bi$) \[
+              z_1(t) = 2e ^{at}[\alpha \cos(bt) - \beta \sin(bt)] \qquad \text{(where $\alpha$ and $\beta$ are constants)}
+          \]
+    \item Repeated complex roots: (Assume $\lambda_1 = a\pm bi$ repeated $r$ times) \begin{align*}
+              z_1(t) = & 2e ^{at}[\alpha_1 \cos(bt) - \beta_1 \sin(bt)]                                                                              \\
+                       & + 2te ^{at}[\alpha_2 \cos(bt) - \beta_2 \sin(bt)]                                                                           \\
+                       & \qquad \vdots                                                                                                               \\
+                       & + 2t^{r-1} e^{at}[\alpha_r \cos(bt) - \beta_r \sin(bt)]                                                                     \\
+              \text{, or}                                                                                                                            \\
+              z_1(t) = & 2e ^{at}[(\alpha_1 +\alpha_2t + \dots + \alpha_rt ^{r-1})\cos(bt) - (\beta_1 + \beta_2t + \dots + \beta_rt ^{r-1})\sin(bt)]
+          \end{align*}
+\end{enumerate}
+
+Then find a particular solution using table \ref{tab:particular_solutions}.
+
+\begin{remark*} \textbf{Compare Difference's and Differential's Complex Roots Situation}:
+
+    Assume $\lambda_1 = a+bi, \lambda_2 = a-bi$.
+
+    \textbf{Difference Equations:} $z(t) = c_1\lambda_1 ^{t} + c_2\lambda_2 ^{t}$.
+
+    To make power calculation convenient, we need to use \textbf{Euler's Formula} $re ^{i\theta} = r[\cos(\theta) + \sin(\theta)]$ where $r = \sqrt{a ^{2} + b ^{2}}, \theta = \arctan (b/a)$.
+
+    So $\lambda_1 = r_1 e ^{\theta_1 i}, \lambda_2 = r_1 e ^{-\theta_1 i}$. We can get \begin{align*}
+        z(t) & = c_1 r_1 ^{t} e ^{\theta_1 it} + c_2 r_1 ^{t} e ^{-\theta_1 it}                                  \\
+             & = r_1 ^{t}\Big[c_1e ^{\theta_1 it}  + c_2 e ^{-\theta_1 it} \Big]                                 \\
+             & = r_1^{t}\{c_1 [\cos(\theta_1t) - \sin(\theta_1t)]  + c_2 [\cos(-\theta_1t) - \sin(-\theta_1t)]\} \\
+             & = r_1^{t}\Big[(c_1+c_2)\cos(\theta_1t) + (c_2 - c_1)\sin(\theta_1t)\Big]                          \\
+             & = r_1^{t}\Big[A\cos(\theta_1t) + B\sin(\theta_1t)\Big]
+    \end{align*}
+
+    \textbf{Differential Equations:} $z(t) = c_1 e ^{\lambda_1 t} + c_2e ^{\lambda_2 t}$. \begin{align*}
+        z(t) & = c_1 e ^{(a+bi) t} + c_2e ^{(a-bi) t}                              \\
+             & = e ^{a} \Big[c_1 e ^{bti} + c_2 e ^{-bti}\Big]                     \\
+             & = e ^{a} \{c_1 [\cos(bt) + \sin(bt)]+ c_2 [\cos(-bt) + \sin(-bt)]\} \\
+             & = e ^{a} \Big[(c_1 + c_2)\cos(bt) + (c_1-c_2)\sin(bt)\Big]          \\
+             & = e ^{a} \Big[A \cos(bt) + B \sin(bt)\Big]
+    \end{align*}
+\end{remark*}
+
+\section{First-order System of Differential Equations}
+
+\begin{definition}
+    An \textbf{\(n\)-dimensional linear system of differential
+        equations} can be defined as
+    \[
+        \left\{ \begin{array}{l l}{\dot{x}_{1}(t) = a_{11}(t)x_{1}(t) + \dots +a_{1n}(t)x_{n}(t) + b_{11}(t)u_{1}(t) + \dots}\\ {\qquad \vdots}\\ {\dot{x}_{n}(t) = a_{n1}(t)x_{1}(t) + \dots +a_{n n}(t)x_{n}(t) + \dots +b_{n m}(t)u_{m}(t)} \end{array} \right.
+    \]
+    where \(\dot{x}_i(t) = dx_i(t) / dt\) , and \(x_i(t)\) 's - for \(i = 1, \ldots , n\) - are called \textbf{state variables}. \(u_i(t)\) 's - for \(i = 1, \ldots , m\) - are called \textbf{control- or input- variables}. \(a_{ij}(t)\)'s and \(b_{hl}(t)\)'s are called \textbf{parameters} or \textbf{coefficients}.
+
+    In matrix notation,
+    \[
+        \dot{\mathbf{x}} (t) = \mathbf{A}(t)\mathbf{x}(t) + \mathbf{B}(t)\mathbf{u}(t) \tag{1}
+    \]
+\end{definition}
+
+
+\subsection{From a linear differential equation of order \(n\) to a \(\mathbf{1}^{st}\)-order system}
+
+\[
+    \frac{d^{n}y}{dt^{n}} +a_{n - 1}(t)\frac{d^{n - 1}y}{dt^{n - 1}} +\dots +a_{1}(t)\frac{dy}{dt} +a_{0}(t)y = u(t),
+\]
+
+and define
+\(x_{1}(t) = y(t), x_{2}(t) = dy / dt, \ldots , x_{n}(t) = d^{n - 1}y / dt^{n - 1}\)
+, then clearly
+
+\[
+    \left\{ \begin{array}{c}\dot{x}_1(t) = x_2(t)\\ \vdots \\ \dot{x}_{n - 1}(t) = x_n(t)\\ \dot{x}_n(t) = -a_0(t)x_1(t) - \dots -a_{n - 1}(t)x_n(t) + u(t). \end{array} \right.
+\]
+
+In matrix form:
+
+\[
+    \mathbf{A}(t) = \left( \begin{array}{cccc}0 & 1 & \dots & 0\\ \vdots & & \ddots & \\ 0 & \dots & 0 & 1\\ -a_0(t) & -a_1(t) & \dots & -a_{n - 1}(t) \end{array} \right), \mathbf{B}(t) = \left( \begin{array}{c}0\\ \vdots \\ 0\\ 1 \end{array} \right).
+\]
+
+
+\subsection{Homogenous System}
+
+
+\[
+    \dot{\mathbf{x}} (t) = \mathbf{A}(t)\mathbf{x}(t). \tag{2}
+\]
+
+\begin{proposition}[Existence and uniqueness of solution]
+    If the elements of \(\mathbf{A}(t)\) in (2) are continuous functions of \(t\) , then the system given in (2) has a unique solution corresponding to each \(\mathbf{x}(0)\).
+\end{proposition}
+
+\begin{proposition}
+    Let \(\mathbf{x}^{1}(t), \mathbf{x}^{2}(t), \ldots, \mathbf{x}^{m}(t)\) be solutions of the homogenous system (2). Then, for all constants \(c_{1}, \ldots, c_{m}\),
+    \[
+        \mathbf{x}(t) = c_{1}\mathbf{x}^{1}(t) + c_{2}\mathbf{x}^{2}(t) + \dots + c_{m}\mathbf{x}^{m}(t)
+    \]
+    is also a solution of the homogenous equation.
+\end{proposition}
+
+\begin{definition}
+    We call \textbf{state-transition matrix} of (2) to the matrix \(\phi (t, \tau)\) that satisfies
+    \[
+        \left\{ \begin{array}{ll}(a):\frac{d}{dt}\phi (t,\tau) = \mathbf{A}(t)\phi (t,\tau),\\ (b):\phi (\tau ,\tau) = I. \end{array} \right.
+    \]
+
+    \textit{Interpretation}: For fixed \(\tau\), each column of \(\phi (t, \tau)\) is a vector which depends on \(t\) and that, since satisfies \((a)\), solves (2). Moreover, because of \((b)\), the vectors of \(\phi (t, \tau)\) when \(t = \tau\) coincide with the canonical basis in \(\mathbb{R}^{n}\). Therefore, by finding \(n\) solutions of the system such that \(\phi (\tau , \tau) = I\) we have found \(\phi (t, \tau)\).
+
+    \textbf{Property}: Suppose \(\mathbf{x}(t)\) is a solution of the homogenous system (2). Then, for fixed \(\tau\), it is verified that for any \(t\),
+    \[
+        \mathbf{x}(t) = \phi (t,\tau)\mathbf{x}(\tau).
+    \]
+\end{definition}
+
+\begin{remark*}
+    Given initial conditions in some \(\tau\), and given a   state-transition matrix, then we know the unique solution to the system (i.e.~\(\phi (t, \tau) \mathbf{X}(\tau)\)).
+\end{remark*}
+
+
+\begin{definition}[l.i. functions]
+    Let \(\mathbf{x}^{1}(t), \mathbf{x}^{2}(t), \ldots , \mathbf{x}^{m}(t)\) be vector functions of a real variable \(t\) i.e.~\(\mathbf{x}^{i}: [t_{0}, t_{1}] \to \mathbb{R}^{n}\), for \(i = 1, \ldots , m\). We say that \(\mathbf{x}^{1}, \ldots , \mathbf{x}^{m}\) are l.i. if
+
+    \[
+        c_{1} \mathbf{x}^{1}(t) + c_{2} \mathbf{x}^{2}(t) + \dots + c_{m} \mathbf{x}^{m}(t) = 0
+    \]
+    for all \(t \in [t_{0}, t_{1}]\) implies \(c_{1} = c_{2} = \dots = 0\), for constants \(c_{i}, i = 1, \ldots , m\).
+\end{definition}
+
+\begin{definition}
+    A \textbf{fundamental set of solutions} is a set \(\{\mathbf{x}^{1}(t), \mathbf{x}^{2}(t), \ldots , \mathbf{x}^{n}(t)\}\) consisting on \(n\) l.i. solutions of the homogenous system (2).
+\end{definition}
+
+\begin{definition}
+    A \textbf{fundamental matrix of solutions} is a matrix whose
+    columns constitute a fundamental set of solutions. Let
+    \[
+        \mathbf{X}(t) = [\mathbf{x}_1(t),\mathbf{x}_2(t),\dots,\mathbf{x}_n(t)] \quad (\text{fundamental matrix}).
+    \]
+
+    Notice that \(\dot{\mathbf{X}} (t) = \mathbf{A}(t)\mathbf{X}(t)\).
+\end{definition}
+
+\begin{proposition}
+    A \textbf{fundamental matrix of solutions} \(\mathbf{X}(t)\) is nonsingular for all \(t\).
+\end{proposition}
+
+\begin{proposition}
+    Let \(\mathbf{X}(t)\) be a \textbf{fundamental matrix of solutions} corresponding to the homogenous system (2). Then, the state-transition matrix \(\phi (t, \tau)\) can be obtained as
+    \[
+        \phi (t, \tau) = \mathbf{X}(t) \mathbf{X}^{-1}(\tau).
+    \]
+\end{proposition}
+
+\subsubsection{Time-invariant system} $\mathbf{A}(t) = \mathbf{A} \Longrightarrow \phi (t, \tau) = e^{\mathbf{A}(t - \tau)}$ for $\dot{\mathbf{x}} (t) = \mathbf{A} \mathbf{x}(t) \Longrightarrow \mathbf{x}(t) = e^{\mathbf{A}t}\mathbf{x}(0)$.
+
+\subsection{Full System}
+
+The solution to (1), in terms of \(\mathbf{x}(0)\) and
+the inputs is
+\[
+    \mathbf{x}(t) = \phi (t,0)\mathbf{x}(0) + \int_{0}^{t}\phi (t,\tau)\mathbf{B}(\tau)\mathbf{u}(\tau)d\tau .
+\]
+
+\subsubsection{Time-invariant system} $\mathbf{A}(t) = \mathbf{A} \Longrightarrow \mathbf{x}(t) = e^{\mathbf{A}t}\mathbf{x}(0) + \int_{0}^{t}e^{\mathbf{A}(t - \tau)}\mathbf{B}(\tau)\mathbf{u}(\tau)d\tau$
+
+
+
