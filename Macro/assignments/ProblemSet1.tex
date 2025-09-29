@@ -1,0 +1,567 @@
+% --- LaTeX Homework Template - S. Venkatraman ---
+
+% --- Set document class and font size ---
+
+\documentclass[letterpaper, 11pt]{article}
+
+% --- Package imports ---
+
+\usepackage{
+  amsmath, amsthm, amssymb, mathtools, dsfont,	  % Math typesetting
+  graphicx, wrapfig, subfig, float,                  % Figures and graphics formatting
+  listings, color, inconsolata, pythonhighlight,     % Code formatting
+  fancyhdr, sectsty, hyperref, enumerate, enumitem } % Headers/footers, section fonts, links, lists
+
+% --- Page layout settings ---
+
+% Set page margins
+\usepackage[left=1.35in, right=1.35in, bottom=1in, top=1.1in, headsep=0.2in]{geometry}
+
+% Anchor footnotes to the bottom of the page
+\usepackage[bottom]{footmisc}
+\usepackage{xcolor}
+
+% Set line spacing
+\renewcommand{\baselinestretch}{1}
+
+% Set spacing between paragraphs
+\setlength{\parskip}{1.5mm}
+
+% Allow multi-line equations to break onto the next page
+\allowdisplaybreaks
+
+% Enumerated lists: make numbers flush left, with parentheses around them
+\setlist[enumerate]{wide=0pt, leftmargin=21pt, labelwidth=0pt, align=left}
+\setenumerate[1]{label={(\arabic*)}}
+
+% --- Page formatting settings ---
+
+% Set link colors for labeled items (blue) and citations (red)
+\hypersetup{colorlinks=true, linkcolor=blue, citecolor=red}
+
+% Make reference section title font smaller
+\renewcommand{\refname}{\large\bf{References}}
+
+% --- Settings for printing computer code ---
+
+% Define colors for green text (comments), grey text (line numbers),
+% and green frame around code
+\definecolor{greenText}{rgb}{0.5, 0.7, 0.5}
+\definecolor{greyText}{rgb}{0.5, 0.5, 0.5}
+\definecolor{codeFrame}{rgb}{0.5, 0.7, 0.5}
+
+% Define code settings
+\lstdefinestyle{code} {
+  frame=single, rulecolor=\color{codeFrame},            % Include a green frame around the code
+  numbers=left,                                         % Include line numbers
+  numbersep=8pt,                                        % Add space between line numbers and frame
+  numberstyle=\tiny\color{greyText},                    % Line number font size (tiny) and color (grey)
+  commentstyle=\color{greenText},                       % Put comments in green text
+  basicstyle=\linespread{1.1}\ttfamily\footnotesize,    % Set code line spacing
+  keywordstyle=\ttfamily\footnotesize,                  % No special formatting for keywords
+  showstringspaces=false,                               % No marks for spaces
+  xleftmargin=1.95em,                                   % Align code frame with main text
+  framexleftmargin=1.6em,                               % Extend frame left margin to include line numbers
+  breaklines=true,                                      % Wrap long lines of code
+  postbreak=\mbox{\textcolor{greenText}{$\hookto$}\space} % Mark wrapped lines with an arrow
+}
+
+% Set all code listings to be styled with the above settings
+\lstset{style=code}
+
+% --- Math/Statistics commands ---
+
+% Add a reference number to a single line of a multi-line equation
+% Usage: "\numberthis\label{labelNameHere}" in an align or gather environment
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+% Shortcut for bold text in math mode, e.g. $\b{X}$
+\let\b\mathbf
+
+% Shortcut for bold Greek letters, e.g. $\bg{\beta}$
+\let\bg\boldsymbol
+
+% Shortcut for calligraphic script, e.g. %\mc{M}$
+\let\mc\mathcal
+
+% \mathscr{(letter here)} is sometimes used to denote vector spaces
+\usepackage[mathscr]{euscript}
+
+% Convergence: right arrow with optional text on top
+% E.g. $\converge[w]$ for weak convergence
+\newcommand{\converge}[1][]{\xto{#1}}
+
+% Normal distribution: arguments are the mean and variance
+% E.g. $\normal{\mu}{\sigma}$
+\newcommand{\normal}[2]{\mathcal{N}\left(#1,#2\right)}
+
+% Uniform distribution: arguments are the left and right endpoints
+% E.g. $\unif{0}{1}$
+\newcommand{\unif}[2]{\text{Uniform}(#1,#2)}
+
+% Independent and identically distributed random variables
+% E.g. $ X_1,...,X_n \iid \normal{0}{1}$
+\newcommand{\iid}{\stackrel{\smash{\text{iid}}}{\sim}}
+
+% Equality: equals sign with optional text on top
+% E.g. $X \equals[d] Y$ for equality in distribution
+\newcommand{\equals}[1][]{\stackrel{\smash{#1}}{=}}
+
+% Math mode symbols for common sets and spaces. Example usage: $\R$
+\newcommand{\R}{\mathbb{R}}   % Real numbers
+\newcommand{\C}{\mathbb{C}}   % Complex numbers
+\newcommand{\Q}{\mathbb{Q}}   % Rational numbers
+\newcommand{\Z}{\mathbb{Z}}   % Integers
+\newcommand{\N}{\mathbb{N}}   % Natural numbers
+\newcommand{\F}{\mathcal{F}}  % Calligraphic F for a sigma algebra
+\newcommand{\El}{\mathcal{L}} % Calligraphic L, e.g. for L^p spaces
+
+% Math mode symbols for probability
+\newcommand{\pr}{\mathbb{P}}    % Probability measure
+\newcommand{\E}{\mathbb{E}}     % Expectation, e.g. $\E(X)$
+\newcommand{\var}{\text{Var}}   % Variance, e.g. $\var(X)$
+\newcommand{\cov}{\text{Cov}}   % Covariance, e.g. $\cov(X,Y)$
+\newcommand{\corr}{\text{Corr}} % Correlation, e.g. $\corr(X,Y)$
+\newcommand{\B}{\mathcal{B}}    % Borel sigma-algebra
+
+% Other miscellaneous symbols
+\newcommand{\tth}{\text{th}}	% Non-italicized 'th', e.g. $n^\tth$
+\newcommand{\Oh}{\mathcal{O}}	% Big-O notation, e.g. $\O(n)$
+\newcommand{\1}{\mathds{1}}	% Indicator function, e.g. $\1_A$
+
+% Additional commands for math mode
+\DeclareMathOperator*{\argmax}{argmax}    % Argmax, e.g. $\argmax_{x\in[0,1]} f(x)$
+\DeclareMathOperator*{\argmin}{argmin}    % Argmin, e.g. $\argmin_{x\in[0,1]} f(x)$
+\DeclareMathOperator*{\spann}{Span}       % Span, e.g. $\spann\{X_1,...,X_n\}$
+\DeclareMathOperator*{\bias}{Bias}        % Bias, e.g. $\bias(\hat\theta)$
+\DeclareMathOperator*{\ran}{ran}          % Range of an operator, e.g. $\ran(T) 
+\DeclareMathOperator*{\dv}{d\!}           % Non-italicized 'with respect to', e.g. $\int f(x) \dv x$
+\DeclareMathOperator*{\diag}{diag}        % Diagonal of a matrix, e.g. $\diag(M)$
+\DeclareMathOperator*{\trace}{trace}      % Trace of a matrix, e.g. $\trace(M)$
+
+% Numbered theorem, lemma, etc. settings - e.g., a definition, lemma, and theorem appearing in that 
+% order in Section 2 will be numbered Definition 2.1, Lemma 2.2, Theorem 2.3. 
+% Example usage: \begin{theorem}[Name of theorem] Theorem statement \end{theorem}
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+
+% Un-numbered theorem, lemma, etc. settings
+% Example usage: \begin{lemma*}[Name of lemma] Lemma statement \end{lemma*}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{corollary*}{Corollary}
+\newtheorem*{definition*}{Definition}
+\newtheorem*{example*}{Example}
+\newtheorem*{remark*}{Remark}
+\newtheorem*{claim}{Claim}
+
+% --- Left/right header text (to appear on every page) ---
+
+% Include a line underneath the header, no footer line
+\pagestyle{fancy}
+\renewcommand{\footrulewidth}{0pt}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% Left header text: course name/assignment number
+\lhead{Macro I - Problem Set 1}
+
+% Right header text: your name
+\rhead{Zian Gong}
+
+% --- Document starts here ---
+
+\begin{document}
+
+\bigskip
+\hrule
+\bigskip
+
+\textbf{Exercise 1}
+
+(a)
+
+A typical Cobb-Douglas function is like \[
+  F(K,L) = K^\alpha L^{1-\alpha} \qquad 0<\alpha<1
+\]
+
+The properties of neoclassical production function are \begin{itemize}
+  \item Constant returns to scale.
+  \item Positive and diminishing marginal returns.
+  \item Inada conditions.
+\end{itemize}
+
+1. Constant returns to scale \[
+  F(\lambda K, \lambda L) = (\lambda K)^\alpha(\lambda L)^{1-\alpha} = \lambda K^\alpha L^{1-\alpha}
+\]
+
+2. Positive and diminishing marginal returns \begin{align*}
+   & F_K = \alpha (\frac{L}{K})^{1-\alpha} > 0 \qquad   &  & F_{KK} = (\alpha)(\alpha - 1)K^{\alpha -2}L^{1-\alpha} < 0 \\
+   & F_L = (1-\alpha) (\frac{K}{L})^{\alpha} > 0 \qquad &  & F_{LL} = (1-\alpha)(-\alpha-1)K^\alpha L^{-\alpha-1} < 0
+\end{align*}
+
+3. Inada conditions \begin{align*}
+   & \lim_{K \to 0} F_K  = \lim_{K \to 0}\alpha (\frac{L}{K})^{1-\alpha} = \infty \qquad   &  & \lim_{K \to \infty} F_K  =\lim_{K \to \infty}  \alpha (\frac{L}{K})^{1-\alpha}= 0   \\
+   & \lim_{L \to 0} F_L = \lim_{L \to 0}(1-\alpha) (\frac{K}{L})^{\alpha}  = \infty \qquad &  & \lim_{L \to \infty} F_L = \lim_{L \to \infty} (1-\alpha) (\frac{K}{L})^{\alpha} = 0
+\end{align*}
+
+(b)
+
+CES production function satisfies these conditions. \[
+  Y = F(K,L) =\left[ \alpha K^{\sigma}  + (1-\alpha)L ^{\sigma}\right]^{1/\sigma} \qquad \sigma < 1
+\]
+
+1. Constant returns to scale \begin{align*}
+   & F(\lambda K, \lambda L) = \left[ \alpha (\lambda K)^{\sigma}  + (1-\alpha)(\lambda L) ^{\sigma}\right]^{1/\sigma} \\
+   & = \left[\alpha \lambda^{\sigma}K^{\sigma} + (1-\alpha)\lambda^{\sigma}L^{\sigma}\right]^{1/\sigma}                \\
+   & = \lambda \left[ \alpha K^{\sigma}  + (1-\alpha)L ^{\sigma}\right]^{1/\sigma}
+\end{align*}
+
+2. Positive and diminishing marginal returns \begin{align*}
+   & F_K = \left[ \alpha K^{\sigma}  + (1-\alpha)L ^{\sigma}\right]^{1/\sigma - 1}\alpha K^{\sigma - 1}  > 0                   \\
+   & F_{KK} = [\alpha K^\sigma + (1-\alpha)L^\sigma]^{1/\sigma - 2} \alpha(1-\alpha)(\sigma - 1) K^{\sigma - 2}L^{\sigma} < 0  \\
+   & F_L = \left[ \alpha K^{\sigma}  + (1-\alpha)L ^{\sigma}\right]^{1/\sigma - 1}(1- \alpha )L^{\sigma - 1}  > 0              \\
+   & F_{LL} = [\alpha K^\sigma + (1-\alpha)L^\sigma]^{1/\sigma - 2} \alpha(1-\alpha)(\sigma - 1) L^{\sigma - 2} K^{\sigma} < 0
+\end{align*}
+
+3. Inada conditions \begin{align*} % TODO:
+   & \lim_{K \to 0}F_K = \lim_{K \to 0} \left[ \alpha K^{\sigma}  + (1-\alpha)L ^{\sigma}\right]^{1/\sigma - 1}\alpha K^{\sigma - 1} = \infty              \\
+   & \lim_{K \to \infty} F_K = \lim_{K \to \infty} \left[ \alpha K^{\sigma}  + (1-\alpha)L ^{\sigma}\right]^{1/\sigma - 1}\alpha K^{\sigma - 1} = 0        \\
+   & \lim_{L \to 0}F_L = \lim_{L \to 0}  \left[ \alpha K^{\sigma}  + (1-\alpha)L ^{\sigma}\right]^{1/\sigma - 1}(1- \alpha )L^{\sigma - 1} = \infty \qquad \\
+   & \lim_{L \to \infty} F_L = \lim_{L \to \infty} \left[ \alpha K^{\sigma}  + (1-\alpha)L ^{\sigma}\right]^{1/\sigma - 1}(1- \alpha )L^{\sigma - 1} = 0   \\
+\end{align*}
+
+(c)
+
+\[
+  \text{MRTS} = \frac{MPK}{MPL} = \frac{\left[ \alpha K^{\sigma}  + (1-\alpha)L ^{\sigma}\right]^{1/\sigma - 1}\alpha K^{\sigma - 1}}{\left[ \alpha K^{\sigma}  + (1-\alpha)L ^{\sigma}\right]^{1/\sigma - 1}(1- \alpha )L^{\sigma - 1}} = \frac{\alpha K^{\sigma -1}}{(1-\alpha)L^{\sigma - 1}}
+\]
+
+\[
+  1/\varepsilon = \frac{d\ln MRTS}{d\ln (K/L)} = \sigma - 1
+\]
+
+\[
+  \left| \varepsilon \right|  = \frac{1}{1-\sigma}
+\]
+
+(d)
+
+\[
+  \text{ratio} = \frac{MPL \cdot L}{MRK \cdot  K} = \frac{(1-\alpha )L^{\sigma}}{\alpha K^{\sigma}}
+\]
+
+(e)
+
+\begin{align*}
+   & \lim_{\sigma \to 0} \left[ \alpha K^{\sigma}  + (1-\alpha)L ^{\sigma}\right]^{1/\sigma} = \lim_{\sigma \to 0} e^{\frac{1}{\sigma}\ln[\alpha K^\sigma + (1-\alpha)L^\sigma]}                          \\
+   & \lim_{\sigma \to 0} \frac{1}{\sigma}\ln[\alpha K^\sigma + (1-\alpha)L^\sigma] = \lim_{\sigma \to 0} \frac{\alpha K^{\sigma}\ln K + (1-\alpha)L^{\sigma} \ln L}{\alpha K^\sigma + (1-\alpha)L^\sigma} \\
+   & = \alpha \ln K + (1-\alpha) \ln L                                                                                                                                                                    \\
+   & \lim_{\sigma \to 0} \left[ \alpha K^{\sigma}  + (1-\alpha)L ^{\sigma}\right]^{1/\sigma} = e ^{\alpha \ln K + (1-\alpha) \ln L} = K^{\alpha}L^{1-\alpha}
+\end{align*}
+
+When $\sigma \to 0$, CES production function becomes a Cobb-Douglas function.
+
+(f)
+
+production function per worker: \[
+  f(k) = [\alpha k^{\sigma} + (1-\alpha)]^{1/\sigma}
+\]
+\[
+  \dot{k}_t = sf(k) - (n + \delta) k
+\]
+\[
+  \frac{\dot{k}_t}{k} = \frac{sf(k)}{k} - (n+\delta) = \frac{s[\alpha k^{\sigma} + (1-\alpha)]^{1/\sigma}}{k} - (n + \delta)
+\]
+\[
+  \lim_{k \to \infty} \frac{\dot{k}_t}{k} = \lim_{k \to \infty}  s\Big[ \alpha + \frac{1-\alpha}{k^\sigma} \Big]^{1/\sigma} - (n+\delta) = \left\{\begin{array}{l}
+    s\sigma^{1/\sigma} - (n+\sigma), \sigma > 0 \\
+    -(n+\sigma), \sigma \leq 0                  \\
+  \end{array}\right.
+\]
+
+If $\sigma \leq 0$, the economy will not grow. If $0<\sigma<1$, it will have a constant growth.
+
+\bigskip
+\hrule
+\bigskip
+
+\textbf{Exercise 2}
+
+(a)
+
+
+1. Constant returns to scale \begin{align*}
+   & F(\lambda K, \lambda L) = A(\lambda K) + B (\lambda K)^{\alpha}(\lambda L)^{1-\alpha} = \lambda (AK + B K^{\alpha}L^{1-\alpha}) = \lambda F(K,L)
+\end{align*}
+
+2. Positive and diminishing marginal returns \begin{align*}
+   & F_K = A + \alpha B (L/K)^{1-\alpha} > 0                     \\
+   & F_{KK} = \alpha(1-\alpha)BL^{1-\alpha}K^{\alpha-2} < 0      \\
+   & F_L =  (1-\alpha)B (K/L)^{\alpha}  > 0                      \\
+   & F_{LL} = (1-\alpha)(-\alpha-1)K^{\alpha}L^{-\alpha - 1} < 0
+\end{align*}
+
+3. Inada conditions \begin{align*}
+   & \lim_{K \to 0}F_K = \lim_{K \to 0} A + \alpha B (L/K)^{1-\alpha} = \infty       \\
+   & \lim_{K \to \infty} F_K = \lim_{K \to \infty} A + \alpha B (L/K)^{1-\alpha} = A \\
+   & \lim_{L \to 0}F_L = \lim_{L \to 0}  (1-\alpha)B (K/L)^{\alpha} = \infty         \\
+   & \lim_{L \to \infty} F_L = \lim_{L \to \infty} (1-\alpha)B (K/L)^{\alpha} = 0    \\
+\end{align*}
+
+It does not satisfy Inada conditions.
+
+(b)
+
+Given $\dot{K}_t = sF(K_t,L_t) - \delta K_t$, we have \[
+  \dot{k}_t = sf(k_t) - (n+\delta)k_t = s(Ak_t + B k_t^\alpha) - (n+\delta)k_t
+\]
+In BGP we need \[
+  \dot{k}_t/k_t = s(A + Bk_t^{\alpha-1}) - (n+\delta)
+\] is constant, then we have $\frac{d}{dt}(\frac{\dot{k}_t}{k_t}) = 0$. \[
+  sB(\alpha-1)k_t^{\alpha-2}\dot{k}_t = 0 \Longrightarrow \dot{k}_t = 0
+\]
+Then the steady state of $k$ is \[
+  k^*_t = \Big(\frac{sB}{n+\delta-sA}\Big)^{\frac{1}{1-\alpha}}
+\]
+
+In this model, all the economies will arrive at a steady state, in which, capital does not increase, and the output per capita will not increase.
+
+Therefore, ideally, if poor and rich countries have similar saving rates, depreciation rates and labor growth rates, they will converge in under this model.
+
+\bigskip
+\hrule
+\bigskip
+
+\textbf{Exercise 3}
+
+(a)
+
+Assume the Cobb-Douglas production function is \[
+  Y_t = K_t^\alpha (A_tL_t)^{1-\alpha}
+\]
+
+We have capital accumulation equation $\dot{K}_t = sF(K_t,A_tL_t) - \delta K_t$, rewrite it in per capita with technology terms, $k_t = \frac{K_t}{A_tL_t}$ \[
+  \dot{k}_t = s f(k_t) - (\delta + n + x)k_t
+\]
+
+In BGP we have $\dot{k}_t/k_t$ is constant \[
+  \dot{k}_t/k_t = s \frac{f(k_t)}{k_t} - (\delta + n + x)
+\] , with Cobb-Douglas production function we have $f(k_t) = k_t^{\alpha}$, then \[
+  \frac{d(\dot{k}_t/k_t)}{dt} = s (\alpha-1) k_t^{\alpha-2} \dot{k}_t = 0
+\] we have $\dot{k}_t = 0$
+
+Since $k_t = \frac{K_t}{A_tL_t}$, we have $\frac{K_t}{L_t} = A_tk_t$. \[
+  \ln(K_t/L_t) = \ln(A_t) + \ln(k_t) \Longrightarrow \frac{\dot{(K_t/L_t)}}{K_t/L_t} = \frac{\dot{A}_t}{A_t} + \frac{\dot{k}_t}{k_t} = x.
+\]
+
+Output per capital is given by $\frac{Y_t}{L_t} = {\frac{K_t}{L_t}}^\alpha A_t^{1-\alpha}$, we get its growth rate \[
+  \ln (Y_t/L_t) = \alpha\ln(K_t/L_t) + (1-\alpha) \ln(A_t) \Longrightarrow \frac{\dot{(Y_t/L_t)}}{Y_t/L_t} = \alpha x + (1-\alpha) + x = x
+\]
+
+(b)
+
+Use $\dot{k}_t =0$ it in former equation $\dot{k}_t/k_t = s(A + Bk_t^{\alpha-1}) - (n+\delta)$ \[
+  s k_t^{\alpha-1} = \delta + n + x \Longrightarrow k_t^{*} = \Big(\frac{\delta + n + x}{s}\Big)^{\frac{1}{\alpha-1}}
+\]
+
+The value of per capita capital is $\frac{K_t}{L_t} = A_t^{1-\alpha}k_t$, in BGP, \[
+  \Big(\frac{K_t}{L_t}\Big)^{*} = A_t^{1-\alpha} k^* = A_t^{1-\alpha} \Big(\frac{\delta + n + x}{s}\Big)^{\frac{1}{\alpha-1}}
+\]
+
+The value of per capita output is $\frac{Y_t}{L_t} = k_t^{\alpha}A_t^{1-\alpha}$, in BGP \[
+  \Big(\frac{Y_t}{L_t}\Big)^{*} = A_t^{1-\alpha}\Big(\frac{\delta + n + x}{s}\Big)^{\frac{\alpha}{\alpha-1}}
+\]
+
+Both The value of per capita capital and output will increase with technology.
+
+(c)
+
+From problem (a), we know facts \#1 (Per capita output grows at a constant rate) and \#2 (Physical capital per worker grows at a constant rate) are satisfied.
+
+Fact \#3: The rate of return of capital is nearly constant. \[
+  R_t = MPK_t = \alpha (L_tA_t/K_t)^{1-\alpha} = \alpha (k^*_t)^{\alpha-1} = \frac{\alpha s}{\delta+n+x}
+\]
+and it is true.
+
+Fact \#4: The ratio of capital to output is nearly constant.
+\[
+  \frac{K_t^*}{Y_t^*} = \frac{A_t^{1-\alpha} \Big(\frac{\delta + n + x}{s}\Big)^{\frac{1}{\alpha-1}}}{A_t^{1-\alpha}\Big(\frac{\delta + n + x}{s}\Big)^{\frac{\alpha}{\alpha-1}}} = \frac{s}{\delta + n + x}
+\]
+and it is true.
+
+Fact \#5: The shares of labor and capital in national income are constant.
+\[
+  \frac{W_tL_t}{Y_t} = \frac{MPL_t \cdot L_t}{Y_t} = \frac{K^{\alpha}A_t^{1-\alpha}(1-\alpha)L^{-\alpha} L_t}{K_t^{\alpha}A_t^{1-\alpha}L_t^{1-\alpha}} = 1-\alpha
+\]
+and it is true.
+
+
+(d)
+
+Using $c_t = f(k_t) - sf(k_t)$ and $c^A_t = A_tc_t$
+\[
+  c_t^* = f(k_t^*) - (n+\delta + x)k^*
+\]
+the FOC is \[
+  \frac{d}{dk_t^*}f(k_t^*) = (n+\delta + x) \Longrightarrow \alpha k_t^{* \alpha - 1} = n+ \delta + x \Longrightarrow k_t^{g*} = \Big(\frac{n+\delta+x}{\alpha}\Big)^{\frac{1}{\alpha-1}}
+\]
+
+since $k^* = \Big(\frac{\delta + n + x}{s}\Big)^{\frac{1}{\alpha-1}}$, \[
+  \frac{\delta + n + x}{s} = \frac{n+\delta+x}{\alpha} \Longrightarrow s = \alpha
+\]
+
+\bigskip
+\hrule
+\bigskip
+
+\textbf{Exercise 4}
+
+(a)
+
+We know $\frac{\dot{y}_t}{y_t}$ is constant and $y_t = f(k_t) = k_t^\alpha$, \[
+  \ln y_t = \ln f(k_t) = \alpha \ln k_t
+\] then \[
+  \frac{\dot{y}_t}{y_t} = \alpha \frac{\dot{k}_t}{k_t}
+\] we know $\frac{\dot{k}_t}{k_t}$ is also a constant.
+
+
+From $\dot{K}_t = A_tI_t-\delta K_t$, we can derive \[
+  \dot{k}_t = A_t sf(k_t) - (\delta +n)k_t = A_t s k_t^\alpha - (\delta+n)k_t
+\] then \[
+  \frac{\dot{k}_t}{k_t} = A_t s k_t^{\alpha-1} - (\delta + n)
+\]
+Since it is constant then \[
+  \frac{d}{dt}\Big(\frac{\dot{k}_t}{k_t}\Big) = s x A_t k_t^{\alpha-1} + sA_t(\alpha-1)k_t^{\alpha-2}\dot{k}_t =A_t k^{\alpha-1}[sx + s(\alpha-1)\frac{\dot{k}_t}{k_t}] = 0
+\] then \[
+  \frac{\dot{k}_t}{k_t} = \frac{sx}{s(1-\alpha)} = \frac{x}{1-\alpha}
+\]
+
+and \[
+  \frac{\dot{y}_t}{y_t} = \frac{\alpha x}{1-\alpha}
+\]
+
+Since $c_t = (1-s)y$ \[
+  \ln c_t = \ln (1-s) + \ln y
+\] \[
+  \frac{\dot{c}_t}{c_t} = \frac{\dot{y}_t}{y_t} = \frac{\alpha x}{1-\alpha}
+\]
+
+(b)
+
+This model implies with technology development, in balanced growth path, an economy can manage to stay a stable increasing rate in per capita output, capital and consumption, while the model in class shows these index will not increase but stay at a constant steady state.
+
+
+(c)
+
+From problem (b) we have $  \frac{\dot{k}_t}{k_t} = \frac{x}{1-\alpha}$. And
+\[
+  \frac{d(\ln k_t)}{dt} = \frac{\dot{k}_t}{k_t} = \frac{x}{1-\alpha} \Longrightarrow k_t = e^{\frac{x}{1-\alpha}t}
+\]
+
+We want to find a $\tilde{k}_t$, satisfies $\frac{\dot{\tilde{k}}_t}{\tilde{k}_t} = 0$ \[
+  \ln k_t - \ln \tilde{k}_t = \int_{}^{} \frac{x}{1-\alpha} \, dt = {\frac{x}{1-\alpha}t} \Longrightarrow \ln \frac{k_t}{\tilde{k}_t} = {\frac{x}{1-\alpha}t} \Longrightarrow \frac{k_t}{\tilde{k}_t} = e^{\frac{x}{1-\alpha}t}
+\]
+then we can define $\tilde{k}_t = {k_t}/{e^{\frac{x}{1-\alpha}t}}$. Then \[
+  \tilde{k}_t = \frac{K_t}{N_t e^{\frac{x}{1-\alpha}t}}
+\]
+
+From \[
+  \dot{K}_t = sA_tF(K_t,N_t) - \delta K_t
+\] then we can drive the capital accumulation equation with a new per capita measure \[
+  \dot{\tilde{k}}_t =  s \tilde{k}_t^\alpha - (n + \delta + \frac{x}{1-\alpha})\tilde{k}_t
+\]
+
+Using $\dot{\tilde{k}}_t  = 0$, we have \[
+  \tilde{k}_t^* = \Big(\frac{s}{n + \delta + \frac{x}{1-\alpha}}\Big)^{\frac{1}{1-\alpha}}
+\]
+
+Then the $\tilde{y}_t^*$ is \[
+  \tilde{y}_t^* = \tilde{k}_t^{\alpha} = \Big(\frac{s}{n + \delta + \frac{x}{1-\alpha}}\Big)^{\frac{\alpha}{1-\alpha}}
+\]
+
+\bigskip
+\hrule
+\bigskip
+
+\textbf{Problem 5}
+
+(a)
+
+i)
+\[
+  ln Y_t = \ln A_t + \alpha\ln K_t + \beta \ln N_t + (1-\alpha-\beta)\ln Z_t
+\]
+\[
+  \gamma_Y = \frac{\dot{Y}_t}{Y_t} = x + \alpha \frac{\dot{K}_t}{K_t} + \beta n
+\]
+
+We need $\frac{\dot{Y}_t}{Y_t}$ to be constant, so $\frac{\dot{K}_t}{K_t}$ should be constant.
+
+\[
+  \dot{K}_t = s Y_t - \delta K_t
+\] we have \[
+  \gamma_X = \frac{\dot{K}_t}{K_t} = s \frac{Y_t}{K_t} - \delta
+\] is constant.
+
+$Y_t/K_t$ should be constant, so $\gamma_Y = \gamma_K$, replace it back \[
+  \gamma_K = x + \alpha \gamma_K + \beta n
+\] , then \[
+  \gamma_K = \frac{x+\beta n}{1-\alpha}
+\]
+And \[
+  \gamma_Y =  \frac{x+\beta n}{1-\alpha}
+\]
+\[
+  \gamma_C = \gamma_Y =  \frac{x+\beta n}{1-\alpha}
+\]
+
+
+ii)
+\[
+  \hat{y}_t = Y_t/B_t \Longrightarrow \ln \hat{y}_t = \ln Y_t - \ln B_t
+\]
+
+\[
+  \frac{\dot{\hat{y}}_t}{y_t} = 0 \Longrightarrow  \frac{\dot{Y}_t}{Y_t} - \frac{\dot{B}_t}{B_t} = 0 \Longrightarrow \gamma_B = \gamma_Y = \frac{x + \beta n}{1-\alpha}
+\]
+\[
+  \ln B_t = \frac{x + \beta n}{1-\alpha} t \Longrightarrow B_t = e^{\frac{x + \beta n}{1-\alpha}t}
+\]
+
+(b)
+\[
+  y_t = Y_t/N_t \Longrightarrow \ln y_t = \ln Y_t - \ln N_t \Longrightarrow \gamma_y = \gamma_Y - n = \frac{x - n(1-\alpha-\beta)}{1-\alpha}
+\]
+per capita output does not in steady state.
+
+If $x > n(1-\alpha-\beta)$, then $\gamma_y > 0$, could have a positive growth.
+
+The condition means with some elements fixed like land, the technology development should be fast enough to offset the negative effect caused by increasing population and decreasing per capita fixed facts.
+
+
+(c)
+
+\[
+  \frac{\dot{k}_t}{k_t} = A_t k_t^{\alpha-1}z_t^{1-\alpha-\beta} - (n+\delta) = \frac{x - n(1-\alpha-\beta)}{1-\alpha}
+\]
+\[
+  k^*_t = \Big(\frac{A_t(1-\alpha)z_t^{1-\alpha-\beta}}{x + n \beta + \delta(1-\alpha)}\Big)^{\frac{1}{1-\alpha}}
+\]
+Assume $A_t = A_0 e^{xt}$ and \[
+  z_t = \frac{Z}{N_t} = \frac{Z}{N_0e^{nt}}
+\] replace them in former equation \[
+  k^*_t = \Big(\frac{A_0 e^{xt}(1-\alpha){\frac{Z}{N_0e^{nt}}}^{1-\alpha-\beta}}{x + n \beta + \delta(1-\alpha)}\Big)^{\frac{1}{1-\alpha}}
+\]
+
+
+% --- Document ends here ---
+
+\end{document}
+

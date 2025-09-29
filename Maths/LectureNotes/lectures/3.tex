@@ -6,7 +6,7 @@
 \begin{definition}
     A set $X$ is said to be a \textbf{\textit{metric space}} if $\forall p,q \in X$, there is an associated real number $d(p,q)$ called the distance from $p$ to $q$ such that:
     \begin{itemize}
-        \item $d(p,q)>0$ if $p \neq q$ and $d(p,q) = 0$ if $p=1$,
+        \item $d(p,q)>0$ if $p \neq q$ and $d(p,q) = 0$ if $p=q$,
         \item $d(p,q) = d(q,p)$, and
         \item $d(p,q) \leq d(p,r) + d(r,q), \forall r \in X$ (Triangle Inequality).
     \end{itemize}
@@ -51,7 +51,7 @@ We can define the following operations in $\mathbb{R}^{n}$:
         ||\mathbf{x}||_p = \Big(\sum_{i=1}^{n} |x_i|^p\Big)^{1/p}, \quad p \geq 1
     \end{equation*}
     \begin{remark*}
-        Euclidean norm is a spacial case of the $p$-norm with $p=2$.
+        Euclidean norm is a special case of the $p$-norm with $p=2$.
     \end{remark*}
 
 \end{definition}
@@ -111,19 +111,19 @@ We can define the following operations in $\mathbb{R}^{n}$:
     \end{equation*}
 \end{remark*}
 
-\begin{definition}[Interior Point]
+\begin{definition}[\textbf{Interior Point}]
     $\mathbf{x}$ is an Interior Point of $A$, if $\exists B(\mathbf{x},r) \subset A$.
 
     The \textbf{set} of all interior points of $A$ is the \textbf{interior} of $A$ and is denoted by $int(A)$.
 \end{definition}
 
-\begin{definition}[Exterior Point]
+\begin{definition}[\textbf{Exterior Point}]
     $\mathbf{x}$ is an Exterior Point of $A$, if $\exists B(\mathbf{x},r) \subset A^{c}$.
 
     The \textbf{set} of all exterior points of $A$ is the \textbf{exterior} of $A$ and is denoted by $ext(A)$.
 \end{definition}
 
-\begin{definition}[Boundary Point]
+\begin{definition}[\textbf{Boundary Point}]
     $\mathbf{x}$ is a Boundary Point of $A$, if $\forall B(\mathbf{x},r), B(\mathbf{x},r)\cap A \neq \emptyset,  B(\mathbf{x},r)\cap A^c \neq \emptyset$.
 
     The \textbf{set} of all boundary points of $A$ is the \textbf{boundary} of $A$ and is denoted by $bd(A)$.
@@ -133,7 +133,7 @@ We can define the following operations in $\mathbb{R}^{n}$:
     Let $A \subset \mathbb{R}^{n}$. Then $\mathbb{R}^{n}=int(A)\cup ext(A)\cup bd(A)$.
 \end{remark*}
 
-\begin{definition}[Open Set]
+\begin{definition}[\textbf{Open Set}]
     A set $A$ is an open set $\iff \forall \mathbf{x} \in A, \mathbf{x} \in int(A)$.
 \end{definition}
 Properties of open sets:
@@ -143,7 +143,7 @@ Properties of open sets:
     \item The intersection of finitely many open sets is open.
 \end{itemize}
 
-\begin{definition}[Closed Set]
+\begin{definition}[\textbf{Closed Set}]
     A set $A$ is a closed set $\iff A^c$ is an open set.
 \end{definition}
 Properties of closed sets:
@@ -155,7 +155,7 @@ Properties of closed sets:
 
 \section{Closure, Accumulation and Isolated Points}
 
-\begin{definition}[Closure Point]
+\begin{definition}[\textbf{Closure Point}]
     $\mathbf{x}$ is a closure point of $A$, if $\forall B(\mathbf{x},r), B(\mathbf{x},r) \cap A \neq \emptyset$.
 
     The \textbf{set} of all closure points of $A$ is the \textbf{closure} of $A$ and is denoted by $cl(A)$.
@@ -165,13 +165,13 @@ Properties of closed sets:
     $A$ is closed $\iff cl(A)=A$.
 \end{proposition}
 
-\begin{definition}[Accumulation Point]
+\begin{definition}[\textbf{Accumulation Point}]
     $\mathbf{x}$ is an accumulation point of $A$, if $\forall \mathring{B}(\mathbf{x},r), \mathring{B}(\mathbf{x},r) \cap A \neq \emptyset$.
 
     The \textbf{set} of all accumulation points of $A$ is the \textbf{accumulation} of $A$ and is denoted by $acc(A)$.
 \end{definition}
 
-\begin{definition}[Isolated Point]
+\begin{definition}[\textbf{Isolated Point}]
     $\mathbf{x}$ is an isolated point of $A$, if $\mathbf{x} \in cl(A), \mathbf{x} \notin acc(A)$.
 
     The \textbf{set} of all isolated points of $A$ is denoted by $ais(A)$.

@@ -1,0 +1,171 @@
+
+\begin{definition}[Experiment of chance]
+    It is an experiment that can be repeated under the same conditions, where the exact outcome is uncertain before it occurs, but the set of all possible outcomes is known.
+\end{definition}
+
+\begin{definition}[Probability space]
+    A formal mathematical model of the experiment of chance.
+\end{definition}
+
+\begin{definition}
+    The \textbf{sample space} (usually denoted by $S$ or $\Omega$) is the set of all possible outcomes of an experiment of chance.
+\end{definition}
+\begin{example*}
+    \[
+        S = \{ \text{Heads}, \text{Tails} \} \quad \text{(coin toss)}
+    \]
+    \[
+        S = \{1, 2, 3, 4, 5, 6\} \quad \text{(roll a die)}
+    \]
+\end{example*}
+
+\begin{definition}
+    An \textbf{event} (denoted by $B$) is any subset of the sample space. It represents one or more outcomes of interest.
+\end{definition}
+\begin{example*}
+    Examples (rolling a die):
+    \[
+        A = \{2,4,6\} \quad \text{(event: ``even number'')}
+    \]
+    \[
+        B = \{5,6\} \quad \text{(event: ``greater than 4'')}
+    \]
+
+    Example (tossing a coin):
+    \[
+        C = \{\text{Heads}\} \quad \text{(event: ``get Heads'')}
+    \]
+
+\end{example*}
+
+\subsection*{Event Space}
+The \textbf{event space} (denoted by $\mathcal{B} $ or $ \mathcal{F}$) (also called a $\sigma$-algebra) is the collection of all events that are measurable in a probability model.
+It must satisfy:
+\begin{enumerate}
+    \item $\Omega \in \mathcal{B}$ (the sample space is included),
+    \item $\varnothing \in \mathcal{B}$ (the empty set is included),
+    \item If $A \in \mathcal{B}$, then $A^c \in \mathcal{B}$ (closed under complementation),
+    \item If $A_1, A_2, \dots \in \mathcal{B}$, then $\bigcup_{i=1}^\infty A_i \in \mathcal{B}$ (closed under countable unions).
+\end{enumerate}
+\begin{example*}
+    Example (coin toss once):
+    \[
+        S = \{H, T\}, \quad
+        \mathcal{B} = \{\varnothing, \{H\}, \{T\}, \{H,T\}\}
+    \]
+\end{example*}
+
+\begin{definition}[A probability measure $p()$] A function which maps $B$ onto $[0,1]$ according to certain rules of Axioms of Probability.
+    % Properties: \begin{enumerate}
+    %     \item $ p(A) \geq 0, \forall A \in B$
+    %     \item $p(\omega ) = 1$
+    %     \item $\{A_i, i = 1,2,\dots\}$ be a collection of pairwise disjoint events $p(\bigcup_i A_i) = \sum_{i}^{} p(A_i)$
+    %     \item 
+    % \end{enumerate}
+\end{definition}
+
+\section{Random variable}
+
+\begin{definition}
+    A \textbf{random variable} $X$ can be fully characterized by means of a \textbf{cumulative distribution function (cdf)} $F_x$, a function which gives the probabilities of events of the form $X \leq x$ for all $x$. \[
+        F_x : \mathbb{R} \to [0,1],\, F_X(x) \equiv p(X \leq x).
+    \]
+\end{definition}
+
+Properties of a cdf: \begin{itemize}
+    \item $F(-\infty ) = 0, \, F(\infty ) = 1$.
+    \item $F$ is non-decreasing.
+    \item $F$ is right-continuous.
+\end{itemize}
+
+\section{Discrete and continuous random variables}
+
+\textbf{Discrete random variable}: $X$ is discrete if its range (support) is a finite or countable set. \begin{itemize}
+    \item The cdf is a step function.
+    \item $p(X=x_i)$ is the \textbf{probability mass function (pmf)} and $\sum_{i=1}^{} p_i = 1$.
+\end{itemize}
+
+
+\textbf{Continuous random variable}: The random value $X$ with cdf $F(\cdot )$ is continuous if there exists a (non-negative) function $f(\cdot )$, which is call the probability \textbf{density} function (\textbf{pdf}), such that \[
+    F(x) = \int_{-\infty }^{x}f(z) \, dz
+\]
+
+Properties if the cdf and pdf of continuous random variables: \begin{itemize}
+    \item $f(x) \geq 0$ at all points where $F(\cdots )$ is differentiable.
+    \item $\int_{-\infty }^{\infty } f(z) \, dz = 1$.
+    \item $F$ is continuous.
+    \item $p(X=b) = 0$.
+    \item $p(a<X<b) = \int_{a}^{b} f(z) \, dz$.
+\end{itemize}
+
+\begin{remark*}
+    $f(\cdot )$ represents the probability in a unit length of interval.
+    $f(\cdot )$ can be larger than $1$ in a very small interval.
+\end{remark*}
+
+\textbf{Mixed variables} \[
+    F(x) = pF_d(x) + (1-p)F_c(x), \, 0 < p < 1, F_d \text{ is discrete and } F_c \text{ is continuous}
+\]
+\begin{remark*}
+    How to understand mixed variables: Think about 2 stages:
+
+    Wages: $20\%$ unemployed and $80\%$ employed. In those who are employed, $40\%$ worker's wages are less than $1000$, $60\%$'s wages are less than $3000$, and $100 \%$'s wages are less than $5000$. \[
+        \text{wages} = \left\{\begin{array}{l}
+            \text{unemployed } 20\% \Rightarrow w = 0 \\
+            \text{employed } 80\% \Rightarrow \left\{\begin{array}{l}
+                                                         40\% \Rightarrow 0 < w \leq 1000  \\
+                                                         60\% \Rightarrow 0 < w \leq 3000  \\
+                                                         100\% \Rightarrow 0 < w \leq 5000 \\
+                                                     \end{array}\right.
+        \end{array}\right.
+    \]
+
+    What is the probability of a random people's wage is under $3000$? We should calculate: \[
+        p(w \leq 3000)  = 20\% \times 1 + 80\% \times 60\% = 68\%
+    \]
+\end{remark*}
+
+
+\section{Univariate normal distribution}
+
+\begin{definition}
+    \textbf{Standard Normal} $N(0,1)$. \begin{itemize}
+        \item pdf: $\phi (x) = \frac{1}{\sqrt{2 \pi }} \exp(-\frac{x ^{2}}{2})$ \begin{itemize}
+                  \item $\phi (x) $ is symmetric about $0$.
+                  \item $\phi (x) $ has a unique maximum at $x = 0$.
+                  \item $\phi (x)$ has two inflexion points at $\pm 1$
+              \end{itemize}
+        \item cdf: $\Phi(x) = \int_{-\infty }^{x} \phi (z) \, dz$
+    \end{itemize}
+\end{definition}
+
+\begin{definition}
+    \textbf{Normal family} $N(\mu, \sigma^2)$. Let $Z \sim N(0,1), X \equiv \mu + \sigma Z$ with $\sigma > 0$, then $X \sim N(\mu, \sigma^2)$. \begin{itemize}
+        \item cdf: $F_X(x) = \Phi(\frac{x-\mu}{\sigma})$
+        \item pdf: $f_X(x) = \frac{1}{\sigma}\phi(\frac{x-\mu}{\sigma})$ \begin{itemize}
+                  \item $f_X(\cdot )$ is symmetric about $\mu$.
+                  \item $\phi (x) $ has a unique maximum at $x = \mu$.
+                  \item $\phi (x)$ has two inflexion points at $\mu \pm \sigma$.
+              \end{itemize}
+    \end{itemize}
+\end{definition}
+
+
+\section{Functions of random variables}
+
+\subsection{Discrete case} $y_i= g(x_i)$:
+\[
+    p(Y=y) = \sum_{i: g(x_i)=y}^{} p(X=x_i)
+\]
+
+\subsection{Continuous case} $Y = g(X)$, if $g$ is continuous and differentiable, $g'\neq 0$ \[
+    f_Y(y) = \left| \frac{dx}{dy}\right| f_X(g^{-1}(y)) , \, \frac{dx}{dy} = \frac{1}{g'[g^{-1}(y)]}
+\]
+
+\begin{proof}
+    \begin{align*}
+         & F_Y(y) \equiv p(Y \leq y) = p(X \leq g^{-1}(y)) = F_X(g^{-1}(x)) \\
+         & f_Y(y) = \frac{d F(x)}{dy} = \frac{dx}{dy} f_X(g^{-1}(y))
+    \end{align*}
+    But $\frac{dx}{dy}$ should be the absolute value because $f(\cdot) \geq 0$.
+\end{proof}

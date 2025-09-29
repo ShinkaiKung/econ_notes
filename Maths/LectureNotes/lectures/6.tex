@@ -254,7 +254,7 @@ In matrix form:
     \mathbf{x}(k + 1) = \mathbf{A}(k)\mathbf{x}(k) + \mathbf{B}(k)\mathbf{u}(k)
 \]
 \begin{proposition}
-    The solution to (1) for given \(\mathbf{x}(0)\) and inputs \(\mathbf{u}\) is
+    The solution for given \(\mathbf{x}(0)\) and inputs \(\mathbf{u}\) is
     \[
         \mathbf{x}(k) = \phi (k,0)\mathbf{x}(0) + \sum_{h = 0}^{k - 1}\phi (k,h + 1)\mathbf{B}(h)\mathbf{u}(h).
     \]
@@ -581,15 +581,108 @@ In matrix form:
 
 \subsubsection{Time-invariant system} $\mathbf{A}(t) = \mathbf{A} \Longrightarrow \phi (t, \tau) = e^{\mathbf{A}(t - \tau)}$ for $\dot{\mathbf{x}} (t) = \mathbf{A} \mathbf{x}(t) \Longrightarrow \mathbf{x}(t) = e^{\mathbf{A}t}\mathbf{x}(0)$.
 
-\subsection{Full System}
+\begin{remark*} If $A = M \Lambda M ^{-1}$,
+    \[
+        e ^{At} = M e ^{\Lambda t}M ^{-1}
+    \] and \[
+        e ^{\Lambda t} = \begin{pmatrix}
+            e ^{\lambda_1 t} & 0                & \cdots & 0                \\
+            0                & e ^{\lambda_2 t} & \cdots & 0                \\
+            \vdots           & \vdots           & \ddots & \vdots           \\
+            0                & 0                & \cdots       & e ^{\lambda_n t}
+        \end{pmatrix}
+    \]
+\end{remark*}
 
-The solution to (1), in terms of \(\mathbf{x}(0)\) and
+\subsection{Full System}
+\[
+    \dot{\mathbf{x}} (t) = \mathbf{A}(t)\mathbf{x}(t) + \mathbf{B}(t)\mathbf{u}(t)
+\]
+The solution in terms of \(\mathbf{x}(0)\) and
 the inputs is
 \[
     \mathbf{x}(t) = \phi (t,0)\mathbf{x}(0) + \int_{0}^{t}\phi (t,\tau)\mathbf{B}(\tau)\mathbf{u}(\tau)d\tau .
 \]
 
-\subsubsection{Time-invariant system} $\mathbf{A}(t) = \mathbf{A} \Longrightarrow \mathbf{x}(t) = e^{\mathbf{A}t}\mathbf{x}(0) + \int_{0}^{t}e^{\mathbf{A}(t - \tau)}\mathbf{B}(\tau)\mathbf{u}(\tau)d\tau$
+\subsubsection{Time-invariant system} $\mathbf{A}(t) = \mathbf{A} \Longrightarrow \mathbf{x}(t) = e^{\mathbf{A}t}\mathbf{x}(0) + \int_{0}^{t}e^{\mathbf{A}(t - \tau)}\mathbf{B}(\tau)\mathbf{u}(\tau)d\tau$.
+
+
+
+\section{APPENDIX: An Economic Interpretation of the State-Space Solution}
+
+The solution to the linear state-space system, for both continuous and discrete time, can be intuitively understood through the lens of economics and finance, specifically as a model for capital accumulation. In this framework, the state vector $\mathbf{x}$ represents the \textbf{capital stock} of an entity (e.g., a firm or a nation), and the solution formula describes how this capital evolves over time.
+\begin{align*}
+    \mathbf{x}(k + 1)    & = \mathbf{A}(k)\mathbf{x}(k) + \mathbf{B}(k)\mathbf{u}(k)                                                                       \tag{1}                                     \\
+                         & \mathbf{x}(k)         = \phi (k,0)\mathbf{x}(0) + \sum_{h = 0}^{k - 1}\phi (k,h + 1)\mathbf{B}(h)\mathbf{u}(h).                                                             \\
+                         & \mathbf{A}(k)         = \mathbf{A} \Longrightarrow \mathbf{x}(k) = \mathbf{A}^{k}\mathbf{x}(0) + \sum_{h = 0}^{k - 1}\mathbf{A}^{k - h - 1}\mathbf{B}(h)\mathbf{u}(h)       \\
+    \dot{\mathbf{x}} (t) & = \mathbf{A}(t)\mathbf{x}(t) + \mathbf{B}(t)\mathbf{u}(t)                                                                                   \tag{2}                         \\
+                         & \mathbf{x}(t)         = \phi (t,0)\mathbf{x}(0) + \int_{0}^{t}\phi (t,\tau)\mathbf{B}(\tau)\mathbf{u}(\tau)d\tau .                                                          \\
+                         & \mathbf{A}(t)         = \mathbf{A} \Longrightarrow \mathbf{x}(t) = e^{\mathbf{A}t}\mathbf{x}(0) + \int_{0}^{t}e^{\mathbf{A}(t - \tau)}\mathbf{B}(\tau)\mathbf{u}(\tau)d\tau
+\end{align*}
+
+
+\subsection{An Economic Dictionary for State-Space Variables}
+
+First, let us establish a direct analogy between the system variables and core economic concepts:
+
+\begin{description}
+    \item[$\mathbf{x}(t)$ or $\mathbf{x}(k)$ (State Vector)] The \textbf{Capital Stock} at a given time. It represents the total accumulated value or wealth.
+
+    \item[$\mathbf{x}(0)$ (Initial State)] The \textbf{Initial Capital} or founding endowment. This is the starting wealth from which all future growth originates.
+
+    \item[$\mathbf{A}$ (System Matrix)] The intrinsic \textbf{Rate of Return and Depreciation}. This matrix governs the internal dynamics of the capital. Its components can represent interest rates, return on investment (ROI), asset depreciation, or capital decay rates.
+
+    \item[$\mathbf{u}(t)$ or $\mathbf{u}(k)$ (Input Vector)] The \textbf{Investment Flow}. This represents external capital injections, such as annual investments, government spending, or reinvested profits.
+
+    \item[$\mathbf{B}$ (Input Matrix)] The \textbf{Investment Multiplier} or \textbf{Efficiency}. This matrix translates the investment flow $\mathbf{u}$ into actual additions to the capital stock $\mathbf{x}$.
+\end{description}
+
+Under this interpretation, the core principle of the solution is:
+\begin{center}
+    \textit{Final Capital Stock = Future Value of Initial Capital + Future Value of the Investment Stream}
+\end{center}
+
+\subsection{Decomposition of the Solution}
+
+The solution formula for both continuous and discrete systems can be broken down into two distinct economic components.
+
+\subsubsection{Part 1: The Zero-Input Response -- Compounding Growth of Initial Capital}
+
+This component describes how the initial endowment grows on its own, without any further investment ($\mathbf{u} = 0$). It is the classic principle of compound interest applied to the starting principal.
+
+For a time-invariant system, the solution is:
+\begin{equation}
+    \mathbf{x}_{\text{zi}}(t) = \underbrace{e^{\mathbf{A}t}\mathbf{x}(0)}_{\text{Continuous Compounding}}
+    \quad \text{and} \quad
+    \mathbf{x}_{\text{zi}}(k) = \underbrace{\mathbf{A}^k\mathbf{x}(0)}_{\text{Discrete Compounding}}
+\end{equation}
+Here, the matrix exponential $e^{\mathbf{A}t}$ is the operator for continuous compounding, analogous to the financial formula $P e^{rt}$. The matrix power $\mathbf{A}^k$ is the operator for discrete, period-by-period compounding, analogous to $P(1+r)^k$.
+
+\subsubsection{Part 2: The Zero-State Response -- Future Value of an Investment Stream}
+
+This component calculates the total accumulated value of all investments made over time, assuming the entity started with zero initial capital ($\mathbf{x}(0) = 0$). This is equivalent to finding the future value of a stream of cash flows.
+
+The full solution for the state $\mathbf{x}(t)$ is given by the sum of these two parts. For continuous-time systems:
+\begin{equation}
+    \mathbf{x}(t) = \underbrace{\phi(t, 0)\mathbf{x}(0)}_{\substack{\text{Value of Initial} \\ \text{Capital}}} + \underbrace{\int_{0}^{t} \phi(t, \tau)\mathbf{B}(\tau)\mathbf{u}(\tau)d\tau}_{\substack{\text{Accumulated Value of} \\ \text{all past Investments}}}
+\end{equation}
+
+For discrete-time systems:
+\begin{equation}
+    \mathbf{x}(k) = \underbrace{\phi(k, 0)\mathbf{x}(0)}_{\substack{\text{Value of Initial} \\ \text{Capital}}} + \underbrace{\sum_{h=0}^{k-1} \phi(k, h+1)\mathbf{B}(h)\mathbf{u}(h)}_{\substack{\text{Accumulated Value of} \\ \text{all past Investments}}}
+\end{equation}
+
+In both cases, the integral or summation term aggregates the future value of every single investment made in the past. The term inside the integral/sum represents the contribution of a single investment:
+\begin{itemize}
+    \item $\mathbf{B}(\tau)\mathbf{u}(\tau)$ is the capital generated from an investment at time $\tau$.
+    \item $\phi(t, \tau)$ is the compounding factor that calculates the future value at time $t$ of that investment made at time $\tau$.
+\end{itemize}
+The integral (for continuous investments) and the summation (for discrete investments) add up the compounded values of all such investments from the beginning to the end of the period.
+
+Thus, the state-space solution provides a rigorous and general framework for the fundamental economic principle of wealth accumulation through the compounding of initial assets and the subsequent stream of investments.
+
+
+
 
 
 

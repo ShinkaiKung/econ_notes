@@ -1,0 +1,230 @@
+
+\begin{definition}[Commodity Bundles and Constraints]
+    Budget Set = consumption set + economic constrains \[
+        \beta(p,w) = \{x \in X: px \leq w\}
+    \] where:
+    \begin{itemize}
+        \item $p = (p_1, p_2,\dots,p_L) \in \mathbb{R}^{L}$ is a price vector,
+        \item $w \in \mathbb{R}^{+}$ is wealth,
+        \item Consumption Plans: $x = (x_1, x_2, \dots, x_L) \in \mathbb{R}^{L}$,  $\left\{\begin{array}{l}
+                      x_l > 0: \text{receive}   \\
+                      x_l < 0: \text{give away} \\
+                  \end{array}\right.$
+        \item Consumption Set: $X \in \mathbb{R}^{L}$, in general we assume $X = \mathbb{R}^{L}_{+}\equiv\{x\in \mathbb{R}^{L}: x \geq 0\}$
+        \item  Commodity Space $\mathbb{R}^{L}$: finite number of goods, perfect divisibility.
+    \end{itemize}
+
+\end{definition}
+\begin{remark*}
+    Implicit Assumptions: \begin{itemize}
+        \item Price-taking consumers
+        \item Perfect Information
+        \item Complete Markets
+        \item Exogenous Wealth
+        \item Linear Budget Constraint
+    \end{itemize}
+
+    Normally, budget set is \textbf{compact} and \textbf{convex}, and $p \gg 0$.
+    A counterexample: quantity discount.
+\end{remark*}
+
+\section{Preference}
+\begin{definition}[Preference]
+    \textbf{Preference} is represented by $\succeq$, a binary relationship on $X$: \[
+        (X, \succeq) \subset X \times X: x^{1} \succeq x^{2} \iff(x^{1}, x^{2}) \in (X, \succeq)
+    \] which means $x^{1}$ is at least as good as $x^{2}$.
+    \begin{remark*}
+        $X$ represents the consumption set, $X \times X$ is the \underline{Cartesian Product}, which represents all the possible combo pairings of commodities. $(x^{1}, x^{2})$ represents an \underline{Ordered Pair}.
+    \end{remark*}
+
+    \textbf{Strict Preference} $\succ$: \[
+        x^{1} \succ x^{2} \iff x^{1} \succeq x^{2} \wedge \neg(x^{2} \succeq x^{1})
+    \]
+
+    \textbf{Indifference} $\sim$: \[
+        x^{1} \sim x^{2} \iff x^{1} \succeq x^{2} \wedge x^{2} \succeq x^{1}
+    \]
+\end{definition}
+
+Properties of \textbf{rational preferences}: \begin{enumerate}
+    \item Transitivity: $\forall x^{1}, x^{2}, x^{3} \in X$: $ x^{1} \succeq x^{2} \wedge  x^{2} \succeq x^{3} \Longrightarrow  x^{1} \succeq x^{3}$.
+    \item Completeness: $\forall x^{1}, x^{2} \in X \Longrightarrow x^{1} \succeq x^{2} \vee x^{2} \succeq x^{1}$.
+\end{enumerate}
+Other preference properties:
+\begin{enumerate}
+    \setcounter{enumi}{2}
+    \item Continuity: $\forall x^{0} \in X$, the sets $\{x \in X: x \succeq x^{0}\}$ and $\{x \in X: x^{0} \succeq x\}$ are closed. \begin{itemize}
+              \item Upper Contour Set and Lower Contour Set are closed.
+              \item $\succeq$ is continuous $\iff \forall x^{0} \in X, $ an arbitrary convergent sequence $(x^{n})^{\infty }_{n=1}$, \[
+                        \Big[\forall n, x^{n} \succeq x^{0}\Big] \Longrightarrow \Big[\lim_{n \to \infty} x^{n} = x \succeq x^{0}\Big]
+                    \] \[
+                        \Big[\forall n, x^{0} \succeq x^{n}\Big] \Longrightarrow \Big[\lim_{n \to \infty} x^{n} = x,\, x^{0} \succeq x\Big]
+                    \]
+                    A counterexample is the \underline{Lexicographic Order} in $\mathbb{R}^{2}_{+}$: \[
+                        x \succeq x^{0} \iff (x_1 > x_1^0) \wedge (x_1=x_1^0 \wedge x_2 \geq x_2^0)
+                    \], e.g., $x^{0}=(5,2), x^{n} = (5+1/n,0)$ for any $n$, we have $5+1/n > 5 \Longrightarrow x^{n} \succeq x^{0}$, however, $\lim_{n \to \infty} x^{n} = (5,0) \nsucceq x^{0}$.
+              \item Closed Set: A set $A$ is closed iff all convergent sequence in $A$ has their limits in $A$.
+          \end{itemize}
+    \item Local nonsatiation: $\forall x^{0} \in X, \forall \varepsilon > 0, \exists x^{1} \in X \Longrightarrow ||x^{0}-x^{1}||<\varepsilon \wedge x^{1} \succ x^{0}$ \begin{itemize}
+              \item It means we can always find a direction to improve.
+          \end{itemize}
+    \item[(4')] Monotonicity: $\forall x^{0}, x^{1}: x^{1} \gg x^{0} \Longrightarrow x^{1} \succ x^{0}$. (All goods more than initial set)
+    \item[(4'')] Strong Monotonicity: $\forall x^{0}, x^{1}, x^{1} \neq x^{0}: x^{1} \geq x^{0} \Longrightarrow x^{1} \succ x^{0}$. (Some goods more than initial set) \begin{itemize}
+              \item We can prove (4'') $\Longrightarrow$ (4') $\Longrightarrow$ (4).
+          \end{itemize}
+    \item Convexity: $\forall x \in X, \{x \in X: x \succeq x^0\}$ is convex. \begin{itemize}
+              \item The upper contour set is convex.
+              \item Convexity also gives the information about how the MRS changes while increasing one good.
+              \item $(3)+(4)+(5) \Longrightarrow$ a nice indifference curve: \begin{enumerate}
+                        \item Continuity gives us a solid, unbroken line.
+                        \item Monotonicity makes that line slope downwards from left to right.
+                        \item Convexity bends that downward-sloping line so it's bowed in toward the origin.
+                    \end{enumerate}
+          \end{itemize}
+    \item[(5')] Strict Convexity: $\forall \lambda \in (0,1)\, \forall x^0,x^1,x^2 \in X: x^1 \neq x^2, x^1 \succeq x^0 \Longrightarrow \lambda x^1 + (1-\lambda)x^2 \succ x^0$. \begin{itemize}
+              \item It's just a strict version of $(5)$.
+          \end{itemize}
+\end{enumerate}
+
+\section{Utility Function}
+
+\begin{definition}
+    Given a rational preference $\succeq $ on $X$. A \textbf{utility function} $u: X \longrightarrow \mathbb{R}$ that represents $\succeq $ is such that \[
+        \forall x^0,x^1 \in X, x^0 \succeq x^1 \iff u(x^0) \geq u(x^0).
+    \]
+\end{definition}
+
+\begin{proposition}
+    \[
+        \left\{\begin{array}{l}
+            x^0 \succ x^1 \iff u(x^0) > u(x^1) \\
+            x^0 \sim x^1 \iff u(x^0) = u(x^1)  \\
+        \end{array}\right.
+    \]
+\end{proposition}
+
+\begin{proposition}[ordinality]
+    Given $u: X \longrightarrow \mathbb{R}$ representing $\succeq $ and $f: \mathbb{R} \longrightarrow \mathbb{R}$ any strict increasing function, then $v = f \circ u$ also represents $\succeq $.
+\end{proposition}
+
+\begin{proof}
+    $\forall x^0,x^1 \in X, x^0 \succeq x^1$.
+
+    $u$ represents $succeq$: $u(x^0) \geq u(x^1)$
+
+    $f$ is strictly increasing: $f(u(x^0)) \geq f(u(x^1)) \iff v(x^1) \geq v(x^0)$
+\end{proof}
+
+\begin{remark*}
+    The "ordinality" implicitly means the scale of the utility function means nothing.
+\end{remark*}
+
+\begin{theorem}[Debreu's]
+    Given a \textbf{rational preference} $\succeq$ on $X \subset \mathbb{R}^{L}_{+}$. If $\succeq $ is \textbf{continuous}, then there \textbf{exists} a \underline{continuous utility function} $u: X \longrightarrow \mathbb{R}$ that represents $\succeq $.
+\end{theorem}
+
+\begin{proof}
+    To give a simple and intuitive proof, we assume $X = \mathbb{R}^{L}_{+}$, and that the preference $\succeq$ is also \textbf{monotone}.
+
+    The proof proceeds by construction. We define a function $u(x)$ by mapping each bundle $x$ to a specific amount of a reference bundle, $e=(1,\dots,1)$. We then show this function is well-defined, represents the preferences, and is continuous.
+
+    \textbf{Step 1:} The utility function $u(x)$ is well-defined
+
+    For any bundle $x \in \mathbb{R}^L_+$, we must show there exists a \textbf{unique} scalar $\lambda_x \ge 0$ such that $\lambda_x e \sim x$.
+
+    To do this, we define the set $F_x = \{\lambda e : \lambda \geq 0, \lambda e \preceq x \}$. This set contains all bundles on the main diagonal that are weakly inferior to $x$. We will show this set is compact (closed and bounded) and non-empty.
+
+    \begin{itemize}
+        \item[\textit{(1)}] \textit{\underline{Proof of non-empty:}} The zero bundle $\mathbf{0} = 0 \cdot e$. By monotonicity, $x \succeq \mathbf{0}$ for any $x \in \mathbb{R}^L_+$. Thus, $0 \cdot e \in F_x$, and $F_x$ is not empty.
+
+        \item[\textit{(2)}] \textit{\underline{Proof of bounded:}} By monotonicity, for any $x \in \mathbb{R}^L_+$, we can find a bundle $z$ such that $z \gg x$ (e.g., $z_i = x_i + 1$ for all $i$), which implies $z \succ x$. Now, for a sufficiently large scalar $\bar{\lambda}$, we will have $\bar{\lambda} e \gg z$. Monotonicity then implies $\bar{\lambda} e \succ z$. By transitivity, $\bar{\lambda} e \succ x$. This means that any vector $\lambda e \in F_x$ (where $\lambda e \preceq x$) must have its components bounded by those of $\bar{\lambda}e$. Thus, the set of vectors $F_x$ is bounded.
+
+        \item[\textit{(3)}] \textit{\underline{Proof of closed:}} The set $F_x$ is the intersection of the ray $R = \{\lambda e : \lambda \ge 0\}$ and the lower contour set $LCS_x = \{y \in \mathbb{R}^L_+ : y \preceq x\}$. The ray $R$ is a closed set. Because the preference relation $\succeq$ is \textbf{continuous}, the set $LCS_x$ is also closed. The intersection of two closed sets is closed, therefore $F_x$ is closed.
+    \end{itemize}
+
+    Since $F_x$ is a non-empty, closed, and bounded subset of $\mathbb{R}^L_+$, it is \textbf{compact}.
+
+    Now, consider the function $f: F_x \to \mathbb{R}$ defined by $f(\lambda e) = \lambda$. This function is continuous. By the \textbf{Weierstrass Extreme Value Theorem}, a continuous function on a compact set attains its maximum. Let this maximum value be $\lambda^*$, achieved at the point $\lambda^* e \in F_x$.
+
+    By construction, since $\lambda^* e \in F_x$, we know $\lambda^* e \preceq x$.
+
+    We must also show $\lambda^* e \succeq x$. We prove this by contradiction. Assume $\lambda^* e \prec x$. This means $\lambda^* e$ is in the \textbf{strict lower contour set} of $x$, $SLCS_x = \{y \in X : y \prec x\}$. Since $\succeq$ is continuous, the set $SLCS_x$ is \textbf{open}.
+
+    Because $\lambda^* e \in SLCS_x$ and $SLCS_x$ is open, there exists an $\varepsilon > 0$ such that the bundle $(\lambda^* + \varepsilon)e$ is also in $SLCS_x$. This means $(\lambda^* + \varepsilon)e \prec x$, which in turn implies $(\lambda^* + \varepsilon)e \preceq x$. By definition, this means $(\lambda^* + \varepsilon)e \in F_x$.
+
+    However, this implies that the function $f(\lambda e) = \lambda$ attains the value $\lambda^* + \varepsilon$ on the set $F_x$. This contradicts $\lambda^*$ being the maximum value of $f$ on $F_x$.
+
+    Therefore, the assumption $\lambda^* e \prec x$ must be false. Since we have both $\lambda^* e \preceq x$ and $\neg(\lambda^* e \prec x)$, we conclude that $\lambda^* e \sim x$. Uniqueness of $\lambda^*$ follows from strict monotonicity.
+
+    We can now define the utility of $x$ as this unique scalar: $u(x) \doteqdot \lambda^*$.
+
+    \textbf{Step 2:} $u(x)$ represents $\succeq$
+
+    We must prove that for any $x, y \in X$, we have $x \succeq y \iff u(x) \geq u(y)$.
+
+    ($\Longrightarrow$) Assume $x \succeq y$. By definition of our function, we have $x \sim u(x)e$ and $y \sim u(y)e$.
+    By transitivity, the relations $x \succeq y$ and $x \sim u(x)e$ imply $u(x)e \succeq y$.
+    Again by transitivity, $u(x)e \succeq y$ and $y \sim u(y)e$ imply $u(x)e \succeq u(y)e$.
+    By monotonicity, for bundles on the main diagonal, $u(x)e \succeq u(y)e$ holds if and only if $u(x) \geq u(y)$.
+
+    ($\Longleftarrow$) Assume $u(x) \geq u(y)$.
+    By monotonicity, this implies $u(x)e \succeq u(y)e$.
+    By definition, we have $x \sim u(x)e$ and $y \sim u(y)e$.
+    Using transitivity on the entire relation: $x \sim u(x)e \succeq u(y)e \sim y$. This implies $x \succeq y$.
+
+    \textbf{Step 3:} $u(x)$ is continuous
+
+    \textbf{A real-valued function is continuous if and only if the inverse images of all closed intervals are closed sets.} ("A real-valued function is continuous if and only if the inverse images of all open intervals are open sets." is also correct.) This is equivalent to showing that for any scalar $\bar{\lambda}$, the sets $\{x \in X : u(x) \geq \bar{\lambda}\}$ and $\{x \in X : u(x) \leq \bar{\lambda}\}$ are both closed.
+
+    (a) Consider the set $A = \{x \in X : u(x) \geq \bar{\lambda}\}$. From Step 2, the condition $u(x) \geq \bar{\lambda}$ is equivalent to $x \succeq \bar{\lambda}e$. Thus, $A = \{x \in X : x \succeq \bar{\lambda}e\}$. This is, by definition, the \textbf{upper contour set} of the bundle $\bar{\lambda}e$. By the initial assumption that the preference relation $\succeq$ is continuous, all its upper contour sets are closed. Therefore, $A$ is a closed set.
+
+    (b) Consider the set $B = \{x \in X : u(x) \leq \bar{\lambda}\}$. Similarly, the condition $u(x) \leq \bar{\lambda}$ is equivalent to $x \preceq \bar{\lambda}e$. Thus, $B = \{x \in X : x \preceq \bar{\lambda}e\}$. This is the \textbf{lower contour set} of the bundle $\bar{\lambda}e$. Since $\succeq$ is continuous, all its lower contour sets are also closed. Therefore, $B$ is a closed set.
+
+    Since both the upper and lower contour sets of the function $u(x)$ are closed for any value in its range, the function $u(x)$ is \textbf{continuous}.
+\end{proof}
+
+\begin{proposition}
+    Given preference $\succeq $ with a utility representation $u$, we have that: \begin{align*}
+        \succeq \text{continuous}          & \iff \text{there exists $u'$ continuous representing $\succeq $} \\
+        \succeq \text{locally nonsatiated} & \iff \text{$u$ has no local maxima}                              \\
+        \succeq \text{strongly monotone}   & \iff \text{$u$ is strictly increasing}                           \\
+        \succeq \text{(strict) convex}     & \iff \text{$u$ is strict quasiconcave}                           \\
+    \end{align*}
+\end{proposition}
+
+
+\section{Walrasian Demand and Indirect Utility}
+
+\begin{definition}
+    For program [P] \begin{align*}
+         & \max_{x \in X} u(x)      \\
+         & s.t. \, x \in \beta(p,w)
+    \end{align*}
+
+    \textbf{Indirect Utility}: $v(p,w) \equiv \max_{x \in \beta(p,w)} u(x)$.
+
+    \textbf{Walrasian Demand}: $x(p,w) \equiv \arg\max_{x \in \beta(p,w)} u(x)$.
+
+\end{definition}
+
+\begin{remark*}
+    $v(p,w)$ is also called value function, while $x(p,w)$ is a correspondence.
+
+    Difference between "function" and "correspondence": \begin{itemize}
+        \item Function: one input only maps to one output.
+        \item Correspondence: one input maps to a set of outputs.
+    \end{itemize}
+\end{remark*}
+
+\begin{proposition}
+    If $u(\cdot )$ is continuous, then for any $p \gg 0$ and $w \geq 0$ the program [P] \textbf{has a solution}.
+
+    If $u(\cdot )$ is also strictly quasiconcave, then the solution is \textbf{unique}. Moreover, $x(p,w)$ is a continuous function.
+\end{proposition}
+
+\begin{proof} Existence and Uniqueness.
+
+    Existence: (Weierstrass Theorem): $u(\cdot )$ is continuous and $\beta(p,w)$ is compact $\Longrightarrow$ exists a maxima.
+
+    Uniqueness: By contradiction: $\exists x^1, x^2 \in X: x^1, x^2 \in \beta(p,w) $ and $u(x) \leq u(x^1), u(x)\leq u(x^2)\, \forall x \in \beta(p,w)$. Then we have $u(\lambda x^1 + (1-\lambda)x^2) > \min\{u(x^1), u(x^2)\} \Longrightarrow u(x') > u(x^1)$. It contradicts to $u(x) \leq u(x^1)\, \forall x \in \beta(p,w)$.
+\end{proof}

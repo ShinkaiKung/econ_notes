@@ -95,7 +95,7 @@
 
 \begin{definition}
     Let $f: D \subseteq \mathbb{R}^{n} \to \mathbb{R}^{m}$. $f$ is \textbf{differentiable} at $\mathbf{x_0} \iff \forall \mathbf{h} \in \mathbb{R}^{n}, \exists Df(\mathbf{x_0})$ such that the following limit exists \[
-        \lim_{h \to 0} \frac{||f(\mathbf{x_0}+\mathbf{h})-f(\mathbf{x_0})-Df(\mathbf{x_0})\mathbf{h}||}{||\mathbf{h}||} = 0
+        \lim_{\mathbf{h} \to \mathbf{0}} \frac{||f(\mathbf{x_0}+\mathbf{h})-f(\mathbf{x_0})-Df(\mathbf{x_0})\mathbf{h}||}{||\mathbf{h}||} = 0
     \]
     where $Df(\mathbf{x_0})$ is called Jacobian Matrix.
     \begin{remark*}
@@ -109,7 +109,7 @@
 \end{proposition}
 
 \begin{proposition}
-    If $f: \mathbb{R}^{n} \to \mathbb{R}$ is differentiable at $\mathbf{x_0}\in \mathbb{R}^{n}$, with differential $L_\mathbf{x_0}$, then $\forall \mathbf{v} \in \mathbb{R}^{n}, \exists f'(\mathbf{x_0}, \mathbf{v})$, in addition \[
+    If $f: \mathbb{R}^{n} \to \mathbb{R}$ is differentiable at $\mathbf{x_0}\in \mathbb{R}^{n}$, with \underline{\textbf{differential} $L_\mathbf{x_0}$}, then $\forall \mathbf{v} \in \mathbb{R}^{n}, \exists f'(\mathbf{x_0}, \mathbf{v})$, in addition \[
         L_\mathbf{x_0}(\mathbf{v}) = f'(\mathbf{x_0},\mathbf{v})= \nabla f(\mathbf{x_0}) \cdot \mathbf{v}.
     \]
     , where $L_\mathbf{x_0}$ represents the linear part of the approximation $f(\mathbf{x_0}+\mathbf{h})-f(\mathbf{x_0}) = Df(\mathbf{x_0})\mathbf{h}+g(\mathbf{h})$. So we have $L_\mathbf{x_0}(\mathbf{v} + \mathbf{h})= L_\mathbf{x_0}(\mathbf{v})+L_\mathbf{x_0}(\mathbf{h})$ and $L_\mathbf{x_0}(\lambda \mathbf{v})=\lambda L_\mathbf{x_0}(\mathbf{v})$.
@@ -214,7 +214,7 @@
     $C_\alpha = \{\mathbf{x} \in \mathbb{R}^{n}: f(\mathbf{x}) = \alpha\}$ is a \textbf{level set} of function $f: \mathbb{R}^{n} \to \mathbb{R}$ at a given level $\alpha$.
 \end{definition}
 
-If $\mathbf{x_0}$ lies on the level set, the \textit{tangent hyperplane} to the level set is the set of all $\mathbf{x}$ that satisfy: \[
+If $\mathbf{x_0}$ lies on the level set, the \textit{\textbf{tangent hyperplane}} to the level set is the set of all $\mathbf{x}$ that satisfy: \[
     \frac{\partial f(\mathbf{x_0})}{\partial x_1}(x_1-x_1 ^{0}) + \dots+ \frac{\partial f(\mathbf{x_0})}{\partial x_n}(x_n-x_n ^{0}) = \mathbf{0}.
 \]
 , which can be written as \[

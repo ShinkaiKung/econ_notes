@@ -1,0 +1,370 @@
+\section{Introduction}
+
+We have 3 equivalent approaches to computing GDP: \begin{itemize}
+    \item Expenditure approach: \[
+              Y_t = C_t + I_t + G_t + \underbrace{(X_t - M_t)}_{\substack{\text{net exports}}}, \qquad\text{with } K_{t+1} = (1-\delta)K_t + I_t.
+          \]
+    \item Income approach: \[
+              Y_t = R_tK_t+W_tN_t+\Pi_t
+          \]
+          where: \begin{itemize}
+              \item $R_tK_t$ are payments to capital owners (rental income).
+              \item $W_tN_t$ are payments to workers (labor income).
+              \item $\Pi_t$ are payments to firm owners (firm profits).
+          \end{itemize}
+    \item Production approach: add up sales minus intermediate expenses in all stages of production.
+\end{itemize}
+
+\subsection{Economic Growth}
+
+``The consequences for human welfare involved in questions like these [of economic growth] are simply staggering: Once one starts to think about them, \textbf{it is hard to think about anything else}. '' --- Robert E. Lucas, “On the Mechanics of Economic Development” [JME 1988]
+
+\textbf{Central Question}: Why some countries grow more than others?
+
+\subsection{The Stylized Facts of Growth} --- by Kaldor (1961)
+
+Economies at the technology frontier are characterized by these properties \begin{enumerate}
+    \item Per capita output grows at a constant rate ($\dot{Y}_t/Y_t$).
+    \item Physical capital per worker grows at a constant rate ($\dot{K}_t/K_t$).
+    \item The rate of return of capital is nearly constant ($R_t$).
+    \item The ratio of capital to output is nearly constant ($K_t/Y_t$).
+    \item The shares of labor and capital in national income are constant ($W_tN_t/Y_t$).
+    \item The growth rate of output per worker differs substantially across countries.
+\end{enumerate}
+
+An economy displaying the \textbf{first 5 facts} is said to be in a \textbf{Balanced Growth Path (BGP)}.
+
+A good theory of growth should be consistent with these facts.
+
+The \textbf{neo-classical growth model} is designed to account for Kaldor's stylized facts. However, by design, this model cannot explain \textbf{fact (6)}. Therefore, it is not a good model to explain why some similar economies differ in long term.
+
+\begin{remark*} However:
+    these facts are not so solid over time and across countries.
+\end{remark*}
+
+\section{The Solow Model}
+
+Solow model is a simple dynamic model to understand the basic mechanics of economic growth through \textbf{capital accumulation}.
+
+\textbf{Environment / Settings of the model}: \begin{itemize}
+    \item Single homogeneous good that can be either invested to consumed.
+    \item Closed economy.
+    \item No utility maximization.
+    \item Population grows at an exogenous and constant rate, $n$.
+    \item Technology level grows at an exogenous and constant rate, $x$.
+\end{itemize}
+
+Solow model is constructed by two equations: \underline{production function} and \underline{capital accumulation}.
+
+\subsection{Production function} Output $Y_t$ is produced with capital $K_t$ and labor $L_t$.
+\[
+    Y_t = F(K_t, L_t)
+\]
+
+\textbf{Properties of a neoclassical production function}: \begin{enumerate}
+    \item \textbf{Constant returns to scale} (homogeneous of degree 1): \[
+              F(\lambda K, \lambda L) = \lambda F(K,L) \qquad \forall \lambda > 0
+          \]
+    \item \textbf{Positive and diminishing marginal returns}: \[
+              F_K(K,L) > 0 \qquad \text{and} \qquad F_{KK}(K,L) < 0 \qquad \forall K > 0, \forall L > 0
+          \] \[
+              F_L(K,L) > 0 \qquad \text{and} \qquad F_{LL}(K,L) < 0 \qquad \forall K > 0, \forall L > 0
+          \]
+    \item \textbf{Inada conditions}: \[
+              \lim_{K \to 0} F_K(K,L) \to \infty \qquad \text{and} \lim_{K \to 0} F_K(K,L) \to 0 \qquad \forall L > 0
+          \] \[
+              \lim_{L \to 0} F_L(K,L) \to \infty \qquad \text{and} \lim_{L \to 0} F_L(K,L) \to 0 \qquad \forall K > 0
+          \]
+\end{enumerate}
+
+
+
+
+\begin{remark*} Importance of these assumptions:
+    \begin{itemize}
+        \item Condition 1 $\Longrightarrow$ BGP with population and/or technology growth.
+        \item Condition 1 $\Longrightarrow$ no rents under competitive markets.
+        \item Condition 2 $\Longrightarrow$ the firm decision is a concave problem.
+        \item Condition 3 $\Longrightarrow$ existence and uniqueness of steady state.
+    \end{itemize}
+
+    Why CRS is important? Check the properties.
+
+    $F(\lambda K, \lambda L) = \lambda^{n}F(K,L)$
+
+    \begin{enumerate}
+        \item Property of marginal production: \begin{align*}
+                   & F_K(\lambda K, \lambda L) = \lambda^{n-1}F_K(K,L)                                \\
+                   & CRS: n = 1, \lambda = \frac{1}{L} \Longrightarrow F_K(\frac{K}{L}, 1) = F_K(K,L)
+              \end{align*}
+              It shows marginal production of capital only depends on $K/L$ rather than its absolute amount, which allows us using $k= K/L$ to simplify our model.
+        \item Euler theorem: \begin{align*}
+                   & KF_K(\lambda K, \lambda L) + LK_L(\lambda K, \lambda L) = n \lambda ^{n-1}F(K,L) \\
+                   & CRS: n = 1 \Longrightarrow KF_K(K,L)+ LK_L(K,L) = F(K,L)
+              \end{align*}
+              It (a) ensure that in a competitive market, output is distributed equally between capital and labor, no extra profit; (b) the sum of the labor share and the capital share is equal to 1, which is consistent with Kaldor's "stable income distribution" fact.
+    \end{enumerate}
+\end{remark*}
+
+\begin{example}[Cobb-Douglas]
+    $Y=F(K,L)=K^{\alpha}L^{1-\alpha} \qquad 1 > \alpha > 0$.
+\end{example}
+
+\subsection{Capital Accumulation} The increase in capital is equal to gross investment minus depreciation: \[
+    \dot{K}_t \equiv \frac{d K_t}{dt} = I_t - \delta K_t
+\]
+
+Closed economy assumption $\Longrightarrow I_t = S_t$.
+
+No utility maximization assumption $\Longrightarrow$ need for an arbitrary rule to choose between consumption and saving --- given exogenous saving rate $s$ \[
+    S_t = s Y_t \qquad 0<s<1
+\]
+
+Therefore, we can combine both production function and capital accumulation equation to get \[
+    \dot{K}_{t} = sF(K_t, L_t) - \delta K_t
+\]
+This is a single \textbf{non-autonomous, non-linear, first-order differential equation} describing the dynamics of capital accumulation.
+
+\subsubsection{Rewrite is in per capita terms}
+\begin{align*}
+     & \text{Production Function:}           &  & Y_t = F(K_t, L_t)                       &  & \Longrightarrow &  & y_t=f(k_t)                            \\
+     & \text{Capital Accumulation Equation:} &  & \dot{K}_{t} = sF(K_t, L_t) - \delta K_t &  & \Longrightarrow &  & \dot{k}_t = sf(k_t) - (\delta + n)k_t
+\end{align*}
+\underline{$\dot{k}_t = sf(k_t) - (\delta + n)k_t$} is a single \textbf{autonomous, non-linear, first-order differential equation} describing the dynamics of capital accumulation.
+
+\begin{remark*}
+    How to get $\dot{k}_t = sf(k_t) - (\delta + n)k_t$?
+    \begin{align*}
+         & K_t = L_tk_t                                                                                    \Longrightarrow
+        \dot{K}_t = \dot{L}_tk_t + L_t\dot{k}_t                                                                                          \\
+         & \frac{\dot{K}_t}{L_t} = \frac{\dot{L}_tk_t}{L_t} + \dot{k_t}
+        \qquad\text{Since $\frac{\dot{L_t}}{L_t} = n$, then } \frac{\dot{K}_t}{L_t} = n k_t + \dot{k_t}                                  \\
+         & \text{From }\dot{K}_{t} = sF(K_t, L_t) - \delta K_t, \text{ devide with $L_t$: }   \frac{\dot{K}_t}{L_t} = sf(k_t)-\delta k_t \\
+         & n k_t + \dot{k_t}  = sf(k_t)-\delta k_t \Longrightarrow \dot{k}_t = sf(k_t) - (\delta + n)k_t
+    \end{align*}
+\end{remark*}
+
+
+\subsection{Balanced Growth Path}
+
+From stylized fact (2) we know that a \textbf{Balanced Growth Path (BGP)} has  an allocation where \textbf{capital per capita grows at a constant rate}. ($\dot{K}_t/K$ is constant).
+
+\begin{proposition}
+    In the BGP of the Solow model, $\gamma_t = \frac{\dot{k}_t}{k_t} = 0$.
+\end{proposition}
+
+\begin{proof}
+    In BGP $\gamma_t = \frac{\dot{k}_t}{k_t}$ is constant, then $s \frac{f(k_t)}{k_t} - (\delta + n)$ is constant.
+
+    Since $\delta,n,s$ are given parameters, we require $\frac{f(k_t)}{k_t}$ to be constant, then \[
+        \frac{d}{dt}\Big(\frac{f(k_t)}{k_t}\Big) = 0 \Longrightarrow \gamma_t \Big(f_k(k_t) - \frac{f(k_t)}{k_t}\Big) = 0.
+    \]
+
+    Since $f$ is concave, $f_k(k_t) - \frac{f(k_t)}{k_t}$ cannot be zero.
+
+    Therefore, BGP requires $\gamma_t = 0$.
+\end{proof}
+
+\subsection{Steady State}
+
+Using the condition of BGP $\gamma_t = 0$ and $\dot{k}_t = sf(k_t) - (\delta + n)k_t$, the steady state is given by: \[
+    sf(k) = (\delta + n)k
+\]
+we can solve the equation, with $k = k^*$.
+
+\begin{example}Cobb-Douglas
+    \[
+        sk^{\alpha} = (\delta + n)k \Longrightarrow k^* = \Big(\frac{s}{\delta + n}\Big)^{\frac{1}{1-\alpha}}
+    \]
+    Steady state output and consumption follow: $y^* = f(k^*)$ and $c^* = (1-s)y^*$.
+\end{example}
+
+\textbf{How does an economy move towards the steady state?} \[
+    \dot{k_t} = \underbrace{sf(k_t)}_{\text{investment}} - \underbrace{(\delta + n)k_t}_{\text{depreciation}}
+\]
+\begin{enumerate}
+    \item $k < k^*$: investment dominates and capital grows towards the SS.
+    \item $k > k^*$: depreciation dominates and capital falls towards the SS.
+\end{enumerate}
+
+\textbf{Characteristic of the steady state:} \begin{enumerate}
+    \item The steady state is (globally and asymptotically) stable.
+    \item Comparative statics. \begin{enumerate}
+              \item $\uparrow s \Rightarrow \uparrow k \text{ and } \uparrow y \text{ and } \uparrow k/y$. $(f_k > 0, f_{kk} < 0)$
+              \item $\uparrow \delta \Rightarrow \downarrow k \text{ and } \downarrow y \text{ and } \downarrow k/y$.
+              \item $\uparrow n \Rightarrow \downarrow k \text{ and } \downarrow y \text{ and } \downarrow k/y$.
+          \end{enumerate}
+    \item Role of diminishing returns to capital (the shape of the production function). \begin{itemize}
+              \item With larger $\alpha$ (for C-D case) --- less curvature, larger level of output and investment at each level of capital.
+              \item For given depreciation rate, a higher level of capital is sustainable in steady state.
+          \end{itemize}
+    \item Why some countries are richer than others? \begin{itemize}
+              \item Higher $s$ or lower $n$.
+          \end{itemize}
+    \item Why some countries grow more than others? \begin{itemize}
+              \item In BGP, the model dose not tell. It depends on the exogenous rate of technical progress.
+          \end{itemize}
+\end{enumerate}
+
+\subsection{Consumption in Steady State} Consumption is given by
+\[
+    c_t  = f(k_t) - s f(k_t)
+\]with SS condition: \[
+    sf(k^*)    =(n+\delta)k^*
+\] then we get \[
+    c^* = f(k^*) - (n+\delta)k^*
+\]
+$c^*$ is hump-shaped with $k^*$ and $s$. ($k^*$ is an increasing function of $s$).
+
+\subsubsection{Golden Rule in Steady State} \[
+    s^g \equiv \arg \max\{f(k^*(s)) - (n+\delta)k^*(s)\}
+\]
+FOC: \[
+    f_k(k^*(s))\frac{\partial k^*}{\partial s} - (n+s)\frac{\partial k^*}{\partial s} = 0 \Longrightarrow f_k(k^*(s)) = (n+\delta)
+\]
+The golden rule capital per capita $k^*_g \equiv k^*(s^g)$.
+
+\textbf{Why SS consumption is not maximized when:} \begin{itemize}
+    \item $s>s^g$: Consumption is not maximized because too many resources are devoted to keep the high level of per capita capital in SS.
+    \item $s<s^g$: A big share of output is consumed, but output is not large enough.
+\end{itemize}
+
+\textbf{How about moving the saving rate to $s^g$?} \begin{itemize}
+    \item Move from $s > s^g$ to $s = s^g$. \begin{enumerate}
+              \item Initial jump: consumption increases.
+              \item Transition: Consumption decreases monotonically until arriving at a steady state with $c^g$.
+              \item Result: Higher consumption at all point of time.
+          \end{enumerate}
+    \item Move from $s < s^g$ to $s = s^g$. \begin{enumerate}
+              \item Initial jump: consumption falls.
+              \item Transition: Consumption increases monotonically until arriving at a steady state with $c^g$.
+              \item Result: In order to achieve a higher long run level of consumption this economy will have to sacrifice consumption in the short run.
+          \end{enumerate}
+\end{itemize}
+
+A SS with $s > s^g$ is said to be \textbf{dynamically inefficient}, because it improved everyone's situation.
+
+A SS with $s < s^g$ depends on the trade-off present and future consumption. The Solow model is silent about that.
+
+
+\subsection{Transitional Dynamics}
+\[
+    \gamma_{k,t} \equiv \frac{\dot{k}_t}{k_t} = s \frac{f(k_t)}{k_t} - (\delta + n).
+\]
+With C-D production function the dynamics for output and consumption will be the same as for capital \[
+    y_t = k_t^\alpha \quad\Longrightarrow \quad\gamma_{y,t} = \alpha\gamma_{k,t}
+\]\[
+    c_t = sy_t \quad \Longrightarrow \quad\gamma_{c,t} = \gamma_{y,t}
+\]
+
+The higher $k$, the lower the growth rate. Since \[
+    \frac{d}{dk}\Big(\frac{f(k)}{k}\Big) < 0 \iff f_k(k) - \frac{f(k)}{k} < 0 \iff f_{kk}(k)<0.
+\]
+
+\textbf{Main message of the Solow model:} diminishing returns to capital imply that growth by accumulation of capital gets eventually exhausted.
+
+
+\subsection{Convergence}
+
+We know poor economies do not necessarily grow faster than rich ones. Because they have different steady states.
+
+Solow model cannot explain absolute convergence but can explain \textbf{conditonal convergence}.
+
+\subsubsection{How to test for conditional convergence?}
+
+Use \textbf{cross-country regressions} with variables ($x$) that control for different steady states: \[
+    \gamma_{y,t-1,t} = \beta_0\ln y_{t-1} + \beta_1\ln x_{t-1} + \varepsilon_t
+\] where $\gamma_{y,t-1,t}$ represents growth rate of $y$ from time $t-1$ to $t$, $y_{t-1}$ is the initial (time $t$) output per capita, $x$ is the control variable which may contains $s, n, \delta, \alpha$.
+
+Take the equation for the rate of growth of capital: \[
+    \gamma_{k,t} = s \frac{f(k_t)}{k_t} - (n + \delta)
+\]
+
+Log-linearize it around the steady state: using Taylor expansion near steady state and $\log k_t - \log k^* \simeq \frac{k_t - k^*}{k^*}$ (since we need the \textbf{relative} bias from SS). \[
+    \gamma_{k,t} \simeq s\Big[f_k(k^*) - \frac{f(k^*)}{k^*}\Big](\log k_t - \log k^*)
+\]
+
+In Cobb-Douglas case we have: \[
+    f_k(k^*) = \alpha(k^*)^{\alpha-1} \quad\text{and}\quad \frac{f(k^*)}{k^*} = (k^*)^{\alpha-1} \quad\text{and}\quad k^* = \Big(\frac{s}{n+\delta}\Big)^{\frac{1}{1-\alpha}}
+\]
+Therefore, \[
+    \gamma_{k,t} \simeq -\beta(\log k_t - \log k^*) \quad\text{with}\quad \beta \equiv (1-\alpha)(n+\delta)
+\]
+This is now a single \textbf{autonomous, log-linear, first-order differential equation} describing the dynamics of capital accumulation. ($\gamma_{k,t} = \frac{\dot{k}_t}{k_t} = \frac{d \log k_t}{dt}$)
+
+Solve the linear differential equation to obtain: \[
+    \log k_t = (\log k_0 - \log k^*)e^{-\beta t} + \log k^*
+\]
+This equation approximates the path of capital around the steady state. And $\lim_{t \to \infty} \log k_t = \log k^*$.
+
+Since $y_t = k_t^{\alpha}$ the same equation applies to output \[
+    \log y_t = (\log y_0 - \log y^*)e^{-\beta t}+\log y^*
+\]
+
+From the \textbf{trajectory of log output} one can write \[
+    \underbrace{\log y_t - \log y_0}_{\text{growth}} = (1-e^{-\beta t}) \underbrace{\log y^*}_{\text{steady state}} - (1-e^{-\beta t})\underbrace{\log y_0}_{\text{initial level}}
+\]
+And substituting by $y^* = \Big(\frac{s}{n+\delta}\Big)^{\frac{\alpha}{1-\alpha}}$ \[
+    \log y_t - \log y_0 = (1-e^{-\beta t})\frac{\alpha}{1-\alpha}(\log s - \log(n+\delta)) - (1-e^{-\beta t})\log y_0
+\]
+
+Hence, one can estimate in the data \[
+    \log y_{i,t} - \log y_{i,0} = \lambda_1 \log s_i + \lambda_2 \log(n_i+\delta_i)+\lambda_3 \log y_{i,0} + \varepsilon_i
+\]
+where, \begin{itemize}
+    \item $\lambda_1 = -\lambda_2 = (1-e^{-\beta t})\frac{\alpha}{1-\alpha}$.
+    \item $\lambda_3 =  - (1-e^{-\beta t}) < 0$ and hence conditional convergence.
+    \item From the estimated $\lambda_3$ we can recover $\beta$. (Note $\beta\equiv(1-\alpha)(n+\delta)$)
+    \item From the estimated $\lambda_1$ we can recover $\alpha$.
+\end{itemize}
+
+\subsubsection{Speed of Convergence}
+One can rewrite the \textbf{trajectory of log output} as: \[
+    \frac{\log y_t - \log y_0}{\log y^*-\log y_0} = 1-e^{-\beta t}
+\] The left hand side is a \textbf{measure of relative distance}: the fraction of the gap between $y_0$ and the steady state erased between time $0$ and $t$.
+
+A \textbf{measure of speed of convergence} is given by distance over time: \[
+    \text{average speed} = \frac{\Big(\frac{\log y_t - \log y_0}{\log y^*-\log y_0}\Big)}{t} = \frac{1-e^{-\beta t}}{t}
+\]
+
+The \textbf{instantaneous speed of convergence} will be given by the limit of the above expression when the time interval tends to zero: \[
+    \text{instantaneous speed} = \lim_{t \to 0}\frac{1-e^{-\beta t}}{t}= \beta
+\]
+
+We have that $\beta \equiv (1-\alpha)(n+\beta)$ is the speed of convergence. But where does $s$ go? \\
+The saving rate $s$ affects the speed of convergence both directly and indirectly: \begin{itemize}
+    \item It increases the speed of convergence directly because it implies a higher proportion of output invested and therefore higher capital accumulation.
+    \item However, it decreases the speed of convergence indirectly by increasing the steady state level of capital $k^*$. A higher $k^*$ implies that we are in an area where the marginal product of capital is lower and therefore the increase of output (and therefore of investment) is smaller.
+\end{itemize}
+In the \textbf{Cobb-Douglas case} these effects exactly cancel out each other.
+
+\[
+    \frac{\log y_t - \log y_0}{\log y^*-\log y_0} = 1-e^{-\beta t} \Longrightarrow t=\frac{\log\Big(1-\frac{\log y_t - \log y_0}{\log y^* - \log y_0}\Big)}{-\beta}
+\]
+We use \textbf{half life} to measure how long it takes for the economy to cover half of the distance to the steady state.
+\begin{remark*}
+    Why use half life? Because in our log-linearized model, it will never arrive at the SS in the finite time.
+\end{remark*}
+
+
+\subsubsection{Empirical Problem}
+The cross-country regressions recover $\beta \in [0.01, 0.03]$.
+
+If we take $\beta = 0.02$, this implies a half life of 35 years and requires a capital share $\alpha \simeq 0.75$ (a much large number than the usually estimated $0.3$).
+
+Solutions: \begin{itemize}
+    \item Upgrade Solow model with human capital $\Rightarrow \alpha$ is the sum of physical and human capital, it can be 0.75, so $\beta$ can be around 0.02. \textit{Mankiw, Romer, Weil (QJE 1992)}
+    \item Estimate convergence equations with panel data $\Rightarrow$ larger speed of convergence ($\beta \simeq 0.05$). \textit{Islam (QJE 1995), Caselli, Esquivel, Lefort (JEG 1996)}
+\end{itemize}
+
+Cross-country growth regressions are biased because of technology.
+
+A model with technology progress we have \[
+    \log \hat{y}_{i,t} - \log\hat{y}_{i,0} = \lambda_1 \log s_i + \lambda_2 \log(n_i + \delta_i + x_i) + \lambda_3 \log\hat{y}_{i,0} + \varepsilon_i
+\] where hat variables are in per efficiency units of labor: $\hat{y}_t \equiv y_t/B_t$ and $B_t = e^{xt}B_0$.
+Then the regression equation in per capita variables becomes \[
+    \log y_{i,t} - \log y_{i,0} = xt + \lambda_1\log s_i + \lambda_2\log(n_i+\delta_i+x_i) + \lambda_3\log y_{i,0} - \underbrace{\lambda_3 \log B_{i,0} + \varepsilon_i}_{\text{error term} = \eta_i}
+\] because $y_{i,0} = B_{i,0}k_{i,0}^{\alpha}$, it is likely that \underline{$Cov(y_{i,0},\eta_i)<0$. Omitted variable bias lowers point estimates of $\lambda_3$}.
+
+\underline{But this can be corrected with panel data as $\lambda_3 \log B_{i,0}$ is differenced out. \textit{Islam (QJE 1995)}
+}

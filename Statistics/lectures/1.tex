@@ -1,0 +1,180 @@
+The term \textit{probability} has two different interpretations: 1) a degree of belief a person has about an event or statement (the Bayesian interpretation); 2) The limit of empirical frequencies (ex: coin toss) for repeated events (the classical of frequentist interpretation). [In economics events often occur only once. So repetition is a thought experiment.]
+
+\section{A Set of Tools to Summarize and Describe Dataset}
+
+Types of dataset in Economics: \begin{itemize}
+    \item Time series
+    \item Cross section
+    \item Panel
+\end{itemize}
+
+\subsection{Frequency Distribution}
+\begin{itemize}
+    \item Absolute frequency: $n_i$
+    \item Relative frequency: $f_i$ \begin{itemize}
+              \item The histogram: a bar chart representing the frequency distribution; area of each bar is \textbf{proportional to the frequency of observations in the interval}.
+          \end{itemize}
+    \item Cumulative frequency: \[
+              c_i = f_1 + f_2+\dots+f_i
+          \] \begin{itemize}
+              \item $c(w) = \frac{1}{n}\sum_{i=1}^{n} \mathbf{1}(w_i \leq w)$, where the notation $\mathbf{1}(\text{condition})$ means if condition is true return $1$ else return $0$.
+          \end{itemize}
+\end{itemize}
+
+\subsection{Synthetic Measures}
+\begin{definition}
+    These are numerical measures which capture the main features of the distribution of the data.
+\end{definition}
+
+\subsubsection{Measures of location}
+
+\begin{itemize}
+    \item Mean: \[
+              \bar{w} = w_1f_1 + w_2f_2 + \dots + w_nf_n = \sum_{i=1}^{n} w_if_i
+          \]
+    \item Mode: the value which occurs with the highest frequency in the data. \begin{itemize}
+              \item Mode interval
+          \end{itemize}
+    \item Median: the value which splits the range of data in two parts with equal frequency. \begin{itemize}
+              \item $\min\{w: c_i(w) \geq \frac{1}{2}\}$
+              \item Median interval
+              \item less sensitive to outliers than the mean, but it uses less information on the magnitude of the data.
+          \end{itemize}
+    \item Quantile: \[
+              Q_w(P) \equiv \min\{w: c(w)\geq P\}
+          \]
+    \item Optimal location measures under loss functions: \begin{itemize}
+              \item A loss function $L()$ satisfies for $0<u<v$: \begin{align*}
+                         & 0=L(0) \leq L(u) \leq L(v)   \\
+                         & 0=L(0) \leq L(-u) \leq L(-v)
+                    \end{align*}
+              \item The mean $\bar{y} = \min_\theta \sum_{i=1}^{}L(y_i-\theta)f_i$, for $L(u) = u ^{2}$. (quadratic loss) \begin{align*}
+                        \sum_{i=1}^{n} (y_i-\theta)^{2}f_i & = \sum_{i=1}^{} (y_i-\bar{y}+\bar{y}-\theta)^{2}f_i                                                                            \\
+                                                           & = \sum_{i=1}^{} (y_i-\bar{y})^{2}f_i + (\bar{y}-\theta)^{2}\sum_{i=1}^{} f_i + 2(\bar{y}-\theta)\sum_{i=1}^{} (y_i-\bar{y})f_i \\
+                                                           & = \sum_{i=1}^{} (y_i-\bar{y})^{2}f_i + (\bar{y}-\theta)^{2}
+                    \end{align*}
+              \item The median minimizes $\sum_{i=1}^{}L(y_i-\theta)f_i$ for $L(u) = \left| u \right| $.
+          \end{itemize}
+\end{itemize}
+
+\subsubsection{Measures of dispersion} They capture the dispersion of the frequency distribution around a measure of location such as the mean.
+
+\begin{itemize}
+    \item Variance: \[
+              s _ {y} ^ {2} = \sum_ {i} (y _ {i} - \overline {{y}}) ^ {2} f _ {i}
+          \]
+    \item Standard deviation: $s_{y}$
+    \item Coefficient of variation: \[
+              CV = \frac {s y}{\mu}
+          \] \begin{itemize}
+              \item scale or normalize the variance.
+          \end{itemize}
+    \item Interquartile range: $Q(0.75)-Q(0.25)$
+    \item Higher order central moments: \[
+              m _ {k} = \sum_ {i} (y _ {i} - \overline {{y}}) ^ {k} f _ {i}
+          \]
+    \item   Coefficient of skewness: $\frac {m _ {3}}{s _ {y} ^ {3}}$ \begin{itemize}
+              \item It measures skewness. If $m_3 > 0$ (positive skewness), it implies (large) right tail and $\text{mean} > \text{median}$.
+          \end{itemize}
+    \item   Coefficient of kurtosis: $\frac {m _ {4}}{s _ {y} ^ {4}}$ \begin{itemize}
+              \item It measures how "fat" the distribution. The normal distribution's $\frac{m_4}{s_y^4} = 3$.
+              \item We use $\frac{m_4}{s_y^4} - 3$ to compare with normal distribution.
+          \end{itemize}
+\end{itemize}
+
+\subsection{Bivariate frequency distribution}
+
+\begin{itemize}
+    \item Joint frequency distribution: \(f(y_{i},x_{j}) = f_{ij}\)
+    \item Marginal frequency distributions: $f (y _ {i}) = \sum_ {j} f (y _ {i}, x _ {j})$
+    \item Conditional frequency distributions: \[
+              f (y _ {i} \mid x _ {j}) = \frac {f (y _ {i} , x _ {j})}{f (x _ {j})}
+          \] \begin{itemize}
+              \item conditional mean: \[
+                        \overline {{y}} \mid x _ {j} = \sum_ {i} y _ {i} f (y _ {i} \mid x _ {j})
+                    \]
+                    We are often interested in how a conditional mean varies with the conditioning variable [e.g.~effect of schooling on wages - the schooling model and the Mincer equation, In \(w = a + b s\)\ldots. Suppose \(s\) is \(ED - 6\)]
+
+              \item conditional variance: \[
+                        s _ {y | x _ {j}} ^ {2} = \sum_ {i} \left[ y _ {i} - \left(\overline {{y}} \mid x _ {j}\right) \right] ^ {2} f (y _ {i} \mid x _ {j})
+                    \]
+          \end{itemize}
+\end{itemize}
+
+\subsection{Covariance and correlation}
+\begin{definition}
+    \textbf{Covariance} measures joint behavior/movement around the means.
+    \[
+        \operatorname {cov} (y, x) = \sum_ {i} \sum_ {j} (y _ {i} - \overline {{y}}) (x _ {j} - \overline {{x}}) f (y _ {i}, x _ {j})
+    \]
+\end{definition}
+\begin{remark*} \underline{\textit{Positive: moving together.  Negative: different directions.}}
+
+    Covariance measures sign/strength of \textbf{linear} relationship:
+
+    Counterexample: $x_i = -2,-1,0,1,2$, $y_i=x_i ^{2}=4,1,0,1,4$.
+    Since
+    \[
+        \operatorname {cov} (y, x) = \sum_ {i} \sum_ {j} (y _ {i} - \overline {{y}}) (x _ {j} - \overline {{x}}) f (y _ {i}, x _ {j}) = \sum_{i} \sum_{j} x_iy_if_{ij} - \bar{x}\bar{y} = \bar{xy} - \bar{x}\bar{y}
+    \]
+    $\operatorname{cov}(x,y)=0$ but $x,y$ move together.
+
+    And (relatedly) plays ``key'' role in the best linear fit of
+    the data: \[
+        \text{if } (\widehat {\alpha}, \widehat {\beta}) = \arg \min _ {a, b} \sum_ {i} (y _ {i} - a - b x _ {i}) ^ {2}, \text{then } \widehat {\beta} = \frac {\operatorname {c o v} (y , x)}{\operatorname {v a r} (x)}, \widehat {\alpha} = \overline {{y}} - \widehat {\beta} \overline {{x}}
+    \]
+\end{remark*}
+
+\textbf{Correlation coefficient}: \[
+    r _ {y x} = \frac {\operatorname {c o v} (y , x)}{s _ {y} s _ {x}}
+\]
+It is \textbf{adimensional}. $-1 \leq r_{yx} \leq 1$. If $\left| r_{yx} \right| $ closed to $1$, \textbf{linear} correlation is tight, if $\left| r_{yx} \right| $ close to $0$, the \textbf{linear} correlation is weak.
+
+
+
+\subsection{Appendix: Non-parametric fitting}
+
+\subsubsection{Conditional means with kernel} If \(x\) is \textbf{continuous} like wages (perhaps even if it is discrete or grouped) we want to compute \(\overline{y} \mid x\) using other observations with \(x's\) which are ``close'' to \(x \ldots\)
+
+\begin{align*}
+    \bar{y} | x & = \frac{\sum_{i=1}^{n} y_i \textbf{1}\{x -h/2 \leq x_i \leq x + h/2\}}{\sum_{i=1}^{n}\textbf{1}\{x -h/2 \leq x_i \leq x + h/2\}}                                          \\
+                & = \frac{\sum_{i=1}^{n} y_i \textbf{1}\{-\frac{1}{2}\leq \frac{x-x_i}{h}\leq \frac{1}{2}\}}{\sum_{i=1}^{n} \textbf{1}\{-\frac{1}{2}\leq \frac{x-x_i}{h}\leq \frac{1}{2}\}}
+\end{align*}
+
+\begin{remark*}
+    This method is straightforward, because it gives all the data in the interval $[x-h/2, x+h/2]$ \textbf{equal weights}.
+
+    If intervals are wide, the $\bar{y}$s which are corresponding to different $x$s, will have small variance but large bias.
+
+    If intervals are narrow, the $\bar{y}$s which are corresponding to different $x$s, will have large variance but small bias.
+\end{remark*}
+
+More generally, we can use a weighting function or ``kernel'' instead of ``$\textbf{1}\{-\frac{1}{2}\leq \frac{x-x_i}{h}\leq \frac{1}{2}\}$''. We define the kernel estimator of the conditional mean function as \[
+    \hat{\bar{y}} | x = \frac{\sum_{i=1}^{n} y_i K(\frac{x-x_i}{h})}{\sum_{i=1}^{n} K(\frac{x-x_i}{h})}.
+\]
+
+For instance, \textbf{Nadaraya-Watson} kernel estimator obtains if the weighting function $K(u)$ is continuous, symmetric, integrates to $1$, and $\lim_{|u| \to \infty} K(u) = 0$.
+
+\(h\) is the smoothing or ``bandwith'' parameter. [As \(n \to \infty\) we need \(h \to 0\) but \(nh \to \infty\) \ldots{} a ``rule of thumb'' makes \(h \propto n^{-1/5}\).]
+
+% TODO: Ask Mengzhen
+\subsubsection{Conditional means, sieves} A lower dimensional alternative is to approximate the conditional mean with a polynomial. That is,
+\(\widehat{\overline{y}}\mid x = \sum_{k = 0}^{J}\widehat{\beta}_{k}x^{k}\)
+where
+\(\widehat{\beta} = \arg \min_{b\in R^{J + 1}}\sum_{i}(y_{i} - \sum_{k = 0}^{J}b_{k}x_{i}^{k})^{2}\)
+.
+
+How many terms in the polynomial? The choice of \(J\) reflects a
+trade-off similar to the choice of bandwidth \(h\) before. As
+\(n \to \infty\) we need \(J \to \infty\) but \(\frac{1}{n} J \to 0\) .
+
+\subsubsection{Kernel estimation of density} The ``local window'' idea above can be
+applied to description of the univariate frequency distribution of a
+continuous variable. Take the denominator above, then
+\(\frac{1}{nh}\sum_{i=1}^{N}\mathbf{1}\left\{-\frac{1}{2} \leq \frac{x - x_i}{h} \leq \frac{1}{2}\right\}\)
+is the relative frequency ``per unit of \(x\) in a window of width \(h\)
+centered at \(x\) . {[}For \(h\) small, this approximates the
+density.{]}
+
+\(\widehat{f} (x) = \frac{1}{nh}\sum_{i = 1}^{N}K\left(\frac{x - x_i}{h}\right)\) is the kernel density estimator.
+
