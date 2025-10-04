@@ -165,7 +165,164 @@ Properties if the cdf and pdf of continuous random variables: \begin{itemize}
 \begin{proof}
     \begin{align*}
          & F_Y(y) \equiv p(Y \leq y) = p(X \leq g^{-1}(y)) = F_X(g^{-1}(x)) \\
-         & f_Y(y) = \frac{d F(x)}{dy} = \frac{dx}{dy} f_X(g^{-1}(y))
+         & f_Y(y) = \frac{d F_Y(y)}{dy} = \frac{dx}{dy} f_X(g^{-1}(y))
     \end{align*}
     But $\frac{dx}{dy}$ should be the absolute value because $f(\cdot) \geq 0$.
 \end{proof}
+
+\section{Expectation and Variance of Random Variables}
+
+\begin{definition}
+    [Expectation]
+
+    Consider a r.v. $X$:
+
+    \begin{itemize}
+        \item Discrete r.v. \[
+                  E(X) = \sum_{i=1}^{} x_i p(X=x)
+              \]
+        \item Continuous r.v. \[
+                  E(X) = \int_{-\infty }^{\infty } xf(x) \, dx
+              \]
+        \item A general notation: \[
+                  E(X) = \int_{-\infty }^{\infty } x \, dF(x)
+              \]
+    \end{itemize}
+\end{definition}
+
+\begin{example*}
+    Discrete r.v. with infinite support. $X = 1,2,\dots$ and $P(X=x) = (\frac{1}{2})^{x}$.
+
+    \begin{align*}
+        E(X) & = \sum_{i=1}^{\infty } x(1/2)^{x}                 \\
+             & = \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \dots \\
+             & +\frac{1}{4} + \frac{1}{8} + \dots                \\
+             & + \frac{1}{8} + \dots                             \\
+             & = 2
+    \end{align*}
+
+    Convention: If $f(x)$ is symmetric, we say $E(X)$ exists $\iff$ $E(\left| X \right| )$ exists.
+
+    Example: $Z \sim N(0,1)$.
+
+    Counterexample: Cauchy distribution $f_X(x) = \frac{1}{\pi (1+x ^{2})}$ doesn't have an expectation. Its cdf is $F(x) = \frac{1}{2} + \frac{1}{\pi }\arctan x$.
+\end{example*}
+
+
+\begin{definition}[Variance]
+    Let $X$ be a r.v. with mean $\mu$. \begin{itemize}
+        \item $var(X) = \sum_{i=1}^{} (x_i - \mu)^{2} p(X=x_i)$ (discrete r.v.)
+        \item $var(X) = \int_{-\infty }^{\infty } (x-\mu)^{2}f(x) \, dx$ (continuous r.v.)
+        \item $var(X) = \int_{-\infty }^{\infty } (x-\mu)^{2} \, dF(x)$ (general case)
+    \end{itemize}
+
+    It measures dispersion of the probability mass about the mean.
+
+    \textbf{Standard deviation}: $\sigma \equiv \sqrt{var(X)}$.
+\end{definition}
+
+\section{Properties of Expectation}
+
+\textbf{Expectation of a function of a r.v.}: Consider $X$ with cdf $F_X(x)$ and $Y = g(X)$ with cdf $F_Y(y)$ \[
+    E(Y) = \int_{}^{} y \, dF_Y(y) = \int_{}^{} g(x) \, dF_X(x)
+\]
+\begin{remark*}
+    It means we do not need to calculate the $F_Y(y)$ in this case.
+\end{remark*}
+
+\begin{itemize}
+    \item $E(c) = c$
+    \item $E(cX) = cE(X)$
+    \item $E[g(X) + h(X)] = E[g(X)] + E[h(X)]$
+    \item $E[g(X)] \geq E[h(X)]$ if $g(x) \geq h(x)$ for all $x$
+    \item $var(X) = E(X^2) - [E(X)]^{2}$ \begin{itemize}
+              \item proof: $var(X) = E(X-E(X))^{2} = E[X^2 + E^2(X) - 2XE(X)] = E(X^{2}) - [E(X)]^{2}$.
+              \item $var(c) = 0$
+              \item $var(cX) = c ^{2} var(X)$
+          \end{itemize}
+\end{itemize}
+
+
+\textbf{Jensen's inequality}: Let $X$ be a r.v. and $g(\cdot )$ a convex function, then $E(g(X)) \geq g(E(X))$ \begin{itemize}
+    \item If $g(\cdot )$ is linear $E(g(X)) = g(E(X))$.
+    \item If $g(\cdot )$ is convex $E(g(X)) \geq g(E(X))$.
+    \item If $g(\cdot )$ is concave $E(g(X)) \leq g(E(X))$.
+    \item If $X$ is non-degenerate and $g(\cdot )$ is strictly convex/concave, then the inequality is strict.
+\end{itemize}
+
+\begin{proof}
+    If $g(x)$ is convex, $\exists h(x)$ such that $h(x) \leq g(x), \forall x \in X$ and $h[E(x)] = g[E(x)]$.
+
+    $\Longrightarrow E[g(x)] \geq  E[h(x)] = h[E(X)] = g[E(X)]$.
+\end{proof}
+
+\textbf{Markov's inequality}: Let $X$ be a r.v., $g(\cdot)$ a non-negative function and $c$ a positive constant \[
+    p[g(X)\geq c] \leq \frac{E[g(X)]}{c}
+\]
+\begin{proof}
+    \begin{align*}
+        E[g(x)] & = \int_{}^{} g(x)f(x) \, dx = \int_{x \in \{x: g(x) \geq c\}} g(x)f(x) \, dx
+        + \int_{x \in \{x: g(x) < c\}} g(x)f(x) \, dx                                                                                             \\
+                & \geq  \int_{x \in \{x: g(x) \geq c\}} g(x)f(x) \, dx = c \int_{x \in \{x: g(x) \geq c\}} f(x)  \, dx = c \times  p[g(x) \geq c]
+    \end{align*}
+\end{proof}
+
+\textbf{Chebychev's inequality}: \[
+    p(\left| X-\mu \right| \geq c ) \leq \frac{\sigma ^{2}}{c ^{2}}
+\]
+\begin{proof}
+    Consider in Markov's inequality: $g(x) = (x-\mu)^{2}$ and $''c'' = c ^{2}$. \[
+        p[(x-\mu)^{2} \geq c ^{2}] \leq \frac{E(x-\mu)^{2}}{c ^{2}} = \frac{\sigma ^{2}}{c ^{2}}
+    \]
+\end{proof}
+
+\begin{remark*}
+    Implication: If a distribution is not very disperse, the probability in its bound cannot be large.
+\end{remark*}
+
+Chebychev's inequality with lowerbound: \[
+    \left| x - \mu \right| < c \iff \mu -c < x < \mu + c.
+\]
+Let $c = k \sigma$, we have \[
+    p(\mu - k\sigma < x < \mu + k\sigma) \geq 1 - \frac{\sigma ^{2}}{k ^{2} \sigma ^{2}} = 1 - \frac{1}{\sigma ^{2}}.
+\] Take $k = 2$, $p\geq \frac{3}{4}$. It gives a lowerbound for all distributions. However, with $N(\mu,\sigma ^{2})$ in the interval of $2\sigma$, $p \simeq 95\%$, it is not that useful.
+
+\section{Other Measures of Location and Dispersion}
+
+\begin{itemize}
+    \item \textbf{Quantiles}: $\varepsilon_q = \min\{x: F(x) \geq q\}$. / $Q_X(p) \equiv \min\{x: F(x) \geq p\}$. \begin{itemize}
+              \item $Q_X(p)$ is an inverse of cdf.
+          \end{itemize}
+    \item \textbf{Median}: $Q_X(\frac{1}{2})$.
+    \item \textbf{Mode}: $\arg \max_{x} f_X(x)$.
+\end{itemize}
+
+Consider a r.v. $X$, the cdf is $F_X(x)$ and r.v. $Y \equiv F_X(x)$. \[
+    F_Y(y) \equiv p(Y \leq y) = p(F_X(x) \leq y) = p(F_X^{-1}(F(x))  \leq F_X^{-1}(y) ) = p(x \leq F_X^{-1}(y)) = y
+\] So $Y$ is uniform distribution.
+
+\textbf{Higher order moments}: \begin{itemize}
+    \item $j$-th moment: $r_j = E(X^j)$.
+    \item $j$-th central moment: $\mu_j = E(X-\mu)^j$
+    \item Coefficient of skewness $(\frac{\mu_3}{\sigma ^{3}})$ and kurtosis $(\frac{\mu_4}{\sigma ^{4}})$.
+\end{itemize}
+
+\textbf{Moment generating function of r.v. $X$}: \[
+    \psi_X(t) = E(e^{tx})
+\]
+$\psi_X(0) = 1$.\\
+If $\psi_X(t)$ exists in an interval around $0 \Longrightarrow \psi^{(k)}_X(0) = r_k = E(X^k)$.
+
+\begin{example*}
+    For $X \sim N(\mu, \sigma)$:
+
+    Median = Mean = Mode = $\mu$.
+
+    \[
+        E(X - \mu)^{2j+1} = 0, \, j = 1,2,\dots
+    \]\[
+        E(X-\mu)^{2j} = \frac{(2j)!}{2^j \cdot j!} \sigma^{2j}
+    \]
+
+    When $j = 2 \Longrightarrow E(X-\mu)^4 = 3\sigma^{4} = \mu_4 \Longrightarrow \frac{\mu_4}{\sigma ^{4}} = 3$.
+\end{example*}

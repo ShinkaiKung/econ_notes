@@ -188,7 +188,7 @@ Other preference properties:
         \succeq \text{continuous}          & \iff \text{there exists $u'$ continuous representing $\succeq $} \\
         \succeq \text{locally nonsatiated} & \iff \text{$u$ has no local maxima}                              \\
         \succeq \text{strongly monotone}   & \iff \text{$u$ is strictly increasing}                           \\
-        \succeq \text{(strict) convex}     & \iff \text{$u$ is strict quasiconcave}                           \\
+        \succeq \text{(strict) convex}     & \iff \text{$u$ is (strict) quasiconcave}                         \\
     \end{align*}
 \end{proposition}
 
@@ -219,7 +219,7 @@ Other preference properties:
 \begin{proposition}
     If $u(\cdot )$ is continuous, then for any $p \gg 0$ and $w \geq 0$ the program [P] \textbf{has a solution}.
 
-    If $u(\cdot )$ is also strictly quasiconcave, then the solution is \textbf{unique}. Moreover, $x(p,w)$ is a continuous function.
+    If $u(\cdot )$ is also strictly quasiconcave, then the solution is \textbf{unique}. Moreover, $x(p,w)$ is a \textbf{continuous} function.
 \end{proposition}
 
 \begin{proof} Existence and Uniqueness.
@@ -227,4 +227,302 @@ Other preference properties:
     Existence: (Weierstrass Theorem): $u(\cdot )$ is continuous and $\beta(p,w)$ is compact $\Longrightarrow$ exists a maxima.
 
     Uniqueness: By contradiction: $\exists x^1, x^2 \in X: x^1, x^2 \in \beta(p,w) $ and $u(x) \leq u(x^1), u(x)\leq u(x^2)\, \forall x \in \beta(p,w)$. Then we have $u(\lambda x^1 + (1-\lambda)x^2) > \min\{u(x^1), u(x^2)\} \Longrightarrow u(x') > u(x^1)$. It contradicts to $u(x) \leq u(x^1)\, \forall x \in \beta(p,w)$.
+
+    Continuity: \underline{MGW 3. Appendix A}
 \end{proof}
+
+\begin{proposition}[Walras' Law]
+    IF $u(\cdot )$ is continuous and locally nonsatiated, then for any $p \gg 0, w \gg 0$ and any $x \in x(p,w)$, we have $px = w$. \underline{If $x(\cdot )$ is a function} then \[
+        px(p,w) = w
+    \]
+\end{proposition}
+
+\begin{proposition}
+    The Walrasian demand is homogenous of degree $0$ in $(p,w)$. \[
+        x(p,w) = x(\lambda p, \lambda w), \forall \lambda > 0
+    \]
+\end{proposition}
+
+
+\begin{definition}[Indirect Utility Function]
+    \[
+        v(p,w) \equiv \max_{x \in \beta(p,w)} u(x)
+    \]
+\end{definition}
+
+
+\begin{proposition}
+    If $u(\cdot )$ is continuous and locally non satiated, then $v(p,w)$ is: \begin{enumerate}
+        \item continuous in $(p,w)$.
+        \item homogenous of degree $0$ in $(p,w)$.
+        \item non increasing in $p$ and strictly increasing in $w$.
+        \item quasiconvex in $(p,w)$. \begin{itemize}
+                  \item It means we prefer extreme not intermediate conditions.
+              \end{itemize}
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    (a) \underline{MGW 3. Appendix A}
+
+    (b) Because $x(p,w)$ is homogenous of degree $0$.
+
+    (c) Non-increasing in $p$: consider the corner solution. Strictly increasing in $w$, interior point and non-satiation.
+
+    (d) At the intersection $x^*$ of two budget constrains, we have $p^1x^* = p^2 x^*$. Since \[
+        \lambda p^1 x^* + (1-\lambda) p^2 x^* = p^1x^*
+    \], we know the interval ($\lambda$) budget constrain also cross the intersection $x^*$. And the $\lambda$ budget constraint's slope is between those two original budget constrains. So any bundles in this now budget constrains is affordable in origin cases. So we have \[
+        v(\lambda p^1 + (1-\lambda)p^2,\lambda w^1 + (1-\lambda) w^2) \leq \max\{v(p^1,w^1), v(p^2,w^2)\}
+    \]
+\end{proof}
+
+\subsection{Comparative Statics}
+
+\begin{enumerate}
+    \item  Wealth: $\frac{\partial x_l}{\partial w} \geq 0 \Longrightarrow$ normal Good. $\frac{\partial x_l}{\partial w} \leq 0 \Longrightarrow$ inferior Good. \begin{itemize}
+              \item Inferior good is a local definition. A good can become an inferior good from a normal good with wealth increasing.
+          \end{itemize}
+    \item Its own price: $\frac{\partial x_l}{\partial p_l} \leq 0 \Longrightarrow$ normal Good. $\frac{\partial x_l}{\partial p_l} \Longrightarrow $ Giffen Good.
+    \item Another good's price: $\frac{\partial x_l}{\partial p_k} \geq 0 \Longleftarrow $ gross substitution. $\frac{\partial x_l}{\partial p_k} \Longrightarrow $ gross complements.
+\end{enumerate}
+
+\begin{example}[Giffen Good]
+    An excellent and historically cited, though debated, example of a Giffen good is the case of potatoes during the Irish Potato Famine in the 19th century. More recent and empirically supported evidence points to rice in certain impoverished regions of China.
+
+    In these specific contexts, when the price of the staple food (potatoes or rice) increased, impoverished households paradoxically consumed more of it. The reasoning is that as the price of the staple rose, the household's already limited budget was squeezed, forcing them to cut back on more expensive "luxury" foods like meat. To maintain their necessary caloric intake, they had to purchase more of the now higher-priced staple, as it was still the most affordable source of calories.
+\end{example}
+
+\section{Hicksian Demand and Expenditure Function}
+
+\begin{definition}
+    For program [D]\begin{align*}
+         & \min_{x \in X} px      \\
+         & s.t. u(x) \geq \bar{u}
+    \end{align*}
+
+    \textbf{Expenditure Function}: $e(p,\bar{u}) \equiv \min_{u(x)\geq \bar{u}}$.
+
+    \textbf{Hicksian/Compensated Demand}: $h(p,\bar{u}) \equiv \arg \min_{u(x) \geq \bar{u}} px$.
+\end{definition}
+
+\begin{remark*}
+    Hicksian/Compensated Demand is a correspondence.
+\end{remark*}
+
+
+\begin{proposition}
+    If $u(\cdot )$ is continuous and $p \gg 0$, then [D] has a solution.
+
+    If $u(\cdot )$ is also strictly quasiconcave, then the solution is unique. Moreover, in this case $h(p,u)$ is a continuous function.
+\end{proposition}
+
+\begin{proof} Existence and Uniqueness.
+
+    Existence: $p \gg 0 \Longrightarrow x$ is closed but not bounded. We can construct a new program \[
+        \left\{\begin{array}{l}
+            \min_{x \in X} px \\
+            s.t. \left\{\begin{array}{l}
+                            u(x) \geq \bar{u}                                        \\
+                            px \leq p x_0, \, x_0 \in \{x \in X: u(x) \geq \bar{u}\} \\
+                        \end{array}\right.
+        \end{array}\right.
+    \]
+    Now, in our new program, $x$ is in a compact set. With Weierstrass Theorem, we can know there is a solution.
+
+    Uniqueness: By contradiction. $\exists x^1, x^2 \in X, x^1 \neq x^2, u(x^1) \geq \bar{u}, u(x_2) \geq \bar{u}$. And \[
+        p x^1 = p^2 x \leq px, \forall x \in \{x \in X: u(x) \geq \bar{u}\}.
+    \]
+
+    $\Longrightarrow^{SQC} \lambda \in (0,1), u(x^\lambda) > u(x^1), u(x^\lambda) > u(x^2)$.
+
+    $\Longrightarrow^{Continuity} \exists \delta \in (0,1), u(\delta x^\lambda) > \bar{u}$. However, $p \delta x^\lambda < p x^1 = px^2$ !!
+\end{proof}
+
+
+
+\begin{proposition}
+    If $u(\cdot )$ is continuous then $\forall x \in h(p,u)$ we have that $u(x) = u$. If $h(\cdot )$ is a function, then \[
+        u(h(p,u)) = u
+    \]
+\end{proposition}
+
+\begin{proposition}
+    The Hicksian demand is homogenous of degree zero in $p$. \[
+        h(p,u) = h(\lambda p, u), \, \forall \lambda > 0
+    \]
+\end{proposition}
+
+\begin{proposition}
+    [\textbf{Compensated Law of Demand}]
+    If $u(\cdot )$ is continuous and the Hicksian demand is a function, then $\forall p',p'' \gg 0$ we have that \[
+        (p'-p'')\cdot [h(p',u) - h(p'',u)] \leq 0
+    \]
+\end{proposition}
+
+\begin{proof}
+    [Intuitive Proof]
+    Let $p_l' = p_l'', l = 2,3,\dots$ and $p_1' \neq p_1''$. Then we have \[
+        (p'-p'')\cdot [h(p',u) - h(p'',u)] \leq 0 \iff (p_1'-p_1'')\cdot [h(p_1',u) - h(p_1'',u)] \leq 0
+    \]
+\end{proof}
+
+\begin{proof} We have
+    \[
+        h(p',u) p' \leq h(p'',u)p'
+    \] since $e(p',u) \leq p'x, \forall x \in \{x \in X: u(x) \geq u\}$.
+
+    Similarly, \[
+        h(p'',u) p'' \leq h(p',u) p'' \iff - h(p',u) p'' \leq - h(p'',u) p''
+    \]
+    Plus these two: \[
+        (p'-p'')h(p',u) \leq (p'-p'')h(p'',u) \iff (p'-p'')\cdot [h(p',u) - h(p'',u)] \leq 0
+    \]
+\end{proof}
+
+\begin{proposition}
+    If $u(\cdot )$ is continuous, satisfies LNS, and $p \gg 0$, then $e(p,u)$ is: \begin{enumerate}
+        \item homogenous of degree $1$ in $p$: $e(\lambda p,u) = \lambda e(p,u)$.
+        \item strictly increasing in $u$, and non-decreasing $p$.
+        \item continuous in $(p,u)$.
+        \item concave in $p$.
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    (1) Because $h(p,u)$ is homogenous of degree $1$ in $p$.
+
+    (2) LNS and Continuity; corner solution.
+
+    (3) \underline{MGW 3. Appendix A}
+
+    (4) \[
+        p^\lambda h(p^\lambda,u) = \lambda p^1 h(p^\lambda, u) + (1-\lambda)p^2 h(p^\lambda, u)
+    \]
+    Since $p^1 h(p^\lambda, u) \geq p^1 h(p^1,u)$ and $p^2 h(p^\lambda,u) \geq p^2 h(p^2,u)$, then we have \[
+        p^\lambda h(p^\lambda,u) \geq  \lambda p^1 h(p^1, u) + (1-\lambda)p^2 h(p^2, u)
+    \]
+
+    Intuition of (4): If $p$ increases, the expenditure will not increase at a same degree, because by rearrange the composition of the consumption bundles, we can alleviate this effect..
+\end{proof}
+
+\section{Duality}
+
+\begin{proposition}
+    [Duality]
+    Consider $u(\cdot )$ continuous and satisfying LNS, and $p \gg 0$. Then: \begin{enumerate}
+        \item if $x^0$ solves [P] for $w > 0$, then $x^0$ solves [D] for $\bar{u} = u(x^0) = v(p,w)$. Moreover, \begin{align*}
+                   & e(p,v(p,w)) = w      \\
+                   & h(p,v(p,w)) = x(p,w)
+              \end{align*}
+        \item if $x^0$ solves [D] for $\bar{u} > u(0)$ then $x^0$ solves [P] for $w = px^0 = e(p,\bar{u})$. Moreover \begin{align*}
+                   & v(p,e(p,\bar{u})) = \bar{u}      \\
+                   & x(p,e(p,\bar{u})) = h(p,\bar{u})
+              \end{align*}
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}[Proof of (1)]
+
+    First Step: Prove $e(p,v(p,w)) \leq w$
+
+    Given $(p,w)$, we have optimal consumption bundle $x^0 \in x(p,w)$, and $u(x^0) = v(p,w)$. We have \[
+        e(p,v(p,w)) \leq px^0 = w
+    \], because $e(p,v(p,w))$ is a minimum.
+
+    Second Step: Prove $e(p,v(p,w)) \geq w$.
+
+    By contradiction, assume $e(p,v(p,w)) < w = px^0$, then $\exists x^1 p < w$ and $u(x^1) \geq u(x^0)$.
+
+    With LNS, $\exists y \in  B(x_1, r), u(y) > u(x^1), py < w$. It contradicts to the setting $u(x^0)$ maximizing the utility under $w$.
+
+    Now we have both $e(p,v(p,w)) \leq w$ and $e(p,v(p,w)) \geq w$. Then $e(p,v(p,w)) = w$
+
+    Since $e(p,v(p,w)) = p h(p,v(p,w))$ and $w = p x(p,w)$, it is trivial that \[
+        h(p,v(p,w)) = x(p,w)
+    \]
+\end{proof}
+
+\begin{proof}[Proof of (2)]
+    First Step: Prove $v(p,e(p,\bar{u})) \geq \bar{u}$.
+
+    Given $p,\bar{u}$, we have optimal consumption bundle $x^0 \in h(p,\bar{u})$, and $px^0 = e(p,\bar{u})$. Then \[
+        v(p,e(p,\bar{u})) \geq u(x^0)
+    \], because $v(p,e(p,\bar{u}))$ is a maxima.
+
+    Second Step: Prove $v(p,e(p,\bar{u})) \leq \bar{u}$.
+
+    By contradiction, assume $v(p,e(p,\bar{u})) > \bar{u}$, then $\exists x^1 \in x(p,e(p,\bar{u})),  u(x^1) > \bar{u}$ and $px^1 \leq px^0$.
+
+    With LNS, $\exists y \in B(x^1,r), u(y) > u(x^1)>\bar{u}$. But $x^1$ should satisfies $u(x^1) \geq u(x), \forall x \in \{x \in X: px \leq px^0\}$, it contradicts to $u(y)>u(x^1)$.
+
+    Now we have both $v(p,e(p,\bar{u})) \geq \bar{u}$ and $v(p,e(p,\bar{u})) \leq \bar{u}$, so $v(p,e(p,\bar{u})) = \bar{u}$.
+
+    And since $u(x(p,e(p,\bar{u}))) = v(p,e(p,\bar{u}))$ and $u(h(p,\bar{u})) = \bar{u}$, it is trivial that \[
+        x(p,e(p,\bar{u})) = h(p,\bar{u})
+    \]
+\end{proof}
+
+\begin{figure}[h!]
+    \centering
+    \begin{tikzpicture}[
+            font=\small, >=Latex, node distance=15mm,
+            box/.style={draw,rounded corners=2pt,align=center,minimum width=4cm,minimum height=13mm},
+            lab/.style={fill=white,inner sep=1pt}
+        ]
+
+        % ---- Nodes (left column) ----
+        \node[box] (primal) {Primal Problem\\ $\max\, u(x)\ \text{s.t.}\ px\le w$};
+        \node[box, below=20mm of primal] (walras) {Walrasian Demand\\ $x(p,w)$};
+        \node[box, below=20mm of walras] (v) {Indirect Utility Function\\ $v(p,w)$};
+
+        % ---- Nodes (right column) ----
+        \node[box, right=50mm of primal] (dual) {Dual Problem\\ $\min\, px\ \text{s.t.}\ u(x)\ge u$};
+        \node[box, below=20mm of dual] (hicks) {Hicksian Demand\\ $h(p,u)$};
+        \node[box, below=20mm of hicks] (e) {Expenditure Function\\ $e(p,u)$};
+
+        % ---- Top duality between problems ----
+        \draw[<->] (primal) -- node[lab,above]{dual problems} (dual);
+
+        % ---- Vertical “Solution” arrows ----
+        \draw[->] (primal.south) -- node[lab,left,pos=.45]{Solution} (walras.north);
+        \draw[->] (dual.south)   -- node[lab,right,pos=.45]{Solution} (hicks.north);
+
+        % ---- Slutsky (right <-> left) ----
+        \draw[<->] (hicks.west) -- node[lab,above]{Slutsky Equation} (walras.east);
+
+        % ---- Down to v and e ----
+        \draw[->] (walras.south) -- (v.north);
+        \draw[->] (hicks.south)  -- (e.north);
+
+        % ---- Roy's Identity (dashed, upward) ----
+        \draw[dashed,->] ($(v.north) + (-0.5,0)$) -- node[lab,left,xshift=-2mm]{Roy's Identity} ($(walras.south) + (-0.5,0)$);
+
+        % ---- Shepard's Lemma (dashed, upward) ----
+        \draw[dashed,->] ($(e.north) + (0.5,0)$) -- node[lab,right,xshift=2mm]{Shepard's Lemma} ($(hicks.south)+ (0.5,0)$);
+
+        % ---- Inverse function between v and e ----
+        \draw[<->] (v) -- node[lab,below]{Inverse function} (e);
+
+        % ---- Cross “duality” relations (two separate U-shaped curves, with white-backed labels) ----
+        % x(p,w) = h(p, v(p,w)) 
+        \draw[<-]
+        ($(walras.east)+(0,-0.5)$)
+        .. controls ($ (walras.east) + (0.1,-2.5) $) ..
+        node[lab,below,pos=.52,yshift=-2pt] {$x(p,w)=h\!\big(p,\,v(p,w)\big)$}
+        ($(hicks.west) + (0,-0.5)$);
+
+        % h(p,u) = x(p, e(p,u))
+        \draw[<-]
+        ($(hicks.west) + (0,-0.5)$)
+        .. controls ($ (hicks.west) + (-0.1,-2.5) $) ..
+        node[lab,below,pos=.52,yshift=-2pt] {$h(p,u)=x\!\big(p,\,e(p,u)\big)$}
+        ($(walras.east) + (0,-0.5)$);
+
+        % label “duality” near the crossing (with white background)
+        \node[lab] at ($(walras)!0.5!(hicks) + (0,-1)$) {\textbf{duality}};
+
+    \end{tikzpicture}
+
+    \caption{Duality}
+    \label{fig:duality}
+\end{figure}

@@ -62,6 +62,85 @@
   \setcounter{section}{0} % reset sections for each lecture
 }
 
+\theoremstyle{remark}
+\newtheorem{remarkinner}{Remark}      % 创建带编号的内部 remark
+\newtheorem*{remarkinner*}{Remark}     % 创建不带编号的内部 remark*
+
+% 3. 定义一个新的 tcolorbox 样式用于包装
+% 这个盒子是可跨页的 (breakable)
+\newtcolorbox{remarkbox}{
+    enhanced,            % 启用增强功能
+    breakable,           % 核心功能: 允许盒子跨页
+    colback=white,       % 内部背景颜色 (白色)
+    colframe=black,      % 边框颜色 (黑色)
+    boxrule=0.5pt,       % 边框线宽
+    arc=2mm,             % 圆角半径
+    left=4mm,            % 内部左边距
+    right=4mm,           % 内部右边距
+    top=3mm,             % 内部上边距
+    bottom=3mm,          % 内部下边距
+    pad at break=2mm,    % 跨页断开处的间距
+    % 在盒子断开处上方添加一条线
+    % underlay unbroken and first={%
+    %   \draw[black,line width=0.5pt] (frame.north west) -- (frame.north east);
+    % },
+    % % 在盒子断开处下方添加一条线
+    % underlay unbroken and last={%
+    %   \draw[black,line width=0.5pt] (frame.south west) -- (frame.south east);
+    % }
+}
+
+% 4. 使用新定义的盒子重新定义 remark 和 remark* 环境
+% 将原始的 "remarkinner" 环境包裹在 "remarkbox" 中
+\renewenvironment{remark}
+  {\begin{remarkbox}\begin{remarkinner}}
+  {\end{remarkinner}\end{remarkbox}}
+
+\renewenvironment{remark*}
+  {\begin{remarkbox}\begin{remarkinner*}}
+  {\end{remarkinner*}\end{remarkbox}}
+
+
+
+\theoremstyle{example}
+\newtheorem{exampleinner}{Example}      % 创建带编号的内部 example
+\newtheorem*{exampleinner*}{Example}     % 创建不带编号的内部 example*
+
+% 3. 定义一个新的 tcolorbox 样式用于包装
+% 这个盒子是可跨页的 (breakable)
+\newtcolorbox{examplebox}{
+    enhanced,            % 启用增强功能
+    breakable,           % 核心功能: 允许盒子跨页
+    colback=white,       % 内部背景颜色 (白色)
+    colframe=black,      % 边框颜色 (黑色)
+    boxrule=0.5pt,       % 边框线宽
+    arc=2mm,             % 圆角半径
+    left=4mm,            % 内部左边距
+    right=4mm,           % 内部右边距
+    top=3mm,             % 内部上边距
+    bottom=3mm,          % 内部下边距
+    pad at break=2mm,    % 跨页断开处的间距
+    % 在盒子断开处上方添加一条线
+    % underlay unbroken and first={%
+    %   \draw[black,line width=0.5pt] (frame.north west) -- (frame.north east);
+    % },
+    % % 在盒子断开处下方添加一条线
+    % underlay unbroken and last={%
+    %   \draw[black,line width=0.5pt] (frame.south west) -- (frame.south east);
+    % }
+}
+
+% 4. 使用新定义的盒子重新定义 example 和 example* 环境
+% 将原始的 "exampleinner" 环境包裹在 "examplebox" 中
+\renewenvironment{example}
+  {\begin{examplebox}\begin{exampleinner}}
+  {\end{exampleinner}\end{examplebox}}
+
+\renewenvironment{example*}
+  {\begin{examplebox}\begin{exampleinner*}}
+  {\end{exampleinner*}\end{examplebox}}
+
+
 % --- Metadata ---
 \title{Macroeconomics}
 \author{Zian Gong}
@@ -89,8 +168,15 @@
 \lecture{Dynamic Optimization}
 \input{lectures/0.tex}
 \newpage
-\lecture{The Neo-Classical Growth Model}
+\lecture{Introduction of Neo-Classical Growth Model}
 \input{lectures/1.tex}
+\newpage
+\lecture{The Solow Model}
+\input{lectures/2.tex}
+\newpage
+\lecture{The Ramsey Model}
+\input{lectures/3.tex}
+
 
 
 % You can add more sections here

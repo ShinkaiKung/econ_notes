@@ -1,0 +1,327 @@
+
+
+There are at least 3 sources of dissatisfaction with the Solow model. \begin{enumerate}
+    \item Differences in long run growth depend on technical progress. \begin{itemize}
+              \item We need a theory of technical progress. (Endogenous Growth Theory)
+          \end{itemize}
+    \item The saving rate is a key determinant of capital accumulation and per capita output. \begin{itemize}
+              \item We need a theory of household consumption and saving. (Ramsey Model)
+          \end{itemize}
+    \item Population growth is a key determinant of per capita output in the long run. \begin{itemize}
+              \item We need a theory of fertility to endogenize it.
+          \end{itemize}
+\end{enumerate}
+
+\section{Settings}
+
+\textbf{Environment}: \begin{itemize}
+    \item Single homogeneous good that can be either invested or consumed.
+    \item Closed economy.
+    \item \textbf{Households choose how much to consume and save every period}.
+    \item Population grows at an exogenous and constant rate, $n$.
+    \item Technology level grows at an exogenous and constant rate, $x$.
+\end{itemize}
+
+
+\textbf{Decentralized solution}: \begin{itemize}
+    \item There is a representative household and a representative firm.
+    \item There are three (competitive) markets: capital, labor, final good.
+\end{itemize}
+
+\textbf{Households}: \begin{itemize}
+    \item The live forever ($\infty $ periods) and discount future utilities at rate $\rho$.
+    \item We have to think of them as families (or dynasties) where each member cares about herself as much as about her offspring.
+    \item The size of the representative family at a given period $t$ is $N_t = N_0 e^{nt}$.\\(where we can normalize $N_0 = 1$)
+    \item They own the \underline{production factors} and rent them to firms.
+    \item They buy the final good from firms.
+\end{itemize}
+
+\textbf{Firms}: \begin{itemize}
+    \item Representative firm characterized by a neoclassical production function.
+    \item They rent capital and labor from households to produce the homogeneous final good.
+    \item They sell the final good to households.
+\end{itemize}
+
+\section{Household Problem}
+
+\subsection{Budget constraint}
+
+Every period, households supply one unit of labor \textbf{inelastically} in exchange of a wage $w_t$, and choose how much to consume $C_t$ and how much to save.
+
+When saving, household accumulate wealth (financial assets) $A_t$. Assets generate a return $r_t$. $A_t > 0$ are savings, $A_t < 0$ implies that the household is in debt.
+
+Then, the flow budget constraint every period is given by: \[
+    \dot{A}_t = N_tw_t+r_tA_t-C_t \Longrightarrow c_t + \dot{a}_t + na_t = w_t + r_ta_t
+\]
+\begin{remark*}[Interpretation]
+    The resources obtained from working ($w_t$) and the interest payments on asset holdings ($r_ta_t$) have to be used for consumption ($c_t$), increasing the asset holding ($\dot{a}_t$) and providing assets for the new family members ($na_t$).
+\end{remark*}
+
+\subsection{Preferences and Maximization} The period utility $u(c_t)$ has the usual properties: $u_c > 0$ and $u_{cc} < 0$.
+
+A representative \textbf{household} chooses the path of consumption $\{c_t\}_{t=0}^{\infty }$ that maximizes the discounted sum of utilities for \textbf{all its members}: \[
+    \int_{0}^{\infty } u(c_t)N_te^{-\rho t} \, dt
+\]
+
+In doing so, the household has to: \begin{itemize}
+    \item satisfy the sequence of period budget constants;
+    \item take the sequence of prices $\{r_t,w_t\}_{t=0}^{\infty }$ as given (competitive equilibrium); \\ (In a perfectly competitive market, individuals cannot decide the prices)
+    \item take initial wealth $a_0$ as given.
+\end{itemize}
+
+\subsection{No Ponzi Game Condition}
+
+To prevent the household achieve infinite utility by accumulating more and more debt, we should require the \textbf{No Ponzi Game (NPG) Condition}: \[
+    \lim_{t \to \infty} e^{-(\bar{r}-n)t}a_t \geq 0
+\] where $\bar{r}_t$ is the \underline{\textit{average interest}} rate between dates $0$ and $t$, defined as: $\bar{r}_t \equiv \frac{1}{t}\int_{0}^{t} r_s \, ds$.
+
+\begin{remark*}[Understanding the NPG Condition]
+    Consider the flow budget constant: \[
+        \dot{a}_t = (r_t - n)a_t + w_t - c_t
+    \]
+
+    Solving the differential equation for some terminal period $t=T$ yields: \[
+        \underbrace{\int_{0}^{T} e^{-(\bar{r}_t-n)t}c_t \, dt}_{\text{PDV of consumption up to T}} + \underbrace{e^{-(\bar{r}_t-n)T}a_T}_{\text{PDV wealth left at T}} = \underbrace{a_0 + \int_{0}^{T} e^{-(\bar{r}_t-n)t}w_t \, dt}_{\text{PDV of resources generated up to T}}
+    \]
+    (\textit{The detailed derivation process are in the later The Consumption Function section.})
+
+    As $T$ goes to infinity, the NGP condition requires: $\lim_{T \to \infty} e^{-(\bar{r}_T - n)T}a_T \geq 0$.
+
+    Hence, \[
+        \underbrace{\int_{0}^{\infty } e^{-(\bar{r}_t-n)t}c_t \, dt}_{\text{PDV of lifetime consumption}} \leq \underbrace{a_0 + \int_{0}^{\infty } e^{-(\bar{r}_t-n)t}w_t \, dt}_{\text{PDV of lifetime resources}}
+    \]
+    If households ended life with a debt position, they would be able to consume above the level of their resources (this is what people want to achieve when running Ponzi schemes)
+\end{remark*}
+
+\begin{remark*}[$e^{-\bar{r}_t t} A_t =  e^{-(\bar{r}_t - n)t} a_t\geq 0$ or $e^{-\bar{r}_tt}a_t \geq 0$? \textbf{Why we cannot consider debt in per capita scale directly?}]
+    The short answer is: We \emph{can} and \emph{do} consider debt on a per capita scale, but we cannot do it ``directly'' or naively. We must use a crucial adjustment because a direct, unadjusted analysis would ignore the fundamental economic effects of population growth, leading to incorrect conclusions.
+
+    The correct approach requires adjusting the interest rate $r$ to an ``effective rate'' of $(r-n)$. Here is a complete explanation using two perspectives.
+
+    \textbf{Angle 1: From a Macro View, Total Debt Grows Even When Per Capita Debt Is Stable}
+
+    The fundamental ``No-Ponzi Game'' rule applies to the \textbf{total debt} of an economy, not an individual's average debt. Population growth causes total debt to grow even if every individual's financial situation remains unchanged.
+
+    \textbf{Consider our island example:}
+    \begin{itemize}
+        \item \textbf{Initial state:} There are 100 people, and the average debt per person is stable at \textbf{100 euros}. The island's \textbf{total debt} is $100 \text{ people} \times 100 \text{ euros/person} = \textbf{10,000 euros}$.
+        \item \textbf{After one year:} The population grows by 2\% ($n=0.02$) to 102 people. To maintain the same economic structure, the average debt per person remains \textbf{100 euros}.
+        \item However, the new \textbf{total debt} is now $102 \text{ people} \times 100 \text{ euros/person} = \textbf{10,200 euros}$.
+    \end{itemize}
+    This demonstrates the core problem of a ``direct'' per capita analysis: If you look only at the stable per capita debt, you might falsely conclude that the debt situation is static. But in reality, the total debt---the quantity that the No-Ponzi rule actually governs---has grown by 2\%. This 2\% growth is an ``automatic'' inflation of total debt caused purely by population growth $n$.
+
+    \textbf{Angle 2: From an Individual's View, the Effective Rate of Return Is Lowered by ``Dilution''}
+
+    When we build economic models, the decisions (to save, consume, or borrow) are made from the perspective of an individual. For an individual, the real return on their assets is ``diluted'' by new people entering the economy.
+
+    \textbf{Consider the savings perspective of the same example:}
+    \begin{itemize}
+        \item \textbf{Initial state:} Each of the 100 people has \textbf{100 euros} in savings, and the market interest rate $r$ is \textbf{5\%}.
+        \item \textbf{After one year:} The total savings pool grows to $10,000 \text{ euros} \times (1 + 5\%) = \textbf{10,500 euros}$.
+        \item \textbf{The ``dilution effect'':} This larger pool must now be shared among \textbf{102 people}. The new per capita wealth is $10,500 \text{ euros} / 102 \text{ people} \approx \textbf{102.94 euros}$.
+        \item From an individual's point of view, their wealth only grew from 100 euros to 102.94 euros. Their \textbf{personal rate of return} was only $\approx \textbf{2.94\%}$, which is approximately $r - n$ (5\% - 2\%).
+    \end{itemize}
+    This shows why a ``direct'' approach is flawed from a behavioral standpoint: A rational person makes decisions based on the actual return they expect to receive, which is the diluted rate of $(r-n)$, not the headline market rate $r$.
+
+    \textbf{Conclusion}
+
+    To answer the question directly: We cannot consider debt in per capita scale ``directly'' because doing so would mean ignoring two critical facts:
+    \begin{enumerate}
+        \item \textbf{Macro Fact:} Total debt, the subject of the No-Ponzi rule, automatically grows with population.
+        \item \textbf{Micro Fact:} Individuals experience a ``diluted'' rate of return, $(r-n)$, which guides their financial decisions.
+    \end{enumerate}
+    The correct method, which adjusts the interest rate to $(r-n)$ for per capita analysis, elegantly solves both issues. It correctly translates the macro-level aggregate debt rule into a micro-level behavioral framework that is consistent with an individual's experience in a growing economy.
+\end{remark*}
+
+\subsection{Household Problem}
+
+The optimization problem in \textbf{per capita} terms:
+\begin{align*}
+    \max_{\{c_t,a_t\}_{t=0}^{\infty}} & \left\{\int_{0}^{\infty } u(c_t)e^{-(\rho-n)t} \, dt \right\}  \\
+    s.t. \qquad                       & c_t \in \mathbb{R}_+, a_t \in \mathbb{R}                       \\
+                                      & c_t + \dot{a}_t + na_t \leq w_t + r_ta_t                       \\
+                                      & a_0 \text{ is given}                                           \\
+                                      & \lim_{t \to \infty} e^{-\int_{0}^{t} (r_s-n) \, ds} a_t \geq 0
+\end{align*}
+This is a \textbf{deterministic constrained optimization problem in continuous time}, with one state and one control variables. We can use optimal control theory to solve it.
+
+\subsection{FOC}
+
+Using optimal control theory, we write the \underline{present value} Hamiltonian \[
+    \mathcal{H}(c_t, a_t,v_t,t) = u(c_t)e^{-(\rho-n)t}+v_t[w_t+(r_t-n)a_t - c_t]
+\], where $v_t$ is the shadow value, in terms of utility at time $0$, of a unit of income at time $t$.
+
+The necessary conditions for an optimum are: \begin{align*}
+     & \mathcal{H}_c = 0          &  & \Longrightarrow &  & v_t = u_c(c_t)e^{-(\rho-n)t}     \\
+     & \mathcal{H}_a = -\dot{v}_t &  & \Longrightarrow &  & \dot{v}_t = -(r_t - n)v_t        \\
+     & \mathcal{H}_v = \dot{a}_t  &  & \Longrightarrow &  & \dot{a}_t=w_t + (r_t-n)a_t - c_t
+\end{align*}
+
+Plus the transversality condition: \[
+    \lim_{t \to \infty} (v_ta_t) = 0
+\]
+
+\subsection{The Euler Equation} Combining $\dot{v}_t = -(r_t - n)v_t$ and $v_t = u_c(c_t)e^{-(\rho-n)t} \iff \ln v_t = \ln u_c(c_t) - (\rho - n)t \Longrightarrow \frac{\dot{v}_t}{v_t} = c_t \frac{u_{cc}(c_t)}{u_c(c_t)}\frac{\dot{c}_t}{c_t} - (\rho - n)$, we get the Euler equation: \[
+    \frac{\dot{c}_t}{c_t} = \frac{1}{\theta}(r_t - \rho)
+\]
+where $\theta \equiv -\frac{u_{cc}(c_t)c_t}{u_c(c_t)} > 0$ is the Arrow-Pratt coefficient of relative risk aversion (elasticity of the marginal utility).
+
+\noindent\textbf{Implications}:
+
+\underline{\textit{Sign}}: Optimal household consumption grows (falls) over time if the return on savings $r_t$ exceeds (fall short of) the subjective discount rate $\rho$. \[
+    \gamma_{r} > 0 \iff r_t > \rho
+\]
+
+\underline{\textit{Size}}: The quantitative importance of the difference $(r_t-\rho)$ is inversely proportional to the curvature of the utility function, as measured by $\theta_t$. \[
+    \frac{\partial \dot{c}_t/c_t}{\partial (r_t - \rho)} = \frac{1}{\theta_t}
+\]\begin{itemize}
+    \item The higher the curvature $\theta_t$, the lower the effect of $(r_t-\rho)$ is inversely proportional.
+    \item $\theta_t$ captures the desire for consumption smoothing.
+    \item $\frac{1}{\theta_t}$ is the \textbf{Intertemporal Elasticity of Substitution (IES)}.
+\end{itemize}
+
+
+\begin{remark*}[\textbf{\textit{Elasticity: Why the elasticity of the \underline{marginal} utility is more important than the elasticity of the utility?}}]
+    \[
+        \theta \equiv -\frac{u_{cc}(c_t)c_t}{u_c(c_t)} = -\frac{d\ln u_c(c_t)}{d\ln c_t}
+    \]
+
+
+    The elasticity of marginal utility is more important because it is a \textbf{fundamental and robust} parameter describing consumer behavior, whereas the elasticity of utility is an \textbf{arbitrary and fragile} measure that changes with behaviorally-irrelevant transformations of the utility function. This fragility is revealed by the economic principle of \emph{ordinal utility}.
+
+    \noindent\textbf{The Core Argument: The Ordinal Nature of Utility}
+
+    Modern economic theory is built on the concept of \emph{ordinal utility}. This principle states that a utility function is simply a tool to rank preferences; what matters is that $u(\text{option A}) > u(\text{option B})$, not the specific numerical values of the utility. A key implication is that any positive monotonic transformation of a utility function, such as adding a constant, will not change the consumer's behavior in any way.
+
+    Let's consider a consumer with a utility function $u(c)$. Now, let's create a new utility function $\hat{u}(c) = u(c) + k$, where $k$ is any arbitrary constant (e.g., one million). A consumer with utility $u(c)$ and one with $\hat{u}(c)$ are behaviorally identical. They will make the exact same consumption-saving decisions. Any parameter that is truly important for describing their behavior must therefore be the same for both functions.
+
+    \noindent\textbf{Testing Both Elasticities against the Ordinality Principle}
+
+    \noindent\textit{1. The Robustness of the Elasticity of Marginal Utility ($\theta$)}
+
+    First, we calculate the first and second derivatives for the transformed utility function, $\hat{u}(c)$:
+    $$ \hat{u}'(c) = \frac{d}{dc}(u(c) + k) = u'(c) $$
+    $$ \hat{u}''(c) = \frac{d}{dc}(u'(c)) = u''(c) $$
+    Since the first and second derivatives are unchanged, the elasticity of marginal utility for the new function, $\hat{\theta}$, is identical to the original:
+    $$ \hat{\theta} = - \frac{\hat{u}''(c) c}{\hat{u}'(c)} = - \frac{u''(c) c}{u'(c)} = \theta $$
+    \textbf{This parameter is invariant.} It is a fundamental property of the preference structure that is not affected by behaviorally-irrelevant modifications to the utility function.
+
+    \noindent\textit{2. The Fragility of the Elasticity of Utility ($E_u$)}
+
+    Now, we calculate the elasticity of total utility for the transformed function, $\hat{E}_u$:
+    $$ \hat{E}_u = \frac{\hat{u}'(c) c}{\hat{u}(c)} = \frac{u'(c) c}{u(c) + k} $$
+    \textbf{This parameter is not invariant.} Its value depends directly on the arbitrary constant $k$. If $k$ is a very large positive number, $\hat{E}_u$ will approach zero, regardless of the consumer's true underlying preferences. A parameter that can be manipulated to be any value without a corresponding change in behavior cannot be fundamental.
+
+    \noindent\textbf{Conclusion}
+
+    A parameter cannot be considered fundamental to behavior if its value can be arbitrarily changed by a transformation that has no effect on that behavior. The elasticity of total utility fails this test; its value is not unique to a given preference structure and is therefore a meaningless metric for choice problems.
+
+    The elasticity of marginal utility ($\theta$), however, passes the test. It is a robust measure of the curvature of preferences, which governs the core economic trade-off of intertemporal substitution. It is for this reason that it is the more important—and indeed, the only relevant—elasticity in the context of the Euler equation.
+
+\end{remark*}
+
+
+Alternatively, write \[
+    r_t = \theta_t \frac{\dot{c}_t}{c_t} + \rho
+\]
+
+In a growing economy ($\frac{\dot{c}_t}{c_t} > 0$), consumption tomorrow is less valuable for two reasons: \begin{enumerate}
+    \item Discount of the future: $\rho > 0$
+    \item Decreasing marginal utility: If $\frac{\dot{c}_t}{c_t} >0$, then the consumption level of tomorrow is higher but with lower marginal utility $u_c$. How much lower depends on the curvature $\theta_t$.
+\end{enumerate}
+
+Households face the trade-off between consumption and saving, and the Euler equation says that the interest rate must be just enough to compensate for these two effects: \[
+    \underbrace{r_t}_{\text{return of saving}} = \underbrace{\theta_t \frac{\dot{c}_t}{c_t}}_{\text{compensate the decreasing marginal utility}} + \underbrace{\rho}_{\text{compensate the future discount}}
+\]
+In equilibrium, households are indifferent at the margin between consuming and saving.
+
+\begin{example*}
+    [Constant $\theta_t$]
+    The class of functions with this property is known as \textbf{the constant relative risk aversion (CRRA) function}, and takes the form: \[
+        u(c) = \frac{c^{1-\theta} - 1}{1- \theta}
+    \] (where $u_{cc} < 0 \iff \theta > 0$)
+
+    In this case, the Euler Equation becomes: \[
+        \frac{\dot{c}_t}{c_t} = \frac{1}{\theta}(r_t-\rho)
+    \]
+\end{example*}
+
+
+
+\subsection{The Transversality Condition}
+
+We have the TVC $\lim_{t \to \infty} (v_ta_t) = 0$.
+
+\noindent What does the TVC impose?
+
+From SOC: $\frac{\dot{v}_t}{v_t} = -(r_t - n) \Longrightarrow v_t = v_0e^{(-\bar{r}_t - n)t}$, substituting into the TVC:
+\[
+    \lim_{t \to \infty} v_0e^{-(\bar{r}_t - n)t}a_t = 0
+\]
+
+Since $v_0 = u_c(c_0) > 0$, we have \[
+    \lim_{t \to \infty} e^{-(\bar{r}_t - n)t}a_t = \lim_{t \to \infty} \Big[a_t e^{-\int_{0}^{t} (t_{\tau}-n) \, d\tau}\Big] = 0
+\]
+
+\textbf{The NPG condition  must hold with \textit{\underline{\uppercase{equality}}}.}
+
+\subsection{The Consumption Function (CRRA case)}
+
+The Euler equation characterizes the \textbf{derivative} of optimal consumption, not its \textbf{level}.
+\[
+    \frac{\dot{c}_t}{c_t} = \frac{1}{\theta}(r_t-\rho) \Longrightarrow c_t = c_0 e^{\frac{1}{\theta}(\bar{r}_t - \rho)t}
+\] where the constant $c_0$ determining the level is not pinned down by the Euler equation.
+
+To obtain the level of the consumption function we need to enrol the budget constraint.
+\[
+    {\int_{0}^{\infty } e^{-(\bar{r}_t-n)t}c_t \, dt} = \underbrace{a_0 + \int_{0}^{\infty } e^{-(\bar{r}_t-n)t}w_t \, dt}_{\equiv \omega_0}
+\]
+
+\begin{remark*}[How to get the ${\int_{0}^{\infty } e^{-(\bar{r}_t-n)t}c_t \, dt} = {a_0 + \int_{0}^{\infty } e^{-(\bar{r}_t-n)t}w_t \, dt}$?]
+    Same steps in NPG section we have \begin{align*}
+        \dot{a}_t - (r_t -n) a_t                                                               & = w_t - c_t                                                                                                                            \\
+        e^{-\int_{0}^{t} (r_s - n) \, ds} (\dot{a}_t - (r_t -n) a_t)                           & = w_t  e^{-\int_{0}^{t} (r_s - n) \, ds} - c_t e^{-\int_{0}^{t} (r_s - n) \, ds}                                                       \\
+        \int_{0}^{\infty } e^{-\int_{0}^{t} (r_s - n) \, ds} (\dot{a}_t - (r_t -n) a_t)  \, dt & = \int_{0}^{\infty }  w_t  e^{-\int_{0}^{t} (r_s - n) \, ds}  \, dt - \int_{0}^{\infty } c_t e^{-\int_{0}^{t} (r_s - n) \, ds}  \, dt  \\
+        e^{-\int_{0}^{t} (r_s - n) \, ds}a_t \Big|_0^\infty                                    & =  \int_{0}^{\infty }  w_t  e^{-\int_{0}^{t} (r_s - n) \, ds}  \, dt - \int_{0}^{\infty } c_t e^{-\int_{0}^{t} (r_s - n) \, ds}  \, dt \\
+        \lim_{t \to \infty} e^{-\int_{0}^{t} (r_s - n) \, ds}a_t -  a_0                        & = \int_{0}^{\infty }  w_t  e^{-\int_{0}^{t} (r_s - n) \, ds}  \, dt - \int_{0}^{\infty } c_t e^{-\int_{0}^{t} (r_s - n) \, ds}  \, dt
+    \end{align*}
+    and we know from TVC condition \[
+        \lim_{t \to \infty} e^{-(\bar{r}_t - n)t}a_t = \lim_{t \to \infty} \Big[a_t e^{-\int_{0}^{t} (t_{\tau}-n) \, d\tau}\Big] = 0
+    \]
+    Then we have \[
+        \underbrace{\int_{0}^{\infty } e^{-(\bar{r}_t-n)t}c_t \, dt}_{\text{PDV of lifetime consumption}} = \underbrace{a_0 + \int_{0}^{\infty } e^{-(\bar{r}_t-n)t}w_t \, dt}_{\text{PDV of lifetime resources}}
+    \]
+\end{remark*}
+
+Then substitute \underline{the optimal consumption path $c_t = c_0 e^{\frac{1}{\theta}(\bar{r}_t - \rho)t}$} into the intertemporal budget constraint: \[
+    c_0 = \beta \omega_0
+\] where $\beta = 1/\int_{0}^{\infty } e^{-(\bar{r}_t-n)t} e^{\frac{1}{\theta}(\bar{r}_t - \rho)t}\, dt$.
+
+The initial consumption level $c_0$ is a $\beta$ fraction of the PDV of total time-$0$ resources. And it grows over time according to the rate $\frac{1}{\theta}(r_t-\rho)$ (following the Euler equation).
+
+For the particular case in which $r_t = \rho, \forall t$ (like in the BGP), we have $\beta = \rho - n$.
+\begin{itemize}
+    \item Consumption per capita remains flat over time (Euler equation).
+    \item Consumption per capita equals (per capita) permanent income: $c_0 = \underbrace{(\rho-n)\omega_0}_{\text{permanent income}}$
+    \item Current income only matters through its effect on permanent income \[
+              \frac{\partial c_0}{\partial w_t} = \frac{\partial c_0}{\partial \omega_0}\frac{\partial \omega_0}{\partial w_t} = (\rho - n)e^{-(\rho-n)t}
+          \] Lottery example:  a rational household does not spend all the money in a short time, they will evaluate its effect on the lifetime wealth, and smooth the consumption.
+\end{itemize}
+
+This  simple result is known as the \textbf{\textit{Permanent Income Hypothesis}} \textit{(Friedman, 1957)}. \begin{itemize}
+    \item It requires the absence of binding borrowing constraints ($a_t \in \mathbb{R}$).
+    \item It leads to the \textbf{Ricardian equivalence}. \begin{itemize}
+              \item Ricardian equivalence is the idea that under ideal conditions (lump-sum taxes, perfect foresight/credit access, unchanged spending) government debt is just deferred taxation, so a debt-financed tax cut leaves households’ lifetime resources—and thus consumption—unchanged.
+          \end{itemize}
+    \item Very much used in consumption theory.
+\end{itemize}
+
+In consumption theory, \textbf{permanent income} is defined as the constant income flow whose discounted present valuable is equal to the discounted present value of the actual income flow of an individual / household (including initial assets).
+
+Hence, permanent income at time $0$, $\tilde{w}_0$ is implicitly defined as
+\[
+    \underbrace{\int_{0}^{\infty } e^{-(\bar{r}_t - n)t}\tilde{w}_0 \, dt}_{\text{PDV of a constant income flow}} = \underbrace{a_0 + \int_{0}^{\infty } e^{-(\bar{r}_t - n)t}w_t \, dt \equiv \omega_0}_{\text{PDV of the actual income flow}} \Longrightarrow \tilde{w}_0 \int_{0}^{\infty } e^{-(\bar{r}_t-n)t} \, dt = \omega_0
+\]
+
+And when $r_t = r \Rightarrow \tilde{w}_0 = (r-n)\omega_0$.
+

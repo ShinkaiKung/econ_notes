@@ -1,0 +1,256 @@
+\section{Optimal Control Theory}
+
+\subsection{The Canonical Problem}
+
+\begin{align}
+    \max_{x,y} W(x,y) & \equiv \int_{0}^{T} f(t,x_t,y_t) \, dt                       \\
+    s.t. \, \dot{x}_t & = g(t,x_t,y_t)                                               \\
+    y_t               & \in \mathcal{Y}, x_t \in \mathcal{X}, \, \forall t \in [0,T] \\
+    x_0               & = \underbar{x}
+\end{align}
+Where: \begin{itemize}
+    \item $x_t \in \mathcal{X}$ is the \textbf{state variable} (variable pre-determined at time $t$).
+    \item $y_t \in \mathcal{Y}$ is the \textbf{control variable} (variable chosen at time $t$).
+    \item $f: \mathbb{R}_+ \times \mathcal{X} \times \mathcal{Y} \to \mathbb{R}$ is the \textbf{instantaneous payoff function}.
+    \item $g: \mathbb{R}_+ \times \times \mathcal{X} \times \mathcal{Y} \to \mathcal{X}$ is the \textbf{law of motion} of the state variable.
+    \item $\underbar{x} \in \mathcal{X}$ is the \textbf{initial condition} for the state (which we take as given).
+    \item $x: [0,T] \to \mathcal{X}$ and $y: [0,T] \to \mathcal{Y}$ are the \textbf{time paths} of the state and control variables.
+    \item $W$ is a functional describing the \textbf{objective function}.
+\end{itemize}
+
+\textbf{Definition}: A pair $(x,y)$ is called an \textbf{admissible pair} if constraints (1)-(4) hold.
+
+\textbf{Assumption}: $W(x,y) < \infty $ for all admissible pairs.
+
+
+A note on \textbf{terminal conditions}: \begin{itemize}
+    \item In problem (1)-(4) terminal time $T$ is given but the terminal state $x_T$ is free to choose.
+    \item In some applications, both a terminal time $T$ and a terminal state $x_T = \bar{x} \in \mathcal{X}$ are given.
+    \item In others, $x_T$ is given but $T$ is not, so the planning horizon $T$ is chosen optimally.
+    \item Finally, it may be that both $T$ and $x_T$ are free (but related by a constraint).
+\end{itemize}
+
+\subsubsection{The Hamiltonian Method}
+
+\[
+    \mathcal{H}(t,x_t,y_t,\lambda_t) \equiv f(t,x_t,y_t) + \lambda_t g(t,x_t,y_t)
+\]
+
+FOC (Necessary Conditions): \begin{align}
+     & \frac{\partial }{\partial y_t}\mathcal{H}(t,x_t^*, y_t^*, \lambda_t) = 0                \\
+     & \frac{\partial }{\partial x_t}\mathcal{H}(t,x_t^*, y_t^*, \lambda_t) = -\dot{\lambda}_t \\
+     & \frac{\partial }{\partial \lambda_t}\mathcal{H}(t,x_t^*, y_t^*,\lambda_t) = \dot{x}_t   \\
+     & \lim_{t \to \infty} \lambda_tx_t^* = 0
+\end{align}
+
+\subsection{The Canonical Problem with Exponential Discounting}
+
+\begin{align}
+    \max_{x,y} W(x,y) & \equiv \int_{0}^{\infty } e^{-\rho t} f(x_t,y_t) \, dt              \\
+    s.t. \, \dot{x}_t & = g(t,x_t,y_t)                                                      \\
+    y_t               & \in \mathcal{Y}, x_t \in \mathcal{X}, \, \forall t \in \mathbb{R}_+ \\
+    x_0               & = \underbar{x} \text{ and } \lim_{t \to \infty} b_tx_t \geq \bar{x}
+\end{align}
+
+\subsubsection{The Hamiltonian Method}
+
+\begin{align*}
+    \mathcal{H}(t,x_t,y_t,\lambda_t) & = \overbrace{e^{-\rho t}f(x_t,y_t) + \lambda_t g(t,x_t,y_t)}^{present-value Hamiltonian}                                                           \\
+                                     & = e^{-\rho t}\Big[\underbrace{f(x_t,y_t) + \mu_t g(t,x_t,y_t)}_{current-value Hamiltonian}\Big] \, \text{where } \mu_t \equiv e^{\rho t} \lambda_t
+\end{align*}
+Current-value Hamiltonian:
+\[
+    \hat{\mathcal{H}}(t,x_t^*, y_t^*, \mu_t) \equiv f(x_t,y_t) + \mu_t g(t,x_t,y_t)
+\]
+
+FOC (Necessary Conditions): \begin{align}
+     & \frac{\partial }{\partial y_t}\hat{\mathcal{H}}(t,x_t^*, y_t^*, \mu_t) = 0                        \\
+     & \frac{\partial }{\partial x_t}\hat{\mathcal{H}}(t,x_t^*, y_t^*, \mu_t) = \rho \mu_t - \dot{\mu}_t \\
+     & \frac{\partial }{\partial \mu_t}\hat{\mathcal{H}}(t,x_t^*, y_t^*,\mu_t) = \dot{x}_t               \\
+     & \lim_{t \to \infty} e^{-\rho t}\mu_t x_t^* = 0
+\end{align}
+
+\section{Dynamic Programming}
+
+\subsection{The Canonical Problem}
+\begin{align}
+    V_0(x_0)          & \equiv \max_{x,y} \int_{0}^{\infty} f(t,x_t,y_t) \, dt              \\
+    s.t. \, \dot{x}_t & = g(t,x_t,y_t),                                                     \\
+    y_t               & \in \mathcal{Y}, x_t \in \mathcal{X}, \, \forall t \in \mathbb{R}_+ \\
+    x_0               & \text{ given and } \lim_{t \to \infty} b_tx_t \geq \bar{x}
+\end{align}
+Where $V_0(x_0)$ is the \textbf{value function}. It states the \textbf{optimal value} of the problem starting at time $t = 0$ with initial state $x_0$. More generally we can define $V_\tau(x_\tau)$ as the \textbf{optimal value} at time $0$ of the problem starting at time $\tau$ with some state $x_\tau$.
+
+\begin{theorem}
+    [\textbf{Bellman's Principle of Optimality}]
+    Suppose we have an interior solution such that $(x_t^*, y_t^*)$ reaches the maximum value $V_0(x_0)$. Then, we have \[
+        V_0(x_0) = \int_{0}^{t} f(s,x_s^*,y_s^*)  \, ds + V_t(x_t^*), \, \forall t \geq 0
+    \] where $V_t(x_t) \equiv \int_{t}^{\infty } f(s,x_s^*, y_s^*) \, ds$.
+\end{theorem}
+
+\begin{definition}[\textbf{Hamilton-Jacobi-Bellmam (HJB) Equation}] By differentiating the equation in ``Bellman's Principle of Optimality'', we have the Hamilton-Jacobi-Bellmam (HJB) Equation characterizing the optimal pair $(x^*,y^*)$
+    \[
+        f(t,x_t^*,y_t^*) + \frac{\partial V_t(x_t^*)}{\partial t} + \frac{\partial V_t(x_t^*)}{\partial x_t}g(t,x_t^*,y_t^*) = 0, \, \forall t \geq 0
+    \]
+\end{definition}
+
+
+\subsection{The Stationary Problem}
+
+\begin{itemize}
+    \item Exponential discounting, i.e. $f(t,x_t,y_t) = e^{-\rho t}f(x_t,y_t)$.
+    \item Time-autonomous constraint, i.e. $\dot{x}_t = g(x_t,y_t)$ instead of $\dot{x}_t = g(t,x_t,y_t)$.
+\end{itemize}
+The solution of this problem is \textbf{time-consistent}.
+\begin{align}
+    V_0(x_0)          & \equiv \max_{x,y} \int_{0}^{\infty} e^{-\rho t} f(x_t,y_t) \, dt    \\
+    s.t. \, \dot{x}_t & = g(x_t,y_t),                                                       \\
+    y_t               & \in \mathcal{Y}, x_t \in \mathcal{X}, \, \forall t \in \mathbb{R}_+ \\
+    x_0               & \text{ given and } \lim_{t \to \infty} b_tx_t \geq \bar{x}
+\end{align}
+
+
+\begin{definition}
+    [\textbf{Time Consistency}]
+    A solution $(x^*,y^*)$ of a dynamic optimization problem starting at time $0$ is time-consistent if $\forall t > 0$ the sub-sequence $(x_s^*,y_s^*: s \geq t) \subset (x^*,y^*)$ is the solution at time $t$ of the sub-problem starting at time $t$ with state $x_t^*$.
+\end{definition}
+
+In time consistent settings, the planner does not gain anything from revisiting the plan at any future date. It allows us to solve the problem \textbf{just once}, at time $t=0$.
+
+\begin{remark*}[Bellmam to HJB]
+    \begin{align*}
+        V_0(x_0)                                 & = \int_{0}^{t} e^{-\rho s} f(x_s^*,y_s^*) \, ds + \int_{t}^{\infty } e^{-\rho s} f(x_s^*,y_s^*) \, ds                                \\
+        \Longrightarrow^{\tau = s - t}  V_0(x_0) & = \int_{0}^{t} e^{-\rho s} f(x_s^*,y_s^*) \, ds + e^{-\rho t}\int_{0}^{\infty } e^{-\rho \tau} f(x_{\tau+t}^*,y_{\tau+t}^*) \, d\tau \\
+        \Longrightarrow  V_0(x_0)                & = \int_{0}^{t} e^{-\rho s} f(x_s^*,y_s^*) \, ds + e^{-\rho t}V_0(x_t^*)
+    \end{align*}
+    Let $v(x) \equiv V_0(x)$, the HJB equation becomes \[
+        f(x_t^*,y_t^*) = \rho v(x_t^*) - v_x(x_t^*)\dot{x}_t^*
+    \]
+\end{remark*}
+
+\begin{remark*}[HJB and Hamiltonian]
+    Rewrite HJB as:
+    \[
+        \rho v(x_t) = \max_{y_t} \{\underbrace{f(x_t,y_t) + v_x(x_t)g(x_t,y_t)}_{\hat{\mathcal{H}}(x_t,y_t,v_x(x_t))}\}
+    \]
+
+    The FOC \[
+        f_y(x_t,y_t) + v_x(x_t)g_t(x_t,y_t) = 0
+    \] corresponds to $\frac{\partial }{\partial y_t}\hat{\mathcal{H}}(x_t,y_t,v_x(x_t)) = 0$.
+
+    And the \textbf{Envelope Condition} characterizes $v_x(x_t)$ \[
+        \rho v_x(x_t) = f_x(x_t,y_t) + v_{xx}(x_t)g(x_t,y_t) + v_x(x_t)g_x(x_t,y_t)
+    \] corresponds to $\rho \mu_t - \dot{\mu}_t = \frac{\partial }{\partial x_t}\hat{\mathcal{H}}(x_t,y_t,\mu_t)$, when $\mu_t(v_x(x_t))$.
+\end{remark*}
+
+\subsection{Stochastic Dynamic Optimization: Poisson point process}
+
+\subsubsection{Poisson Point Process} A Poisson process is a specific type if \textbf{counting process}.
+\begin{definition}
+    A \textbf{counting process} is a stochastic process $(N_t:t \in \mathbb{R}_+)$ that records the number of events (or "arrivals") that occurred within some interval $(0,t]$, and that satisfies the following properties: \begin{itemize}
+        \item $N_t \in \mathbb{Z}_+ \equiv \mathbb{N}\cup\{0\}$, i.e. $N_t$ must be a non-negative integer number.
+        \item $\forall t \geq s, N_t \geq N_s$, i.e. events do not ``disappear''.
+        \item $\forall t > s, N_t-N_s$ denotes the \textbf{number of arrivals} within the interval $(s,t]$.
+    \end{itemize}
+    \begin{example*} $N_t$ may record the number of \begin{itemize}
+            \item Job offers received by an unemployed worker.
+            \item Innovations by a firm doing R\&D.
+            \item Buses that pass through a given bus stop.
+            \item Number of births in a hospital.
+        \end{itemize}
+    \end{example*}
+\end{definition}
+
+
+\begin{definition}
+    A counting process $N_t: t \in \mathbb{R}_+$ is \textbf{Poisson process} with ``arrival rate'' $\alpha > 0$ if: \begin{itemize}
+        \item $N_0 = 0$ (i.e. at the beginning of time, no events have yet been recorded).
+        \item $N_t$ has independent and stationary disjoint increments, that is: \begin{itemize}
+                  \item Independent increments:\\The random variables $(N_{t_1} - N_{t_0}), (N_{t_2} - N_{t_1}), \dots, (N_{t_n} - N_{t_{n-1}})$ are independent.
+                  \item Stationary increments:\\The distribution of $(N_{t+s}-N_t)$ is a function of $s$ but not of $t$.
+              \end{itemize}
+        \item The number of events $m \in \mathbb{Z}_+$ within a time interval $\Delta$ follows a \textbf{Poisson distribution}: \[
+                  Pr[N_{t+\Delta} - N_t = m] = \frac{(\alpha\Delta)^m e^{-\alpha\Delta}}{m!}, \forall \Delta \geq 0
+              \] which has mean $E[N_{t+\Delta} - N_t] = \alpha \Delta$.\\
+              (Hence, the average number of events increases with the length $\Delta$ of the time interval and with the parameter $\alpha$ defining the rate of arrival of events)
+    \end{itemize}
+\end{definition}
+
+Probabilities and Rates: \begin{itemize}
+    \item Probabilities. Let $\Delta$ be some arbitrary small time interval. Then \begin{align*}
+               & Pr[N_\Delta = 0] = e^{-\alpha \Delta} = 1-\alpha\Delta + o(\Delta) \leftarrow \text{ Prob. of \textbf{zero} events within } t \in [0,\Delta]          \\
+               & Pr[N_\Delta = 1] =\alpha\Delta e^{-\alpha \Delta} = \alpha\Delta + o(\Delta) \leftarrow \text{ Prob. of \textbf{one} events within } t \in [0,\Delta] \\
+               & Pr[N_\Delta = 2] =\cdots \cdots = o(\Delta) \leftarrow \text{ Prob. of \textbf{two} events within } t \in [0,\Delta]
+          \end{align*}
+    \item Rates. We can also express these probabilities in rates per unit of time \begin{align*}
+               & Pr[N_\Delta = 0]/\Delta = o(\Delta)/\Delta + 1/\Delta - \alpha \\
+               & Pr[N_\Delta = 1]/\Delta = o(\Delta)/\Delta + \alpha            \\
+               & Pr[N_\Delta = 2]/\Delta = o(\Delta)/\Delta
+          \end{align*}
+    \item Hence, taking the \textbf{continuous time} limit ($\Delta \to 0$) we have \begin{itemize}
+              \item At any instant of time we can have either $0$ or $1$ event, but no more.
+              \item $\alpha$ is the ``Poisson arrival rate'' at which events occur ($\lim_{\Delta \to 0} \frac{Pr[N_\Delta = 1]}{\Delta} = \alpha$).
+              \item $\alpha$ is NOT a probability, indeed it can be that $\alpha > 1$.
+          \end{itemize}
+\end{itemize}
+
+Some other facts about Poisson process: \begin{itemize}
+    \item The process is memoryless: \begin{itemize}
+              \item The occurrence of one event does not affect the probability that a second event can occur. \\ (Earthquakes are not Poisson, as one big earthquake typically generates several replicas afterward)
+              \item The length of time without events does not predict the occurrence of the next one \\ (So buses arriving at a bus stop are probably not Poisson)
+          \end{itemize}
+    \item The distribution for the length of time periods between arrivals is exponential: \begin{itemize}
+              \item Let $\{t_n\}_{n=1}^\infty$ be the sequence of interarrival times.\\(times elapsed between consecutive arrivals, i.e., points in time at which a worker gets a job offer)
+              \item Then, $\{t_n\}_{n=1}^\infty$ are  identically distributed exponential random variables with mean $1/\alpha$: \[
+                        Pr[t_n \leq t \Big| \{t_j\}_{j=1}^{n-1}] = 1- e^{-\alpha t}, \, \forall n \in \mathbb{Z}_+, \, \forall t > t_{n-1}
+                    \]
+          \end{itemize}
+\end{itemize}
+
+\subsubsection{Dynamic Programming with a Poisson Point Process}
+
+Consider a standard non-stochastic consumption/savings problem: \[
+    \max_{(c_s,\alpha_s)} \int_{0}^{\infty } e^{-\rho s} u(c_s) \, ds, \qquad s.t. \, \dot{a}_s = w + ra_s -c_s
+\] with $w$ and $a_0$ are given, plus some transversality condition on $a_s$.
+
+Using the maximum principle we have \[
+    v(a_0) \equiv \max_{c_s: \sin [0,t)} \{\int_{0}^{t} e^{-\rho s}u(c_s) \, ds + e^{-\rho t} v(a_t)\}
+\]
+
+Now we add a stochastic shock (Poisson): \begin{itemize}
+    \item Let's assume that the consumer may go bankrupt at Poisson arrival rate $\delta > 0$.
+    \item When this happens, the consumer’s wealth drops to zero.
+\end{itemize}
+The HJB equation of this stochastic problem \begin{align*}
+    v(a_0) = \max_{c_s: s \in [0,t)} \{\int_{0}^{t} e^{-\rho s}u(c_s) \, ds
+    + e^{-\rho t} \Big[
+    \underbrace{e^{-\delta t}}_{\substack{\text{Prob. of not}              \\ \text{going bankrupt}}}v(a_t)
+    + \underbrace{\delta t e^{-\delta t}}_{\substack{\text{Prob. of going} \\ \text{bankrupt only once}}}v(0) \\
+    + \underbrace{Pr[N_t \geq 2]}_{\substack{\text{Prob. of going}         \\ \text{bankrupt twice or more}}}v(0)\Big]\}
+\end{align*}
+
+Next, compute a \underline{Taylor expansion} with respect to $t$ around $t = 0$, $\Delta$ is a very small interval near $t=0$ \begin{itemize}
+    \item The first term becomes: $\int_{0}^{t} e^{-\rho s} u(c_s) \, ds = u(c_0)\Delta + o(\Delta)$ \begin{itemize}
+              \item $c_s \simeq c_0$ and $e^{-\rho s} = 1 - \rho s + o(s^2)$
+          \end{itemize}
+    \item The second: $e^{-(\rho + \delta)t}v(a_t) = v(a_0) + v_a(a_0)\dot{a}_0\Delta - (\rho+\delta)v(a_0)\Delta + o(\Delta)$ \begin{itemize}
+              \item $e^{-(\rho + \delta)t} = 1 - (\rho + \delta)t + o(t)$ and $a_t-a_0 = \dot{a}_0t + o(t)$, and $v(a_t) = v(a_0) - v_a(a_0)(a_t-a_0) + o(a_t - a_0) = v(a_0) + v_a(a_0)\dot{a}_0t+o(t)$.
+          \end{itemize}
+    \item The third: $e^{-(\rho+\delta)t}\delta t v(0) = \delta v(0)\Delta$ \begin{itemize}
+              \item $e^{-(\rho + \delta)t} = 1 - (\rho + \delta)t + o(t)$
+          \end{itemize}
+    \item And the forth: $Pr[N_t \geq 2]v(0) = o(\Delta)$
+\end{itemize}
+
+So we can write \[
+    v(a_0) = \max_{c_0} \{u(c_0)\Delta + v(a_0) + v_a(a_0)\dot{a}_0\Delta - (\rho + \delta)v(a_0)\Delta + \delta v(0)\Delta + o(\Delta)\}
+\]
+
+Divide both sides by $\Delta$, take the limit as $\Delta \to 0$, and write it more generally at time $t$: \[
+    \rho v(a_t) = \max_{c_t > 0}\{u(c_t) + \frac{\partial v(a_t)}{\partial a_t}\dot{a}_t + \delta\underbrace{(v(0)-v(a_t))}_{\substack{\text{change in value due} \\ \text{to bankruptcy shock}}}\}
+\]
+
+A particular form of this \textbf{HJB equation} is when the problem is such that $v(0) = 0$: \[
+    (\rho + \delta)v(a_t) = \max_{c_t > 0}\{u(c_t) + \frac{\partial v(a_t)}{\partial a_t} \dot{a}_t\}
+\](the effective discount is given by the time discount ρplus the probability disocunt δ, as at the stochastic rate δthe value
+function goes to zero)

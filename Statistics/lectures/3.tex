@@ -1,0 +1,55 @@
+\section{Random Vectors}
+
+Joint cdf - def. Consider \(k\) random variables.
+\(X_{1},X_{2},\ldots ,X_{k}\)
+\[
+    F (x _ {1}, x _ {2}, \ldots , x _ {k}) \equiv p (X _ {1} \leq x _ {1}, X _ {2} \leq x _ {2}, \ldots , X _ {k} \leq x _ {k})
+\]
+
+\textbf{Discrete variables}: Joint pmf \(p(X_{1} = x_{1},\ldots ,X_{k} = x_{k})\)
+
+\textbf{Continuous variables}: There exists a joint pdf
+\(f(x_{1},\ldots ,x_{k})\) such that
+\[
+    F (x _ {1}, \ldots , x _ {k}) = \int_ {- \infty} ^ {x _ {1}} \dots \int_ {- \infty} ^ {x _ {k}} f (z _ {1}, \ldots , z _ {k}) d z _ {1} \dots d z _ {k}
+\] \begin{enumerate}
+    \item   \(f(x_{1},\ldots ,x_{k})\geq 0\)
+    \item   \(\int_{-\infty}^{\infty}\dots \int_{-\infty}^{\infty}f\big(z_1,\ldots ,z_k\big)dz_1\dots dz_k = 1\)
+    \item    \begin{enumerate}
+              \item     \(p\big(a_1 < X_1 < b_1, \ldots, a_k < X_k < b_k\big) =\int_ {a _ {1}} ^ {b _ {1}} \dots \int_ {a _ {k}} ^ {b _ {k}} f (z _ {1}, \ldots , z _ {k}) d z _ {1} \dots d z _ {k}\)
+              \item   \(p(X_{1} = a_{1},X_{2} = a_{2},\ldots ,X_{k} = a_{k}) = 0\)
+              \item \(p(X_{1} = a_{1},a_{2} < X_{2} < b_{2},\ldots ,a_{k} < X_{k} < b_{k}) = 0\)
+          \end{enumerate}
+    \item     \(\frac{\partial^k}{\partial x_1 \cdots \partial x_k} F(\cdot ) = f(\cdot )\).
+\end{enumerate}
+
+\textbf{Marginal distributions:}
+
+The marginal cdf of the r.v. \(X_{i}\) is
+\[
+    \begin{array}{l} F _ {i} (x) \equiv p (X _ {i} \leq x) = p (X _ {1} \leq \infty , \ldots , X _ {i} \leq x, \ldots , X _ {k} \leq \infty) = \\ = F (\infty , \dots , x, \dots , \infty) \\ \end{array}
+\]
+
+The marginal pdf of \(X_{i}\) is
+\[
+    \begin{array}{l} f _ {i} (x) = \int \dots \int f \left(z _ {1}, \dots , z _ {i - 1}, x, z _ {i + 1}, \dots , z _ {k}\right). \\ \cdot d z _ {1} \cdot \cdot \cdot d z _ {i - 1} d z _ {i + 1} \cdot \cdot \cdot d z _ {k} \\ \end{array}
+\]
+
+
+\section{Conditional Probability \& Independence}
+
+\begin{definition}[Conditional probability]
+    Consider two events \(A\) and \(B\) in a probability space with
+    \(p(B)\neq 0\) ; then
+    \[
+        p \left(A \mid B\right) = \frac {p (A \cap B)}{p (B)}
+    \]
+\end{definition}
+
+\textbf{Independent events}: Events \(A\) and \(B\) are independent if conditional and unconditional probabilities are the same:
+\begin{enumerate}
+    \item \(p(A \mid B) = p(A)\)
+    \item \(p(B \mid A) = p(B)\)
+    \item \(p(A \cap B) = p(A)p(B)\)
+\end{enumerate}
+

@@ -202,7 +202,23 @@
 
 (c)
 
-%TODO:
+$f_X(x;1.5,1) = \frac{1}{\Gamma(1.5)}x^\frac{1}{2}\exp(-x), \, x>0$ \[
+    f_X'(x;1.5,1) = (\frac{1}{2}x^{-\frac{1}{2}}-x^{\frac{1}{2}})e^{-x}
+\]
+
+$f_X(x;3,1) = \frac{1}{\Gamma(3)}x^2\exp(-x), \, x>0$ \[
+    f_X'(x;3,1) = x(2-x)e^{-x}
+\]
+
+The shapes of two pdfs are shown in Figure \ref{fig:p1-c}
+
+\begin{figure}[H] % h=here, t=top, b=bottom, p=page
+    \centering
+    \includegraphics[width=0.75\textwidth]{images/stats-a1-p1-c.drawio.png}
+    \caption{Problem 1-(c)}
+    \label{fig:p1-c}
+\end{figure}
+
 
 (d)
 
@@ -224,11 +240,10 @@ The variance is given by \begin{align*}
 \end{align*}
 
 (e)
-
-% TODO:
 \begin{align*}
-    m(t) = E(e^{tx}) & = \int_{0}^{\infty } e^{tx} f_X(x;\alpha,\lambda) \, dx \\
-    \frac{d m(t)}{dt} =
+     & m(t) = E(e^{tx}) = \int_{0}^{\infty } e^{tx} f_X(x;\alpha,\lambda) \, dx                                                                                                                  \\
+     & \frac{d m(t)}{dt} = \int_{0}^{\infty } xe^{tx}f_X(x;\alpha,\lambda) \, dx \Longrightarrow \frac{d m(t)}{dt}\Big|_{x=0} = \int_{0}^{\infty } xf_X(x;\alpha,\lambda) \, dx = E(x)           \\
+     & \frac{d^2 m(t)}{dt^2} = \int_{0}^{\infty } x^2e^{tx}f_X(x;\alpha,\lambda) \, dx \Longrightarrow \frac{d m(t)}{dt}\Big|_{x=0} = \int_{0}^{\infty } x^2f_X(x;\alpha,\lambda) \, dx = E(x^2) \\
 \end{align*}
 
 \bigskip
@@ -252,7 +267,22 @@ Expectation: \begin{align*}
          & = p_1 \mu_2 + p_2 \mu_2
 \end{align*}
 
-Variance, % TODO:
+Variance: \begin{align*}
+     & var(X) = E(X^2) - [E(X)]^2                                                                                                                                                                                                              \\
+     & =   \int_{-\infty }^{\infty } x^2f(x) \, dx = \int_{-\infty }^{\infty } p_1 x^2\frac{1}{\sigma_1} \phi (\frac{x - \mu_1}{\sigma_1}) + p_2 x^2\frac{1}{\sigma_2} \phi (\frac{x - \mu_2}{\sigma_2})  \, dx - ( p_1 \mu_2 + p_2 \mu_2)^{2} \\
+\end{align*}
+Since \begin{align*}
+     & \int_{-\infty }^{\infty } x^2\frac{1}{\sigma_1} \phi (\frac{x - \mu_1}{\sigma_1})                                                                                                                                                                                                        \\
+     & = \int_{-\infty }^{\infty } (x-\mu_1)^{2}\frac{1}{\sigma_1} \phi (\frac{x - \mu_1}{\sigma_1})\, dx + 2\int_{-\infty }^{\infty } x\mu_1\frac{1}{\sigma_1} \phi (\frac{x - \mu_1}{\sigma_1}) - \int_{-\infty }^{\infty } \mu_1^2 \frac{1}{\sigma_1} \phi (\frac{x - \mu_1}{\sigma_1})\, dx \\
+     & = \sigma_1^2 + 2 \mu_1^{2} - \mu_1^2 = \sigma_1^2 + \mu_1^{2}
+\end{align*}
+Similarly, $\int_{-\infty }^{\infty } x^2\frac{1}{\sigma_2} \phi (\frac{x - \mu_2}{\sigma_2}) = \sigma_2^2 + \mu_2^2$.
+
+Thus, \[
+    var(X) = p_1(\sigma_1^2 + \mu_1 ^{2}) + p_2( \sigma_2^2 + \mu_2^2) - ( p_1 \mu_2 + p_2 \mu_2)^{2}
+\]
+
+
 
 (c)
 
@@ -260,9 +290,14 @@ When $\sigma_1 = \sigma_2 = 1, p_1 = p_2 = \frac{1}{2}, \mu_1 + \mu_2 = 0$, the 
 \[
     f(x) = \frac{1}{2}  \phi ({x - \mu_1}) + \frac{1}{2} \phi ({x + \mu_1})
 \]
-we have $f(-x) = f(x)$, so it is symmetric.
+we have $f(-x) = f(x)$, so it is symmetric. Figure \ref{fig:p2-c}
 
-% TODO:
+\begin{figure}[H] % h=here, t=top, b=bottom, p=page
+    \centering
+    \includegraphics[width=0.75\textwidth]{images/stats-a1-p2-c.drawio.png}
+    \caption{Problem 2-(c)}
+    \label{fig:p2-c}
+\end{figure}
 
 \bigskip
 \hrule
@@ -287,18 +322,31 @@ Expectation \begin{align*}
 
 Variance \begin{align*}
     Var(X) & = \sum_{x=0}^{\infty } (x-\lambda)^{2} P(X=x) = \sum_{x=0}^{\infty } (x-\lambda)^{2}  e^{-\lambda}\lambda^{x}/x! \\
-    & = \sum_{x=0}^{\infty } x ^{2} e^{-\lambda}\lambda^{x}/x! 
-    -2 \lambda\sum_{x=0}^{\infty } x  e^{-\lambda}\lambda^{x}/x! 
-    + \lambda ^{2} \sum_{x=0}^{\infty } e^{-\lambda}\lambda^{x}/x! \\
-    & = \lambda \sum_{x=1}^{\infty } x e^{-\lambda}\lambda^{x-1}/(x-1)! -2\lambda \cdot \lambda + \lambda ^{2} \\ 
-    & = \lambda e^{-\lambda} (e^{\lambda} + \lambda e^{\lambda}) - \lambda ^{2} \\
-    & = \lambda
+           & = \sum_{x=0}^{\infty } x ^{2} e^{-\lambda}\lambda^{x}/x!
+    -2 \lambda\sum_{x=0}^{\infty } x  e^{-\lambda}\lambda^{x}/x!
+    + \lambda ^{2} \sum_{x=0}^{\infty } e^{-\lambda}\lambda^{x}/x!                                                            \\
+           & = \lambda \sum_{x=1}^{\infty } x e^{-\lambda}\lambda^{x-1}/(x-1)! -2\lambda \cdot \lambda + \lambda ^{2}         \\
+           & = \lambda e^{-\lambda} (e^{\lambda} + \lambda e^{\lambda}) - \lambda ^{2}                                        \\
+           & = \lambda
 \end{align*}
 
 (b)
 
-% TODO:
-
+\[
+    m(t) = E(e^{xt}) =  \sum_{x=0}^{\infty } e^{xt - \lambda}\lambda^{x}/x!
+\]
+\[
+    \kappa(t) = \ln m(t) = \ln \Big[ \sum_{x=0}^{\infty } e^{xt - \lambda}\lambda^{x}/x! \Big]
+\]
+We have $m(0) = \sum_{x=0}^{\infty } e^{- \lambda}\lambda^{x}/x! = 1$.
+\[
+    \frac{d \kappa(t)}{dt} = \frac{m'(t)}{m(t)} \Longrightarrow  \frac{d \kappa(t)}{dt}\Big|_{t=0} = \frac{m'(0)}{m(0)} = m'(0) = \sum_{x=0}^{\infty }x e^{xt - \lambda}\lambda^{x}/x! = E(X)
+\]
+\begin{align*}
+     & \frac{d^2 \kappa(t)}{dt^2} = \frac{m''(t)m(t) - m'(t)m'(t)}{[m(t)]^{2}}                                \\
+     & \Longrightarrow  \frac{d^2 \kappa(t)}{dt^2}\Big|_{t=0} = m''(0) -[ m'(0)]^{2} =  m''(0) - [E(X)]^{2}   \\
+     & = \sum_{x=0}^{\infty } x^2 e^{xt - \lambda}\lambda^{x}/x! - [E(X)]^{2}  = E(X^2) - [E(X)]^{2} = var(X)
+\end{align*}
 
 \bigskip
 \hrule
@@ -306,9 +354,48 @@ Variance \begin{align*}
 
 \textbf{Problem 7}
 
-(a)
-% TODO:
+pdf
+\[
+    f_X(x) = \left\{\begin{array}{l}
+        \frac{1}{2}, x \in [-1,1] \\
+        0, x \notin [-1,1]        \\
+    \end{array}\right.
+\]
 
+cdf \[
+    F_X(x) = \left\{\begin{array}{l}
+        0, x < -1                      \\
+        \frac{1}{2}(x+1), x \in [-1,1] \\
+        1, x > 1
+    \end{array}\right.
+\]
+
+(a)
+
+\[
+    Y = \left| X \right| \Longrightarrow X = \pm Y
+\]
+
+\[
+    f_Y(y) = f_X(y) + f_X(-y) = 1
+\]
+
+Then pdf \[
+    f_Y = \left\{\begin{array}{l}
+        1, y \in [0,1]    \\
+        0, y \notin [0,1] \\
+    \end{array}\right.
+\]
+and cdf \[
+    F_Y = \left\{\begin{array}{l}
+        0, y < 0       \\
+        y, y \in [0,1] \\
+        1, y > 1
+    \end{array}\right.
+\]
+expectation: \[
+    E(X) = \int_{0}^{1} y \, dy = \frac{1}{2}
+\]
 
 
 \bigskip
@@ -317,10 +404,27 @@ Variance \begin{align*}
 
 \textbf{Problem 22}
 
-%TODO:
+(a)
 
+\[
+    f(-1) + f(0) + f(1) = \frac{4}{c} + \frac{1}{c} + \frac{4}{c} = 1 \Longrightarrow c = 9
+\]
 
+(b)
 
+\[
+    M(t) = \frac{4}{9} e^{-t} + \frac{1}{9} + \frac{4}{9} e^t
+\]
+
+(c)
+
+Mean: \[
+    \frac{dM(t)}{dt}\Big|_{t=0}= - \frac{4}{9} + \frac{4}{9} = 0
+\]
+
+Variance: \[
+    \frac{d^2M(t)}{dt^2}\Big|_{t=0} = \frac{4}{9} + \frac{4}{9}  = \frac{8}{9}
+\]
 
 % --- Document ends here ---
 
